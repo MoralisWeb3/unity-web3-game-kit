@@ -36,3 +36,112 @@ git clone https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate.git
 - Using the information from you Moralis Server, fill in Application Id and Server URL.
 - If the Wallet Connect property is set to "None" drag WalletConnect from the "Hierarchy" section to this input.
 - Click the Play icon located at the top, center of the Unity3D IDE.
+
+# 🧭 Table of contents
+
+- [`ethereum-unity-boilerplate`](#ethereum-unity-boilerplate)
+- [🚀 Quick Start](#-quick-start)
+- [🧭 Table of contents](#-table-of-contents)
+- [🧰 Moralis SDK](#-moralis-sdk)
+    - [`Client`](#sdk-client)
+    - [`Authentication`](#sdk-authentication)  
+    - [`Queries`](#sdk-queries)  
+    - [`Live Queries`](#sdk-live-queries)
+    - [`Custom Objects`](#sdk-custom-objects)
+    - [`User Object`](#sdk-user-object)
+    - [`HostManifestData`](#sdk-hostmanifestdata)
+    - [`ServerConnectionData`](#sdk-server-connectiondata)
+- [🏗 Ethereum Web3Api Methods](#-ethereum-web3api-methods)
+    - [`Web3Api Notes`](#web3api-notes-)
+    - [`Chains`](#chains-)
+    - [`Account`](#account-)
+    - [`Defi`](#defi-)
+    - [`Native`](#native-)
+    - [`Resolve`](#resolve-)
+    - [`Storage`](#erc20balance-)
+    - [`Token`](#erc20transfers-)
+  
+# 🏗 Moralis SDK
+  The.NET Moralis SDK provides easy to use method that make integrating your application with Moralis a snap. You will find that the.NET SDK works much the same as in JavaScript. For use in Unity3D we have added additional quick start objects that make integrating the Moralis SDK in a Unity3D application. 
+  For the examples that follow we provide examples of how to use the Moralis.NET SDK directly and perform the same functionality using the provided Moralis Unity3D quick start tools.
+  
+## `Client`
+  The Moralis SDK Client provides a way to easily interact with Moralis database and the Web3API. In .NET we use the *MoralisClient*
+  to interact with Moralis. For Unity3D we have provided a signleton wrapper named *MoralisInterface* that makes it easy to initialize the MoralisClient and then access it from anywhere in your Unity3D application. With either option you can initialize the Moralis Client with a single line of code
+  
+### SDK Client Initialization
+**Required Using Statements**
+```
+using Moralis;
+using Moralis.Platform; 
+using Moralis.Web3Api.Client;
+```
+**Initialize Client**
+```
+MoralisClient moralis = new MoralisClient(new ServerConnectionData() { ApplicationID = "YOUR_APPLICATION_ID_HERE", ServerURI = "YOUR_SERER_URL_HERE"}, new Web3ApiClient());
+```
+_note: The **new Web3ApiClient()** parameter is optional and should be included only when you will be using functionality fromt the Moralis Web3AP REST service._
+
+### Unity3D Client Initialization
+**Required Using Statements**
+```
+```
+**Initialize Client**
+```
+MoralisInterface.Initialize(MoralisApplicationId, MoralisServerURI, hostManifestData);
+```
+_note: For the **hostManifestData** parameter see [`HostManifestData`](#sdk-hostmanifestdata). This is requried for Unity3D applications._
+
+## `Authentication`
+Description here
+
+## `Queries`
+Description here
+
+## `Live Queries`
+Description here
+
+## `Custom Object`
+Description here
+
+## `User Object`
+Description here
+
+## `HostManifestData`
+Description here
+
+## `ServerConnectionData`
+Description here
+
+
+# 🏗 Ethereum Web3Api Methods
+
+## `Web3Api Notes`
+Description here
+```
+CODE SNIPPET HERE
+```
+
+## `Chains`
+Description here
+```
+CODE SNIPPET HERE
+```
+
+## `Account`
+Description here
+
+## `Defi`
+Description here  
+
+## `Native`
+Description here  
+
+## `Resolve`
+Description here  
+
+## `Storage`
+Description here  
+
+## `Token`
+Description here

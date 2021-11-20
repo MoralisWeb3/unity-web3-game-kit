@@ -109,12 +109,10 @@ public class MoralisInterface : MonoBehaviour
 
         // Create an instance of Moralis Server Client
         // NOTE: Web3ApiClient is optional. If you are not using the Moralis 
-        // Web3Api REST API you can call the method with just connectionData 
-        // and address.
+        // Web3Api REST API you can call the method with just connectionData
         // NOTE: If you are using a custom user object use 
         // new MoralisClient<YourUser>(connectionData, address, Web3ApiClient)
-        // TODO: Address seems to be an artifact as it is no longer required the server and should be removed.
-        moralis = new MoralisClient(connectionData, "123", new Web3ApiClient(), jsonSerializer);
+        moralis = new MoralisClient(connectionData, new Web3ApiClient(), jsonSerializer);
 
         if (moralis == null)
         { 
