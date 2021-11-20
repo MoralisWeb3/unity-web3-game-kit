@@ -55,12 +55,12 @@ git clone https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate.git
     - [`Web3Api Notes`](#web3api-notes)
     - [`Chains`](#chains)
     - [`Account`](#account)
-        --['GetNFTs'](#getnfts)
-        --['GetNFTsForContract'](#getnftsforcontract)
-        --['GetNFTTransfers'](#getnfttransfers)
-        --['GetTokenBalances'](#gettokenbalances)
-        --['GetTokenTransfers'](#gettokentransfers)
-        --['GetTransactions'](#gettransactions)
+        -['GetNFTs'](#getnfts)
+        -['GetNFTsForContract'](#getnftsforcontract)
+        -['GetNFTTransfers'](#getnfttransfers)
+        -['GetTokenBalances'](#gettokenbalances)
+        -['GetTokenTransfers'](#gettokentransfers)
+        -['GetTransactions'](#gettransactions)
     - [`Defi`](#defi)
     - [`Native`](#native)
     - [`Resolve`](#resolve)
@@ -137,37 +137,37 @@ CODE SNIPPET HERE
 ## `Account`
 Description here
 
-### 'GetNFTs'
+### `GetNFTs`
 Description here
 ```
 CODE SNIPPET HERE
 ```
 
-### 'GetNFTsForContract'
+### `GetNFTsForContract`
 Description here
 ```
 CODE SNIPPET HERE
 ```
 
-### 'GetNFTTransfers'
+### `GetNFTTransfers`
 Description here
 ```
 CODE SNIPPET HERE
 ```
 
-### 'GetTokenBalances'
+### `GetTokenBalances`
 Description here
 ```
 CODE SNIPPET HERE
 ```
 
-### 'GetTokenTransfers'
+### `GetTokenTransfers`
 Description here
 ```
 CODE SNIPPET HERE
 ```
 
-### 'GetTransactions'
+### `GetTransactions`
 Description here
 ```
 CODE SNIPPET HERE
