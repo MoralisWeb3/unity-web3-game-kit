@@ -25,49 +25,113 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  */
-using System.Collections.Generic;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using UnityEngine;
+using Moralis.Platform.Objects;
+using Assets.Scripts.Moralis;
+using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace Assets.Scripts
 {
     public class MobileLogin
     {
-        public static async Task<MoralisUnityTxnResult> LogIn(string signInUrl)
+        private static string TOKEN_REQUEST_URL = "server/requestLoginToken";
+        private static string REMOTE_SESSION_URL = "server/getRemoteSession?login_token={0}&_ApplicationId={1}";
+
+        public static async Task<MoralisUser> LogIn(string moralisServerUrl, string applicationId)
         {
-            IDictionary<string, object> paras = new Dictionary<string, object>();
-            paras.Add("txnType", "SIGN");
-            SetInteractionResponse siresp = await MoralisInterface.GetClient().Cloud.RunAsync<SetInteractionResponse>("createUnityInteraction", paras);
+            MoralisUser user = null;
+            MoralisLoginTokenResponse tokenResponse = await RequestLoginToken(moralisServerUrl, applicationId);
 
-            Application.OpenURL(signInUrl + "?txnId=" + siresp.txnId + "&publicKey=" + siresp.publicKey);
-
-            MoralisUnityTxnResult resp = null;
-
-            paras.Clear();
-            paras.Add("txnId", siresp.txnId);
-
-            while (true)
+            if (tokenResponse != null)
             {
-                Thread.Sleep(1000);
+                // Display the connector page.
+                Application.OpenURL(tokenResponse.url);
 
-                
-                MoralisUnityTxnResult txnResult = await MoralisInterface.GetClient().Cloud.RunAsync<MoralisUnityTxnResult>("getTxnResult", paras);
+                DateTime timeout = DateTime.Now.AddSeconds(40);
 
-                if (txnResult == null)
+                while (true && DateTime.Now < timeout)
                 {
-                    Debug.LogError($"ERROR: record for txnId: {siresp.txnId} not found");
-                    break;
-                }
-                else if (txnResult.result != null && !txnResult.result.Equals("NEW"))
-                {
-                    Debug.Log($"TxnId: {txnResult.txnId}, result: {txnResult.result}, data: {txnResult.data}");
-                    resp = txnResult;
-                    break;
+                    Thread.Sleep(1000);
+
+                    MoralisSessionTokenResponse sessionResponse = await CheckSessionResult(moralisServerUrl, tokenResponse.loginToken, applicationId);
+
+                    if (sessionResponse != null && !String.IsNullOrWhiteSpace(sessionResponse.sessionToken))
+                    {
+                        user = await MoralisInterface.GetClient().UserFromSession(sessionResponse.sessionToken);
+                    }
                 }
             }
 
-            return resp;
+            return user;
+        }
+
+        private async static Task<MoralisSessionTokenResponse> CheckSessionResult(string moralisServerUrl, string tokenId, string applicationId)
+        {
+            MoralisSessionTokenResponse result = null;
+
+            MoralisLoginTokenRequest payload = new MoralisLoginTokenRequest()
+            {
+                _ApplicationId = applicationId
+            };
+
+            string data = JsonConvert.SerializeObject(payload);
+
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(moralisServerUrl);
+
+                HttpResponseMessage response = client.GetAsync(String.Format(REMOTE_SESSION_URL, tokenId, applicationId)).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
+
+                if (response.IsSuccessStatusCode)
+                {
+                    // Parse the response body. 
+                    string responseBody = await response.Content.ReadAsStringAsync();
+
+                    result = JsonConvert.DeserializeObject<MoralisSessionTokenResponse>(responseBody);
+                }
+            }
+
+            return result;
+        }
+
+        private async static Task<MoralisLoginTokenResponse> RequestLoginToken(string moralisServerUrl, string applicationId)
+        {
+            MoralisLoginTokenResponse result = null;
+
+            MoralisLoginTokenRequest payload = new MoralisLoginTokenRequest()
+            {
+                _ApplicationId = applicationId
+            };
+
+            string data = JsonConvert.SerializeObject(payload);
+
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(moralisServerUrl);
+
+                // Add an Accept header for JSON format.
+                client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+                StringContent content = new StringContent(data);
+                // List data response.
+                HttpResponseMessage response = client.PostAsync(TOKEN_REQUEST_URL, content).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
+
+                if (response.IsSuccessStatusCode)
+                {
+                    // Parse the response body. 
+                    string responseBody = await response.Content.ReadAsStringAsync();
+
+                    result = JsonConvert.DeserializeObject<MoralisLoginTokenResponse>(responseBody);
+                }
+            }
+            
+            return result;
         }
     }
 }

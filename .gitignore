@@ -33,6 +33,6 @@ msbuild.err
 msbuild.wrn
 
 # test log files
-[Ll]og/
+[Ll]og/*
 *.testlog
 testlog.manifest

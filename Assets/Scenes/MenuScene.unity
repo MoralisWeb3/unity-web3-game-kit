@@ -533,12 +533,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 669b4c0065732ac4ba25705a404a25b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoralisApplicationId: 
-  MoralisServerURI: 
+  MoralisApplicationId: n47cMIiJZkdSlhCb01dldXO5mFIGuM6YqfYZ6DXA
+  MoralisServerURI: https://x5gna0kcbpto.usemoralis.com:2053/server
   ApplicationName: Test Application
   Version: 1.0.0
   walletConnect: {fileID: 1066406667}
-  SignInUrl: http://192.168.0.2:8008/moralis/
 --- !u!1 &469846183
 GameObject:
   m_ObjectHideFlags: 0

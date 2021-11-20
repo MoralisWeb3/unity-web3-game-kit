@@ -30,7 +30,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Moralis.Platform.Objects;
-using Moralis.Web3Api.Models;
+using Moralis.Platform.Utilities;
 using WalletConnectSharp.Core.Models;
 using WalletConnectSharp.Unity;
 using Moralis.Platform;
@@ -51,7 +51,6 @@ public class MainMenuScript : MonoBehaviour
     public string ApplicationName;
     public string Version;
     public WalletConnect walletConnect;
-    public string SignInUrl;
 
     GameObject mainMenu;
     GameObject qrMenu;
@@ -101,19 +100,23 @@ public class MainMenuScript : MonoBehaviour
             Debug.Log("User is not logged in.");
             mainMenu.SetActive(false);
 
+            // The mobile solutions for iOA ans Android will be different once we
+            // smooth out the interaction with Wallet Connect. For now the duplicated 
+            // code below is on purpose just to keep the iOS and Android authentication
+            // processes separate.
 #if UNITY_ANDROID
-            androidMenu.SetActive(true);
+            //androidMenu.SetActive(true);
 
-            // This is the attempt to use open browser for auth
-            //MoralisUnityTxnResult result = await MobileLogin.LogIn(SignInUrl);
-
-            //signResultText.text = result.result + ", " + result.data;
+            // Use Moralis Connect page for authentication as we work to make the Wallet 
+            // Connect experience better.
+            await MobileLogin.LogIn(MoralisServerURI, MoralisApplicationId);
+            SceneManager.LoadScene(SceneMap.GAME_VIEW);
 #elif UNITY_IOS
-            iOsMenu.SetActive(true);
+            //iOsMenu.SetActive(true);
 
-            // This is the attempt to use open browser for auth
-            //MoralisUnityTxnResult result = await MobileLogin.LogIn(SignInUrl);
-            //signResultText.text = result.result + ", " + result.data;
+            // Use Moralis Connect page for authentication as we work to make the Wallet 
+            // Connect experience better.
+            await MobileLogin.LogIn(MoralisServerURI).OnSuccess(t => SceneManager.LoadScene(SceneMap.GAME_VIEW));
 #else
             qrMenu.SetActive(true);
 #endif

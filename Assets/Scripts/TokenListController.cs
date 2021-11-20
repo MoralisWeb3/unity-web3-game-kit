@@ -1,3 +1,31 @@
+/**
+ *           Module: MoralisSessionTokenResponse.cs
+ *  Descriptiontion: Sample game controller that demonstrates how to use the Moralis 
+ *                   Web3Api to retieve and display a list of ERC20 Tokens..
+ *           Author: Moralis Web3 Technology AB, 559307-5988 - David B. Goodrich
+ *  
+ *  MIT License
+ *  
+ *  Copyright (c) 2021 Moralis Web3 Technology AB, 559307-5988
+ *  
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *  
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *  
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ */
 using Moralis.Platform.Objects;
 using Moralis.Web3Api.Models;
 using System.Collections;
@@ -7,6 +35,10 @@ using UnityEngine.UI;
 using Assets.Scripts;
 using UnityEngine.Networking;
 
+/// <summary>
+/// Sample game controller that demonstrates how to use the Moralis Web3Api to retieve 
+/// and display a list of ERC20 Tokens..
+/// </summary>
 public class TokenListController : MonoBehaviour
 {
 
@@ -37,8 +69,8 @@ public class TokenListController : MonoBehaviour
         StartCoroutine(BuildTokenList());
     }
 
-        IEnumerator BuildTokenList()
-        {
+    IEnumerator BuildTokenList()
+    {
         // Get user object and display user name
         MoralisUser user = MoralisInterface.GetUser();
 
@@ -50,7 +82,7 @@ public class TokenListController : MonoBehaviour
 
             List<Erc20TokenBalance> tokens =
                 MoralisInterface.GetClient().Web3Api.Account.GetTokenBalances(addr.ToLower(),
-                                          (ChainList)ChainId);
+                                            (ChainList)ChainId);
 
             foreach (Erc20TokenBalance token in tokens)
             {
@@ -70,9 +102,8 @@ public class TokenListController : MonoBehaviour
 
                 var parentTransform = TokenListTransform.GetComponent<RectTransform>();
 
-
                 float parentWidth = parentTransform.rect.width;
-                
+
                 rectTransform.sizeDelta = new Vector2(parentWidth, 64);
 
                 if (parentWidth > 800.0f)
@@ -133,10 +164,7 @@ public class TokenListController : MonoBehaviour
                         tokenImage.sprite = sprite;
                     }
                 }
-
-                
             }
         }
     }
-
 }

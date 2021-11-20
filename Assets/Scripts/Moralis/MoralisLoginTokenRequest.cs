@@ -1,6 +1,6 @@
 ﻿/**
- *           Module: MoralisSessionTokenResponse.cs
- *  Descriptiontion: Extensions to make certain tasks easier to perform.
+ *           Module: MoralisLoginTokenRequest.cs
+ *  Descriptiontion: Payload request object for a REST login request
  *           Author: Moralis Web3 Technology AB, 559307-5988 - David B. Goodrich
  *  
  *  MIT License
@@ -25,34 +25,13 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  */
-using UnityEngine;
-
-namespace Assets.Scripts
+namespace Assets.Scripts.Moralis
 {
     /// <summary>
-    /// Extensions to make certain tasks easier to perform.
+    /// Payload request object for a REST login request
     /// </summary>
-    public static class Extensions
+    public class MoralisLoginTokenRequest
     {
-        /// <summary>
-        /// Make a quick way to find a child component by name
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="obj"></param>
-        /// <param name="name"></param>
-        /// <param name="includeInactive"></param>
-        /// <returns></returns>
-        public static T GetFirstChildComponentByName<T>(this GameObject obj, string name, bool includeInactive) where T : Component
-        {
-            foreach (T component in obj.GetComponentsInChildren<T>(includeInactive))
-            {
-                if (component.gameObject.name.Equals(name))
-                {
-                    return component;
-                }
-            }
-
-            return null;
-        }
+        public string _ApplicationId;
     }
 }
