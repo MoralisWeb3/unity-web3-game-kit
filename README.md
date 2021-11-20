@@ -55,6 +55,12 @@ git clone https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate.git
     - [`Web3Api Notes`](#web3api-notes)
     - [`Chains`](#chains)
     - [`Account`](#account)
+        --['GetNFTs'](#getnfts)
+        --['GetNFTsForContract'](#getnftsforcontract)
+        --['GetNFTTransfers'](#getnfttransfers)
+        --['GetTokenBalances'](#gettokenbalances)
+        --['GetTokenTransfers'](#gettokentransfers)
+        --['GetTransactions'](#gettransactions)
     - [`Defi`](#defi)
     - [`Native`](#native)
     - [`Resolve`](#resolve)
@@ -130,6 +136,42 @@ CODE SNIPPET HERE
 
 ## `Account`
 Description here
+
+### 'GetNFTs'
+Description here
+```
+CODE SNIPPET HERE
+```
+
+### 'GetNFTsForContract'
+Description here
+```
+CODE SNIPPET HERE
+```
+
+### 'GetNFTTransfers'
+Description here
+```
+CODE SNIPPET HERE
+```
+
+### 'GetTokenBalances'
+Description here
+```
+CODE SNIPPET HERE
+```
+
+### 'GetTokenTransfers'
+Description here
+```
+CODE SNIPPET HERE
+```
+
+### 'GetTransactions'
+Description here
+```
+CODE SNIPPET HERE
+```
 
 ## `Defi`
 Description here  
