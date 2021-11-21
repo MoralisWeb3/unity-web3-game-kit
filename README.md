@@ -56,7 +56,7 @@ git clone https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate.git
     - [`Chains`](#chains)
     - [`Account`](#account)
         - [`GetNativeBalance`](#getnativebalance)
-        - [`GetNFTs'](#getnfts)
+        - [`GetNFTs`](#getnfts)
         - [`GetNFTsForContract`](#getnftsforcontract)
         - [`GetNFTTransfers`](#getnfttransfers)
         - [`GetTokenBalances`](#gettokenbalances)
@@ -64,9 +64,17 @@ git clone https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate.git
         - [`GetTransactions`](#gettransactions)
     - [`Defi`](#defi)
     - [`Native`](#native)
+        - [`GetBlock`](#GetBlock)
+        - [`GetContractEvents`](#GetContractEvents)
+        - [`GetDateToBloc`](#GetDateToBloc)
+        - [`GetLogsByAddress`](#GetLogsByAddress)
+        - [`GetNFTTransfersByBlock`](#GetNFTTransfersByBlock)
+        - [`GetTransaction`](#GetTransaction)
+        - [`RunContractFunction`](#RunContractFunction)
     - [`Resolve`](#resolve)
     - [`Storage`](#erc20balance)
     - [`Token`](#erc20transfers)
+- [Helpful Tools](#helpful-tools)
   
 # 🏗 Moralis SDK
   The.NET Moralis SDK provides easy to use method that make integrating your application with Moralis a snap. You will find that the.NET SDK works much the same as in JavaScript. For use in Unity3D we have added additional quick start objects that make integrating the Moralis SDK in a Unity3D application. 
@@ -140,42 +148,88 @@ Code examples demonstrating how to use the Moralis Web3API Account endpoint and 
 
 ### `GetNativeBalance`
 Gets native balance for a specific address
+- **address** _string_ REQUIRED Target address
+- **chain** _ChainList_ REQUIRED The chain to query
+- **providerUrl** _string_ OPTIONAL web3 provider url to user when using local dev chain
+- **toBlock** _string_ OPTIONAL The maximum block number from where to get the logs.
 ```
 NativeBalance balance = MoralisInterface.GetClient().Web3Api.Account.GetNativeBalance(address.ToLower(), ChainList.eth);
 ```
 
 ### `GetNFTs`
 Gets NFTs owned by the given address
+- **address** _string_ REQUIRED Target address
+- **chain** _ChainList_ REQUIRED The chain to query
+- **format** _string_ OPTIONAL The format of the token id
+- **offset** _integer_ REQUIRED Offset
+- **limit** _integer_ REQUIRED Limit
+- **order** _string_ OPTIONAL The field(s) to order on and if it should be ordered in ascending or descending order. Specified by: fieldName1.order,fieldName2.order. Example 1: "name", "name.ASC", "name.DESC", Example 2: "Name and Symbol", "name.ASC,symbol.DESC"
 ```
 NftOwnerCollection balance = MoralisInterface.GetClient().Web3Api.Account.GetNFTs(address.ToLower(), ChainList.eth);
 ```
 
 ### `GetNFTsForContract`
 Gets NFTs owned by the given address
+- **address** _string_ REQUIRED Target address
+- **tokenAddress** _string_ REQUIRED Address of the contract
+- **chain** _ChainList_ REQUIRED The chain to query
+- **format** _string_ OPTIONAL The format of the token id
+- **offset** _integer_ REQUIRED Offset
+- **limit** _integer_ REQUIRED Limit
+- **order** _string_ OPTIONAL The field(s) to order on and if it should be ordered in ascending or descending order. Specified by: fieldName1.order,fieldName2.order. Example 1: "name", "name.ASC", "name.DESC", Example 2: "Name and Symbol", "name.ASC,symbol.DESC"
 ```
 NftOwnerCollection balance = MoralisInterface.GetClient().Web3Api.Account.GetNFTsForContract(address.ToLower(), tokenAddress, ChainList.eth);
 ```
 
 ### `GetNFTTransfers`
 Gets the transfers of the tokens matching the given parameters
+- **address** _string_ REQUIRED Target address
+- **chain** _ChainList_ REQUIRED The chain to query
+- **format** _string_ OPTIONAL The format of the token id
+- **direction** _string_ OPTIONAL The transfer direction
+- **offset** _integer_ REQUIRED Offset
+- **limit** _integer_ REQUIRED Limit
+- **order** _string_ OPTIONAL The field(s) to order on and if it should be ordered in ascending or descending order. Specified by: fieldName1.order,fieldName2.order. Example 1: "name", "name.ASC", "name.DESC", Example 2: "Name and Symbol", "name.ASC,symbol.DESC"
 ```
 NftTransferCollection balance = MoralisInterface.GetClient().Web3Api.Account.GetNFTTransfers(address.ToLower(), ChainList.eth);
 ```
 
 ### `GetTokenBalances`
 Gets token balances for a specific address
+- **address** _string_ REQUIRED Target address
+- **chain** _ChainList_ REQUIRED The chain to query
+- **subdomain** _string_ OPTIONAL The subdomain of the moralis server to use (Only use when selecting local devchain as chain)
+- **toBlock** _string_ OPTIONAL The maximum block number from where to get the logs.
 ```
 List<Erc20TokenBalance> balance = MoralisInterface.GetClient().Web3Api.Account.GetTokenBalances(address.ToLower(), ChainList.eth);
 ```
 
 ### `GetTokenTransfers`
 Gets ERC20 token transactions in descending order based on block number
+- **address** _string_ REQUIRED Target address
+- **chain** _ChainList_ REQUIRED The chain to query
+- **subdomain** _string_ OPTIONAL The subdomain of the moralis server to use (Only use when selecting local devchain as chain)
+- **fromBlock** _string_ OPTIONAL The minimum block number from where to get the logs.
+- **toBlock** _string_ OPTIONAL The maximum block number from where to get the logs.
+- **fromDate** _string_ OPTIONAL The date from where to get the logs (any format that is accepted by momentjs).
+- **toDate** _string_ OPTIONAL Get the logs to this date (any format that is accepted by momentjs)
+- **offset** _integer_ REQUIRED Offset
+- **limit** _integer_ REQUIRED Limit
 ```
 List<Erc20Transaction> balance = MoralisInterface.GetClient().Web3Api.Account.GetTokenTransfers(address.ToLower(), ChainList.eth);
 ```
 
 ### `GetTransactions`
 Gets native transactions in descending order based on block number
+- **address** _string_ REQUIRED Target address
+- **chain** _ChainList_ REQUIRED The chain to query
+- **subdomain** _string_ OPTIONAL The subdomain of the moralis server to use (Only use when selecting local devchain as chain)
+- **fromBlock** _string_ OPTIONAL The minimum block number from where to get the logs.
+- **toBlock** _string_ OPTIONAL The maximum block number from where to get the logs.
+- **fromDate** _string_ OPTIONAL The date from where to get the logs (any format that is accepted by momentjs).
+- **toDate** _string_ OPTIONAL Get the logs to this date (any format that is accepted by momentjs)
+- **offset** _integer_ REQUIRED Offset
+- **limit** _integer_ REQUIRED Limit
 ```
 TransactionCollection balance = MoralisInterface.GetClient().Web3Api.Account.GetTransactions(address.ToLower(), ChainList.eth);
 ```
@@ -186,6 +240,89 @@ Code examples demonstrating how to use the Moralis Web3API Defi endpoint and ope
 
 ## `Native`
 Code examples demonstrating how to use the Moralis Web3API Native endpoint and operations.
+
+### `GetBlock`
+Gets the contents of a block by block hash
+- **blockNumberOrHash** _string_ REQUIRED The block hash or block number
+- **chain** _ChainList_ REQUIRED The chain to query
+- **subdomain** _string_ OPTIONAL The subdomain of the moralis server to use (Only use when selecting local devchain as chain)
+```
+Block block = MoralisInterface.GetClient().Web3Api.Native.GetBlock(blockNumberOrHash, ChainList.eth);
+```
+
+### `GetContractEvents`
+Gets events in descending order based on block number
+- **address** _string_ REQUIRED Target address
+- **topic** _string_ REQUIRED The topic of the event
+- **chain** _ChainList_ REQUIRED The chain to query
+- **subdomain** _string_ OPTIONAL The subdomain of the moralis server to use (Only use when selecting local devchain as chain)
+- **providerUrl** _string_ OPTIONAL web3 provider url to user when using local dev chain
+- **fromBlock** _string_ OPTIONAL The minimum block number from where to get the logs.
+- **toBlock** _string_ OPTIONAL The maximum block number from where to get the logs.
+- **fromDate** _string_ OPTIONAL The date from where to get the logs (any format that is accepted by momentjs).
+- **toDate** _string_ OPTIONAL Get the logs to this date (any format that is accepted by momentjs)
+- **offset** _integer_ REQUIRED Offset
+- **limit** _integer_ REQUIRED Limit
+```
+List<LogEvent> logEvents = MoralisInterface.GetClient().Web3Api.Native.GetContractEvents(address, topic, ChainList.eth);
+```
+
+### `GetDateToBlock`
+Gets the closest block of the provided date
+- **data** _string_ REQUIRED Unix date in miliseconds or a datestring (any format that is accepted by momentjs)
+- **chain** _ChainList_ REQUIRED The chain to query
+- **providerUrl** _string_ OPTIONAL web3 provider url to user when using local dev chain
+```
+BlockDate blockDate = MoralisInterface.GetClient().Web3Api.Native.GetDateToBlock(date, ChainList.eth);
+```
+
+### `GetLogsByAddress`
+Gets the logs from an address
+- **address** _string_ REQUIRED Target address
+- **chain** _ChainList_ REQUIRED The chain to query
+- **subdomain** _string_ OPTIONAL The subdomain of the moralis server to use (Only use when selecting local devchain as chain)
+- **blockNumber** _string_ OPTIONAL The block number.
+- **fromBlock** _string_ OPTIONAL The minimum block number from where to get the logs.
+- **toBlock** _string_ OPTIONAL The maximum block number from where to get the logs.
+- **fromDate** _string_ OPTIONAL The date from where to get the logs (any format that is accepted by momentjs).
+- **toDate** _string_ OPTIONAL Get the logs to this date (any format that is accepted by momentjs)
+- **topic0** _string_ OPTIONAL 
+- **topic1** _string_ OPTIONAL 
+- **topic2** _string_ OPTIONAL 
+- **topic3** _string_ OPTIONAL 
+```
+LogEventByAddress logEvents = MoralisInterface.GetClient().Web3Api.Native.GetLogsByAddress(address, ChainList.eth);
+```
+
+### `GetNFTTransfersByBlock`
+Gets NFT transfers by block number or block hash
+- **blockNumberOrHash** _string_ REQUIRED The block hash or block number
+- **chain** _ChainList_ REQUIRED The chain to query
+- **subdomain** _string_ OPTIONAL The subdomain of the moralis server to use (Only use when selecting local devchain as chain)
+```
+NftTransferCollection nftTransfers = MoralisInterface.GetClient().Web3Api.Native.GetNFTTransfersByBlock(blockNumberOrHash, ChainList.eth);
+```
+
+### `GetTransaction`
+Gets the contents of a block transaction by hash
+- **transactionHash** _string_ REQUIRED The transaction hash
+- **chain** _ChainList_ REQUIRED The chain to query
+- **subdomain** _string_ OPTIONAL The subdomain of the moralis server to use (Only use when selecting local devchain as chain)
+
+```
+BlockTransaction blockTransaction = MoralisInterface.GetClient().Web3Api.Native.GetTransaction(transactionHash, ChainList.eth);
+```
+
+### `RunContractFunction`
+Runs a given function of a contract abi and returns readonly data
+- **address** _string_ REQUIRED Target address
+- **chain** _ChainList_ REQUIRED The chain to query
+- **subdomain** _string_ OPTIONAL The subdomain of the moralis server to use (Only use when selecting local devchain as chain)
+- **providerUrl** _string_ OPTIONAL web3 provider url to user when using local dev chain
+- **functionName** _string_ OPTIONAL Function name of the target function.
+```
+string result = MoralisInterface.GetClient().Web3Api.Native.RunContractFunction(address, functionName, ChainList.eth);
+```
 
 
 ## `Resolve`
@@ -198,3 +335,13 @@ Code examples demonstrating how to use the Moralis Web3API Storage endpoint and 
 
 ## `Token`
 Code examples demonstrating how to use the Moralis Web3API Token endpoint and operations.
+
+# Helpful Tools
+1. [Unity3d Assets](https://assetstore.unity.com/)
+    The best place to find Unity3d Assets for a range of budgets.
+2. [The Gimp](https://www.gimp.org/)
+    Open source image editing tool
+3. [Blender](https://www.blender.org/)
+    Open source tool for creating 3D models, animations, textures, andeverything else you need for game characters and objects.
+4. [Maximo](https://www.mixamo.com/)
+    Free to use (with registration) Animations for huminoid rigged models.
