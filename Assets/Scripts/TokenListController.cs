@@ -84,6 +84,32 @@ public class TokenListController : MonoBehaviour
                 MoralisInterface.GetClient().Web3Api.Account.GetTokenBalances(addr.ToLower(),
                                             (ChainList)ChainId);
 
+
+            var address = addr;
+
+
+            MoralisInterface.GetClient().Web3Api.Token.GetAllTokenIds(address, ChainList.eth);
+            MoralisInterface.GetClient().Web3Api.Token.GetContractNFTTransfers;
+            MoralisInterface.GetClient().Web3Api.Token.GetNFTLowestPrice;
+            MoralisInterface.GetClient().Web3Api.Token.GetNFTMetadata;
+            MoralisInterface.GetClient().Web3Api.Token.GetNFTOwners;
+            MoralisInterface.GetClient().Web3Api.Token.GetNFTTrades;
+            MoralisInterface.GetClient().Web3Api.Token.GetNftTransfersFromToBlock;
+            MoralisInterface.GetClient().Web3Api.Token.GetTokenAdressTransfers;
+            MoralisInterface.GetClient().Web3Api.Token.GetTokenAllowance;
+            MoralisInterface.GetClient().Web3Api.Token.GetTokenIdMetadata;
+            MoralisInterface.GetClient().Web3Api.Token.GetTokenIdOwners;
+            MoralisInterface.GetClient().Web3Api.Token.GetTokenMetadata;
+            MoralisInterface.GetClient().Web3Api.Token.GetTokenMetadataBySymbol;
+            MoralisInterface.GetClient().Web3Api.Token.GetTokenPrice;
+            MoralisInterface.GetClient().Web3Api.Token.GetWalletTokenIdTransfers;
+            MoralisInterface.GetClient().Web3Api.Token.SearchNFTs;
+
+
+
+
+
+
             foreach (Erc20TokenBalance token in tokens)
             {
                 // Ignor entry without symbol
