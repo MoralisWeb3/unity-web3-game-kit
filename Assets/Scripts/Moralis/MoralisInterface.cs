@@ -27,15 +27,16 @@
  *  SOFTWARE.
  */
 using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using Moralis;
 using Moralis.Web3Api.Client;
 using Moralis.Platform;
 using Moralis.Platform.Objects;
-using System.Threading;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Assets.Scripts;
+using Assets.Scripts.Moralis;
 
 /// <summary>
 /// Class that wraps moralis integration points. Provided as an example of 
@@ -178,4 +179,9 @@ public class MoralisInterface : MonoBehaviour
     {
         return moralis.LogOutAsync();
     }
+
+    /// <summary>
+    /// Provide quick access to the Moralis Web3API Supported chains list.
+    /// </summary>
+    public static List<ChainEntry> SupportedChains => SupportedEvmChains.SupportedChains;
 }

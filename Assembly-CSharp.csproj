@@ -141,6 +141,8 @@
     <Compile Include="Assets\Scripts\Moralis\MoralisLoginTokenResponse.cs" />
     <Compile Include="Assets\Scripts\Moralis\MoralisLoginTokenRequest.cs" />
     <Compile Include="Assets\Scripts\Moralis\MoralisSessionTokenResponse.cs" />
+    <Compile Include="Assets\Scripts\Moralis\ChainEntry.cs" />
+    <Compile Include="Assets\Scripts\Moralis\SupportedEvmChains.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

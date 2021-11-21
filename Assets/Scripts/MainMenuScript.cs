@@ -30,15 +30,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Moralis.Platform.Objects;
-using Moralis.Platform.Utilities;
 using WalletConnectSharp.Core.Models;
 using WalletConnectSharp.Unity;
 using Moralis.Platform;
 using Assets.Scripts;
-using Assets.Scripts.WalletConnectSharp.Unity.UI;
-using UnityEngine.UI;
 using Assets;
-using System.Threading;
 
 /// <summary>
 /// Example class that demonstrates a game menu that incorporates Wallet 

@@ -33,7 +33,7 @@ git clone https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate.git
 - When Unity3D opens, in the "Hierachy" section expand "Menu Scene" then select "MenuCanvas"
 - In the "Inspector" section find the sub-section titled "MainMenuScript".
 - If the "MainMenuScript" sub-section is not expanded, expand it.
-- Using the information from you Moralis Server, fill in Application Id and Server URL.
+- Using the information from your Moralis Server, fill in Application Id and Server URL.
 - If the Wallet Connect property is set to "None" drag WalletConnect from the "Hierarchy" section to this input.
 - Click the Play icon located at the top, center of the Unity3D IDE.
 
@@ -55,12 +55,13 @@ git clone https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate.git
     - [`Web3Api Notes`](#web3api-notes)
     - [`Chains`](#chains)
     - [`Account`](#account)
-        -['GetNFTs'](#getnfts)
-        -['GetNFTsForContract'](#getnftsforcontract)
-        -['GetNFTTransfers'](#getnfttransfers)
-        -['GetTokenBalances'](#gettokenbalances)
-        -['GetTokenTransfers'](#gettokentransfers)
-        -['GetTransactions'](#gettransactions)
+        -[`GetNativeBalance`](#getnativebalance)
+        -[`GetNFTs'](#getnfts)
+        -[`GetNFTsForContract`](#getnftsforcontract)
+        -[`GetNFTTransfers`](#getnfttransfers)
+        -[`GetTokenBalances`](#gettokenbalances)
+        -[`GetTokenTransfers`](#gettokentransfers)
+        -[`GetTransactions`](#gettransactions)
     - [`Defi`](#defi)
     - [`Native`](#native)
     - [`Resolve`](#resolve)
@@ -89,9 +90,6 @@ MoralisClient moralis = new MoralisClient(new ServerConnectionData() { Applicati
 _note: The **new Web3ApiClient()** parameter is optional and should be included only when you will be using functionality fromt the Moralis Web3AP REST service._
 
 ### Unity3D Client Initialization
-**Required Using Statements**
-```
-```
 **Initialize Client**
 ```
 MoralisInterface.Initialize(MoralisApplicationId, MoralisServerURI, hostManifestData);
@@ -123,67 +121,80 @@ Description here
 # 🏗 Ethereum Web3Api Methods
 
 ## `Web3Api Notes`
-Description here
+The complete Moralis Web3API schema including endpoints, operations and models, can be found by loggining into your Moralis Server and select **Web3 API***
+
+For use with either Moralis SDK or in Unity3d, the following using statements are requried:
 ```
-CODE SNIPPET HERE
+using System.Collections.Generic;
+using Moralis.Web3Api.Models;
 ```
 
 ## `Chains`
-Description here
+Use the code snippet below to retrieve a list of EVM chains supported in the Moralis Web3API. This list can be used for populating dropdown lists etc.
 ```
-CODE SNIPPET HERE
+List<ChainEntry> chains = MoralisInterface.SupportedChains;
 ```
 
 ## `Account`
-Description here
+Code examples demonstrating how to use the Moralis Web3API Account endpoint and operations.
+
+### `GetNativeBalance`
+Gets native balance for a specific address
+```
+NativeBalance balance = MoralisInterface.GetClient().Web3Api.Account.GetNativeBalance(address.ToLower(), ChainList.eth);
+```
 
 ### `GetNFTs`
-Description here
+Gets NFTs owned by the given address
 ```
-CODE SNIPPET HERE
+NftOwnerCollection balance = MoralisInterface.GetClient().Web3Api.Account.GetNFTs(address.ToLower(), ChainList.eth);
 ```
 
 ### `GetNFTsForContract`
-Description here
+Gets NFTs owned by the given address
 ```
-CODE SNIPPET HERE
+NftOwnerCollection balance = MoralisInterface.GetClient().Web3Api.Account.GetNFTsForContract(address.ToLower(), tokenAddress, ChainList.eth);
 ```
 
 ### `GetNFTTransfers`
-Description here
+Gets the transfers of the tokens matching the given parameters
 ```
-CODE SNIPPET HERE
+NftTransferCollection balance = MoralisInterface.GetClient().Web3Api.Account.GetNFTTransfers(address.ToLower(), ChainList.eth);
 ```
 
 ### `GetTokenBalances`
-Description here
+Gets token balances for a specific address
 ```
-CODE SNIPPET HERE
+List<Erc20TokenBalance> balance = MoralisInterface.GetClient().Web3Api.Account.GetTokenBalances(address.ToLower(), ChainList.eth);
 ```
 
 ### `GetTokenTransfers`
-Description here
+Gets ERC20 token transactions in descending order based on block number
 ```
-CODE SNIPPET HERE
+List<Erc20Transaction> balance = MoralisInterface.GetClient().Web3Api.Account.GetTokenTransfers(address.ToLower(), ChainList.eth);
 ```
 
 ### `GetTransactions`
-Description here
+Gets native transactions in descending order based on block number
 ```
-CODE SNIPPET HERE
+TransactionCollection balance = MoralisInterface.GetClient().Web3Api.Account.GetTransactions(address.ToLower(), ChainList.eth);
 ```
 
 ## `Defi`
-Description here  
+Code examples demonstrating how to use the Moralis Web3API Defi endpoint and operations.
+
 
 ## `Native`
-Description here  
+Code examples demonstrating how to use the Moralis Web3API Native endpoint and operations.
+
 
 ## `Resolve`
-Description here  
+Code examples demonstrating how to use the Moralis Web3API Resolve endpoint and operations.
+
 
 ## `Storage`
-Description here  
+Code examples demonstrating how to use the Moralis Web3API Storage endpoint and operations.
+
 
 ## `Token`
-Description here
+Code examples demonstrating how to use the Moralis Web3API Token endpoint and operations.
