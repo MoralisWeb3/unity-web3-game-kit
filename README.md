@@ -55,13 +55,13 @@ git clone https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate.git
     - [`Web3Api Notes`](#web3api-notes)
     - [`Chains`](#chains)
     - [`Account`](#account)
-        -[`GetNativeBalance`](#getnativebalance)
-        -[`GetNFTs'](#getnfts)
-        -[`GetNFTsForContract`](#getnftsforcontract)
-        -[`GetNFTTransfers`](#getnfttransfers)
-        -[`GetTokenBalances`](#gettokenbalances)
-        -[`GetTokenTransfers`](#gettokentransfers)
-        -[`GetTransactions`](#gettransactions)
+        - [`GetNativeBalance`](#getnativebalance)
+        - [`GetNFTs'](#getnfts)
+        - [`GetNFTsForContract`](#getnftsforcontract)
+        - [`GetNFTTransfers`](#getnfttransfers)
+        - [`GetTokenBalances`](#gettokenbalances)
+        - [`GetTokenTransfers`](#gettokentransfers)
+        - [`GetTransactions`](#gettransactions)
     - [`Defi`](#defi)
     - [`Native`](#native)
     - [`Resolve`](#resolve)
@@ -94,7 +94,7 @@ _note: The **new Web3ApiClient()** parameter is optional and should be included 
 ```
 MoralisInterface.Initialize(MoralisApplicationId, MoralisServerURI, hostManifestData);
 ```
-_note: For the **hostManifestData** parameter see [`HostManifestData`](#sdk-hostmanifestdata). This is requried for Unity3D applications._
+_note: For the **hostManifestData** parameter see [`HostManifestData`](#hostmanifestdata). This is requried for Unity3D applications._
 
 ## `Authentication`
 Description here
@@ -121,7 +121,7 @@ Description here
 # 🏗 Ethereum Web3Api Methods
 
 ## `Web3Api Notes`
-The complete Moralis Web3API schema including endpoints, operations and models, can be found by loggining into your Moralis Server and select **Web3 API***
+The complete Moralis Web3API schema including endpoints, operations and models, can be found by loggining into your Moralis Server and selecting **Web3 API***
 
 For use with either Moralis SDK or in Unity3d, the following using statements are requried:
 ```
