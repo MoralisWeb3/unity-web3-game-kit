@@ -63,6 +63,8 @@ git clone https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate.git
         - [`GetTokenTransfers`](#gettokentransfers)
         - [`GetTransactions`](#gettransactions)
     - [`Defi`](#defi)
+        - [`GetPairAddress`](#getpairaddress)
+        - [`GetPairReserves`](#getpairreserves)
     - [`Native`](#native)
         - [`GetBlock`](#GetBlock)
         - [`GetContractEvents`](#GetContractEvents)
@@ -72,6 +74,7 @@ git clone https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate.git
         - [`GetTransaction`](#GetTransaction)
         - [`RunContractFunction`](#RunContractFunction)
     - [`Resolve`](#resolve)
+        - [`ResolveDomain`](#resolvedomain)
     - [`Storage`](#erc20balance)
     - [`Token`](#erc20transfers)
         - [`GetAllTokenIds`](#getalltokenids)
@@ -261,6 +264,30 @@ TransactionCollection balance = MoralisInterface.GetClient().Web3Api.Account.Get
 ## `Defi`
 Code examples demonstrating how to use the Moralis Web3API Defi endpoint and operations.
 
+### `GetPairAddress`
+Fetches and returns pair data of the provided token0+token1 combination. The token0 and token1 options are interchangable (ie. there is no different outcome in "token0=WETH and token1=USDT" or "token0=USDT and token1=WETH")
+- **exchange** _string_ REQUIRED The factory name or address of the token exchange
+- **token0Address** _string_ REQUIRED Token0 address
+- **token1Address** _string_ REQUIRED Token1 address
+- **chain** _ChainList_ REQUIRED The chain to query
+- **toBlock** _string_ OPTIONAL The maximum block number from where to get the logs.
+- **toDate** _string_ OPTIONAL Get the logs to this date (any format that is accepted by momentjs)
+#### Example
+```
+ReservesCollection nftTransers = MoralisInterface.GetClient().Web3Api.Defi.GetPairAddress(exchange, token0Address, token1Address, ChainList.eth);
+```
+
+### `GetPairReserves`
+Get the liquidity reserves for a given pair address
+- **pairAddress** _string_ REQUIRED Liquidity pair address
+- **chain** _ChainList_ REQUIRED The chain to query
+- **toBlock** _string_ OPTIONAL The maximum block number from where to get the logs.
+- **toDate** _string_ OPTIONAL Get the logs to this date (any format that is accepted by momentjs)
+- **providerUrl** _string_ OPTIONAL web3 provider url to user when using local dev chain
+#### Example
+```
+ReservesCollectionNftTransferCollection nftTransers = MoralisInterface.GetClient().Web3Api.Defi.GetPairReserves(pairAddress, ChainList.eth);
+```
 
 ## `Native`
 Code examples demonstrating how to use the Moralis Web3API Native endpoint and operations.
@@ -346,9 +373,9 @@ BlockTransaction blockTransaction = MoralisInterface.GetClient().Web3Api.Native.
 Runs a given function of a contract abi and returns readonly data
 - **address** _string_ REQUIRED Target address
 - **chain** _ChainList_ REQUIRED The chain to query
+- **functionName** _string_ REQUIRED Function name of the target function.
 - **subdomain** _string_ OPTIONAL The subdomain of the moralis server to use (Only use when selecting local devchain as chain)
 - **providerUrl** _string_ OPTIONAL web3 provider url to user when using local dev chain
-- **functionName** _string_ OPTIONAL Function name of the target function.
 #### Example
 ```
 string result = MoralisInterface.GetClient().Web3Api.Native.RunContractFunction(address, functionName, ChainList.eth);
@@ -357,6 +384,15 @@ string result = MoralisInterface.GetClient().Web3Api.Native.RunContractFunction(
 
 ## `Resolve`
 Code examples demonstrating how to use the Moralis Web3API Resolve endpoint and operations.
+
+### `ResolveDomain`
+Resolves an Unstoppable domain and returns the address
+- **domain** _string_ REQUIRED Domain to be resolved
+- **currency** _string_ OPTIONAL The currency to query.
+#### Example
+```
+Resolve result = MoralisInterface.GetClient().Web3Api.Resolve.ResolveDomain(domain);
+```
 
 
 ## `Storage`
