@@ -130,6 +130,7 @@ public class MainMenuScript : MonoBehaviour
     public async void WalletConnectHandler(WCSessionData data)
     {
         Debug.Log("Wallet connection received");
+        // Extract wallet address from the Wallet Connect Session data object.
         string address = data.accounts[0].ToLower();
 
         Debug.Log($"Sending sign request for {address} ...");
@@ -138,15 +139,12 @@ public class MainMenuScript : MonoBehaviour
 
         Debug.Log($"Signature {response} for {address} was returned.");
 
-        // Close the wallet connect connection so that Moralis Web3Api can be used.
-        //await walletConnect.Session.Disconnect();
-
-        Debug.Log("WalletConnect session discountted.");
-
         // Create moralis auth data from message signing response.
         Dictionary<string, object> authData = new Dictionary<string, object> { { "id", address }, { "signature", response }, { "data", "Moralis Authentication" } };
 
         Debug.Log("Logging in user.");
+
+        // Attempt to login user.
         MoralisUser user = await MoralisInterface.LogInAsync(authData);
 
         if (user != null)
