@@ -49,7 +49,7 @@ git clone https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate.git
     - [`Live Queries`](#live-queries)
     - [`Custom Objects`](custom-objects)
     - [`User Object`](#user-object)
-    - [`Authentication Data`](#authenticationdata)
+    - [`Authentication Data`](#authentication-data)
     - [`HostManifestData`](#hostmanifestdata)
     - [`ServerConnectionData`](#server-connectiondata)
 - [🏗 Ethereum Web3Api Methods](#-ethereum-web3api-methods)
@@ -136,9 +136,9 @@ MoralisUser user = await moralis.LogInAsync(authenticationData, CancellationToke
 ```
 #### Unity3D
 ```
-MoralisUser user = await MoralisInterface.LogInAsync(authenticationData);
+MoralisUser user = await MoralisInterface.LogInAsync(authentication-Data);
 ```
-_note: See [`Authentication Data`](#authenticationdata) for information about the authenticationData parameter._
+_note: See [`Authentication Data`](#authentication-data) for information about the authenticationData parameter._
 
 The Unity3D Boilerplate application provides a detailed example of how to integrate with Wallet Connect and is worth examining in detail.
 Here are the relevant sections from the Boiler Plate Application:
@@ -313,6 +313,7 @@ Since C# is a typed language the compiler must know what types are used at compi
 MoralisClient<YourUserObject> moralis = new MoralisClient<YourUserObject>(new ServerConnectionData() { ApplicationID = "YOUR_APPLICATION_ID_HERE", ServerURI = "YOUR_SERER_URL_HERE"}, new Web3ApiClient());
 ```
 _note: for Unity3D you will need to make the above change in the **MoralisInterface.Initialize** object. You will also need to replace the MoralisUser object elsewhere in the Boilerplate code._
+_**WARNING** do not make any replacements to any files under the MoralisDtoNet folder_
 
 ## `Authentication Data`
 Authentucation data is a _**Dictionary<string, string>**_ object that contains the information required by Moralis to authenticate a user.
