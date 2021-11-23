@@ -52,17 +52,20 @@ namespace Assets.Scripts
                 // Display the connector page.
                 Application.OpenURL(tokenResponse.url);
 
-                DateTime timeout = DateTime.Now.AddSeconds(40);
+                DateTime timeout = DateTime.Now.AddSeconds(120);
 
                 while (true && DateTime.Now < timeout)
                 {
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
 
                     MoralisSessionTokenResponse sessionResponse = await CheckSessionResult(moralisServerUrl, tokenResponse.loginToken, applicationId);
 
                     if (sessionResponse != null && !String.IsNullOrWhiteSpace(sessionResponse.sessionToken))
                     {
+                        Debug.Log($"Session response received, log in user with session: {sessionResponse.sessionToken}");
                         user = await MoralisInterface.GetClient().UserFromSession(sessionResponse.sessionToken);
+                        Debug.Log("Moralis client UserFromSession returned.");
+                        break;
                     }
                 }
             }
@@ -91,6 +94,8 @@ namespace Assets.Scripts
                 {
                     // Parse the response body. 
                     string responseBody = await response.Content.ReadAsStringAsync();
+
+                    Debug.Log($"Session Result: {responseBody}");
 
                     result = JsonConvert.DeserializeObject<MoralisSessionTokenResponse>(responseBody);
                 }

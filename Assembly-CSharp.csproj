@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -22,7 +22,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\Bin\Debug\</OutputPath>
-    <DefineConstants>UNITY_2020_3_17;UNITY_2020_3;UNITY_2020;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_INCLUDE_TESTS;USE_SEARCH_ENGINE_API;SCENE_TEMPLATE_MODULE;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_NATIVE_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_RUNTIME_PERMISSIONS;ENABLE_ENGINE_CODE_STRIPPING;ENABLE_ONSCREEN_KEYBOARD;INCLUDE_DYNAMIC_GI;ENABLE_MONO_BDWGC;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;ENABLE_VIDEO;PLATFORM_ANDROID;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;UNITY_CAN_SHOW_SPLASH_SCREEN;UNITY_HAS_GOOGLEVR;UNITY_HAS_TANGO;ENABLE_SPATIALTRACKING;PLATFORM_EXTENDS_VULKAN_DEVICE;PLATFORM_HAS_MULTIPLE_SWAPCHAINS;UNITY_ANDROID_SUPPORTS_SHADOWFILES;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;NET_STANDARD_2_0;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <DefineConstants>UNITY_2020_3_17;UNITY_2020_3;UNITY_2020;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_INCLUDE_TESTS;USE_SEARCH_ENGINE_API;SCENE_TEMPLATE_MODULE;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_ENGINE_CODE_STRIPPING;ENABLE_ONSCREEN_KEYBOARD;INCLUDE_DYNAMIC_GI;ENABLE_MONO_BDWGC;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;ENABLE_VIDEO;PLATFORM_IOS;ENABLE_RUNTIME_GI;ENABLE_GAMECENTER;ENABLE_NETWORK;ENABLE_IOS_ON_DEMAND_RESOURCES;ENABLE_IOS_APP_SLICING;PLAYERCONNECTION_LISTENS_FIXED_PORT;DEBUGGER_LISTENS_FIXED_PORT;PLATFORM_SUPPORTS_ADS_ID;SUPPORT_ENVIRONMENT_VARIABLES;PLATFORM_SUPPORTS_PROFILER;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;UNITY_IOS;PLATFORM_IPHONE;UNITY_IPHONE;UNITY_IPHONE_API;UNITY_HAS_GOOGLEVR;ENABLE_SPATIALTRACKING;ENABLE_MONO;NET_STANDARD_2_0;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
@@ -49,100 +49,230 @@
     <UnityProjectGenerator>Package</UnityProjectGenerator>
     <UnityProjectGeneratorVersion>2.0.11</UnityProjectGeneratorVersion>
     <UnityProjectType>Game:1</UnityProjectType>
-    <UnityBuildTarget>Android:13</UnityBuildTarget>
+    <UnityBuildTarget>iOS:9</UnityBuildTarget>
     <UnityVersion>2020.3.17f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\InternalEvent.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Utilities\JsonUtilities.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Network\ITransport.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Utilities\FlexibleListWrapper.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\Ethereum\EthResponse.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\Infrastructure\ObjectCoder.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\Utils\WaitForTask.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\Ethereum\EthPersonalSign.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Queries\QueryServiceExtensions.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\Models\WebRequest.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IMetadataService.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Operations\MoralisFieldOperations.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\ClientServices\MoralisCloudFunctionService.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\EditorTools\WalletConnectEditor.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Queries\MutableObjectState.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\CustomServiceHub.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\NetworkMessage.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\Models\DeepLink\AppColors.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\Infrastructure\MoralisCacheService.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IServerConnectionData.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\ICurrentObjectService.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\RelativeCacheLocationMutator.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Utilities\FlexibleDictionaryWrapper.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\Ethereum\NativeCurrency.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\Ethereum\Types\EvmTypeAttribute.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\SupportedWalletList.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\Ethereum\EthSign.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Utilities\MoralisFileExtensions.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\Ethereum\EthSignTypedData.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\RelationBase.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Operations\MoralisAddOperation.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\ClientServices\MoralisSessionService.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Resources.Designer.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\ErrorResponse.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\Models\DataTransferLevel.cs" />
     <Compile Include="Assets\Scripts\Moralis\UnityNewtosoftSerializer.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Queries\Live\SubscribeRequest.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Utilities\LockSet.cs" />
     <Compile Include="Assets\Scripts\MainMenuScript.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Utilities\ReflectionUtilities.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Network\MessageReceivedEventArgs.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\SavedSession.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Utilities\LateInitializer.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\Infrastructure\MetadataService.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\EncryptedPayload.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\Ethereum\EthChain.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\Ethereum\Types\EvmIgnoreAttribute.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\ClientMeta.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IDiskFileCacheService.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IDataTransferLevel.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Objects\MoralisUser.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IServiceHub.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\Ethereum\EthSignTransaction.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\ClientServices\UserServiceExtensions.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisSessionTokenResponse.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\IdentifierBasedRelativeCacheLocationGenerator.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IServiceHubMutator.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\ClientServices\MoralisLiveQueryClient.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\Models\MoralisCommand.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\Models\DeepLink\MobileAppData.cs" />
     <Compile Include="Assets\Scripts\TokenListController.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\WalletConnectSession.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IInstallationService.cs" />
     <Compile Include="Assets\Scripts\MenuScript.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Network\ICipher.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\ClientServices\MoralisLiveQueryManager.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IHostManifestData.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\UI\WalletConnectQRImage.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Queries\Live\ConnectRequest.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Events\Model\JsonRpcRequestEvent.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IMoralisFieldOperation.cs" />
     <Compile Include="Assets\Scripts\Extensions.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IJsonConvertible.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\MoralisDynamic.cs" />
     <Compile Include="Assets\Scripts\Moralis\ISubscriptionQuery.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\WalletConnectUnitySession.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\ICustomServiceHub.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IRelativeCacheLocationGenerator.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\MoralisCloud.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisLoginTokenResponse.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\Infrastructure\PointerOrLocalIdEncoder.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\Utils\UnityBinder.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Utilities\TaskQueue.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\ClientServices\MoralisService.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\ILiveQueryClient.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\ClientServices\MoralisCommandRunner.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Events\EventManager.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IUserService.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Objects\MoralisGeoPoint.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\MoralisLiveQueryCallbacks.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\ClientServices\MoralisFileService.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisLoginTokenRequest.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Objects\MoralisGeoDistance.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IUser.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Queries\Live\QueryEventMessage.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\ClientServices\CommandRunnerExtensions.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Utils\Hex.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Objects\MoralisObject.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Events\Model\GenericEvent.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\ICurrentUserService.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\OrchestrationServiceHub.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Objects\MoralisFile.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IObjectState.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\WcSessionRequest.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IClientWebSocket.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\Models\NFTTokenData.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IObjectService.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\ILiveQueryCallbacks.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\ClientServices\FileServiceExtensions.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\ICloudFunctionService.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\JsonRpcRequest.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Utilities\InternalExtensions.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Network\AESCipher.cs" />
+    <Compile Include="Assets\Scripts\Moralis\ChainEntry.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IJsonSerializer.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Queries\Live\UnscubscribeRequest.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Utils\RpcPayloadId.cs" />
     <Compile Include="Assets\Scripts\Moralis\MoralisSubscriptionQuery.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Objects\MoralisSession.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\WCSessionRequestResponse.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IFileService.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Operations\MoralisDeleteOperation.cs" />
+    <Compile Include="Assets\Scripts\Moralis\SupportedEvmChains.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Network\DefaultBridge.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IMoralisCommandRunner.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Objects\MoralisRole.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\Infrastructure\MoralisQueryService.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\Network\NativeWebSocketTransport.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Network\TransportFactory.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Utilities\XamarinAttributes.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\Infrastructure\InstallationService.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\Address.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\MoralisServiceHub.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Events\IEventProvider.cs" />
     <Compile Include="Assets\Scripts\Moralis\MobileLogin.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Queries\MoralisQuery.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\IEventSource.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\WCSessionRequestRequest.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\Ethereum\WalletAddEthChain.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\ClientServices\SessionServiceExtensions.cs" />
     <Compile Include="Assets\Scripts\Moralis\MoralisInterface.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\Infrastructure\MoralisCurrentUserService.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Queries\Live\ActionEvent.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\Utils\WaitForTaskResult.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\UI\PlatformToggle.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Utilities\FileUtilities.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\Ethereum\EthChainData.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Objects\MoralisFileState.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Events\EventDelegator.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\MutableServiceHub.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\JsonRpcResponse.cs" />
     <Compile Include="Assets\Scripts\Moralis\EditorTools\WalletSelectListEditor.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\HostManifestData.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\ServerConnectionData.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\Models\DeepLink\Wallets.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\Ethereum\EthSendTransaction.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\Ethereum\Types\EvmTypeInfo.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\ISessionService.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Exceptions\MoralisFailureException.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Events\Model\JsonRpcResponseEvent.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\ICacheService.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\Network\WebGLAESCipher.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Operations\MoralisSetOperation.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\Ethereum\Types\EvmTypedData.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Queries\Live\MoralisClientWebSocket.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\AbsoluteCacheLocationMutator.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\Models\DeepLink\AppEntry.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Operations\MoralisIncrementOperation.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IQueryService.cs" />
     <Compile Include="Assets\Scripts\SceneMap.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\ClientServices\MoralisUserService.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\LiveQueryCallbacks.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Queries\Live\ErrorMessage.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\Ethereum\EthGenericRequest.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IEnvironmentData.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\Models\CountQueryResult.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IMutableServiceHub.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\ILiveQueryService.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\EnvironmentData.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Queries\Live\LiveQueryClientStatus.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\ClientServices\UniversalWebClient.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\WalletConnectProtocol.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\UI\ChooseWalletScreen.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IDataCache.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Queries\QueryExtensions.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Objects\MoralisAcl.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\WalletConnect.cs" />
     <Compile Include="Assets\Scripts\Moralis\MoralisLiveQueryController.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Utilities\IdentityEqualityComparer.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IServiceHubComposer.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\Ethereum\TransactionData.cs" />
     <Compile Include="Assets\Scripts\Moralis\WalletSelectItem.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\Infrastructure\DataDecoder.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\Infrastructure\DataEncoder.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Events\EventHandlerMap.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\Ethereum\Types\EIP712Domain.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\Models\DeepLink\AppMetadata.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Chains.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\WalletConnectProvider.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Events\EventFactory.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\ClientServices\MoralisObjectService.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Operations\MoralisUniqueAddOperation.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Queries\Live\MoralisLiveQueryDelegates.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\Models\DeepLink\AppInfo.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Utilities\Conversion.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IAuthenticationProvider.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IWebClient.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Utilities\SynchronizedEventHandler.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\MoralisClient.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Utilities\ThreadingUtilities.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\WCSessionData.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Events\IEvent.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Queries\Live\SubscribableWebSocket.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Utilities\AssemblyLister.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\WCSessionUpdate.cs" />
-    <Compile Include="Assets\Scripts\Moralis\MoralisLoginTokenResponse.cs" />
-    <Compile Include="Assets\Scripts\Moralis\MoralisLoginTokenRequest.cs" />
-    <Compile Include="Assets\Scripts\Moralis\MoralisSessionTokenResponse.cs" />
-    <Compile Include="Assets\Scripts\Moralis\ChainEntry.cs" />
-    <Compile Include="Assets\Scripts\Moralis\SupportedEvmChains.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Queries\Live\OperationTypes.cs" />
+    <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\ServiceHub.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -164,7 +294,6 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\Packages\QRCoder.Unity.1.0.2\lib\net35\QRCoder.Unity.dll" />
-    <None Include="Assets\Scripts\DLLs\Moralis.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\Scripts\DLLs\RestSharp.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
@@ -390,9 +519,6 @@
     </Reference>
     <Reference Include="Moralis.Web3Api.Core">
       <HintPath>Assets\Scripts\DLLs\Moralis.Web3Api.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Moralis">
-      <HintPath>Assets\Scripts\DLLs\Moralis.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing.Common">
       <HintPath>Assets\Packages\System.Drawing.Common\netstandard2.0\System.Drawing.Common.dll</HintPath>

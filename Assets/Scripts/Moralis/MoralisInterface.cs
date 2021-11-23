@@ -129,13 +129,19 @@ public class MoralisInterface : MonoBehaviour
     /// <summary>
     /// Properly dispose Moralis Client, shuts down any subscriptions, etc.
     /// </summary>
-    public static void Dispose() { moralis.Dispose(); }
+    public static void Dispose() 
+    { 
+        moralis.Dispose(); 
+    }
 
     /// <summary>
     /// Get the Moralis Server Client.
     /// </summary>
     /// <returns></returns>
-    public static MoralisClient GetClient() { return moralis; }
+    public static MoralisClient GetClient() 
+    { 
+        return moralis; 
+    }
 
     /// <summary>
     /// Provides the current authenticated user if Moralis 

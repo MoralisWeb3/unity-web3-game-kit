@@ -27,12 +27,14 @@
  *  SOFTWARE.
  */
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Moralis.Platform;
+using Moralis.Platform.Objects;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Moralis.Platform.Objects;
+using UnityEngine.UI;
 using WalletConnectSharp.Core.Models;
 using WalletConnectSharp.Unity;
-using Moralis.Platform;
 using Assets.Scripts;
 using Assets;
 
@@ -46,13 +48,16 @@ public class MainMenuScript : MonoBehaviour
     public string MoralisServerURI;
     public string ApplicationName;
     public string Version;
+    public Text errorText;
     public WalletConnect walletConnect;
 
     GameObject mainMenu;
     GameObject qrMenu;
     GameObject androidMenu;
     GameObject iOsMenu;
-    private void Start()
+    GameObject errorPanel;
+
+    void Start()
     {
         HostManifestData hostManifestData = new HostManifestData()
         { 
@@ -64,12 +69,20 @@ public class MainMenuScript : MonoBehaviour
 
         mainMenu = GameObject.FindGameObjectWithTag("MainMenu");
         qrMenu = GameObject.FindGameObjectWithTag("QrConnectMenu");
-        androidMenu = GameObject.FindGameObjectWithTag("AndroidConnectMenu");
-        iOsMenu = GameObject.FindGameObjectWithTag("IOSConnectMenu");
+        errorPanel = GameObject.FindGameObjectWithTag("ErrorPanel");
 
+        errorPanel.SetActive(false);
         qrMenu.SetActive(false);
+
+        /**
+         * For future use. These menu choices are used for direct Wallet 
+         * Connect interaction. While we work to better our interaction with
+         * Unity / Wallet Connect we will use an alternative method.
+        iOsMenu = GameObject.FindGameObjectWithTag("IOSConnectMenu");
+        androidMenu = GameObject.FindGameObjectWithTag("AndroidConnectMenu");
         androidMenu.SetActive(false);
         iOsMenu.SetActive(false);
+        */
 
         MoralisInterface.Initialize(MoralisApplicationId, MoralisServerURI, hostManifestData);
     }
@@ -83,6 +96,7 @@ public class MainMenuScript : MonoBehaviour
     {
         Debug.Log("PLAY");
 
+        // If the user is still logged in just show game.
         if (MoralisInterface.IsLoggedIn())
         {
             Debug.Log("User is already logged in to Moralis.");
@@ -96,23 +110,24 @@ public class MainMenuScript : MonoBehaviour
             Debug.Log("User is not logged in.");
             mainMenu.SetActive(false);
 
-            // The mobile solutions for iOA ans Android will be different once we
+            // The mobile solutions for iOS and Android will be different once we
             // smooth out the interaction with Wallet Connect. For now the duplicated 
             // code below is on purpose just to keep the iOS and Android authentication
             // processes separate.
 #if UNITY_ANDROID
+            // By pass noraml Wallet Connect for now.
             //androidMenu.SetActive(true);
 
             // Use Moralis Connect page for authentication as we work to make the Wallet 
             // Connect experience better.
-            await MobileLogin.LogIn(MoralisServerURI, MoralisApplicationId);
-            SceneManager.LoadScene(SceneMap.GAME_VIEW);
+            await LoginViaConnectionPage();
 #elif UNITY_IOS
+            // By pass noraml Wallet Connect for now.
             //iOsMenu.SetActive(true);
 
             // Use Moralis Connect page for authentication as we work to make the Wallet 
             // Connect experience better.
-            await MobileLogin.LogIn(MoralisServerURI).OnSuccess(t => SceneManager.LoadScene(SceneMap.GAME_VIEW));
+            await LoginViaConnectionPage();
 #else
             qrMenu.SetActive(true);
 #endif
@@ -173,5 +188,29 @@ public class MainMenuScript : MonoBehaviour
         await MoralisInterface.LogOutAsync();
         // Close out the application.
         Application.Quit();
+    }
+
+    /// <summary>
+    /// Display Moralis connector login page
+    /// </summary>
+    private async Task LoginViaConnectionPage()
+    {
+        // Use Moralis Connect page for authentication as we work to make the Wallet 
+        // Connect experience better.
+        MoralisUser user = await MobileLogin.LogIn(MoralisServerURI, MoralisApplicationId);
+
+        if (user != null)
+        {
+            // User is not null so login was successful, show first game scene.
+            SceneManager.LoadScene(SceneMap.GAME_VIEW);
+        }
+        else
+        {
+            // Set error display text.
+            errorText.text = "Log Failed, Try Again";
+            // Show error panel
+            mainMenu.SetActive(true);
+            errorPanel.SetActive(true);
+        }
     }
 }

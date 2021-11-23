@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - IOSConnectMenu
+  - MainMenu
+  - QrConnectMenu
+  - AndroidConnectMenu
+  - ErrorPanel
   layers:
   - Default
   - TransparentFX

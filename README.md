@@ -161,10 +161,97 @@ MoralisUser user = await MoralisInterface.LogInAsync(authData);
 ```
 
 ## `Queries`
-Description here
+Queries provide a way to retrieve informaition from your Moralis database.
+#### Required Using Statement(s)
+```
+using Moralis;
+using Moralis.Platform.Objects;
+```
+The following example will return all Hero records where 'Level' is equal to 3.
+#### SDK Example Query
+```
+MoralisQuery<Hero> q = moralis.Query<Hero>().WhereEqualTo("Level", 3);
+IEnumerable<Hero> result = await q.FindAsync();
+```
+#### Unity3D Example
+```
+MoralisQuery<Hero> q = MoralisInterface.GetClient().Query<Hero>().WhereEqualTo("Level", 3);
+IEnumerable<Hero> result = await q.FindAsync();
+```
+
+The Moralis Dot Net SDK supports the same query methods as the JS SDK. For example creating 'OR', 'AND', and 'NOR' queries.
+For this example we will take the query from the above example and construct a 'OR' query that also returns records where the hero's name is 'Zuko'.
+Furthermore we will sort (order) the result set by the hero's strength, descending.
+#### SDK Example OR query
+```
+MoralisQuery<Hero> q1 = moralis.BuildOrQuery<Hero>(new MoralisQuery<Hero>[] { q, moralis.Query<Hero>().WhereEqualTo("Name", "Zuko") })
+    .OrderByDescending("Strength");
+IEnumerable<Hero> result = await q1.FindAsync();
+```
+#### Unity3D Example OR query
+```
+MoralisQuery<Hero> q1 = MoralisInterface.GetClient()
+    .BuildOrQuery<Hero>(new MoralisQuery<Hero>[] { q, MoralisInterface.GetClient().Query<Hero>().WhereEqualTo("Name", "Zuko") })
+    .OrderByDescending("Strength");
+IEnumerable<Hero> result = await q1.FindAsync();
+```
 
 ## `Live Queries`
-Description here
+Live Queries are queries that include a subscription that provide updates whenever the data targeted by the query are updated.
+A Live Query subscription emits events that indicate the state of the client and changes to the data. For more information please see
+the [docs](https://docs.moralis.io/moralis-server/database/live-queries).
+
+The foloowing examples use the [query example from above](#queries)
+### Live Query Example (SDK)
+```
+MoralisLiveQueryClient<Hero> heroSubscription = moralis.Query<Hero>().Subscribe(callbacks);
+```
+_note: the **callbacks** parameter is optional. Please see [Callbacks Explained](#live-query-callbacks-explained) bellow.
+### Live Query Example (Unity3D)
+Since Unity3d is mainly used to create games, Unity3D apps generaly have life cycle events you do not usually need to worray about in a normal program.
+We have created a special Live Query wrapper object that automatically handles your subscriptions for pause, unpause, close, etc.
+This example shows how to create your subscription using this wrapper class.
+```
+MoralisQuery<Hero> q = moralis.Query<Hero>();
+MoralisLiveQueryController.AddSubscription<Hero>("Hero", q, callbacks);
+```
+_note: the **callbacks** parameter is optional. Please see [Callbacks Explained](#live-query-callbacks-explained) bellow.
+
+The _**MoralisLiveQueryController**_ is a singleton object and so is available anywhere within your application.
+The first parameter ("Hero" above") is a key that you cab use to retrieve a subscription (to check its status for example) or to remove a subscription.
+
+By using the The _**MoralisLiveQueryController**_ object you do not need to worry about properly closing or disposing of your scubscriptions as this wrapper object handles all of that for you.
+
+### Live Query Callbacks Explained.
+Callbacks are used to handle the events emitted by a subscription. You can set the callbacks directly agains a subscription. However it is usually cleaner to 
+seperate these from the main code. To facilitate this we have included the _**MoralisLiveQueryCallbacks**_ object. This optional object can be passed to the subscription.
+#### Example MoralisLiveQueryCallbacks Use
+```
+MoralisLiveQueryCallbacks<Hero> callbacks = new MoralisLiveQueryCallbacks<Hero>();
+callbacks.OnConnectedEvent += (() => { Console.WriteLine("Connection Established."); });
+callbacks.OnSubscribedEvent += ((requestId) => { Console.WriteLine($"Subscription {requestId} created."); });
+callbacks.OnUnsubscribedEvent += ((requestId) => { Console.WriteLine($"Unsubscribed from {requestId}."); });
+callbacks.OnErrorEvent += ((ErrorMessage em) =>
+{
+    Console.WriteLine($"ERROR: code: {em.code}, msg: {em.error}, requestId: {em.requestId}");
+});
+callbacks.OnCreateEvent += ((item, requestId) =>
+{
+    Console.WriteLine($"Created hero: name: {item.Name}, level: {item.Level}, strength: {item.Strength} warcry: {item.Warcry}");
+});
+callbacks.OnUpdateEvent += ((item, requestId) =>
+{
+    Console.WriteLine($"Updated hero: name: {item.Name}, level: {item.Level}, strength: {item.Strength} warcry: {item.Warcry}");
+});
+callbacks.OnDeleteEvent += ((item, requestId) =>
+{
+    Console.WriteLine($"Hero {item.Name} has been defeated and removed from the roll!");
+});
+callbacks.OnGeneralMessageEvent += ((text) =>
+{
+    Console.WriteLine($"Websocket message: {text}");
+});
+```
 
 ## `Custom Object`
 Creating your own objects to support NPCs, characters, and game objects is a simple as creating a Plain Old C# Object (POCO). The only stipulation is that your custom object must be a child of Moralis Object and when you create an instance of the object it should be made via _**moralis.Create**_ method. This associates some extensions to your object that enable you to perform Moralis functions such as _Save_ directly on the object.
@@ -189,9 +276,21 @@ public class Hero : MoralisObject
     }
 }
 ```
-#### Create and Save Instance of Object
+#### Create and Save Instance of Object (SDK)
 ```
 Hero h = moralis.Create<Hero>();
+h.Name = "Zuko";
+h.Strength = 50;
+h.Level = 15;
+h.Warcry = "Honor!!!";
+h.Bag.Add("Leather Armor");
+h.Bag.Add("Crown Prince Hair clip.");
+
+await h.SaveAsync();
+```
+#### Create and Save Instance of Object (Unity3D)
+```
+Hero h = MoralisInterface.GetClient().Create<Hero>();
 h.Name = "Zuko";
 h.Strength = 50;
 h.Level = 15;
@@ -227,7 +326,7 @@ Dictionary<string, object> authData = new Dictionary<string, object> { { "id", "
 ```
 
 ## `HostManifestData`
-Description here
+In Unity3D applications the HostManifestData object is used to pass information to Moralis that is usually autogenerated from Windows system variables. Since Unity3D supports multiple platforms this information is not always available. 
 
 ## `ServerConnectionData`
 Description here
