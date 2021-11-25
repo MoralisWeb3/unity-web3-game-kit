@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -52,9 +52,6 @@
     <UnityBuildTarget>iOS:9</UnityBuildTarget>
     <UnityVersion>2020.3.17f1</UnityVersion>
   </PropertyGroup>
-  <ItemGroup>
-    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
-  </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\InternalEvent.cs" />
     <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Utilities\JsonUtilities.cs" />
@@ -273,6 +270,66 @@
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\WCSessionUpdate.cs" />
     <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Queries\Live\OperationTypes.cs" />
     <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\ServiceHub.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Interfaces\IAccountApi.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\ChainList.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\Block.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\Erc20Transaction.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Interfaces\IStorageApi.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\NftCollection.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\Erc20TokenBalance.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\Ens.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\IpfsFileRequest.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Interfaces\INativeApi.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\RunContractDto.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\NftMetadata.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\ReservesCollection.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\Nft.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\NftMetadataCollection.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\NftOwnerCollection.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\NftTransferCollection.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\NftContractMetadataCollection.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\IpfsFile.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\NftOwner.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\Resolve.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\Erc20Metadata.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\Erc20Allowance.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\LogEventByAddress.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\NftTransfer.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Interfaces\IWeb3Api.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\NftContractMetadata.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\HistoricalNftTransfer.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\TradesCollection.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\TransactionCollection.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\Transaction.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\Log.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\BlockDate.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\LogEvent.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Interfaces\IResolveApi.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\NativeBalance.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\NativeErc20Price.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\Erc20Price.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\BlockTransaction.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Interfaces\ITokenApi.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Interfaces\IDefiApi.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\CloudFunctionResult.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\Erc721Metadata.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api\Client\ApiException.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api\Api\StorageApi.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api\Moralis.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api\CloudApi\DefiApi.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api\Client\Web3ApiClient.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api\CloudApi\NativeApi.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api\CloudApi\TokenApi.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api\Api\TokenApi.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api\CloudApi\ResolveApi.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api\Api\NativeApi.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api\Api\DefiApi.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api\Client\Configuration.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api\Api\AccountApi.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api\CloudApi\StorageApi.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api\Client\ApiClient.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api\Api\ResolveApi.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api\CloudApi\AccountApi.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -282,12 +339,10 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
-    <None Include="Assets\Scripts\DLLs\Moralis.Web3Api.Core.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
-    <None Include="Assets\Scripts\DLLs\Moralis.Web3Api.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
@@ -523,17 +578,11 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\AOT\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Moralis.Web3Api.Core">
-      <HintPath>Assets\Scripts\DLLs\Moralis.Web3Api.Core.dll</HintPath>
-    </Reference>
     <Reference Include="System.Drawing.Common">
       <HintPath>Assets\Packages\System.Drawing.Common\netstandard2.0\System.Drawing.Common.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp">
       <HintPath>Assets\Scripts\DLLs\RestSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Moralis.Web3Api">
-      <HintPath>Assets\Scripts\DLLs\Moralis.Web3Api.dll</HintPath>
     </Reference>
     <Reference Include="QRCoder">
       <HintPath>Assets\Packages\QRCoder.1.3.4\lib\net35\QRCoder.dll</HintPath>

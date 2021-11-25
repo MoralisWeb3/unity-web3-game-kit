@@ -212,13 +212,13 @@ Since Unity3d is mainly used to create games, Unity3D apps generaly have life cy
 We have created a special Live Query wrapper object that automatically handles your subscriptions for pause, unpause, close, etc.
 This example shows how to create your subscription using this wrapper class.
 ```
-MoralisQuery<Hero> q = moralis.Query<Hero>();
+MoralisQuery<Hero> q = MoralisInterface.GetClient().Query<Hero>();
 MoralisLiveQueryController.AddSubscription<Hero>("Hero", q, callbacks);
 ```
 _note: the **callbacks** parameter is optional. Please see [Callbacks Explained](#live-query-callbacks-explained) bellow.
 
 The _**MoralisLiveQueryController**_ is a singleton object and so is available anywhere within your application.
-The first parameter ("Hero" above") is a key that you cab use to retrieve a subscription (to check its status for example) or to remove a subscription.
+The first parameter ("Hero" above") is a key that you can use to retrieve a subscription (to check its status for example) or to remove a subscription.
 
 By using the The _**MoralisLiveQueryController**_ object you do not need to worry about properly closing or disposing of your scubscriptions as this wrapper object handles all of that for you.
 
