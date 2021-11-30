@@ -41,19 +41,13 @@ using UnityEngine.Networking;
 /// </summary>
 public class TokenListController : MonoBehaviour
 {
-
-    /// <summary>
-    /// Username text
-    /// </summary>
-    public TMPro.TMP_Text nameText;
-
     /// <summary>
     /// Prefab of the item to draw the token to and show in the list.
     /// </summary>
     public GameObject ListItemPrefab;
 
     /// <summary>
-    /// Grid layout to hold the NFT Images Button
+    /// Vertical layout to hold the Token item list.
     /// </summary>
     public Transform TokenListTransform;
 
@@ -63,10 +57,17 @@ public class TokenListController : MonoBehaviour
     /// </summary>
     public int ChainId;
 
-    // Start is called before the first frame update
-    void Start()
+    private bool tokensLoaded;
+
+    public void PopulateWallet()
     {
-        StartCoroutine(BuildTokenList());
+        if (!tokensLoaded)
+        {
+            StartCoroutine(BuildTokenList());
+
+            // Make sure that duplicate tokens are not loaded.
+            tokensLoaded = true;
+        }
     }
 
     IEnumerator BuildTokenList()
@@ -76,8 +77,6 @@ public class TokenListController : MonoBehaviour
 
         if (user != null)
         {
-            nameText.text = user.username;
-
             string addr = user.authData["moralisEth"]["id"].ToString();
 
             List<Erc20TokenBalance> tokens =

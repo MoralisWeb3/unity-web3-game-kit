@@ -48,17 +48,17 @@ public class MainMenuScript : MonoBehaviour
     public string MoralisServerURI;
     public string ApplicationName;
     public string Version;
-    public Text errorText;
+    public GameObject AuthenticationButton;
     public WalletConnect walletConnect;
+    public GameObject qrMenu;
+    public GameObject joystick;
 
-    GameObject mainMenu;
-    GameObject qrMenu;
-    GameObject androidMenu;
-    GameObject iOsMenu;
-    GameObject errorPanel;
+    Image menuBackground;
 
     void Start()
     {
+        menuBackground = GameObject.FindObjectOfType<Image>();
+
         HostManifestData hostManifestData = new HostManifestData()
         { 
             Version = Version,
@@ -67,24 +67,26 @@ public class MainMenuScript : MonoBehaviour
             ShortVersion = Version
         };
 
-        mainMenu = GameObject.FindGameObjectWithTag("MainMenu");
-        qrMenu = GameObject.FindGameObjectWithTag("QrConnectMenu");
-        errorPanel = GameObject.FindGameObjectWithTag("ErrorPanel");
-
-        errorPanel.SetActive(false);
         qrMenu.SetActive(false);
 
-        /**
-         * For future use. These menu choices are used for direct Wallet 
-         * Connect interaction. While we work to better our interaction with
-         * Unity / Wallet Connect we will use an alternative method.
-        iOsMenu = GameObject.FindGameObjectWithTag("IOSConnectMenu");
-        androidMenu = GameObject.FindGameObjectWithTag("AndroidConnectMenu");
-        androidMenu.SetActive(false);
-        iOsMenu.SetActive(false);
-        */
+#if UNITY_ANDROID || UNITY_IOS
+        // We're in mobile so show the joystick.
+        joystick.SetActive(true);
+#endif
 
         MoralisInterface.Initialize(MoralisApplicationId, MoralisServerURI, hostManifestData);
+
+        if (MoralisInterface.IsLoggedIn())
+        {
+            Debug.Log("User is already logged in to Moralis.");
+
+            // Transition to main game scene
+
+        }
+        else
+        {
+            AuthenticationButtonOn();
+        }
     }
 
     /// <summary>
@@ -95,6 +97,8 @@ public class MainMenuScript : MonoBehaviour
     public async void Play()
     {
         Debug.Log("PLAY");
+
+        AuthenticationButtonOff();
 
         // If the user is still logged in just show game.
         if (MoralisInterface.IsLoggedIn())
@@ -108,7 +112,7 @@ public class MainMenuScript : MonoBehaviour
         else
         {
             Debug.Log("User is not logged in.");
-            mainMenu.SetActive(false);
+            //mainMenu.SetActive(false);
 
             // The mobile solutions for iOS and Android will be different once we
             // smooth out the interaction with Wallet Connect. For now the duplicated 
@@ -202,15 +206,28 @@ public class MainMenuScript : MonoBehaviour
         if (user != null)
         {
             // User is not null so login was successful, show first game scene.
-            SceneManager.LoadScene(SceneMap.GAME_VIEW);
+            //SceneManager.LoadScene(SceneMap.GAME_VIEW);
+            AuthenticationButtonOff();
         }
         else
         {
-            // Set error display text.
-            errorText.text = "Log Failed, Try Again";
-            // Show error panel
-            mainMenu.SetActive(true);
-            errorPanel.SetActive(true);
+            AuthenticationButtonOn();
         }
+    }
+
+    private void AuthenticationButtonOff()
+    {
+        AuthenticationButton.SetActive(false);
+        Color color = menuBackground.color;
+        color.a = Mathf.Clamp(0f, 0, 1);
+        menuBackground.color = color;
+    }
+
+    private void AuthenticationButtonOn()
+    {
+        AuthenticationButton.SetActive(true);
+        Color color = menuBackground.color;
+        color.a = Mathf.Clamp(0.7f, 0, 1);
+        menuBackground.color = color;
     }
 }
