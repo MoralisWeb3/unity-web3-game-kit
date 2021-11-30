@@ -101,39 +101,6 @@ public class TokenListController : MonoBehaviour
 
                 var parentTransform = TokenListTransform.GetComponent<RectTransform>();
 
-                float parentWidth = parentTransform.rect.width;
-
-                rectTransform.sizeDelta = new Vector2(parentWidth, 64);
-
-                if (parentWidth > 800.0f)
-                {
-                    tokenSymbol.fontSize = 36;
-                    tokenBalanace.fontSize = 24;
-
-                    var symRectTran = tokenSymbol.GetComponent<RectTransform>();
-                    var balRectTran = tokenBalanace.GetComponent<RectTransform>();
-
-                    symRectTran.sizeDelta = new Vector2(105, symRectTran.rect.height);
-                    balRectTran.sizeDelta = new Vector2(350, balRectTran.rect.height);
-
-                    symRectTran.position = new Vector3(symRectTran.position.x + 30, symRectTran.position.y);
-                    balRectTran.position = new Vector3(balRectTran.position.x - 100, balRectTran.position.y);
-                }
-                else if (parentWidth > 600.0f)
-                {
-                    tokenSymbol.fontSize = 28;
-                    tokenBalanace.fontSize = 18;
-
-                    var symRectTran = tokenSymbol.GetComponent<RectTransform>();
-                    var balRectTran = tokenBalanace.GetComponent<RectTransform>();
-
-                    symRectTran.sizeDelta = new Vector2(75, symRectTran.rect.height);
-                    balRectTran.sizeDelta = new Vector2(275, balRectTran.rect.height);
-
-                    symRectTran.position = new Vector3(symRectTran.position.x + 15, symRectTran.position.y);
-                    balRectTran.position = new Vector3(balRectTran.position.x - 50, balRectTran.position.y);
-                }
-
                 tokenSymbol.text = token.Symbol;
                 tokenBalanace.text = token.Balance;
 
