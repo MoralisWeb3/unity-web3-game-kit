@@ -3017,3 +3017,94 @@ Received Import Request.
 Start importing Assets/Resources/BillingMode.json using Guid(ce1174a77d4b912488f70ce0c81f6713) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '798c63f037b5038e2eba1c71a14dbd0e') in 0.065902 seconds 
   Import took 0.070848 seconds .
 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005181 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.57 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.688 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1689ms)
+		BeginReloadAssembly (126ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (6ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (40ms)
+		EndReloadAssembly (1485ms)
+			LoadAssemblies (123ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (361ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (48ms)
+			SetupLoadedEditorAssemblies (616ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (7ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (86ms)
+				ProcessInitializeOnLoadAttributes (512ms)
+				ProcessInitializeOnLoadMethodAttributes (4ms)
+				AfterProcessingInitializeOnLoad (5ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (8ms)
+Platform modules already initialized, skipping
+Switching build target platform(19) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
+Refreshing native plugins compatible for Editor in 0.52 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1912 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 183.4 MB.
+System memory in use after: 183.5 MB.
+
+Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 2533.
+Total: 4.008477 ms (FindLiveObjects: 0.250420 ms CreateObjectMapping: 0.197931 ms MarkObjects: 3.525524 ms  DeleteObjects: 0.033428 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 6424.809244 seconds.
+  path: Assets/3rdParty/readme.md
+  artifactKey: Guid(2a5a4e5c8a9c44841ba562a63816e7c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/3rdParty/readme.md using Guid(2a5a4e5c8a9c44841ba562a63816e7c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9dee614c45578c8ebad564d355b1be28') in 0.041522 seconds 
+  Import took 0.047707 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 219.821438 seconds.
+  path: Assets/3rdParty/readme.md
+  artifactKey: Guid(2a5a4e5c8a9c44841ba562a63816e7c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/3rdParty/readme.md using Guid(2a5a4e5c8a9c44841ba562a63816e7c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd0d88330790396a1b540cac3911aa502') in 0.012018 seconds 
+  Import took 0.018194 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.755096 seconds.
+  path: Assets/3rdParty/TextMesh Pro
+  artifactKey: Guid(ba46b0d92c079474286c29a679e0e26c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/3rdParty/TextMesh Pro using Guid(ba46b0d92c079474286c29a679e0e26c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd6bebe03c9bc757877357608578e57e6') in 0.006468 seconds 
+  Import took 0.014118 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 36.426932 seconds.
+  path: Assets/Scripts/Moralis/readme.md
+  artifactKey: Guid(6163967bb49ff4346847b7b039696adf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Moralis/readme.md using Guid(6163967bb49ff4346847b7b039696adf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5cc4f903b01685eb3086169a3050f094') in 0.020740 seconds 
+  Import took 0.029427 seconds .
+
