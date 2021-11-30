@@ -57,7 +57,7 @@ public class MainMenuScript : MonoBehaviour
 
     void Start()
     {
-        menuBackground = GameObject.FindObjectOfType<Image>();
+        menuBackground = (Image)gameObject.GetComponent(typeof(Image));
 
         HostManifestData hostManifestData = new HostManifestData()
         { 
@@ -219,7 +219,7 @@ public class MainMenuScript : MonoBehaviour
     {
         AuthenticationButton.SetActive(false);
         Color color = menuBackground.color;
-        color.a = Mathf.Clamp(0f, 0, 1);
+        color = new Color(0f, 0f, 0f, 0f);
         menuBackground.color = color;
     }
 
@@ -227,7 +227,7 @@ public class MainMenuScript : MonoBehaviour
     {
         AuthenticationButton.SetActive(true);
         Color color = menuBackground.color;
-        color.a = Mathf.Clamp(0.7f, 0, 1);
+        color = new Color(0f, 0f, 0f, 0.7f);
         menuBackground.color = color;
     }
 }

@@ -62,9 +62,8 @@ namespace Assets.Scripts
 
                     if (sessionResponse != null && !String.IsNullOrWhiteSpace(sessionResponse.sessionToken))
                     {
-                        Debug.Log($"Session response received, log in user with session: {sessionResponse.sessionToken}");
                         user = await MoralisInterface.GetClient().UserFromSession(sessionResponse.sessionToken);
-                        Debug.Log("Moralis client UserFromSession returned.");
+
                         break;
                     }
                 }

@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // Update character address if it has not been set
-        if (MoralisInterface.IsLoggedIn() && addressText.text.Equals("ADDRESS"))
+        if (addressText.text.Equals("ADDRESS") && MoralisInterface.GetUser() != null)
         {
             string addr = MoralisInterface.GetUser().authData["moralisEth"]["id"].ToString();
 
