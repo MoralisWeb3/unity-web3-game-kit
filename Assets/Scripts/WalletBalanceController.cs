@@ -65,7 +65,7 @@ public class WalletBalanceController : MonoBehaviour
         if (user != null)
         {
             // Get user address from user auth data.
-            string addr = "0xBa878d88c71E0091613798C53B6c72aDd9b9A6a7"; // user.authData["moralisEth"]["id"].ToString();
+            string addr = user.authData["moralisEth"]["id"].ToString();
 
             addressText.text = addr;
 

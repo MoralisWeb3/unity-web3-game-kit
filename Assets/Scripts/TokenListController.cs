@@ -77,7 +77,7 @@ public class TokenListController : MonoBehaviour
 
         if (user != null)
         {
-            string addr = "0xBa878d88c71E0091613798C53B6c72aDd9b9A6a7"; // user.authData["moralisEth"]["id"].ToString();
+            string addr = user.authData["moralisEth"]["id"].ToString();
 
             List<Erc20TokenBalance> tokens =
                 MoralisInterface.GetClient().Web3Api.Account.GetTokenBalances(addr.ToLower(),
