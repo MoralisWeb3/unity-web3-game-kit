@@ -1,6 +1,7 @@
-# `ethereum-unity3d-boilerplate`
+# `ethereum-unity-boilerplate`
 
-> Unity3d components and hooks for fast building games without running your own backend
+> Unity components and hooks for fast building of web3 games. With this SDK you can build web3 games for mobile, desktop, Xbox, Playstation and other platforms.
+This boilerplate allows you to authenticate users using crypto wallets on any platform.
 
 This boilerplate is built on moralis-dotnet-sdk and [Moralis](https://moralis.io?utm_source=github&utm_medium=readme&utm_campaign=ethereum-boilerplate). Also has its own context provider for quick access to `chainId` or `ethAddress`
 
