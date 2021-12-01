@@ -26,7 +26,6 @@ public class WalletConnectQRImage : BindableMonoBehavior
             return;
         }
         
-        walletConnect.NewSessionCreated += UpdateQRCode;
         walletConnect.ConnectionStarted += UpdateQRCode;
     }
 

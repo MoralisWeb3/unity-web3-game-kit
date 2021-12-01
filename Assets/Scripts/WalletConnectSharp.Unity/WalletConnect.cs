@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -26,8 +27,7 @@ namespace WalletConnectSharp.Unity
             get;
             private set;
         }
-
-        public List<string> AllowedWalletIds { get; set; }
+        
         public AppEntry SelectedWallet { get; set; }
 
         public Wallets DefaultWallet;
@@ -35,19 +35,16 @@ namespace WalletConnectSharp.Unity
         [Serializable]
         public class ConnectedEventNoSession : UnityEvent { }
         [Serializable]
+        public class DisconnectedEventWithSession : UnityEvent<WalletConnectUnitySession> { }
+        [Serializable]
         public class ConnectedEventWithSession : UnityEvent<WCSessionData> { }
+        [Serializable]
+        public class ConnectionFailedEventWithSession : UnityEvent<WalletConnectUnitySession> { }
         
         public event EventHandler ConnectionStarted;
-        
-        public event EventHandler NewSessionCreated;
 
         [BindComponent]
         private NativeWebSocketTransport _transport;
-
-        public WalletConnect()
-        {
-            AllowedWalletIds = null;
-        }
 
         private static WalletConnect _instance;
 
@@ -78,8 +75,8 @@ namespace WalletConnectSharp.Unity
         public bool autoSaveAndResume = true;
         public bool connectOnAwake = false;
         public bool connectOnStart = true;
-        public bool autoReconnectOnNewSession = true;
-        
+        public bool createNewSessionOnSessionDisconnect = true;
+        public int connectSessionRetryCount = 3;
         public string customBridgeUrl;
         
         public int chainId = 1;
@@ -87,6 +84,10 @@ namespace WalletConnectSharp.Unity
         public ConnectedEventNoSession ConnectedEvent;
 
         public ConnectedEventWithSession ConnectedEventSession;
+
+        public DisconnectedEventWithSession DisconnectedEvent;
+        
+        public ConnectionFailedEventWithSession ConnectionFailedEvent;
 
         public WalletConnectUnitySession Session
         {
@@ -214,12 +215,16 @@ namespace WalletConnectSharp.Unity
             {
                 Session = new WalletConnectUnitySession(savedSession, this, _transport);
             }
-            else if (Session == null)
+            else
             {
                 Session = new WalletConnectUnitySession(AppData, this, customBridgeUrl, _transport, ciper, chainId);
-                Session.OnSessionDisconnect += SessionOnOnSessionDisconnect;
-                Session.NewSessionCreated += SessionOnNewSessionCreated;
             }
+            
+            Session.OnSessionConnect += (sender, session) =>
+            {
+                Debug.Log("[WalletConnect] Session Connected");
+            };
+            Session.OnSessionDisconnect += SessionOnOnSessionDisconnect;
             
             StartCoroutine(SetupDefaultWallet());
 
@@ -229,17 +234,6 @@ namespace WalletConnectSharp.Unity
             #endif
 
             return await CompleteConnect();
-        }
-
-        private async void SessionOnNewSessionCreated(object sender, EventArgs e)
-        {
-            if (NewSessionCreated != null)
-                NewSessionCreated(sender, e);
-
-            if (autoReconnectOnNewSession)
-            {
-                await Connect();
-            }
         }
 
         private async Task<WCSessionData> CompleteConnect()
@@ -259,18 +253,42 @@ namespace WalletConnectSharp.Unity
                 ConnectedEventSession.Invoke(arg0);
             });
 
-            var session = await Session.SourceConnectSession();
-            
-            allEvents.Invoke(session);
+            int tries = 0;
+            while (tries < connectSessionRetryCount)
+            {
+                try
+                {
+                    var session = await Session.SourceConnectSession();
 
-            return session;
+                    allEvents.Invoke(session);
+
+                    return session;
+                }
+                catch (IOException e)
+                {
+                    tries++;
+
+                    if (tries >= connectSessionRetryCount)
+                        throw new IOException("Failed to request session connection after " + tries + " times.", e);
+                }
+            }
+            
+            throw new IOException("Failed to request session connection after " + tries + " times.");
         }
 
-        private void SessionOnOnSessionDisconnect(object sender, EventArgs e)
+        private async void SessionOnOnSessionDisconnect(object sender, EventArgs e)
         {
+            if (DisconnectedEvent != null)
+                DisconnectedEvent.Invoke(ActiveSession);
+
             if (autoSaveAndResume && PlayerPrefs.HasKey(SessionKey))
             {
                 PlayerPrefs.DeleteKey(SessionKey);
+            }
+            
+            if (createNewSessionOnSessionDisconnect)
+            {
+                await Connect();
             }
         }
 
@@ -335,8 +353,6 @@ namespace WalletConnectSharp.Unity
 
         public IEnumerator FetchWalletList(bool downloadImages = true)
         {
-            Debug.Log("Loading supported wallet list ...");
-
             using (UnityWebRequest webRequest = UnityWebRequest.Get("https://registry.walletconnect.org/data/wallets.json"))
             {
                 // Request and wait for the desired page.
@@ -348,23 +364,9 @@ namespace WalletConnectSharp.Unity
                 }
                 else
                 {
-                    Debug.Log($"Supported list returned. WalletFilter: {AllowedWalletIds != null}.");
-
                     var json = webRequest.downloadHandler.text;
 
-                    SupportedWallets = new Dictionary<string, AppEntry>();
-
-                    Dictionary<string, AppEntry> tempWallets = JsonConvert.DeserializeObject<Dictionary<string, AppEntry>>(json);
-
-                    foreach (var id in tempWallets.Keys)
-                    {
-                        // If wallet filters passed in skip any wallet id not in the filter.
-                        if (AllowedWalletIds != null && !AllowedWalletIds.Contains(id))
-                            continue;
-
-                        Debug.Log($"Allow wallet: {tempWallets[id].name}");
-                        SupportedWallets.Add(id, tempWallets[id]);
-                    }
+                    SupportedWallets = JsonConvert.DeserializeObject<Dictionary<string, AppEntry>>(json);
 
                     if (downloadImages)
                     {
@@ -514,6 +516,17 @@ namespace WalletConnectSharp.Unity
         public void CLearSession()
         {
             PlayerPrefs.DeleteKey(SessionKey);
+        }
+        
+        public async void CloseSession(bool waitForNewSession = true)
+        {
+            if (ActiveSession == null)
+                return;
+            
+            await ActiveSession.Disconnect();
+        
+            if (waitForNewSession)
+                await ActiveSession.Connect();
         }
     }
 }

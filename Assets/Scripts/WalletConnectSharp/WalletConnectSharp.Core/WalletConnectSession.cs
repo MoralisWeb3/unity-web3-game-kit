@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
@@ -6,6 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using UnityEngine;
 using WalletConnectSharp.Core.Events;
 using WalletConnectSharp.Core.Events.Request;
 using WalletConnectSharp.Core.Models;
@@ -26,7 +28,6 @@ namespace WalletConnectSharp.Core
         public event EventHandler OnSessionDisconnect;
         public event EventHandler<WalletConnectSession> OnSend;
         public event EventHandler<WCSessionData> SessionUpdate;
-        public event EventHandler NewSessionCreated;
 
         public int NetworkId { get; private set; }
         
@@ -64,6 +65,8 @@ namespace WalletConnectSharp.Core
             this.Accounts = savedSession.Accounts;
                         
             this.NetworkId = savedSession.NetworkID;
+
+            this._handshakeId = savedSession.HandshakeID;
 
             this.SessionConnected = true;
         }
@@ -113,19 +116,14 @@ namespace WalletConnectSharp.Core
 
             this.SessionConnected = false;
             
-            CreateNewSession(true);
+            CreateNewSession();
         }
 
-        public void CreateNewSession(bool force = false)
+        private void CreateNewSession()
         {
-            if (!SessionUsed && !force)
+            if (SessionConnected)
             {
-                return;
-            }
-            
-            if (SessionConnected && !force)
-            {
-                throw new IOException("You must disconnect the current session before you can create a new one");
+                throw new IOException("You cannot create a new session after connecting the session. Create a new WalletConnectSession object to create a new session");
             }
 
             this._bridgeUrl = DefaultBridge.GetBridgeUrl(this._bridgeUrl);
@@ -145,10 +143,14 @@ namespace WalletConnectSharp.Core
 
             SessionUsed = false;
             ReadyForUserPrompt = false;
+        }
 
-            if (NewSessionCreated != null)
+        private void EnsureNotDisconnected()
+        {
+            if (Disconnected)
             {
-                NewSessionCreated(this, EventArgs.Empty);
+                throw new IOException(
+                    "Session stale! The session has been disconnected. This session cannot be reused.");
             }
         }
         
@@ -167,9 +169,21 @@ namespace WalletConnectSharp.Core
 
         public virtual async Task<WCSessionData> ConnectSession()
         {
+            EnsureNotDisconnected();
+            
             Connecting = true;
             try
             {
+                if (SessionConnected)
+                {
+                    //Listen for the _handshakeId response
+                    //The response will be of type WCSessionRequestResponse
+                    //We do this now before subscribing
+                    //This is in case we need to respond to a session disconnect and this is a
+                    //resume session
+                    Events.ListenForResponse<WCSessionRequestResponse>(this._handshakeId, HandleSessionResponse);
+                }
+                
                 if (!base.TransportConnected)
                 {
                     await base.SetupTransport();
@@ -200,13 +214,28 @@ namespace WalletConnectSharp.Core
                         peerMeta = WalletMetadata
                     };
                 }
-                
+
                 Connecting = false;
 
                 if (OnSessionConnect != null)
                     OnSessionConnect(this, this);
 
                 return result;
+            }
+            catch (IOException e)
+            {
+                //If the transport is connected, then disconnect that
+                //we tried our best, they can try again
+                if (TransportConnected)
+                {
+                    await DisconnectTransport();
+                }
+                else
+                {
+                    throw new IOException("Transport Connection failed", e);
+                }
+
+                throw new IOException("Session Connection failed", e);
             }
             finally
             {
@@ -218,6 +247,8 @@ namespace WalletConnectSharp.Core
         
         public override async Task Connect()
         {
+            EnsureNotDisconnected();
+            
             await base.Connect();
 
             await ConnectSession();
@@ -225,6 +256,8 @@ namespace WalletConnectSharp.Core
 
         public async Task DisconnectSession(string disconnectMessage = "Session Disconnected", bool createNewSession = true)
         {
+            EnsureNotDisconnected();
+            
             var request = new WCSessionUpdate(new WCSessionData()
             {
                 approved = false,
@@ -242,51 +275,76 @@ namespace WalletConnectSharp.Core
 
         public override async Task Disconnect()
         {
+            EnsureNotDisconnected();
+            
             await DisconnectSession();
         }
         
-        public async Task<string> EthSign(string address, string message, Encoding messageEncoding = null)
+        public async Task<string> EthSign(string address, string message)
         {
+            EnsureNotDisconnected();
+            
             if (!message.IsHex())
             {
-                var encoding = messageEncoding;
-                if (encoding == null)
-                {
-                    encoding = Encoding.UTF8;
-                }
+                var rawMessage = Encoding.UTF8.GetBytes(message);
                 
-                message = "0x" + encoding.GetBytes(message).ToHex();
-            }
-            
-            var request = new EthPersonalSign(address, message);
+                var byteList = new List<byte>();
+                var bytePrefix = "0x19".HexToByteArray();
+                var textBytePrefix = Encoding.UTF8.GetBytes("Ethereum Signed Message:\n" + rawMessage.Length);
 
-            var response = await Send<EthPersonalSign, EthResponse>(request);
+                byteList.AddRange(bytePrefix);
+                byteList.AddRange(textBytePrefix);
+                byteList.AddRange(rawMessage);
+                
+                var hash = new Sha3Keccack().CalculateHash(byteList.ToArray());
+
+                message = "0x" + hash.ToHex();
+            }
+
+            Debug.Log(message);
+            
+            var request = new EthSign(address, message);
+
+            var response = await Send<EthSign, EthResponse>(request);
 
             return response.Result;
         }
 
-        public async Task<string> EthPersonalSign(string address, string message, Encoding messageEncoding = null)
+        public async Task<string> EthPersonalSign(string address, string message)
         {
+            EnsureNotDisconnected();
+            
             if (!message.IsHex())
             {
-                var encoding = messageEncoding;
-                if (encoding == null)
-                {
-                    encoding = Encoding.UTF8;
-                }
+                /*var rawMessage = Encoding.UTF8.GetBytes(message);
                 
-                message = "0x" + encoding.GetBytes(message).ToHex();
+                var byteList = new List<byte>();
+                var bytePrefix = "0x19".HexToByteArray();
+                var textBytePrefix = Encoding.UTF8.GetBytes("Ethereum Signed Message:\n" + rawMessage.Length);
+
+                byteList.AddRange(bytePrefix);
+                byteList.AddRange(textBytePrefix);
+                byteList.AddRange(rawMessage);
+                
+                var hash = new Sha3Keccack().CalculateHash(byteList.ToArray());*/
+
+                message = "0x" + Encoding.UTF8.GetBytes(message).ToHex();
             }
             
             var request = new EthPersonalSign(address, message);
 
             var response = await Send<EthPersonalSign, EthResponse>(request);
+            
+            
+            
 
             return response.Result;
         }
 
         public async Task<string> EthSignTypedData<T>(string address, T data, EIP712Domain eip712Domain)
         {
+            EnsureNotDisconnected();
+            
             var request = new EthSignTypedData<T>(address, data, eip712Domain);
 
             var response = await Send<EthSignTypedData<T>, EthResponse>(request);
@@ -296,6 +354,8 @@ namespace WalletConnectSharp.Core
 
         public async Task<string> EthSendTransaction(params TransactionData[] transaction)
         {
+            EnsureNotDisconnected();
+            
             var request = new EthSendTransaction(transaction);
             
             var response = await Send<EthSendTransaction, EthResponse>(request);
@@ -305,6 +365,8 @@ namespace WalletConnectSharp.Core
 
         public async Task<string> EthSignTransaction(params TransactionData[] transaction)
         {
+            EnsureNotDisconnected();
+            
             var request = new EthSignTransaction(transaction);
             
             var response = await Send<EthSignTransaction, EthResponse>(request);
@@ -315,6 +377,8 @@ namespace WalletConnectSharp.Core
         
         public async Task<string> EthSendRawTransaction(string data, Encoding messageEncoding = null)
         {
+            EnsureNotDisconnected();
+            
             if (!data.IsHex())
             {
                 var encoding = messageEncoding;
@@ -335,6 +399,8 @@ namespace WalletConnectSharp.Core
 
         public async Task<R> Send<T, R>(T data) where T : JsonRpcRequest where R : JsonRpcResponse
         {
+            EnsureNotDisconnected();
+            
             TaskCompletionSource<R> eventCompleted = new TaskCompletionSource<R>(TaskCreationOptions.None);
             
             Events.ListenForResponse<R>(data.ID, (sender, @event) =>
@@ -367,6 +433,8 @@ namespace WalletConnectSharp.Core
         /// <returns></returns>
         private async Task<WCSessionData> CreateSession()
         {
+            EnsureNotDisconnected();
+            
             var data = new WcSessionRequest(DappMetadata, clientId, ChainId);
 
             this._handshakeId = data.ID;
@@ -483,6 +551,7 @@ namespace WalletConnectSharp.Core
         private void HandleSessionDisconnect(string msg, string topic = "disconnect", bool createNewSession = true)
         {
             SessionConnected = false;
+            Disconnected = true;
 
             Events.Trigger(topic, new ErrorResponse(msg));
 
@@ -490,8 +559,6 @@ namespace WalletConnectSharp.Core
             {
                 DisconnectTransport();
             }
-
-            CreateNewSession();
             
             _activeTopics.Clear();
             
@@ -509,12 +576,12 @@ namespace WalletConnectSharp.Core
         /// <returns></returns>
         public SavedSession SaveSession()
         {
-            if (!SessionConnected)
+            if (!SessionConnected || Disconnected)
             {
                 return null;
             }
             
-            return new SavedSession(clientId, _bridgeUrl, _key, _keyRaw, PeerId, NetworkId, Accounts, ChainId, DappMetadata, WalletMetadata);
+            return new SavedSession(clientId, _handshakeId, _bridgeUrl, _key, _keyRaw, PeerId, NetworkId, Accounts, ChainId, DappMetadata, WalletMetadata);
         }
 
         /// <summary>

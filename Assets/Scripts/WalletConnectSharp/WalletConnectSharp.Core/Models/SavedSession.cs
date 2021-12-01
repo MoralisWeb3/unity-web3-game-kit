@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine.XR;
 
 namespace WalletConnectSharp.Core.Models
 {
@@ -10,6 +11,7 @@ namespace WalletConnectSharp.Core.Models
         public string Key { get; }
         public byte[] KeyRaw { get; }
         public string PeerID { get; }
+        public long HandshakeID { get; }
         public int NetworkID { get; }
         public string[] Accounts { get; }
         public int ChainID { get; }
@@ -17,7 +19,7 @@ namespace WalletConnectSharp.Core.Models
         
         public ClientMeta WalletMeta { get; }
 
-        public SavedSession(string clientID, string bridgeURL, string key, byte[] keyRaw, string peerID, int networkID, string[] accounts, int chainID, ClientMeta dappMeta, ClientMeta walletMeta)
+        public SavedSession(string clientID, long handshakeID, string bridgeURL, string key, byte[] keyRaw, string peerID, int networkID, string[] accounts, int chainID, ClientMeta dappMeta, ClientMeta walletMeta)
         {
             ClientID = clientID;
             BridgeURL = bridgeURL;
@@ -29,6 +31,7 @@ namespace WalletConnectSharp.Core.Models
             ChainID = chainID;
             DappMeta = dappMeta;
             WalletMeta = walletMeta;
+            HandshakeID = handshakeID;
         }
 
         private sealed class SavedSessionEqualityComparer : IEqualityComparer<SavedSession>

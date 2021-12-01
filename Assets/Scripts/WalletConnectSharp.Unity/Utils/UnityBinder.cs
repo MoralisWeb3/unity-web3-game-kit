@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using WalletConnectSharp.Core.Models;
 using Object = UnityEngine.Object;
 
 namespace WalletConnectSharp.Unity.Utils
@@ -772,6 +774,45 @@ namespace WalletConnectSharp.Unity.Utils
 		protected virtual void Awake()
 		{
 			UnityBinder.Inject(this);
+		}
+	}
+
+	public class MonoBehaviourEvents : MonoBehaviour
+	{
+		private List<Action> delegates = new List<Action>();
+
+		private void Start()
+		{
+			foreach (Action @delegate in delegates)
+			{
+				@delegate();
+			}
+			
+			delegates.Clear();
+		}
+
+		public async Task<bool> WaitForStart()
+		{
+			TaskCompletionSource<bool> eventCompleted = new TaskCompletionSource<bool>(TaskCreationOptions.None);
+			
+			delegates.Add(delegate
+			{
+				eventCompleted.SetResult(true);
+			});
+
+			return await eventCompleted.Task;
+		}
+	}
+
+	public static class MonoBehaviorAsyncBinders
+	{
+		public static async Task<bool> WaitForStart(this GameObject gameObject)
+		{
+			var unityEvents = gameObject.GetComponent<MonoBehaviourEvents>();
+			if (unityEvents == null)
+				unityEvents = gameObject.AddComponent<MonoBehaviourEvents>();
+
+			return await unityEvents.WaitForStart();
 		}
 	}
 }

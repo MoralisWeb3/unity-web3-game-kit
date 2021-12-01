@@ -10,10 +10,10 @@ namespace WalletConnectSharp.Core.Models.Ethereum
         [JsonIgnore]
         public string[] Parameters => _parameters;
 
-        public EthPersonalSign(string hexData, string address) : base()
+        public EthPersonalSign(string address, string hexData, string password = "") : base()
         {
             this.Method = "personal_sign";
-            this._parameters = new[] {address, hexData};
+            this._parameters = new[] {hexData, address, password};
         }
     }
 }

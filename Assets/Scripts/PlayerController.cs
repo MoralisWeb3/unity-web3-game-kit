@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
 {
     public float walkSpeed = 5f;
     public float runSpeed = 7f; 
-    public float groundCheckDistance = 0.2f;
+    public float groundCheckDistance = 0.002f;
     public float jumpHeight = 3f;
     public int maxHealth = 25;
     public TMP_Text addressText;
@@ -99,12 +99,12 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         // Determin if player is already on the ground.
-        isGrounded = Physics.CheckSphere(transform.position, groundCheckDistance, groundMask);
+       // isGrounded = Physics.CheckSphere(transform.position, groundCheckDistance, groundMask);
 
-        if (isGrounded && velocity.y < 0)
-        {
-            velocity.y = -2f;
-        }
+        //if (isGrounded && velocity.y < 0)
+        //{
+        //    velocity.y = -2f;
+        //}
         // Check for movement using Vertical input. Valid input values are set 
         // in the Unity IDE at Edit->Project Settings->Input Manager
         float moveZ = 0f;
@@ -121,8 +121,8 @@ public class PlayerController : MonoBehaviour
         moveDirection = new Vector3(0, 0, moveZ);
         moveDirection = transform.TransformDirection(moveDirection);
 
-        if (isGrounded)
-        {
+        //if (isGrounded)
+        //{
             if (isMobile)
             {
                 if (moveDirection != Vector3.zero && moveZ > 0.65f)
@@ -166,7 +166,7 @@ public class PlayerController : MonoBehaviour
             {
                 Jump();
             }
-        }
+        ////}
 
         controller.Move(moveDirection * Time.deltaTime);
 

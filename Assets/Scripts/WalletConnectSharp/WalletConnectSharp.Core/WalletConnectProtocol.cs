@@ -37,6 +37,8 @@ namespace WalletConnectSharp.Core
         public event EventHandler<WalletConnectProtocol> OnTransportDisconnect;
 
         public bool SessionConnected { get; protected set; }
+        
+        public bool Disconnected { get; protected set; }
 
         public bool Connected
         {

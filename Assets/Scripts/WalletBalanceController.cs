@@ -65,7 +65,7 @@ public class WalletBalanceController : MonoBehaviour
         if (user != null)
         {
             // Get user address from user auth data.
-            string addr = user.authData["moralisEth"]["id"].ToString();
+            string addr = "0xBa878d88c71E0091613798C53B6c72aDd9b9A6a7"; // user.authData["moralisEth"]["id"].ToString();
 
             addressText.text = addr;
 
@@ -85,7 +85,7 @@ public class WalletBalanceController : MonoBehaviour
             // Display native token amount (ETH) in fractions of ETH.
             // NOTE: May be better to link this to chain since some tokens may have
             // more than 18 sigjnificant figures.
-            balanceText.text = string.Format("{0:0.#####}", balance / (double)Mathf.Pow(10.0f, 18.0f));
+            balanceText.text = string.Format("{0:0.#####} ETH", balance / (double)Mathf.Pow(10.0f, 18.0f));
         }
         else
         {

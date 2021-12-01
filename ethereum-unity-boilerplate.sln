@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{33C7F2A2-4AEA-64FB-8DAF-0F32154145E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanTransition", "LeanTransition.csproj", "{03A0A499-4A5D-BF38-396D-7221417375F7}"
@@ -15,15 +15,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanTransition.Editor", "Le
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{0F1397D1-E97D-D981-7CD5-19D28FA8F235}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp.Player", "Assembly-CSharp.Player.csproj", "{AB50884F-D908-2896-746F-E05F16BA8E4E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.Player.csproj", "{AB50884F-D908-2896-746F-E05F16BA8E4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanTransition.Player", "LeanTransition.Player.csproj", "{94ECBDA4-3229-47B3-0D18-1C4ADAC536C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanTransition", "LeanTransition.Player.csproj", "{94ECBDA4-3229-47B3-0D18-1C4ADAC536C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanCommon.Player", "LeanCommon.Player.csproj", "{9710F2A5-3762-97FD-C02C-2EAA22FEDD76}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanCommon", "LeanCommon.Player.csproj", "{9710F2A5-3762-97FD-C02C-2EAA22FEDD76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanGUI.Player", "LeanGUI.Player.csproj", "{6E521240-FAF9-4A1D-7932-ED5191988B40}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanGUI", "LeanGUI.Player.csproj", "{6E521240-FAF9-4A1D-7932-ED5191988B40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "endel.nativewebsocket.Player", "endel.nativewebsocket.Player.csproj", "{FBD2F68F-EDB0-3A13-2494-B52249C22AF0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "endel.nativewebsocket", "endel.nativewebsocket.Player.csproj", "{FBD2F68F-EDB0-3A13-2494-B52249C22AF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
