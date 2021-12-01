@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
     private int currentHealth;
     private Vector2 joystickPosition;
     private bool isMobile;
+    private bool isAuthenticated = false;
 
     private void Start()
     {
@@ -71,11 +72,13 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // Update character address if it has not been set
-        if (addressText.text.Equals("ADDRESS") && MoralisInterface.GetUser() != null)
+        if (!isAuthenticated && MoralisInterface.GetUser() != null)
         {
             string addr = MoralisInterface.GetUser().authData["moralisEth"]["id"].ToString();
 
             addressText.text = string.Format("{0}...{1}", addr.Substring(0, 6), addr.Substring(addr.Length - 3, 3));
+
+            isAuthenticated = true;
         }
 
         Move();

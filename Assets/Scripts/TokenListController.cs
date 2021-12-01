@@ -100,9 +100,19 @@ public class TokenListController : MonoBehaviour
                 var rectTransform = tokenObj.GetComponent<RectTransform>();
 
                 var parentTransform = TokenListTransform.GetComponent<RectTransform>();
+                double balance = 0.0;
+                float tokenDecimals = 18.0f;
+
+                // Make sure a response to the balanace request weas received. The 
+                // IsNullOrWhitespace check may not be necessary ...
+                if (token != null && !string.IsNullOrWhiteSpace(token.Balance))
+                {
+                    double.TryParse(token.Balance, out balance);
+                    float.TryParse(token.Decimals, out tokenDecimals);
+                }
 
                 tokenSymbol.text = token.Symbol;
-                tokenBalanace.text = token.Balance;
+                tokenBalanace.text = string.Format("{0:0.##} ", balance / (double)Mathf.Pow(10.0f, tokenDecimals));
 
                 // When button clicked display theCoingecko page for that token.
                 tokenButton.onClick.AddListener(delegate

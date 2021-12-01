@@ -169,9 +169,6 @@ public class MainMenuScript : MonoBehaviour
         if (user != null)
         {
             Debug.Log($"User {user.username} logged in successfully. ");
-
-            // Transition to main game scene
-            SceneManager.LoadScene(SceneMap.GAME_VIEW);
         }
         else
         {

@@ -85,7 +85,7 @@ public class WalletBalanceController : MonoBehaviour
             // Display native token amount (ETH) in fractions of ETH.
             // NOTE: May be better to link this to chain since some tokens may have
             // more than 18 sigjnificant figures.
-            balanceText.text = string.Format("{0:0.#####} ETH", balance / (double)Mathf.Pow(10.0f, 18.0f));
+            balanceText.text = string.Format("{0:0.##} ETH", balance / (double)Mathf.Pow(10.0f, 18.0f));
         }
         else
         {
