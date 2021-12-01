@@ -252,6 +252,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5175095894888145821, guid: ce99fd52594d5e54f972689a083ac409, type: 3}
       propertyPath: connectOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5175095894888145821, guid: ce99fd52594d5e54f972689a083ac409, type: 3}
+      propertyPath: connectOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5175095894888145821, guid: ce99fd52594d5e54f972689a083ac409, type: 3}
+      propertyPath: autoSaveAndResume
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5175095894888145821, guid: ce99fd52594d5e54f972689a083ac409, type: 3}
@@ -628,7 +636,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -250.00032}
+  m_AnchoredPosition: {x: 0, y: -249.99933}
   m_SizeDelta: {x: 640, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &125404195
@@ -12350,7 +12358,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -70}
-  m_SizeDelta: {x: 370, y: 32}
+  m_SizeDelta: {x: 500, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1716479458
 MonoBehaviour:
@@ -12385,7 +12393,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Address
+  m_Text: ADDRESS
 --- !u!222 &1716479459
 CanvasRenderer:
   m_ObjectHideFlags: 0

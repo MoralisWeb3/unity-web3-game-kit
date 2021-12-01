@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,6 +53,9 @@
     <UnityVersion>2020.3.17f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\InternalEvent.cs" />
     <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Utilities\JsonUtilities.cs" />
     <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\NftMetadataCollection.cs" />
@@ -79,6 +82,7 @@
     <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IServerConnectionData.cs" />
     <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\ICurrentObjectService.cs" />
     <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\RelativeCacheLocationMutator.cs" />
+    <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\UI\ChooseWalletScreen.cs" />
     <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Utilities\FlexibleDictionaryWrapper.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\Ethereum\NativeCurrency.cs" />
     <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api\CloudApi\DefiApi.cs" />
@@ -111,6 +115,7 @@
     <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\Infrastructure\MetadataService.cs" />
     <Compile Include="Assets\Scripts\ChestController.cs" />
     <Compile Include="Assets\Scripts\WalletBalanceController.cs" />
+    <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\Models\WCMessageSigned.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\EncryptedPayload.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\Ethereum\EthChain.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\Ethereum\Types\EvmIgnoreAttribute.cs" />
@@ -169,6 +174,7 @@
     <Compile Include="Assets\Scripts\Moralis\MoralisLoginTokenRequest.cs" />
     <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api\Api\AccountApi.cs" />
     <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Objects\MoralisGeoDistance.cs" />
+    <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Utils\Sha3Keccack.cs" />
     <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Abstractions\IUser.cs" />
     <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\NftCollection.cs" />
     <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Queries\Live\QueryEventMessage.cs" />
@@ -272,6 +278,7 @@
     <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\Network\WebGLAESCipher.cs" />
     <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Operations\MoralisSetOperation.cs" />
     <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Models\Ethereum\Types\EvmTypedData.cs" />
+    <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\WalletConnectActions.cs" />
     <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Queries\Live\MoralisClientWebSocket.cs" />
     <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\LogEventByAddress.cs" />
     <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\AbsoluteCacheLocationMutator.cs" />
@@ -340,10 +347,6 @@
     <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Queries\Live\OperationTypes.cs" />
     <Compile Include="Assets\Scripts\IWeaponCollisionHandler.cs" />
     <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\ServiceHub.cs" />
-    <Compile Include="Assets\Scripts\WalletConnectSharp\WalletConnectSharp.Core\Utils\Sha3Keccack.cs" />
-    <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\Models\WCMessageSigned.cs" />
-    <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\WalletConnectActions.cs" />
-    <Compile Include="Assets\Scripts\WalletConnectSharp.Unity\UI\ChooseWalletScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rdParty\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -599,6 +602,9 @@
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.17f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
+    <Reference Include="BouncyCastle.Crypto">
+      <HintPath>Assets\Packages\BouncyCastle.Crypto\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing.Common">
       <HintPath>Assets\Packages\System.Drawing.Common\netstandard2.0\System.Drawing.Common.dll</HintPath>
     </Reference>
@@ -613,9 +619,6 @@
     </Reference>
     <Reference Include="QRCoder.Unity">
       <HintPath>Assets\Packages\QRCoder.Unity.1.0.2\lib\net35\QRCoder.Unity.dll</HintPath>
-    </Reference>
-    <Reference Include="BouncyCastle.Crypto">
-      <HintPath>Assets\Packages\BouncyCastle.Crypto\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.17f1\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
