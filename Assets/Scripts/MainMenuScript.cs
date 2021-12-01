@@ -188,6 +188,8 @@ public class MainMenuScript : MonoBehaviour
         
         // Disconnect wallet subscription.
         await walletConnect.Session.Disconnect();
+        // CLear out the session so it is re-establish on sign-in.
+        walletConnect.CLearSession();
         // Logout the Moralis User.
         await MoralisInterface.LogOutAsync();
         // Close out the application.
