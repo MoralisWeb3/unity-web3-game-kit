@@ -39,6 +39,10 @@ git clone https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate.git
 - If the Wallet Connect property is set to "None" drag WalletConnect from the "Hierarchy" section to this input.
 - Click the Play icon located at the top, center of the Unity3D IDE.
 
+This boilerplate project has been tested with the following Unity3D Releases:
+1. 2020.2
+2. 2020.3.24f1 (latest)
+
 # 🧭 Table of contents
 
 - [`ethereum-unity-boilerplate`](#ethereum-unity-boilerplate)
@@ -476,7 +480,7 @@ Get the liquidity reserves for a given pair address
 - **providerUrl** _string_ OPTIONAL web3 provider url to user when using local dev chain
 #### Example
 ```
-ReservesCollectionNftTransferCollection nftTransers = MoralisInterface.GetClient().Web3Api.Defi.GetPairReserves(pairAddress, ChainList.eth);
+ReservesCollection nftTransers = MoralisInterface.GetClient().Web3Api.Defi.GetPairReserves(pairAddress, ChainList.eth);
 ```
 
 ## `Native`

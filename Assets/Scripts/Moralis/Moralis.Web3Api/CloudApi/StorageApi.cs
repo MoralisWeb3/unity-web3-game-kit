@@ -1,4 +1,34 @@
-using System;
+/**
+*            Module: StorageApi.cs
+*       Description: Represents a collection of functions to interact with the API endpoints
+*            Author: Moralis Web3 Technology AB, 559307-5988 - David B. Goodrich
+*  
+* NOTE: THIS FILE HAS BEEN AUTOMATICALLY GENERATED. ANY CHANGES MADE TO THIS 
+* FILE WILL BE LOST
+*
+* MIT License
+*  
+* Copyright (c) 2021 Moralis Web3 Technology AB, 559307-5988
+*  
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the 'Software'), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and / or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*/ 
+            using System;
 using System.Collections.Generic;
 using RestSharp;
 using Newtonsoft.Json;
@@ -66,8 +96,13 @@ namespace Moralis.Web3Api.CloudApi
 		/// Uploads multiple files and place them in a folder directory
 		/// 
 		/// </summary>
-		public Type UploadFolder ()
+		/// <param name="abi">Array of JSON and Base64 Supported</param>
+		/// <returns>Returns the path to the uploaded files</returns>
+		public List<IpfsFile> UploadFolder (List<IpfsFileRequest> abi)
 		{
+
+			// Verify the required parameter 'abi' is set
+			if (abi == null) throw new ApiException(400, "Missing required parameter 'abi' when calling UploadFolder");
 
 			var postBody = new Dictionary<String, String>();
 			var queryParams = new Dictionary<String, String>();
@@ -76,7 +111,7 @@ namespace Moralis.Web3Api.CloudApi
 			var fileParams = new Dictionary<String, FileParameter>();
 
 			var path = "/functions/uploadFolder";
-
+			if (abi != null) postBody.Add("abi", ApiClient.ParameterToString(abi));
 
 			// Authentication setting, if any
 			String[] authSettings = new String[] { "ApiKeyAuth" };
@@ -86,11 +121,11 @@ namespace Moralis.Web3Api.CloudApi
 			IRestResponse response = (IRestResponse)ApiClient.CallApi(path, Method.POST, queryParams, bodyData, headerParams, formParams, fileParams, authSettings);
 
 			if (((int)response.StatusCode) >= 400)
-				throw new ApiException((int)response.StatusCode, "Error calling GetNFTs: " + response.Content, response.Content);
+				throw new ApiException((int)response.StatusCode, "Error calling UploadFolder: " + response.Content, response.Content);
 			else if (((int)response.StatusCode) == 0)
-				throw new ApiException((int)response.StatusCode, "Error calling GetNFTs: " + response.ErrorMessage, response.ErrorMessage);
+				throw new ApiException((int)response.StatusCode, "Error calling UploadFolder: " + response.ErrorMessage, response.ErrorMessage);
 
-			return ((CloudFunctionResult<Type>)ApiClient.Deserialize(response.Content, typeof(CloudFunctionResult<Type>), response.Headers)).Result;
+			return ((CloudFunctionResult<List<IpfsFile>>)ApiClient.Deserialize(response.Content, typeof(CloudFunctionResult<List<IpfsFile>>), response.Headers)).Result;
 		}
 	}
 }

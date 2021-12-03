@@ -11,11 +11,10 @@ namespace Moralis.Web3Api.Models
 	public class Erc20Price
 	{
 		/// <summary>
-		/// $ref: #/components/schemas/nativeErc20Price
 		/// </summary>
 		[DataMember(Name = "nativePrice", EmitDefaultValue = false)]
 		[JsonProperty(PropertyName = "nativePrice")]
-		public string NativePrice { get; set; }
+		public NativeErc20Price NativePrice { get; set; }
 
 		/// <summary>
 		/// format: double

@@ -88,6 +88,7 @@ namespace Moralis.Web3Api.Interfaces
 		/// </summary>
 		/// <param name="address">address</param>
 		/// <param name="topic">The topic of the event</param>
+		/// <param name="abi">ABI of the specific event</param>
 		/// <param name="chain">The chain to query</param>
 		/// <param name="subdomain">The subdomain of the moralis server to use (Only use when selecting local devchain as chain)</param>
 		/// <param name="providerUrl">web3 provider url to user when using local dev chain</param>
@@ -110,18 +111,19 @@ namespace Moralis.Web3Api.Interfaces
 		/// <param name="offset">offset</param>
 		/// <param name="limit">limit</param>
 		/// <returns>Returns a collection of events by topic</returns>
-		List<LogEvent> GetContractEvents (string address, string topic, ChainList chain, string subdomain=null, string providerUrl=null, int? fromBlock=null, int? toBlock=null, string fromDate=null, string toDate=null, int? offset=null, int? limit=null);
+		List<LogEvent> GetContractEvents (string address, string topic, object abi, ChainList chain, string subdomain=null, string providerUrl=null, int? fromBlock=null, int? toBlock=null, string fromDate=null, string toDate=null, int? offset=null, int? limit=null);
 
 		/// <summary>
 		/// Runs a given function of a contract abi and returns readonly data
 		/// </summary>
 		/// <param name="address">address</param>
 		/// <param name="functionName">function_name</param>
+		/// <param name="abi">Body</param>
 		/// <param name="chain">The chain to query</param>
 		/// <param name="subdomain">The subdomain of the moralis server to use (Only use when selecting local devchain as chain)</param>
 		/// <param name="providerUrl">web3 provider url to user when using local dev chain</param>
 		/// <returns>Returns response of the function executed</returns>
-		string RunContractFunction (string address, string functionName, ChainList chain, string subdomain=null, string providerUrl=null);
+		string RunContractFunction (string address, string functionName, RunContractDto abi, ChainList chain, string subdomain=null, string providerUrl=null);
 
 	}
 }

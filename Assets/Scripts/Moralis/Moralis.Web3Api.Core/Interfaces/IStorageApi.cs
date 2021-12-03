@@ -14,7 +14,9 @@ namespace Moralis.Web3Api.Interfaces
 		/// Uploads multiple files and place them in a folder directory
 		/// 
 		/// </summary>
-		Type UploadFolder ();
+		/// <param name="abi">Array of JSON and Base64 Supported</param>
+		/// <returns>Returns the path to the uploaded files</returns>
+		List<IpfsFile> UploadFolder (List<IpfsFileRequest> abi);
 
 	}
 }

@@ -20,6 +20,7 @@ namespace Moralis.Web3Api.Models
 		bsc = 0x38,
 		bsc_testnet = 0x61,
 		avalanche = 0xa86a,
+		avalanche_testnet = 0xa869,
 		fantom = 0xfa
 	};
 

@@ -1,4 +1,34 @@
-using System;
+/**
+*            Module: ResolveApi.cs
+*       Description: Represents a collection of functions to interact with the API endpoints
+*            Author: Moralis Web3 Technology AB, 559307-5988 - David B. Goodrich
+*  
+* NOTE: THIS FILE HAS BEEN AUTOMATICALLY GENERATED. ANY CHANGES MADE TO THIS 
+* FILE WILL BE LOST
+*
+* MIT License
+*  
+* Copyright (c) 2021 Moralis Web3 Technology AB, 559307-5988
+*  
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the 'Software'), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and / or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*/ 
+            using System;
 using System.Collections.Generic;
 using RestSharp;
 using Newtonsoft.Json;
@@ -73,7 +103,7 @@ namespace Moralis.Web3Api.Api
 		{
 
 			// Verify the required parameter 'domain' is set
-			if (domain == null) throw new ApiException(400, "Missing required parameter 'domain' when calling GetNFTs");
+			if (domain == null) throw new ApiException(400, "Missing required parameter 'domain' when calling ResolveDomain");
 
 			var postBody = new Dictionary<String, String>();
 			var queryParams = new Dictionary<String, String>();
@@ -94,9 +124,9 @@ namespace Moralis.Web3Api.Api
 			IRestResponse response = (IRestResponse)ApiClient.CallApi(path, Method.GET, queryParams, bodyData, headerParams, formParams, fileParams, authSettings);
 
 			if (((int)response.StatusCode) >= 400)
-				throw new ApiException((int)response.StatusCode, "Error calling GetNFTs: " + response.Content, response.Content);
+				throw new ApiException((int)response.StatusCode, "Error calling ResolveDomain: " + response.Content, response.Content);
 			else if (((int)response.StatusCode) == 0)
-				throw new ApiException((int)response.StatusCode, "Error calling GetNFTs: " + response.ErrorMessage, response.ErrorMessage);
+				throw new ApiException((int)response.StatusCode, "Error calling ResolveDomain: " + response.ErrorMessage, response.ErrorMessage);
 
 			return (Resolve)ApiClient.Deserialize(response.Content, typeof(Resolve), response.Headers);
 		}
@@ -110,7 +140,7 @@ namespace Moralis.Web3Api.Api
 		{
 
 			// Verify the required parameter 'address' is set
-			if (address == null) throw new ApiException(400, "Missing required parameter 'address' when calling GetNFTs");
+			if (address == null) throw new ApiException(400, "Missing required parameter 'address' when calling ResolveAddress");
 
 			var postBody = new Dictionary<String, String>();
 			var queryParams = new Dictionary<String, String>();
@@ -130,9 +160,9 @@ namespace Moralis.Web3Api.Api
 			IRestResponse response = (IRestResponse)ApiClient.CallApi(path, Method.GET, queryParams, bodyData, headerParams, formParams, fileParams, authSettings);
 
 			if (((int)response.StatusCode) >= 400)
-				throw new ApiException((int)response.StatusCode, "Error calling GetNFTs: " + response.Content, response.Content);
+				throw new ApiException((int)response.StatusCode, "Error calling ResolveAddress: " + response.Content, response.Content);
 			else if (((int)response.StatusCode) == 0)
-				throw new ApiException((int)response.StatusCode, "Error calling GetNFTs: " + response.ErrorMessage, response.ErrorMessage);
+				throw new ApiException((int)response.StatusCode, "Error calling ResolveAddress: " + response.ErrorMessage, response.ErrorMessage);
 
 			return (Ens)ApiClient.Deserialize(response.Content, typeof(Ens), response.Headers);
 		}

@@ -38,7 +38,6 @@ namespace Moralis
 
             // Make sure singleton instance is available.
             moralisService.Publicize();
-            //Storage = new LocalDatastore<ParseObject>(client);
 
             // Default to always save.
             ServiceHub.AlwaysSave = true;
@@ -144,24 +143,6 @@ namespace Moralis
         public IUserService<MoralisUser> UserService => moralisService.UserService;
 
         public MoralisCloud<MoralisUser> Cloud => moralisService.Cloud;
-
-        //public void EnableLocalDatastore()
-        //{
-        //    Storage.IsEnabled = true;
-        //}
-
-        //public bool IsLocalDataStoreEnabled => Storage.IsEnabled;
-
-        //public IEnumerable<ParseObject> DumpLocalDatabase()
-        //{
-        //    if (!Storage.IsEnabled)
-        //    {
-        //        Console.WriteLine("Moralis.EnableLocalDatastore() must be called first");
-        //        return new List<ParseObject>();
-        //    }
-
-        //    return Storage.GetAllContents();
-        //}
 
         public async Task<Guid?> GetInstallationIdAsync() => await InstallationService.GetAsync();
 

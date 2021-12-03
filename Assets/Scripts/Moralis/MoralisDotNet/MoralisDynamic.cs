@@ -36,7 +36,6 @@ namespace Moralis
 
             // Make sure singleton instance is available.
             moralisService.Publicize();
-            //Storage = new LocalDatastore<ParseObject>(client);
 
             this.Web3Api = web3Api;
 
@@ -171,23 +170,6 @@ namespace Moralis
 
         public MoralisCloud<TUser> Cloud => moralisService.Cloud;
 
-        //public void EnableLocalDatastore()
-        //{
-        //    Storage.IsEnabled = true;
-        //}
-
-        //public bool IsLocalDataStoreEnabled => Storage.IsEnabled;
-
-        //public IEnumerable<ParseObject> DumpLocalDatabase()
-        //{
-        //    if (!Storage.IsEnabled)
-        //    {
-        //        Console.WriteLine("Moralis.EnableLocalDatastore() must be called first");
-        //        return new List<ParseObject>();
-        //    }
-
-        //    return Storage.GetAllContents();
-        //}
 
         public async Task<Guid?> GetInstallationIdAsync() => await InstallationService.GetAsync();
 
