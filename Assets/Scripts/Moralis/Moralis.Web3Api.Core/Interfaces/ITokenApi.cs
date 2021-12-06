@@ -43,7 +43,7 @@ namespace Moralis.Web3Api.Interfaces
 		/// <param name="offset">offset</param>
 		/// <param name="limit">limit</param>
 		/// <returns>Returns the trades</returns>
-		TradesCollection GetNFTTrades (string address, ChainList chain, int? fromBlock=null, string toBlock=null, string fromDate=null, string toDate=null, string providerUrl=null, string marketplace=null, int? offset=null, int? limit=null);
+		TradeCollection GetNFTTrades (string address, ChainList chain, int? fromBlock=null, string toBlock=null, string fromDate=null, string toDate=null, string providerUrl=null, string marketplace=null, int? offset=null, int? limit=null);
 
 		/// <summary>
 		/// Get the lowest price found for a nft token contract for the last x days (only trades paid in ETH)
@@ -56,7 +56,7 @@ namespace Moralis.Web3Api.Interfaces
 		/// <param name="providerUrl">web3 provider url to user when using local dev chain</param>
 		/// <param name="marketplace">marketplace from where to get the trades (only opensea is supported at the moment)</param>
 		/// <returns>Returns the trade with the lowest price</returns>
-		TradesCollection GetNFTLowestPrice (string address, ChainList chain, int? days=null, string providerUrl=null, string marketplace=null);
+		Trade GetNFTLowestPrice (string address, ChainList chain, int? days=null, string providerUrl=null, string marketplace=null);
 
 		/// <summary>
 		/// Returns metadata (name, symbol, decimals, logo) for a given token contract address.
@@ -103,7 +103,7 @@ namespace Moralis.Web3Api.Interfaces
 		/// <param name="offset">offset</param>
 		/// <param name="limit">limit</param>
 		/// <returns>Returns a collection of token contract transactions.</returns>
-		List<Erc20Transaction> GetTokenAdressTransfers (string address, ChainList chain, string subdomain=null, int? fromBlock=null, int? toBlock=null, string fromDate=null, string toDate=null, int? offset=null, int? limit=null);
+		Erc20TransactionCollection GetTokenAddressTransfers (string address, ChainList chain, string subdomain=null, int? fromBlock=null, int? toBlock=null, string fromDate=null, string toDate=null, int? offset=null, int? limit=null);
 
 		/// <summary>
 		/// Gets the amount which the spender is allowed to withdraw from the spender
@@ -145,31 +145,6 @@ namespace Moralis.Web3Api.Interfaces
 		NftMetadataCollection SearchNFTs (string q, ChainList chain, string format=null, string filter=null, int? fromBlock=null, int? toBlock=null, string fromDate=null, string toDate=null, int? offset=null, int? limit=null);
 
 		/// <summary>
-		/// Gets data, including metadata (where available), for all token ids for the given contract address.
-		/// * Results are sorted by the block the token id was minted (descending) and limited to 100 per page by default
-		/// * Requests for contract addresses not yet indexed will automatically start the indexing process for that NFT collection
-		/// 
-		/// </summary>
-		/// <param name="address">Address of the contract</param>
-		/// <param name="chain">The chain to query</param>
-		/// <param name="format">The format of the token id</param>
-		/// <param name="offset">offset</param>
-		/// <param name="limit">limit</param>
-		/// <returns>Returns a collection of nfts</returns>
-		NftCollection GetAllTokenIds (string address, ChainList chain, string format=null, int? offset=null, int? limit=null);
-
-		/// <summary>
-		/// Gets the transfers of the tokens matching the given parameters
-		/// </summary>
-		/// <param name="address">Address of the contract</param>
-		/// <param name="chain">The chain to query</param>
-		/// <param name="format">The format of the token id</param>
-		/// <param name="offset">offset</param>
-		/// <param name="limit">limit</param>
-		/// <returns>Returns a collection of NFT transfers</returns>
-		NftTransferCollection GetContractNFTTransfers (string address, ChainList chain, string format=null, int? offset=null, int? limit=null);
-
-		/// <summary>
 		/// Gets the transfers of the tokens from a block number to a block number
 		/// </summary>
 		/// <param name="chain">The chain to query</param>
@@ -194,6 +169,31 @@ namespace Moralis.Web3Api.Interfaces
 		/// <param name="limit">limit</param>
 		/// <returns>Returns a collection of NFT transfers</returns>
 		NftTransferCollection GetNftTransfersFromToBlock (ChainList chain, int? fromBlock=null, int? toBlock=null, string fromDate=null, string toDate=null, string format=null, int? offset=null, int? limit=null);
+
+		/// <summary>
+		/// Gets data, including metadata (where available), for all token ids for the given contract address.
+		/// * Results are sorted by the block the token id was minted (descending) and limited to 100 per page by default
+		/// * Requests for contract addresses not yet indexed will automatically start the indexing process for that NFT collection
+		/// 
+		/// </summary>
+		/// <param name="address">Address of the contract</param>
+		/// <param name="chain">The chain to query</param>
+		/// <param name="format">The format of the token id</param>
+		/// <param name="offset">offset</param>
+		/// <param name="limit">limit</param>
+		/// <returns>Returns a collection of nfts</returns>
+		NftCollection GetAllTokenIds (string address, ChainList chain, string format=null, int? offset=null, int? limit=null);
+
+		/// <summary>
+		/// Gets the transfers of the tokens matching the given parameters
+		/// </summary>
+		/// <param name="address">Address of the contract</param>
+		/// <param name="chain">The chain to query</param>
+		/// <param name="format">The format of the token id</param>
+		/// <param name="offset">offset</param>
+		/// <param name="limit">limit</param>
+		/// <returns>Returns a collection of NFT transfers</returns>
+		NftTransferCollection GetContractNFTTransfers (string address, ChainList chain, string format=null, int? offset=null, int? limit=null);
 
 		/// <summary>
 		/// Gets all owners of NFT items within a given contract collection

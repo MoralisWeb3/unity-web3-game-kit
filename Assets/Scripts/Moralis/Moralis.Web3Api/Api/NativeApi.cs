@@ -114,7 +114,7 @@ namespace Moralis.Web3Api.Api
 			var path = "/block/{block_number_or_hash}";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "block_number_or_hash" + "}", ApiClient.ParameterToString(blockNumberOrHash));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(subdomain != null) queryParams.Add("subdomain", ApiClient.ParameterToString(subdomain));
 
 			// Authentication setting, if any
@@ -154,7 +154,7 @@ namespace Moralis.Web3Api.Api
 			path = path.Replace("{format}", "json");
 
 			if(date != null) queryParams.Add("date", ApiClient.ParameterToString(date));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(providerUrl != null) queryParams.Add("providerUrl", ApiClient.ParameterToString(providerUrl));
 
 			// Authentication setting, if any
@@ -219,7 +219,7 @@ namespace Moralis.Web3Api.Api
 			var path = "/{address}/logs";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "address" + "}", ApiClient.ParameterToString(address));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(subdomain != null) queryParams.Add("subdomain", ApiClient.ParameterToString(subdomain));
 			if(blockNumber != null) queryParams.Add("block_number", ApiClient.ParameterToString(blockNumber));
 			if(fromBlock != null) queryParams.Add("from_block", ApiClient.ParameterToString(fromBlock));
@@ -269,7 +269,7 @@ namespace Moralis.Web3Api.Api
 			var path = "/block/{block_number_or_hash}/nft/transfers";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "block_number_or_hash" + "}", ApiClient.ParameterToString(blockNumberOrHash));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(subdomain != null) queryParams.Add("subdomain", ApiClient.ParameterToString(subdomain));
 			if(offset != null) queryParams.Add("offset", ApiClient.ParameterToString(offset));
 			if(limit != null) queryParams.Add("limit", ApiClient.ParameterToString(limit));
@@ -310,7 +310,7 @@ namespace Moralis.Web3Api.Api
 			var path = "/transaction/{transaction_hash}";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "transaction_hash" + "}", ApiClient.ParameterToString(transactionHash));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(subdomain != null) queryParams.Add("subdomain", ApiClient.ParameterToString(subdomain));
 
 			// Authentication setting, if any
@@ -378,7 +378,7 @@ namespace Moralis.Web3Api.Api
 			path = path.Replace("{" + "address" + "}", ApiClient.ParameterToString(address));
 			if (abi != null) postBody.Add("abi", ApiClient.ParameterToString(abi));
 			if(topic != null) queryParams.Add("topic", ApiClient.ParameterToString(topic));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(subdomain != null) queryParams.Add("subdomain", ApiClient.ParameterToString(subdomain));
 			if(providerUrl != null) queryParams.Add("providerUrl", ApiClient.ParameterToString(providerUrl));
 			if(fromBlock != null) queryParams.Add("from_block", ApiClient.ParameterToString(fromBlock));
@@ -435,7 +435,7 @@ namespace Moralis.Web3Api.Api
 			path = path.Replace("{" + "address" + "}", ApiClient.ParameterToString(address));
 			if (abi != null) postBody.Add("abi", ApiClient.ParameterToString(abi));
 			if(functionName != null) queryParams.Add("function_name", ApiClient.ParameterToString(functionName));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(subdomain != null) queryParams.Add("subdomain", ApiClient.ParameterToString(subdomain));
 			if(providerUrl != null) queryParams.Add("providerUrl", ApiClient.ParameterToString(providerUrl));
 

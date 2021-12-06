@@ -119,7 +119,7 @@ namespace Moralis.Web3Api.Api
 			var path = "/{pair_address}/reserves";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "pair_address" + "}", ApiClient.ParameterToString(pairAddress));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(toBlock != null) queryParams.Add("to_block", ApiClient.ParameterToString(toBlock));
 			if(toDate != null) queryParams.Add("to_date", ApiClient.ParameterToString(toDate));
 			if(providerUrl != null) queryParams.Add("provider_url", ApiClient.ParameterToString(providerUrl));
@@ -175,7 +175,7 @@ namespace Moralis.Web3Api.Api
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "token0_address" + "}", ApiClient.ParameterToString(token0Address));			path = path.Replace("{" + "token1_address" + "}", ApiClient.ParameterToString(token1Address));
 			if(exchange != null) queryParams.Add("exchange", ApiClient.ParameterToString(exchange));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(toBlock != null) queryParams.Add("to_block", ApiClient.ParameterToString(toBlock));
 			if(toDate != null) queryParams.Add("to_date", ApiClient.ParameterToString(toDate));
 

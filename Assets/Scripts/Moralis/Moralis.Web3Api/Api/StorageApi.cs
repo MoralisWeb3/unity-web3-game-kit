@@ -104,7 +104,7 @@ namespace Moralis.Web3Api.Api
 			// Verify the required parameter 'abi' is set
 			if (abi == null) throw new ApiException(400, "Missing required parameter 'abi' when calling UploadFolder");
 
-			var postBody = new Dictionary<String, String>();
+			var postBody = new List<String>();
 			var queryParams = new Dictionary<String, String>();
 			var headerParams = new Dictionary<String, String>();
 			var formParams = new Dictionary<String, String>();
@@ -113,7 +113,7 @@ namespace Moralis.Web3Api.Api
 			var path = "/ipfs/uploadFolder";
 			path = path.Replace("{format}", "json");
 
-			if (abi != null) postBody.Add("abi", ApiClient.ParameterToString(abi));
+			if (abi != null) postBody.Add(ApiClient.ParameterToString(abi));
 
 			// Authentication setting, if any
 			String[] authSettings = new String[] { "ApiKeyAuth" };

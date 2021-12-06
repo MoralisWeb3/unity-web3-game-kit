@@ -131,7 +131,6 @@ namespace Moralis.Web3Api.CloudApi
 
 			var path = "/functions/getTransactions";
 			if (address != null) postBody.Add("address", ApiClient.ParameterToString(address));
-			if (chain != null) postBody.Add("chain", ApiClient.ParameterToString(chain));
 			if (subdomain != null) postBody.Add("subdomain", ApiClient.ParameterToString(subdomain));
 			if (fromBlock != null) postBody.Add("from_block", ApiClient.ParameterToString(fromBlock));
 			if (toBlock != null) postBody.Add("to_block", ApiClient.ParameterToString(toBlock));
@@ -139,6 +138,7 @@ namespace Moralis.Web3Api.CloudApi
 			if (toDate != null) postBody.Add("to_date", ApiClient.ParameterToString(toDate));
 			if (offset != null) postBody.Add("offset", ApiClient.ParameterToString(offset));
 			if (limit != null) postBody.Add("limit", ApiClient.ParameterToString(limit));
+			if(chain != null) postBody.Add("chain", ApiClient.ParameterToHex((long)chain));
 
 			// Authentication setting, if any
 			String[] authSettings = new String[] { "ApiKeyAuth" };
@@ -176,9 +176,9 @@ namespace Moralis.Web3Api.CloudApi
 
 			var path = "/functions/getNativeBalance";
 			if (address != null) postBody.Add("address", ApiClient.ParameterToString(address));
-			if (chain != null) postBody.Add("chain", ApiClient.ParameterToString(chain));
 			if (providerUrl != null) postBody.Add("providerUrl", ApiClient.ParameterToString(providerUrl));
 			if (toBlock != null) postBody.Add("to_block", ApiClient.ParameterToString(toBlock));
+			if(chain != null) postBody.Add("chain", ApiClient.ParameterToHex((long)chain));
 
 			// Authentication setting, if any
 			String[] authSettings = new String[] { "ApiKeyAuth" };
@@ -216,9 +216,9 @@ namespace Moralis.Web3Api.CloudApi
 
 			var path = "/functions/getTokenBalances";
 			if (address != null) postBody.Add("address", ApiClient.ParameterToString(address));
-			if (chain != null) postBody.Add("chain", ApiClient.ParameterToString(chain));
 			if (subdomain != null) postBody.Add("subdomain", ApiClient.ParameterToString(subdomain));
 			if (toBlock != null) postBody.Add("to_block", ApiClient.ParameterToString(toBlock));
+			if(chain != null) postBody.Add("chain", ApiClient.ParameterToHex((long)chain));
 
 			// Authentication setting, if any
 			String[] authSettings = new String[] { "ApiKeyAuth" };
@@ -273,7 +273,6 @@ namespace Moralis.Web3Api.CloudApi
 
 			var path = "/functions/getTokenTransfers";
 			if (address != null) postBody.Add("address", ApiClient.ParameterToString(address));
-			if (chain != null) postBody.Add("chain", ApiClient.ParameterToString(chain));
 			if (subdomain != null) postBody.Add("subdomain", ApiClient.ParameterToString(subdomain));
 			if (fromBlock != null) postBody.Add("from_block", ApiClient.ParameterToString(fromBlock));
 			if (toBlock != null) postBody.Add("to_block", ApiClient.ParameterToString(toBlock));
@@ -281,6 +280,7 @@ namespace Moralis.Web3Api.CloudApi
 			if (toDate != null) postBody.Add("to_date", ApiClient.ParameterToString(toDate));
 			if (offset != null) postBody.Add("offset", ApiClient.ParameterToString(offset));
 			if (limit != null) postBody.Add("limit", ApiClient.ParameterToString(limit));
+			if(chain != null) postBody.Add("chain", ApiClient.ParameterToHex((long)chain));
 
 			// Authentication setting, if any
 			String[] authSettings = new String[] { "ApiKeyAuth" };
@@ -324,10 +324,10 @@ namespace Moralis.Web3Api.CloudApi
 
 			var path = "/functions/getNFTs";
 			if (address != null) postBody.Add("address", ApiClient.ParameterToString(address));
-			if (chain != null) postBody.Add("chain", ApiClient.ParameterToString(chain));
 			if (format != null) postBody.Add("format", ApiClient.ParameterToString(format));
 			if (offset != null) postBody.Add("offset", ApiClient.ParameterToString(offset));
 			if (limit != null) postBody.Add("limit", ApiClient.ParameterToString(limit));
+			if(chain != null) postBody.Add("chain", ApiClient.ParameterToHex((long)chain));
 
 			// Authentication setting, if any
 			String[] authSettings = new String[] { "ApiKeyAuth" };
@@ -367,11 +367,11 @@ namespace Moralis.Web3Api.CloudApi
 
 			var path = "/functions/getNFTTransfers";
 			if (address != null) postBody.Add("address", ApiClient.ParameterToString(address));
-			if (chain != null) postBody.Add("chain", ApiClient.ParameterToString(chain));
 			if (format != null) postBody.Add("format", ApiClient.ParameterToString(format));
 			if (direction != null) postBody.Add("direction", ApiClient.ParameterToString(direction));
 			if (offset != null) postBody.Add("offset", ApiClient.ParameterToString(offset));
 			if (limit != null) postBody.Add("limit", ApiClient.ParameterToString(limit));
+			if(chain != null) postBody.Add("chain", ApiClient.ParameterToHex((long)chain));
 
 			// Authentication setting, if any
 			String[] authSettings = new String[] { "ApiKeyAuth" };
@@ -419,10 +419,10 @@ namespace Moralis.Web3Api.CloudApi
 			var path = "/functions/getNFTsForContract";
 			if (address != null) postBody.Add("address", ApiClient.ParameterToString(address));
 			if (tokenAddress != null) postBody.Add("token_address", ApiClient.ParameterToString(tokenAddress));
-			if (chain != null) postBody.Add("chain", ApiClient.ParameterToString(chain));
 			if (format != null) postBody.Add("format", ApiClient.ParameterToString(format));
 			if (offset != null) postBody.Add("offset", ApiClient.ParameterToString(offset));
 			if (limit != null) postBody.Add("limit", ApiClient.ParameterToString(limit));
+			if(chain != null) postBody.Add("chain", ApiClient.ParameterToHex((long)chain));
 
 			// Authentication setting, if any
 			String[] authSettings = new String[] { "ApiKeyAuth" };

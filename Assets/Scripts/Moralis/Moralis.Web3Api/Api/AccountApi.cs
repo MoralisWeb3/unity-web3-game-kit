@@ -132,7 +132,7 @@ namespace Moralis.Web3Api.Api
 			var path = "/{address}";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "address" + "}", ApiClient.ParameterToString(address));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(subdomain != null) queryParams.Add("subdomain", ApiClient.ParameterToString(subdomain));
 			if(fromBlock != null) queryParams.Add("from_block", ApiClient.ParameterToString(fromBlock));
 			if(toBlock != null) queryParams.Add("to_block", ApiClient.ParameterToString(toBlock));
@@ -178,7 +178,7 @@ namespace Moralis.Web3Api.Api
 			var path = "/{address}/balance";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "address" + "}", ApiClient.ParameterToString(address));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(providerUrl != null) queryParams.Add("providerUrl", ApiClient.ParameterToString(providerUrl));
 			if(toBlock != null) queryParams.Add("to_block", ApiClient.ParameterToString(toBlock));
 
@@ -219,7 +219,7 @@ namespace Moralis.Web3Api.Api
 			var path = "/{address}/erc20";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "address" + "}", ApiClient.ParameterToString(address));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(subdomain != null) queryParams.Add("subdomain", ApiClient.ParameterToString(subdomain));
 			if(toBlock != null) queryParams.Add("to_block", ApiClient.ParameterToString(toBlock));
 
@@ -277,7 +277,7 @@ namespace Moralis.Web3Api.Api
 			var path = "/{address}/erc20/transfers";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "address" + "}", ApiClient.ParameterToString(address));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(subdomain != null) queryParams.Add("subdomain", ApiClient.ParameterToString(subdomain));
 			if(fromBlock != null) queryParams.Add("from_block", ApiClient.ParameterToString(fromBlock));
 			if(toBlock != null) queryParams.Add("to_block", ApiClient.ParameterToString(toBlock));
@@ -329,7 +329,7 @@ namespace Moralis.Web3Api.Api
 			var path = "/{address}/nft";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "address" + "}", ApiClient.ParameterToString(address));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(format != null) queryParams.Add("format", ApiClient.ParameterToString(format));
 			if(offset != null) queryParams.Add("offset", ApiClient.ParameterToString(offset));
 			if(limit != null) queryParams.Add("limit", ApiClient.ParameterToString(limit));
@@ -373,7 +373,7 @@ namespace Moralis.Web3Api.Api
 			var path = "/{address}/nft/transfers";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "address" + "}", ApiClient.ParameterToString(address));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(format != null) queryParams.Add("format", ApiClient.ParameterToString(format));
 			if(direction != null) queryParams.Add("direction", ApiClient.ParameterToString(direction));
 			if(offset != null) queryParams.Add("offset", ApiClient.ParameterToString(offset));
@@ -425,7 +425,7 @@ namespace Moralis.Web3Api.Api
 			var path = "/{address}/nft/{token_address}";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "address" + "}", ApiClient.ParameterToString(address));			path = path.Replace("{" + "token_address" + "}", ApiClient.ParameterToString(tokenAddress));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(format != null) queryParams.Add("format", ApiClient.ParameterToString(format));
 			if(offset != null) queryParams.Add("offset", ApiClient.ParameterToString(offset));
 			if(limit != null) queryParams.Add("limit", ApiClient.ParameterToString(limit));

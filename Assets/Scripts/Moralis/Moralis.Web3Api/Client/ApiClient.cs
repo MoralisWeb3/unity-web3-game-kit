@@ -81,11 +81,11 @@ namespace Moralis.Web3Api.Client
 
             // add query parameter, if any
             foreach(var param in queryParams)
-                request.AddParameter(param.Key, param.Value, ParameterType.GetOrPost);
+                request.AddParameter(param.Key, param.Value, ParameterType.QueryString);
 
             // add form parameter, if any
             foreach(var param in formParams)
-                request.AddParameter(param.Key, param.Value, ParameterType.GetOrPost);
+                request.AddParameter(param.Key, param.Value, ParameterType.QueryString);
 
             // add file parameter, if any
             foreach(var param in fileParams)
@@ -149,13 +149,29 @@ namespace Moralis.Web3Api.Client
                 // Defaults to an ISO 8601, using the known as a Round-trip date/time pattern ("o")
                 // https://msdn.microsoft.com/en-us/library/az4se3k1(v=vs.110).aspx#Anchor_8
                 // For example: 2009-06-15T13:45:30.0000000
-                return ((DateTime)obj).ToString (Configuration.DateTimeFormat);
+                return ((DateTime)obj).ToString(Configuration.DateTimeFormat);
             else if (obj is List<string>)
                 return String.Join(",", (obj as List<string>).ToArray());
+            else if (obj is string || obj is int || obj is long || obj is decimal || obj is bool || obj is float || obj is double || obj is byte || obj is char)
+            {
+                return obj.ToString();
+            }
             else
-                return Convert.ToString (obj);
+                return JsonConvert.SerializeObject(obj);
         }
     
+        /// <summary>
+        /// Convert a number to a HEX string.
+        /// </summary>
+        /// <param name="val">Value to convert</param>
+        /// <returns>Hex string.</returns>
+        public string ParameterToHex(long val)
+        {
+            string resp = $"0x{val.ToString("X")}";
+
+            return resp;
+        }
+
         /// <summary>
         /// Deserialize the JSON string into a proper object.
         /// </summary>

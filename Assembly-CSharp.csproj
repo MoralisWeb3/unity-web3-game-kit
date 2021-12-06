@@ -347,6 +347,9 @@
     <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Queries\Live\OperationTypes.cs" />
     <Compile Include="Assets\Scripts\IWeaponCollisionHandler.cs" />
     <Compile Include="Assets\Scripts\Moralis\MoralisDotNet\Platform\Services\ServiceHub.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\Trade.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\TradeCollection.cs" />
+    <Compile Include="Assets\Scripts\Moralis\Moralis.Web3Api.Core\Models\Erc20TransactionCollection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rdParty\TextMesh Pro\Shaders\TMPro.cginc" />

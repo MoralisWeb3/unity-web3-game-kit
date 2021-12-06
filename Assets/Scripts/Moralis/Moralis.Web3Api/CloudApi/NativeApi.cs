@@ -113,8 +113,8 @@ namespace Moralis.Web3Api.CloudApi
 
 			var path = "/functions/getBlock";
 			if (blockNumberOrHash != null) postBody.Add("block_number_or_hash", ApiClient.ParameterToString(blockNumberOrHash));
-			if (chain != null) postBody.Add("chain", ApiClient.ParameterToString(chain));
 			if (subdomain != null) postBody.Add("subdomain", ApiClient.ParameterToString(subdomain));
+			if(chain != null) postBody.Add("chain", ApiClient.ParameterToHex((long)chain));
 
 			// Authentication setting, if any
 			String[] authSettings = new String[] { "ApiKeyAuth" };
@@ -151,8 +151,8 @@ namespace Moralis.Web3Api.CloudApi
 
 			var path = "/functions/getDateToBlock";
 			if (date != null) postBody.Add("date", ApiClient.ParameterToString(date));
-			if (chain != null) postBody.Add("chain", ApiClient.ParameterToString(chain));
 			if (providerUrl != null) postBody.Add("providerUrl", ApiClient.ParameterToString(providerUrl));
+			if(chain != null) postBody.Add("chain", ApiClient.ParameterToHex((long)chain));
 
 			// Authentication setting, if any
 			String[] authSettings = new String[] { "ApiKeyAuth" };
@@ -215,7 +215,6 @@ namespace Moralis.Web3Api.CloudApi
 
 			var path = "/functions/getLogsByAddress";
 			if (address != null) postBody.Add("address", ApiClient.ParameterToString(address));
-			if (chain != null) postBody.Add("chain", ApiClient.ParameterToString(chain));
 			if (subdomain != null) postBody.Add("subdomain", ApiClient.ParameterToString(subdomain));
 			if (blockNumber != null) postBody.Add("block_number", ApiClient.ParameterToString(blockNumber));
 			if (fromBlock != null) postBody.Add("from_block", ApiClient.ParameterToString(fromBlock));
@@ -226,6 +225,7 @@ namespace Moralis.Web3Api.CloudApi
 			if (topic1 != null) postBody.Add("topic1", ApiClient.ParameterToString(topic1));
 			if (topic2 != null) postBody.Add("topic2", ApiClient.ParameterToString(topic2));
 			if (topic3 != null) postBody.Add("topic3", ApiClient.ParameterToString(topic3));
+			if(chain != null) postBody.Add("chain", ApiClient.ParameterToHex((long)chain));
 
 			// Authentication setting, if any
 			String[] authSettings = new String[] { "ApiKeyAuth" };
@@ -264,10 +264,10 @@ namespace Moralis.Web3Api.CloudApi
 
 			var path = "/functions/getNFTTransfersByBlock";
 			if (blockNumberOrHash != null) postBody.Add("block_number_or_hash", ApiClient.ParameterToString(blockNumberOrHash));
-			if (chain != null) postBody.Add("chain", ApiClient.ParameterToString(chain));
 			if (subdomain != null) postBody.Add("subdomain", ApiClient.ParameterToString(subdomain));
 			if (offset != null) postBody.Add("offset", ApiClient.ParameterToString(offset));
 			if (limit != null) postBody.Add("limit", ApiClient.ParameterToString(limit));
+			if(chain != null) postBody.Add("chain", ApiClient.ParameterToHex((long)chain));
 
 			// Authentication setting, if any
 			String[] authSettings = new String[] { "ApiKeyAuth" };
@@ -304,8 +304,8 @@ namespace Moralis.Web3Api.CloudApi
 
 			var path = "/functions/getTransaction";
 			if (transactionHash != null) postBody.Add("transaction_hash", ApiClient.ParameterToString(transactionHash));
-			if (chain != null) postBody.Add("chain", ApiClient.ParameterToString(chain));
 			if (subdomain != null) postBody.Add("subdomain", ApiClient.ParameterToString(subdomain));
+			if(chain != null) postBody.Add("chain", ApiClient.ParameterToHex((long)chain));
 
 			// Authentication setting, if any
 			String[] authSettings = new String[] { "ApiKeyAuth" };
@@ -371,7 +371,6 @@ namespace Moralis.Web3Api.CloudApi
 			if (address != null) postBody.Add("address", ApiClient.ParameterToString(address));
 			if (topic != null) postBody.Add("topic", ApiClient.ParameterToString(topic));
 			if (abi != null) postBody.Add("abi", ApiClient.ParameterToString(abi));
-			if (chain != null) postBody.Add("chain", ApiClient.ParameterToString(chain));
 			if (subdomain != null) postBody.Add("subdomain", ApiClient.ParameterToString(subdomain));
 			if (providerUrl != null) postBody.Add("providerUrl", ApiClient.ParameterToString(providerUrl));
 			if (fromBlock != null) postBody.Add("from_block", ApiClient.ParameterToString(fromBlock));
@@ -380,6 +379,7 @@ namespace Moralis.Web3Api.CloudApi
 			if (toDate != null) postBody.Add("to_date", ApiClient.ParameterToString(toDate));
 			if (offset != null) postBody.Add("offset", ApiClient.ParameterToString(offset));
 			if (limit != null) postBody.Add("limit", ApiClient.ParameterToString(limit));
+			if(chain != null) postBody.Add("chain", ApiClient.ParameterToHex((long)chain));
 
 			// Authentication setting, if any
 			String[] authSettings = new String[] { "ApiKeyAuth" };
@@ -427,9 +427,9 @@ namespace Moralis.Web3Api.CloudApi
 			if (address != null) postBody.Add("address", ApiClient.ParameterToString(address));
 			if (functionName != null) postBody.Add("function_name", ApiClient.ParameterToString(functionName));
 			if (abi != null) postBody.Add("abi", ApiClient.ParameterToString(abi));
-			if (chain != null) postBody.Add("chain", ApiClient.ParameterToString(chain));
 			if (subdomain != null) postBody.Add("subdomain", ApiClient.ParameterToString(subdomain));
 			if (providerUrl != null) postBody.Add("providerUrl", ApiClient.ParameterToString(providerUrl));
+			if(chain != null) postBody.Add("chain", ApiClient.ParameterToHex((long)chain));
 
 			// Authentication setting, if any
 			String[] authSettings = new String[] { "ApiKeyAuth" };

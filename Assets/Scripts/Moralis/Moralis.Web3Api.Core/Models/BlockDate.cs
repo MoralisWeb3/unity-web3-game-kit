@@ -16,7 +16,7 @@ namespace Moralis.Web3Api.Models
 		/// </summary>
 		[DataMember(Name = "date", EmitDefaultValue = false)]
 		[JsonProperty(PropertyName = "date")]
-		public decimal? Date { get; set; }
+		public DateTime? Date { get; set; }
 
 		/// <summary>
 		/// The blocknumber

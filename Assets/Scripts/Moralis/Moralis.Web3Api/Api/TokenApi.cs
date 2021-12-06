@@ -116,7 +116,7 @@ namespace Moralis.Web3Api.Api
 			path = path.Replace("{format}", "json");
 
 			if(addresses != null) queryParams.Add("addresses", ApiClient.ParameterToString(addresses));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(subdomain != null) queryParams.Add("subdomain", ApiClient.ParameterToString(subdomain));
 			if(providerUrl != null) queryParams.Add("providerUrl", ApiClient.ParameterToString(providerUrl));
 
@@ -157,7 +157,7 @@ namespace Moralis.Web3Api.Api
 		/// <param name="offset">offset</param>
 		/// <param name="limit">limit</param>
 		/// <returns>Returns the trades</returns>
-		public TradesCollection GetNFTTrades (string address, ChainList chain, int? fromBlock=null, string toBlock=null, string fromDate=null, string toDate=null, string providerUrl=null, string marketplace=null, int? offset=null, int? limit=null)
+		public TradeCollection GetNFTTrades (string address, ChainList chain, int? fromBlock=null, string toBlock=null, string fromDate=null, string toDate=null, string providerUrl=null, string marketplace=null, int? offset=null, int? limit=null)
 		{
 
 			// Verify the required parameter 'address' is set
@@ -172,7 +172,7 @@ namespace Moralis.Web3Api.Api
 			var path = "/nft/{address}/trades";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "address" + "}", ApiClient.ParameterToString(address));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(fromBlock != null) queryParams.Add("from_block", ApiClient.ParameterToString(fromBlock));
 			if(toBlock != null) queryParams.Add("to_block", ApiClient.ParameterToString(toBlock));
 			if(fromDate != null) queryParams.Add("from_date", ApiClient.ParameterToString(fromDate));
@@ -194,7 +194,7 @@ namespace Moralis.Web3Api.Api
 			else if (((int)response.StatusCode) == 0)
 				throw new ApiException((int)response.StatusCode, "Error calling GetNFTTrades: " + response.ErrorMessage, response.ErrorMessage);
 
-			return (TradesCollection)ApiClient.Deserialize(response.Content, typeof(TradesCollection), response.Headers);
+			return (TradeCollection)ApiClient.Deserialize(response.Content, typeof(TradeCollection), response.Headers);
 		}
 		/// <summary>
 		/// Get the lowest price found for a nft token contract for the last x days (only trades paid in ETH)
@@ -207,7 +207,7 @@ namespace Moralis.Web3Api.Api
 		/// <param name="providerUrl">web3 provider url to user when using local dev chain</param>
 		/// <param name="marketplace">marketplace from where to get the trades (only opensea is supported at the moment)</param>
 		/// <returns>Returns the trade with the lowest price</returns>
-		public TradesCollection GetNFTLowestPrice (string address, ChainList chain, int? days=null, string providerUrl=null, string marketplace=null)
+		public Trade GetNFTLowestPrice (string address, ChainList chain, int? days=null, string providerUrl=null, string marketplace=null)
 		{
 
 			// Verify the required parameter 'address' is set
@@ -222,7 +222,7 @@ namespace Moralis.Web3Api.Api
 			var path = "/nft/{address}/lowestprice";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "address" + "}", ApiClient.ParameterToString(address));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(days != null) queryParams.Add("days", ApiClient.ParameterToString(days));
 			if(providerUrl != null) queryParams.Add("provider_url", ApiClient.ParameterToString(providerUrl));
 			if(marketplace != null) queryParams.Add("marketplace", ApiClient.ParameterToString(marketplace));
@@ -239,7 +239,7 @@ namespace Moralis.Web3Api.Api
 			else if (((int)response.StatusCode) == 0)
 				throw new ApiException((int)response.StatusCode, "Error calling GetNFTLowestPrice: " + response.ErrorMessage, response.ErrorMessage);
 
-			return (TradesCollection)ApiClient.Deserialize(response.Content, typeof(TradesCollection), response.Headers);
+			return (Trade)ApiClient.Deserialize(response.Content, typeof(Trade), response.Headers);
 		}
 		/// <summary>
 		/// Returns metadata (name, symbol, decimals, logo) for a given token contract address.
@@ -264,7 +264,7 @@ namespace Moralis.Web3Api.Api
 			path = path.Replace("{format}", "json");
 
 			if(symbols != null) queryParams.Add("symbols", ApiClient.ParameterToString(symbols));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(subdomain != null) queryParams.Add("subdomain", ApiClient.ParameterToString(subdomain));
 
 			// Authentication setting, if any
@@ -305,7 +305,7 @@ namespace Moralis.Web3Api.Api
 			var path = "/erc20/{address}/price";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "address" + "}", ApiClient.ParameterToString(address));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(providerUrl != null) queryParams.Add("providerUrl", ApiClient.ParameterToString(providerUrl));
 			if(exchange != null) queryParams.Add("exchange", ApiClient.ParameterToString(exchange));
 			if(toBlock != null) queryParams.Add("to_block", ApiClient.ParameterToString(toBlock));
@@ -349,11 +349,11 @@ namespace Moralis.Web3Api.Api
 		/// <param name="offset">offset</param>
 		/// <param name="limit">limit</param>
 		/// <returns>Returns a collection of token contract transactions.</returns>
-		public List<Erc20Transaction> GetTokenAdressTransfers (string address, ChainList chain, string subdomain=null, int? fromBlock=null, int? toBlock=null, string fromDate=null, string toDate=null, int? offset=null, int? limit=null)
+		public Erc20TransactionCollection GetTokenAddressTransfers (string address, ChainList chain, string subdomain=null, int? fromBlock=null, int? toBlock=null, string fromDate=null, string toDate=null, int? offset=null, int? limit=null)
 		{
 
 			// Verify the required parameter 'address' is set
-			if (address == null) throw new ApiException(400, "Missing required parameter 'address' when calling GetTokenAdressTransfers");
+			if (address == null) throw new ApiException(400, "Missing required parameter 'address' when calling GetTokenAddressTransfers");
 
 			var postBody = new Dictionary<String, String>();
 			var queryParams = new Dictionary<String, String>();
@@ -364,7 +364,7 @@ namespace Moralis.Web3Api.Api
 			var path = "/erc20/{address}/transfers";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "address" + "}", ApiClient.ParameterToString(address));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(subdomain != null) queryParams.Add("subdomain", ApiClient.ParameterToString(subdomain));
 			if(fromBlock != null) queryParams.Add("from_block", ApiClient.ParameterToString(fromBlock));
 			if(toBlock != null) queryParams.Add("to_block", ApiClient.ParameterToString(toBlock));
@@ -381,11 +381,11 @@ namespace Moralis.Web3Api.Api
 			IRestResponse response = (IRestResponse)ApiClient.CallApi(path, Method.GET, queryParams, bodyData, headerParams, formParams, fileParams, authSettings);
 
 			if (((int)response.StatusCode) >= 400)
-				throw new ApiException((int)response.StatusCode, "Error calling GetTokenAdressTransfers: " + response.Content, response.Content);
+				throw new ApiException((int)response.StatusCode, "Error calling GetTokenAddressTransfers: " + response.Content, response.Content);
 			else if (((int)response.StatusCode) == 0)
-				throw new ApiException((int)response.StatusCode, "Error calling GetTokenAdressTransfers: " + response.ErrorMessage, response.ErrorMessage);
+				throw new ApiException((int)response.StatusCode, "Error calling GetTokenAddressTransfers: " + response.ErrorMessage, response.ErrorMessage);
 
-			return (List<Erc20Transaction>)ApiClient.Deserialize(response.Content, typeof(List<Erc20Transaction>), response.Headers);
+			return (Erc20TransactionCollection)ApiClient.Deserialize(response.Content, typeof(Erc20TransactionCollection), response.Headers);
 		}
 		/// <summary>
 		/// Gets the amount which the spender is allowed to withdraw from the spender
@@ -419,7 +419,7 @@ namespace Moralis.Web3Api.Api
 			path = path.Replace("{" + "address" + "}", ApiClient.ParameterToString(address));
 			if(ownerAddress != null) queryParams.Add("owner_address", ApiClient.ParameterToString(ownerAddress));
 			if(spenderAddress != null) queryParams.Add("spender_address", ApiClient.ParameterToString(spenderAddress));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(providerUrl != null) queryParams.Add("providerUrl", ApiClient.ParameterToString(providerUrl));
 
 			// Authentication setting, if any
@@ -478,7 +478,7 @@ namespace Moralis.Web3Api.Api
 			path = path.Replace("{format}", "json");
 
 			if(q != null) queryParams.Add("q", ApiClient.ParameterToString(q));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(format != null) queryParams.Add("format", ApiClient.ParameterToString(format));
 			if(filter != null) queryParams.Add("filter", ApiClient.ParameterToString(filter));
 			if(fromBlock != null) queryParams.Add("from_block", ApiClient.ParameterToString(fromBlock));
@@ -501,6 +501,65 @@ namespace Moralis.Web3Api.Api
 				throw new ApiException((int)response.StatusCode, "Error calling SearchNFTs: " + response.ErrorMessage, response.ErrorMessage);
 
 			return (NftMetadataCollection)ApiClient.Deserialize(response.Content, typeof(NftMetadataCollection), response.Headers);
+		}
+		/// <summary>
+		/// Gets the transfers of the tokens from a block number to a block number
+		/// </summary>
+		/// <param name="chain">The chain to query</param>
+		/// <param name="fromBlock">The minimum block number from where to get the transfers
+		/// * Provide the param 'from_block' or 'from_date'
+		/// * If 'from_date' and 'from_block' are provided, 'from_block' will be used.
+		/// </param>
+		/// <param name="toBlock">The maximum block number from where to get the transfers.
+		/// * Provide the param 'to_block' or 'to_date'
+		/// * If 'to_date' and 'to_block' are provided, 'to_block' will be used.
+		/// </param>
+		/// <param name="fromDate">The date from where to get the transfers (any format that is accepted by momentjs)
+		/// * Provide the param 'from_block' or 'from_date'
+		/// * If 'from_date' and 'from_block' are provided, 'from_block' will be used.
+		/// </param>
+		/// <param name="toDate">Get transfers up until this date (any format that is accepted by momentjs)
+		/// * Provide the param 'to_block' or 'to_date'
+		/// * If 'to_date' and 'to_block' are provided, 'to_block' will be used.
+		/// </param>
+		/// <param name="format">The format of the token id</param>
+		/// <param name="offset">offset</param>
+		/// <param name="limit">limit</param>
+		/// <returns>Returns a collection of NFT transfers</returns>
+		public NftTransferCollection GetNftTransfersFromToBlock (ChainList chain, int? fromBlock=null, int? toBlock=null, string fromDate=null, string toDate=null, string format=null, int? offset=null, int? limit=null)
+		{
+
+			var postBody = new Dictionary<String, String>();
+			var queryParams = new Dictionary<String, String>();
+			var headerParams = new Dictionary<String, String>();
+			var formParams = new Dictionary<String, String>();
+			var fileParams = new Dictionary<String, FileParameter>();
+
+			var path = "/nft/transfers";
+			path = path.Replace("{format}", "json");
+
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
+			if(fromBlock != null) queryParams.Add("from_block", ApiClient.ParameterToString(fromBlock));
+			if(toBlock != null) queryParams.Add("to_block", ApiClient.ParameterToString(toBlock));
+			if(fromDate != null) queryParams.Add("from_date", ApiClient.ParameterToString(fromDate));
+			if(toDate != null) queryParams.Add("to_date", ApiClient.ParameterToString(toDate));
+			if(format != null) queryParams.Add("format", ApiClient.ParameterToString(format));
+			if(offset != null) queryParams.Add("offset", ApiClient.ParameterToString(offset));
+			if(limit != null) queryParams.Add("limit", ApiClient.ParameterToString(limit));
+
+			// Authentication setting, if any
+			String[] authSettings = new String[] { "ApiKeyAuth" };
+
+			string bodyData = postBody.Count > 0 ? JsonConvert.SerializeObject(postBody) : null;
+
+			IRestResponse response = (IRestResponse)ApiClient.CallApi(path, Method.GET, queryParams, bodyData, headerParams, formParams, fileParams, authSettings);
+
+			if (((int)response.StatusCode) >= 400)
+				throw new ApiException((int)response.StatusCode, "Error calling GetNftTransfersFromToBlock: " + response.Content, response.Content);
+			else if (((int)response.StatusCode) == 0)
+				throw new ApiException((int)response.StatusCode, "Error calling GetNftTransfersFromToBlock: " + response.ErrorMessage, response.ErrorMessage);
+
+			return (NftTransferCollection)ApiClient.Deserialize(response.Content, typeof(NftTransferCollection), response.Headers);
 		}
 		/// <summary>
 		/// Gets data, including metadata (where available), for all token ids for the given contract address.
@@ -529,7 +588,7 @@ namespace Moralis.Web3Api.Api
 			var path = "/nft/{address}";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "address" + "}", ApiClient.ParameterToString(address));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(format != null) queryParams.Add("format", ApiClient.ParameterToString(format));
 			if(offset != null) queryParams.Add("offset", ApiClient.ParameterToString(offset));
 			if(limit != null) queryParams.Add("limit", ApiClient.ParameterToString(limit));
@@ -572,7 +631,7 @@ namespace Moralis.Web3Api.Api
 			var path = "/nft/{address}/transfers";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "address" + "}", ApiClient.ParameterToString(address));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(format != null) queryParams.Add("format", ApiClient.ParameterToString(format));
 			if(offset != null) queryParams.Add("offset", ApiClient.ParameterToString(offset));
 			if(limit != null) queryParams.Add("limit", ApiClient.ParameterToString(limit));
@@ -588,65 +647,6 @@ namespace Moralis.Web3Api.Api
 				throw new ApiException((int)response.StatusCode, "Error calling GetContractNFTTransfers: " + response.Content, response.Content);
 			else if (((int)response.StatusCode) == 0)
 				throw new ApiException((int)response.StatusCode, "Error calling GetContractNFTTransfers: " + response.ErrorMessage, response.ErrorMessage);
-
-			return (NftTransferCollection)ApiClient.Deserialize(response.Content, typeof(NftTransferCollection), response.Headers);
-		}
-		/// <summary>
-		/// Gets the transfers of the tokens from a block number to a block number
-		/// </summary>
-		/// <param name="chain">The chain to query</param>
-		/// <param name="fromBlock">The minimum block number from where to get the transfers
-		/// * Provide the param 'from_block' or 'from_date'
-		/// * If 'from_date' and 'from_block' are provided, 'from_block' will be used.
-		/// </param>
-		/// <param name="toBlock">The maximum block number from where to get the transfers.
-		/// * Provide the param 'to_block' or 'to_date'
-		/// * If 'to_date' and 'to_block' are provided, 'to_block' will be used.
-		/// </param>
-		/// <param name="fromDate">The date from where to get the transfers (any format that is accepted by momentjs)
-		/// * Provide the param 'from_block' or 'from_date'
-		/// * If 'from_date' and 'from_block' are provided, 'from_block' will be used.
-		/// </param>
-		/// <param name="toDate">Get transfers up until this date (any format that is accepted by momentjs)
-		/// * Provide the param 'to_block' or 'to_date'
-		/// * If 'to_date' and 'to_block' are provided, 'to_block' will be used.
-		/// </param>
-		/// <param name="format">The format of the token id</param>
-		/// <param name="offset">offset</param>
-		/// <param name="limit">limit</param>
-		/// <returns>Returns a collection of NFT transfers</returns>
-		public NftTransferCollection GetNftTransfersFromToBlock (ChainList chain, int? fromBlock=null, int? toBlock=null, string fromDate=null, string toDate=null, string format=null, int? offset=null, int? limit=null)
-		{
-
-			var postBody = new Dictionary<String, String>();
-			var queryParams = new Dictionary<String, String>();
-			var headerParams = new Dictionary<String, String>();
-			var formParams = new Dictionary<String, String>();
-			var fileParams = new Dictionary<String, FileParameter>();
-
-			var path = "/nft/transfers";
-			path = path.Replace("{format}", "json");
-
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
-			if(fromBlock != null) queryParams.Add("from_block", ApiClient.ParameterToString(fromBlock));
-			if(toBlock != null) queryParams.Add("to_block", ApiClient.ParameterToString(toBlock));
-			if(fromDate != null) queryParams.Add("from_date", ApiClient.ParameterToString(fromDate));
-			if(toDate != null) queryParams.Add("to_date", ApiClient.ParameterToString(toDate));
-			if(format != null) queryParams.Add("format", ApiClient.ParameterToString(format));
-			if(offset != null) queryParams.Add("offset", ApiClient.ParameterToString(offset));
-			if(limit != null) queryParams.Add("limit", ApiClient.ParameterToString(limit));
-
-			// Authentication setting, if any
-			String[] authSettings = new String[] { "ApiKeyAuth" };
-
-			string bodyData = postBody.Count > 0 ? JsonConvert.SerializeObject(postBody) : null;
-
-			IRestResponse response = (IRestResponse)ApiClient.CallApi(path, Method.GET, queryParams, bodyData, headerParams, formParams, fileParams, authSettings);
-
-			if (((int)response.StatusCode) >= 400)
-				throw new ApiException((int)response.StatusCode, "Error calling GetNftTransfersFromToBlock: " + response.Content, response.Content);
-			else if (((int)response.StatusCode) == 0)
-				throw new ApiException((int)response.StatusCode, "Error calling GetNftTransfersFromToBlock: " + response.ErrorMessage, response.ErrorMessage);
 
 			return (NftTransferCollection)ApiClient.Deserialize(response.Content, typeof(NftTransferCollection), response.Headers);
 		}
@@ -678,7 +678,7 @@ namespace Moralis.Web3Api.Api
 			var path = "/nft/{address}/owners";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "address" + "}", ApiClient.ParameterToString(address));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(format != null) queryParams.Add("format", ApiClient.ParameterToString(format));
 			if(offset != null) queryParams.Add("offset", ApiClient.ParameterToString(offset));
 			if(limit != null) queryParams.Add("limit", ApiClient.ParameterToString(limit));
@@ -720,7 +720,7 @@ namespace Moralis.Web3Api.Api
 			var path = "/nft/{address}/metadata";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "address" + "}", ApiClient.ParameterToString(address));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 
 			// Authentication setting, if any
 			String[] authSettings = new String[] { "ApiKeyAuth" };
@@ -764,7 +764,7 @@ namespace Moralis.Web3Api.Api
 			var path = "/nft/{address}/{token_id}";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "address" + "}", ApiClient.ParameterToString(address));			path = path.Replace("{" + "token_id" + "}", ApiClient.ParameterToString(tokenId));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(format != null) queryParams.Add("format", ApiClient.ParameterToString(format));
 
 			// Authentication setting, if any
@@ -813,7 +813,7 @@ namespace Moralis.Web3Api.Api
 			var path = "/nft/{address}/{token_id}/owners";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "address" + "}", ApiClient.ParameterToString(address));			path = path.Replace("{" + "token_id" + "}", ApiClient.ParameterToString(tokenId));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(format != null) queryParams.Add("format", ApiClient.ParameterToString(format));
 			if(offset != null) queryParams.Add("offset", ApiClient.ParameterToString(offset));
 			if(limit != null) queryParams.Add("limit", ApiClient.ParameterToString(limit));
@@ -861,7 +861,7 @@ namespace Moralis.Web3Api.Api
 			var path = "/nft/{address}/{token_id}/transfers";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "address" + "}", ApiClient.ParameterToString(address));			path = path.Replace("{" + "token_id" + "}", ApiClient.ParameterToString(tokenId));
-			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToString(chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(format != null) queryParams.Add("format", ApiClient.ParameterToString(format));
 			if(offset != null) queryParams.Add("offset", ApiClient.ParameterToString(offset));
 			if(limit != null) queryParams.Add("limit", ApiClient.ParameterToString(limit));
