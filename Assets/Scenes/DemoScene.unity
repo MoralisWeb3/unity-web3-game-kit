@@ -770,7 +770,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -254.00073}
+  m_AnchoredPosition: {x: 0, y: -250.00064}
   m_SizeDelta: {x: 640, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &125404195
@@ -11359,8 +11359,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 669b4c0065732ac4ba25705a404a25b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoralisApplicationId: n47cMIiJZkdSlhCb01dldXO5mFIGuM6YqfYZ6DXA
-  MoralisServerURI: https://x5gna0kcbpto.usemoralis.com:2053/server
+  MoralisApplicationId: YOUR APPLICATION ID HERE
+  MoralisServerURI: YOUR SERVER URL HERE
   ApplicationName: Moralis Unity Boilerplate
   Version: 1.0.0
   AuthenticationButton: {fileID: 990276067045873226}

@@ -32,7 +32,7 @@ git clone https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate.git
 - Navigate to the folder you cloned the boiler plate project to.
 - Click on the "Select Folder" button.
 - The project named "Boilerplate" will now be in the "Projects List". Click on it.
-- When Unity3D opens, in the "Hierachy" section expand "DemoScene" then select "UICanvas/Panel"
+- When Unity3D opens, in the "Hierachy" section expand "DemoScene" then select "UICanvas" then "UIPanel"
 - In the "Inspector" section find the sub-section titled "MainMenuScript".
 - If the "MainMenuScript" sub-section is not expanded, expand it.
 - Using the information from your Moralis Server, fill in Application Id and Server URL.
