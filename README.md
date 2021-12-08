@@ -37,7 +37,7 @@ If you need help with setting up the boilerplate or have other questions - don't
 - In the "Inspector" section find the sub-section titled "MainMenuScript".
 - If the "MainMenuScript" sub-section is not expanded, expand it.
 - Using the information from your Moralis Server, fill in Application Id and Server URL.
-![Demo](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/download.gif)
+![Demo](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/insertvalues.gif)
 
 - Run the application by clicking the Play icon located at the top, center of the Unity3D IDE.
 
