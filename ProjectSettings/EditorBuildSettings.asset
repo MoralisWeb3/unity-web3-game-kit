@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/DemoScene.unity
+    path: Assets/MoralisWeb3ApiSdk/Example/DemoScene.unity
     guid: 40d4add513190a441bb79c9ffe0fff3a
   m_configObjects: {}

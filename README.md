@@ -9,7 +9,7 @@ There are many components in this boilerplate that do not require an active web3
 
 Please check the [official documentation of Moralis](https://docs.moralis.io/#user) for all the functionalities of Moralis.
 
-![Demo](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/moralis-unity-boilerplate.gif)
+![Demo](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/moralis-unity-boilerplate.gif)
 
 # ⭐️ `Star us`
 If this boilerplate helps you build Ethereum dapps faster - please star this project, every star makes us very happy!
@@ -18,26 +18,28 @@ If this boilerplate helps you build Ethereum dapps faster - please star this pro
 If you need help with setting up the boilerplate or have other questions - don't hesitate to write in our community forum and we will check asap. [Forum link](https://forum.moralis.io/t/ethereum-unity3d-boilerplate-questions/4553). The best thing about this boilerplate is the super active community ready to help at any time! We help each other.
 
 # 🚀 Quick Start
-📄 Clone or fork `ethereum-boilerplate`:
-```sh
-git clone https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate.git
-```
 💿 Install all dependencies:
 - [Unity Hub](https://unity3d.com/get-unity/download)
 - [Visual Studio](https://visualstudio.microsoft.com/)
 
-💿 Open Unity Hub and Add the Project
+📄 Download the latest package:
+![Demo](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/download.gif)
+
+💿 Create a New Unity Project and Import the Package
 - Open Unity Hub
-- click on the 'ADD' button.
-- Navigate to the folder you cloned the boiler plate project to.
-- Click on the "Select Folder" button.
-- The project named "Boilerplate" will now be in the "Projects List". Click on it.
-- When Unity3D opens, in the "Hierachy" section expand "DemoScene" then select "UICanvas" then "UIPanel"
+- Click on the 'NEW' button and create a new project
+- When the project opens, navigate to the folder you downloaded the package to.
+- Drag and drop the package into the Unity project.
+![Demo](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/add.gif)
+
+- Open MoralisWeb3ApiSdk->Example and double-click on the DemoScene object.
+- In the "Hierachy" panel under DemoScene expand "UICanvas" then "UIPanel".
 - In the "Inspector" section find the sub-section titled "MainMenuScript".
 - If the "MainMenuScript" sub-section is not expanded, expand it.
 - Using the information from your Moralis Server, fill in Application Id and Server URL.
-- If the Wallet Connect property is set to "None" drag WalletConnect from the "Hierarchy" section to this input.
-- Click the Play icon located at the top, center of the Unity3D IDE.
+![Demo](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/download.gif)
+
+- Run the application by clicking the Play icon located at the top, center of the Unity3D IDE.
 
 This boilerplate project has been tested with the following Unity3D Releases:
 1. 2020.2
@@ -436,7 +438,7 @@ Gets ERC20 token transactions in descending order based on block number
 - **limit** _integer_ OPTIONAL Limit
 #### Example
 ```
-List<Erc20Transaction> balance = MoralisInterface.GetClient().Web3Api.Account.GetTokenTransfers(address.ToLower(), ChainList.eth);
+Erc20TransactionCollection balance = MoralisInterface.GetClient().Web3Api.Account.GetTokenTransfers(address.ToLower(), ChainList.eth);
 ```
 
 ### `GetTransactions`
@@ -575,7 +577,6 @@ Runs a given function of a contract abi and returns readonly data
 string result = MoralisInterface.GetClient().Web3Api.Native.RunContractFunction(address, functionName, ChainList.eth);
 ```
 
-
 ## `Resolve`
 Code examples demonstrating how to use the Moralis Web3API Resolve endpoint and operations.
 
@@ -588,10 +589,37 @@ Resolves an Unstoppable domain and returns the address
 Resolve result = MoralisInterface.GetClient().Web3Api.Resolve.ResolveDomain(domain);
 ```
 
+### `ResolveAddress`
+Resolves an ETH address and find the ENS name
+- **address** _string_ REQUIRED The wallet address to perform reverse lookup on.
+#### Example
+```
+Ens result = MoralisInterface.GetClient().Web3Api.Resolve.ResolveAddress(address);
+```
 
 ## `Storage`
 Code examples demonstrating how to use the Moralis Web3API Storage endpoint and operations.
 
+### UploadFolder
+Resolves an ETH address and find the ENS name
+- **request** _List<IpfsFileRequest>_ REQUIRED Upload Data
+#### Example
+``` 
+// Define file information.
+IpfsFileRequest req = new IpfsFileRequest()
+{
+	Path = "moralis/logo.jpg",
+	Content = "iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAApgAAAKYB3X3"
+};
+
+// Multiple request can be sent via a List so define the request list.
+List<IpfsFileRequest> reqs = new List<IpfsFileRequest>();
+
+// Add requests to request list.
+reqs.Add(req);
+
+List<IpfsFile> resp = web3Api.Storage.UploadFolder(reqs);
+```
 
 ## `Token`
 Code examples demonstrating how to use the Moralis Web3API Token endpoint and operations.
@@ -606,7 +634,7 @@ Gets data, including metadata (where available), for all token ids for the given
 - **order** _string_ OPTIONAL If the order should be Ascending or Descending based on the blocknumber on which the NFT was minted. Allowed values: "ASC", "DESC"
 #### Example
 ```
-NftCollection nfts = MoralisInterface.GetClient().Web3Api.Token.GetAllTokenIds(address, ChainList.eth);
+NftCollection nfts = MoralisInterface.GetClient().Web3Api.Token.GetAllTokenIds(address, ChainList.eth, null, 0, 10);
 ```
 
 ### `GetContractNFTTransfers`
@@ -619,7 +647,7 @@ Gets the transfers of the tokens matching the given parameters
 - **order** _string_ OPTIONAL If the order should be Ascending or Descending based on the blocknumber on which the NFT was minted. Allowed values: "ASC", "DESC"
 #### Example
 ```
-NftTransferCollection nftTransers = MoralisInterface.GetClient().Web3Api.Token.GetContractNFTTransfers(address, ChainList.eth);
+NftTransferCollection nftTransers = MoralisInterface.GetClient().Web3Api.Token.GetContractNFTTransfers(address, ChainList.eth, null, 0, 10);
 ```
 
 ### `GetNFTLowestPrice`
@@ -631,7 +659,7 @@ Get the lowest price found for a nft token contract for the last x days (only tr
 - **marketplace** _string_ OPTIONAL web3 marketplace from where to get the trades (only opensea is supported at the moment)
 #### Example
 ```
-TradesCollection trades = MoralisInterface.GetClient().Web3Api.Token.GetNFTLowestPrice(address, ChainList.eth);
+Trade trade = MoralisInterface.GetClient().Web3Api.Token.GetNFTLowestPrice(address, ChainList.eth);
 ```
 
 ### `GetNFTMetadata`
@@ -739,18 +767,20 @@ Gets all owners of NFT items within a given contract collection
 - **order** _string_ OPTIONAL If the order should be Ascending or Descending based on the blocknumber on which the NFT was minted. Allowed values: "ASC", "DESC"
 #### Example
 ```
-NftOwnerCollection owners = MoralisInterface.GetClient().Web3Api.Token.GetTokenIdOwners(address, tokenId, ChainList.eth);
+NftOwnerCollection owners = MoralisInterface.GetClient().Web3Api.Token.GetTokenIdOwners(address, tokenId, ChainList.eth, null, 0, 10);
 ```
 
 ### `GetTokenMetadata`
 Returns metadata (name, symbol, decimals, logo) for a given token contract address.
-- **address** _string_ REQUIRED Target address
+- **address** _List<string>_ REQUIRED Target address
 - **chain** _ChainList_ REQUIRED The chain to query
 - **subdomain** _string_ OPTIONAL The subdomain of the moralis server to use (Only use when selecting local devchain as chain)
 - **providerUrl** _string_ OPTIONAL web3 provider url to user when using local dev chain
 #### Example
 ```
-List<Erc20Metadata> metadataList = MoralisInterface.GetClient().Web3Api.Token.GetTokenMetadata(addresses, ChainList.eth);
+List<string> addresses = new List<string>();
+addresses.Add("0x6b175474e89094c44da98b954eedeac495271d0f");
+List<Erc20Metadata> resp = web3Api.Token.GetTokenMetadata(addresses, ChainList.eth);
 ```
 
 ### `GetTokenMetadataBySymbol`
@@ -760,7 +790,9 @@ Returns metadata (name, symbol, decimals, logo) for a given token contract addre
 - **subdomain** _string_ OPTIONAL The subdomain of the moralis server to use (Only use when selecting local devchain as chain)
 #### Example
 ```
-List<Erc20Metadata> metadataList = MoralisInterface.GetClient().Web3Api.Token.GetTokenMetadataBySymbol(symbols, ChainList.eth);
+List<string> symbols = new List<string>();
+symbols.Add("DAI");
+List<Erc20Metadata> resp = web3Api.Token.GetTokenMetadataBySymbol(symbols, ChainList.eth);
 ```
 
 ### `GetTokenPrice`
@@ -803,7 +835,7 @@ Gets NFTs that match a given metadata search.
 - **limit** _integer_ OPTIONAL Limit
 #### Example
 ```
-NftMetadataCollection metadata = MoralisInterface.GetClient().Web3Api.Token.SearchNFTs(q, ChainList.eth);
+NftMetadataCollection metadata = MoralisInterface.GetClient().Web3Api.Token.SearchNFTs(q, ChainList.eth, null, null, null, null, null, null, 0, 10);
 ```
 
 
