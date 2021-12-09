@@ -105,12 +105,12 @@ This boilerplate project has been tested with the following Unity3D Releases:
 - [Helpful Tools](#helpful-tools)
   
 # 🏗 Moralis SDK
-  The.NET Moralis SDK provides easy to use method that make integrating your application with Moralis a snap. You will find that the.NET SDK works much the same as in JavaScript. For use in Unity3D we have added additional quick start objects that make integrating the Moralis SDK in a Unity3D application. 
+  The.NET Moralis SDK provides easy to use methods that make integrating your application with Moralis a snap. You will find that the.NET SDK works much the same as in JavaScript. For use in Unity3D, we have added additional quick start objects for integrating the Moralis SDK in a Unity3D application. 
   For the examples that follow we provide examples of how to use the Moralis.NET SDK directly and perform the same functionality using the provided Moralis Unity3D quick start tools.
   
 ## `Client`
   The Moralis SDK Client provides a way to easily interact with Moralis database and the Web3API. In .NET we use the *MoralisClient*
-  to interact with Moralis. For Unity3D we have provided a signleton wrapper named *MoralisInterface* that makes it easy to initialize the MoralisClient and then access it from anywhere in your Unity3D application. With either option you can initialize the Moralis Client with a single line of code
+  to interact with Moralis. For Unity3D we have provided a singleton wrapper named *MoralisInterface* that makes it easy to initialize the MoralisClient and then access it from anywhere in your Unity3D application. With either option you can initialize the Moralis Client with a single line of code
   
 ### SDK Client Initialization
 **Required Using Statements**
@@ -123,18 +123,18 @@ using Moralis.Web3Api.Client;
 ```
 MoralisClient moralis = new MoralisClient(new ServerConnectionData() { ApplicationID = "YOUR_APPLICATION_ID_HERE", ServerURI = "YOUR_SERER_URL_HERE"}, new Web3ApiClient());
 ```
-_note: The **new Web3ApiClient()** parameter is optional and should be included only when you will be using functionality fromt the Moralis Web3AP REST service._
+_note: The **new Web3ApiClient()** parameter is optional and should be included only when you will be using functionality from the Moralis Web3API REST service._
 
 ### Unity3D Client Initialization
 **Initialize Client**
 ```
 MoralisInterface.Initialize(MoralisApplicationId, MoralisServerURI, hostManifestData);
 ```
-_note: For the **hostManifestData** parameter see [`HostManifestData`](#hostmanifestdata). This is requried for Unity3D applications._
+_note: For the **hostManifestData** parameter see [`HostManifestData`](#hostmanifestdata). This is required for Unity3D applications._
 _note: See [`User Object`](#userobject) for information about initializing the Moralis Client for a custom User Object._
 
 ## `Authentication`
-Authentication is handled in a similar manner in both the SDK and the Unity3d. There is not direct manner to interact securely with a wallet in a .NET application so the Moralis SDK interacts with wallets in a lose cupled manner. For the Unity3D boilerplate application, and the other examples we provide, we use Wallet Connect to facilitate interaction with wallets. 
+Authentication is handled in a similar manner in both the SDK and the Unity3d. There is no direct manner to interact securely with a wallet in a .NET application so the Moralis SDK interacts with wallets in a loosely coupled manner. For the Unity3D boilerplate application, and the other examples we provide, we use Wallet Connect to facilitate interaction with wallets. 
 
 ### Basic Moralis Authentication
 Here are the statements used to authenticate with Moralis:
@@ -169,7 +169,7 @@ MoralisUser user = await MoralisInterface.LogInAsync(authData);
 ```
 
 ## `Queries`
-Queries provide a way to retrieve informaition from your Moralis database.
+Queries provide a way to retrieve information from your Moralis database.
 #### Required Using Statement(s)
 ```
 using Moralis;
@@ -214,7 +214,7 @@ The foloowing examples use the [query example from above](#queries)
 ```
 MoralisLiveQueryClient<Hero> heroSubscription = moralis.Query<Hero>().Subscribe(callbacks);
 ```
-_note: the **callbacks** parameter is optional. Please see [Callbacks Explained](#live-query-callbacks-explained) bellow.
+_note: the **callbacks** parameter is optional. Please see [Callbacks Explained](#live-query-callbacks-explained) below.
 ### Live Query Example (Unity3D)
 Since Unity3d is mainly used to create games, Unity3D apps generaly have life cycle events you do not usually need to worray about in a normal program.
 We have created a special Live Query wrapper object that automatically handles your subscriptions for pause, unpause, close, etc.
@@ -228,11 +228,11 @@ _note: the **callbacks** parameter is optional. Please see [Callbacks Explained]
 The _**MoralisLiveQueryController**_ is a singleton object and so is available anywhere within your application.
 The first parameter ("Hero" above") is a key that you can use to retrieve a subscription (to check its status for example) or to remove a subscription.
 
-By using the The _**MoralisLiveQueryController**_ object you do not need to worry about properly closing or disposing of your scubscriptions as this wrapper object handles all of that for you.
+By using the The _**MoralisLiveQueryController**_ object you do not need to worry about properly closing or disposing of your subscriptions as this wrapper object handles all of that for you.
 
 ### Live Query Callbacks Explained.
-Callbacks are used to handle the events emitted by a subscription. You can set the callbacks directly agains a subscription. However it is usually cleaner to 
-seperate these from the main code. To facilitate this we have included the _**MoralisLiveQueryCallbacks**_ object. This optional object can be passed to the subscription.
+Callbacks are used to handle the events emitted by a subscription. You can set the callbacks directly against a subscription. However it is usually cleaner to 
+separate these from the main code. To facilitate this we have included the _**MoralisLiveQueryCallbacks**_ object. This optional object can be passed to the subscription.
 #### Example MoralisLiveQueryCallbacks Use
 ```
 MoralisLiveQueryCallbacks<Hero> callbacks = new MoralisLiveQueryCallbacks<Hero>();
@@ -262,7 +262,7 @@ callbacks.OnGeneralMessageEvent += ((text) =>
 ```
 
 ## `Custom Object`
-Creating your own objects to support NPCs, characters, and game objects is a simple as creating a Plain Old C# Object (POCO). The only stipulation is that your custom object must be a child of Moralis Object and when you create an instance of the object it should be made via _**moralis.Create**_ method. This associates some extensions to your object that enable you to perform Moralis functions such as _Save_ directly on the object.
+Creating your own objects to support NPCs, characters, and game objects is as simple as creating a Plain Old C# Object (POCO). The only stipulation is that your custom object must be a child of Moralis Object and when you create an instance of the object it should be made via _**moralis.Create**_ method. This associates some extensions to your object that enable you to perform Moralis functions such as _Save_ directly on the object.
 #### Required Using Statement(s)
 ```
 using Moralis;
@@ -312,7 +312,7 @@ await h.SaveAsync();
 ## `User Object`
 The user object contains information about the currently logged in user. Upon successful login, the user is stored in local storage until logout. This allows a user to log in once and not login again until their session expires or they logout.
 
-If you create a custom user object it must descend from MoralisUser.
+If you create a custom user object it must inherit from MoralisUser.
 
 Since C# is a typed language the compiler must know what types are used at compile time. Due to this, since the MoralisUser is integral to internal functions in the Moralis SDK, when you create a custom User Object you must initialize the Moralis client using your custom User Object. After this step you can use the Moralis Client as usual.
 
@@ -324,7 +324,7 @@ _note: for Unity3D you will need to make the above change in the **MoralisInterf
 _**WARNING** do not make any replacements to any files under the MoralisDtoNet folder_
 
 ## `Authentication Data`
-Authentucation data is a _**Dictionary<string, string>**_ object that contains the information required by Moralis to authenticate a user.
+Authentication data is a _**Dictionary<string, string>**_ object that contains the information required by Moralis to authenticate a user.
 As a minimum the authentication data dictionary must contain the following entries:
 1. **id** The wallet address of the wallet used to sign the message.
 2. **signature** The signature data returned by the Sign request sent to the wallet.
@@ -344,9 +344,9 @@ Description here
 # 🏗 Ethereum Web3Api Methods
 
 ## `Web3Api Notes`
-The complete Moralis Web3API schema including endpoints, operations and models, can be found by loggining into your Moralis Server and selecting **Web3 API***
+The complete Moralis Web3API schema including endpoints, operations and models, can be found by logging in to your Moralis Server and selecting **Web3 API***
 
-For use with either Moralis SDK or in Unity3d, the following using statements are requried:
+For use with either Moralis SDK or in Unity3d, the following using statements are required:
 ```
 using System.Collections.Generic;
 using Moralis.Web3Api.Models;
@@ -612,7 +612,7 @@ IpfsFileRequest req = new IpfsFileRequest()
 	Content = "iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAApgAAAKYB3X3"
 };
 
-// Multiple request can be sent via a List so define the request list.
+// Multiple requests can be sent via a List so define the request list.
 List<IpfsFileRequest> reqs = new List<IpfsFileRequest>();
 
 // Add requests to request list.
@@ -845,6 +845,6 @@ NftMetadataCollection metadata = MoralisInterface.GetClient().Web3Api.Token.Sear
 2. [The Gimp](https://www.gimp.org/)
     Open source image editing tool
 3. [Blender](https://www.blender.org/)
-    Open source tool for creating 3D models, animations, textures, andeverything else you need for game characters and objects.
+    Open source tool for creating 3D models, animations, textures, and everything else you need for game characters and objects.
 4. [Maximo](https://www.mixamo.com/)
-    Free to use (with registration) Animations for huminoid rigged models.
+    Free to use (with registration) Animations for humanoid rigged models.
