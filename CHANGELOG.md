@@ -1,4 +1,9 @@
 # Change Log
+## 1.0.1 (2021-21-xx)
+- Use Unity recommended .gitignore file
+- Fix Chest Lid convex issue
+- Fix iOS missing reference issue.
+
 ## 1.0.0 (2021-12-08)
 - Re-layout whole project to group the assets into a format  recommened for a Unity Asset Package.
 - Update .gitignore to ignoe Unity .meta files and Unity .log files.
