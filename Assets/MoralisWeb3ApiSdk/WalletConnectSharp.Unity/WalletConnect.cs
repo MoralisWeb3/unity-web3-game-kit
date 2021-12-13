@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Assets.Scripts;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Events;
@@ -21,7 +22,13 @@ namespace WalletConnectSharp.Unity
     public class WalletConnect : BindableMonoBehavior
     {
         public const string SessionKey = "__WALLETCONNECT_SESSION__";
-        
+
+        /// <summary>
+        /// FOR FUTURE USE - when using W.C. for iOS this list will limit the wallets
+        /// displayed to the user.
+        /// </summary>
+        public List<string> AllowedWalletIds;
+
         public Dictionary<string, AppEntry> SupportedWallets
         {
             get;
