@@ -28,8 +28,8 @@ If you need help with setting up the boilerplate or have other questions - don't
 💿 Create a New Unity Project and Import the Package
 - Open Unity Hub
 - Click on the 'NEW' button and create a new project
-- When the project opens, navigate to the folder you downloaded the package to.
-- Drag and drop the package into the Unity project.
+- When the project opens, open Edit->Preferences->External Tools (on MAC this is Unity->Preferences->External Tools) and make sure "Script Editor" is set to your installed Visual Studio instance. IMPORTANT: This step must be done before importing the package.
+- Navigate to the folder you downloaded the package to. Drag and drop the package into the Unity project.
 ![Demo](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/add.gif)
 
 - Open MoralisWeb3ApiSdk->Example and double-click on the DemoScene object.
