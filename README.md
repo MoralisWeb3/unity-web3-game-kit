@@ -45,7 +45,7 @@ If you need help with setting up the boilerplate or have other questions - don't
     - In desktop and WebGL builds use the 'SHIFT' key with the 'W' and 'S' keys to run.
     - Use the space bar to jump
 - Note the purpose of the demo is to show how to authenticate with and interact with Moralis in a Unity3D game. THough you can  swing your character's sword hitting things has no effect.
-- **IMPORTANT** If you want to create WebGL builds or want to run the Demo in WebGL, please read the [Wb3GL](#web3gl) section prior to running the demo in WebGL.
+- **IMPORTANT** If you want to create WebGL builds or want to run the Demo in WebGL, please read the [Web3GL](#web3gl) section prior to running the demo in WebGL.
 
 This boilerplate project has been tested with the following Unity3D Releases:
 1. 2020.2
@@ -67,7 +67,7 @@ This boilerplate project has been tested with the following Unity3D Releases:
     - [`Authentication Data`](#authentication-data)
     - [`HostManifestData`](#hostmanifestdata)
     - [`ServerConnectionData`](#server-connectiondata)
-- [Wb3GL](#web3gl)
+- [Web3GL](#web3gl)
 - [🏗 Ethereum Web3Api Methods](#-ethereum-web3api-methods)
     - [`Web3Api Notes`](#web3api-notes)
     - [`Chains`](#chains)
