@@ -26,7 +26,13 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  */
+#if UNITY_WEBGL
+using Moralis.WebGL.Platform;
+using System.Collections.Generic;
+#else
 using Moralis.Platform;
+using System.Collections.Generic;
+#endif
 using UnityEngine;
 
 public class MoralisSetup : MonoBehaviour
@@ -36,7 +42,7 @@ public class MoralisSetup : MonoBehaviour
     public string ApplicationName;
     public string Version;
 
-    void Start()
+    async void Start()
     {
         HostManifestData hostManifestData = new HostManifestData()
         {
@@ -46,6 +52,9 @@ public class MoralisSetup : MonoBehaviour
             ShortVersion = Version
         };
 
-        MoralisInterface.Initialize(MoralisApplicationId, MoralisServerURI, hostManifestData);
+        await MoralisInterface.Initialize(MoralisApplicationId, MoralisServerURI, hostManifestData);
+
+        var authData = new Dictionary<string, object> { { "id", "0x26841E928b5b89BB257CCCeC06d8d63951f2507b".ToLower() }, { "signature", "0x7589245bd712ccdcaa9f946c1052b169569fecaf5beed44d916acc0361be16b63f9ad8fb8526c276a1869a314ca7f9a0becee334aadca2e62ccd656cd1379c041b" }, { "data", "Moralis Authentication" } };
+        await MoralisInterface.GetClient().LogInAsync(authData);
     }
 }

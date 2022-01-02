@@ -743,9 +743,17 @@
       <Project>{33C7F2A2-4AEA-64FB-8DAF-0F32154145E8}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
+    <ProjectReference Include="UniTask.TextMeshPro.csproj">
+      <Project>{DD9FBA50-F34C-8139-B3B5-343F4D69F34A}</Project>
+      <Name>UniTask.TextMeshPro</Name>
+    </ProjectReference>
     <ProjectReference Include="LeanCommon.csproj">
       <Project>{5F33B1B9-9801-72E3-D3B6-0BE732F8089A}</Project>
       <Name>LeanCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.DOTween.csproj">
+      <Project>{4DC51B1B-0F5A-CF2E-4B59-76AB2FC4943F}</Project>
+      <Name>UniTask.DOTween</Name>
     </ProjectReference>
     <ProjectReference Include="LeanGUI.csproj">
       <Project>{1A6356EB-DA13-4D05-E0A2-B4102EFEEE87}</Project>
@@ -755,9 +763,21 @@
       <Project>{E15FCF00-000C-B7F6-0240-791AF76D32E0}</Project>
       <Name>endel.nativewebsocket</Name>
     </ProjectReference>
+    <ProjectReference Include="UniTask.csproj">
+      <Project>{476CBF30-A1C6-5E8D-1CA3-CF359CC96538}</Project>
+      <Name>UniTask</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.Addressables.csproj">
+      <Project>{F5CC6268-57BF-FB81-A497-522C5BACBDF9}</Project>
+      <Name>UniTask.Addressables</Name>
+    </ProjectReference>
     <ProjectReference Include="LeanTransition.Editor.csproj">
       <Project>{2E294EDD-27B9-9A60-ECFB-0CE5E06F28CE}</Project>
       <Name>LeanTransition.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.Linq.csproj">
+      <Project>{8F73A630-12B8-86C2-A4F6-C50A8728D121}</Project>
+      <Name>UniTask.Linq</Name>
     </ProjectReference>
     <ProjectReference Include="LeanTransition.csproj">
       <Project>{03A0A499-4A5D-BF38-396D-7221417375F7}</Project>

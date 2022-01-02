@@ -40,10 +40,17 @@ If you need help with setting up the boilerplate or have other questions - don't
 ![Demo](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/insertvalues.gif)
 
 - Run the application by clicking the Play icon located at the top, center of the Unity3D IDE.
+- Click on the "Authenticate" button to authenticate to Moralis using your Wallet.
+- To walk around use the mouse for direction, the 'W' key to move forward and the 'S' key to move backwards. 
+    - In desktop and WebGL builds use the 'SHIFT' key with the 'W' and 'S' keys to run.
+    - Use the space bar to jump
+- Note the purpose of the demo is to show how to authenticate with and interact with Moralis in a Unity3D game. THough you can  swing your character's sword hitting things has no effect.
+- **IMPORTANT** If you want to create WebGL builds or want to run the Dem in WebGL, please read the [Wb3GL](#web3gl) section prior to running the demo in WebGL.
 
 This boilerplate project has been tested with the following Unity3D Releases:
 1. 2020.2
-2. 2020.3.24f1 (latest)
+2. 2020.3.25f1 (latest)
+3. 2021.2.5
 
 # 🧭 Table of contents
 
@@ -60,6 +67,7 @@ This boilerplate project has been tested with the following Unity3D Releases:
     - [`Authentication Data`](#authentication-data)
     - [`HostManifestData`](#hostmanifestdata)
     - [`ServerConnectionData`](#server-connectiondata)
+- [Wb3GL](#web3gl)
 - [🏗 Ethereum Web3Api Methods](#-ethereum-web3api-methods)
     - [`Web3Api Notes`](#web3api-notes)
     - [`Chains`](#chains)
@@ -340,6 +348,65 @@ In Unity3D applications the HostManifestData object is used to pass information 
 ## `ServerConnectionData`
 Description here
 
+# Web3GL 
+Due to the way WebGL works, for security reasons it does not support outbound calls or multi-threading. The Moralis SDK depends heavily on both. As a solution we created a duplicate of the SDK that specifically geared to be compatible with WebGL.
+
+For most functionality the switch between other build types and WebGL should be seemless, with two exceptions.
+
+### `Moralis objects and Models`
+Anytime you directly access moralis interfaces, objects, models, etc., use the __Moralis.WebGL__ instead of the __Moralis__ namespace.
+For example:
+```
+using Moralis.Platform.Objects;
+using Moralis.Web3Api.Models;
+```
+becomes
+```
+using Moralis.WebGL.Platform.Objects;
+using Moralis.WebGL.Web3Api.Models;
+```
+
+When you have a file that is used for both WebGL and non-WebGL builds use the __UNITY_WEBGL__ pre-processor statement to seperate the code that will be used for each type of build. As example here is part of the using statement from the *TokenListController.cs* file from the Boilerplate Example:
+```
+#if UNITY_WEBGL
+using Moralis.WebGL.Platform.Objects;
+using Moralis.WebGL.Web3Api.Models;
+using Cysharp.Threading.Tasks;
+using Newtonsoft.Json;
+using Assets.MoralisWeb3ApiSdk.Example.Scripts;
+#else
+using Moralis.Platform.Objects;
+using Moralis.Web3Api.Models;
+#endif
+```
+Additionally you can define blocks of code to be included or ignored depending on whether the code is build for WebGL or not. For a good example of this please examine the code in the *TokenListController.cs* file in the Boilerplate Example.
+
+### `Loading External Resources`
+Under the hood, WebGL loads external resources similar to javascript using AJAX. This means that you can run into CORs issues in the client browser when loading external resources. The prescribed method to solve this issue (as settings for CORS are on the server side) is to create a proxy service. 
+
+As part of the WebGL solution example, the *TokenListController.cs* file shows how to use a Moralis Cloud function as a proxy for loading external resources. To successfully display the images of tokens in the wallet example you will need to create the following cloud function in your Moralis server.
+1. Log into Moralis, select and expand your Server instance.
+2. Click on the "Cloud Functions" button.
+3. Copy the following code into your Cloud Functions
+```
+Moralis.Cloud.define("loadResource", async (request) => {
+  const logger = Moralis.Cloud.getLogger();
+  
+  return await Moralis.Cloud.httpRequest({
+    url: request.params.url
+  }).then(function(httpResponse) {
+    let resp = {status: httpResponse.status, headers: httpResponse.headers, data: JSON.stringify(httpResponse.buffer)};
+    return resp;
+  },function(httpResponse) {
+    // Error occurred
+    logger.error('Request failed with response code ' + httpResponse.status);
+    return httpResponse;
+  });
+}, {
+	fields : ["url"]
+});
+```
+4. Click on the "Save" button.
 
 # 🏗 Ethereum Web3Api Methods
 

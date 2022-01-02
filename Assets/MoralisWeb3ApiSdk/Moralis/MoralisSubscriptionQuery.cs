@@ -27,13 +27,14 @@
  *  SOFTWARE.
  */
 using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Moralis;
-using Moralis.Platform.Objects;
-using Moralis.Platform.Queries;
-using Moralis.Platform.Services.ClientServices;
 using UnityEngine;
+
+#if UNITY_WEBGL
+using Cysharp.Threading.Tasks;
+using Moralis.WebGL;
+using Moralis.WebGL.Platform.Objects;
+using Moralis.WebGL.Platform.Queries;
+using Moralis.WebGL.Platform.Services.ClientServices;
 
 namespace Assets.Scripts
 {
@@ -55,6 +56,103 @@ namespace Assets.Scripts
         /// Query against which the subscription is made.
         /// </summary>
         public  MoralisQuery<T> Query { get; private set; }
+
+        /// <summary>
+        /// Indicates if a connection the server was established.
+        /// </summary>
+        public bool Connected { get; private set; }
+
+        /// <summary>
+        /// Indicates if a subscription for the query has been established.
+        /// </summary>
+        public bool Subscribed { get; private set; }
+
+        /// <summary>
+        /// Key name used to identify this subscription and included in any 
+        /// error logs generated.
+        /// </summary>
+        public string SubscriptionName { get; private set; }
+
+        public MoralisSubscriptionQuery(string keyName, MoralisQuery<T> q, MoralisLiveQueryCallbacks<T> c)
+        {
+            Query = q;
+            Callbacks = c;
+            SubscriptionName = keyName;
+
+            // Internally track connection state
+            Callbacks.OnConnectedEvent += (() => { Connected = true; });
+            // Internally track subscription state
+            Callbacks.OnSubscribedEvent += ((requestId) => { Subscribed = true; });
+            Callbacks.OnUnsubscribedEvent += ((requestId) => { Subscribed = false; });
+
+            // Create initial subscription.
+            subscription = Query.Subscribe<T>(Callbacks);
+        }
+
+        /// <summary>
+        /// Attempts to re-establish a previous subscriptions. If the 
+        /// subscription is already active, unsubscribe is called.
+        /// Subscription is then re-created.
+        /// </summary>
+        /// <returns></returns>
+        public async UniTask RenewSubscription()
+        {
+            // Make sure the subscription is not active.
+            if (Subscribed)
+            {
+                await Unsubscribe();
+            }
+
+            // Re-establish the subscription.
+            subscription = Query.Subscribe<T>(Callbacks);
+        }
+
+        /// <summary>
+        /// Unsubscribes from and disposes of the subscription.
+        /// </summary>
+        /// <returns></returns>
+        public async UniTask Unsubscribe()
+        {
+            if (Subscribed)
+            {
+                // Try to close down the subscription properly
+                subscription.Unsubscribe();
+                
+                subscription.Dispose();
+                subscription = null;
+                Subscribed = false;
+            }
+        }
+    }
+}
+#else
+using System.Threading;
+using System.Threading.Tasks;
+using Moralis;
+using Moralis.Platform.Objects;
+using Moralis.Platform.Queries;
+using Moralis.Platform.Services.ClientServices;
+
+namespace Assets.Scripts
+{
+    /// <summary>
+    /// Provides a wrapper around the query subscription process to facilitate automated
+    /// subscribe and suspension processes.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class MoralisSubscriptionQuery<T> : ISubscriptionQuery where T : MoralisObject
+    {
+        private MoralisLiveQueryClient<T> subscription;
+
+        /// <summary>
+        /// The client event handlers used to react to this subscription.
+        /// </summary>
+        public MoralisLiveQueryCallbacks<T> Callbacks { get; private set; }
+
+        /// <summary>
+        /// Query against which the subscription is made.
+        /// </summary>
+        public MoralisQuery<T> Query { get; private set; }
 
         /// <summary>
         /// Indicates if a connection the server was established.
@@ -146,3 +244,4 @@ namespace Assets.Scripts
         }
     }
 }
+#endif

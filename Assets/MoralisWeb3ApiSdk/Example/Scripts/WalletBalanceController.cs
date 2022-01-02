@@ -27,11 +27,16 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  */
-using Moralis.Platform.Objects;
-using Moralis.Web3Api.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
+#if UNITY_WEBGL
+using Moralis.WebGL.Platform.Objects;
+using Moralis.WebGL.Web3Api.Models;
+#else
+using Moralis.Platform.Objects;
+using Moralis.Web3Api.Models;
+#endif
 /// <summary>
 /// Sample script showing how to retrieve user and balance information using 
 /// Moralis Web3API and displaying those items in text elements.
@@ -57,10 +62,10 @@ public class WalletBalanceController : MonoBehaviour
     public int ChainId;
 
     // Update is called once per frame
-    public void PopulateBalanceValues()
+    public async void PopulateBalanceValues()
     {
         // Get user object and display user name
-        MoralisUser user = MoralisInterface.GetUser();
+        MoralisUser user = await MoralisInterface.GetUserAsync();
 
         if (user != null)
         {
@@ -69,10 +74,17 @@ public class WalletBalanceController : MonoBehaviour
 
             addressText.text = addr;
 
+#if UNITY_WEBGL
+            // Retrieve account balanace.
+            NativeBalance bal =
+                await MoralisInterface.GetClient().Web3Api.Account.GetNativeBalance(addr.ToLower(),
+                                            (ChainList)ChainId);
+#else
             // Retrieve account balanace.
             NativeBalance bal =
                 MoralisInterface.GetClient().Web3Api.Account.GetNativeBalance(addr.ToLower(),
                                             (ChainList)ChainId);
+#endif
             double balance = 0.0;
             
             // Make sure a response to the balanace request weas received. The 

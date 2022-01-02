@@ -29,8 +29,10 @@
  *  SOFTWARE.
  */
 using System.Collections.Generic;
-using Moralis.Platform.Abstractions;
 using Newtonsoft.Json;
+
+#if UNITY_WEBGL
+using Moralis.WebGL.Platform.Abstractions;
 
 namespace Assets.Scripts
 {
@@ -87,3 +89,62 @@ namespace Assets.Scripts
         }
     }
 }
+#else
+using Moralis.Platform.Abstractions;
+
+namespace Assets.Scripts
+{
+    /// <summary>
+    /// Defines a Newtonsoft wrapper around the Unity specific Newtonsoft library so that is
+    /// can be passed into Moralis.
+    /// </summary>
+    public class UnityNewtosoftSerializer : IJsonSerializer
+    {
+        public IDictionary<string, object> DefaultOptions { get; set; }
+
+        public UnityNewtosoftSerializer()
+        {
+            DefaultOptions = new Dictionary<string, object>();
+            DefaultOptions.Add("NullValueHandling", NullValueHandling.Ignore);
+            DefaultOptions.Add("ReferenceLoopHandling", ReferenceLoopHandling.Serialize);
+            DefaultOptions.Add("DateFormatString", "yyyy-MM-ddTHH:mm:ss.fffZ");
+        }
+
+        public T Deserialize<T>(string json, IDictionary<string, object> options = null)
+        {
+            if (options is { })
+            {
+                return JsonConvert.DeserializeObject<T>(json, OptionsToSettings(options));
+            }
+            else
+            {
+                return JsonConvert.DeserializeObject<T>(json);
+            }
+        }
+
+        public string Serialize(object target, IDictionary<string, object> options = null)
+        {
+            if (options is { })
+            {
+                return JsonConvert.SerializeObject(target, OptionsToSettings(options));
+            }
+            else
+            {
+                return JsonConvert.SerializeObject(target);
+            }
+        }
+
+        private JsonSerializerSettings OptionsToSettings(IDictionary<string, object> options)
+        {
+            JsonSerializerSettings settings = new JsonSerializerSettings()
+            {
+                DateFormatString = options.ContainsKey("DateFormatString") ? (string)options["DateFormatString"] : null,
+                NullValueHandling = options.ContainsKey("NullValueHandling") ? (NullValueHandling)options["NullValueHandling"] : NullValueHandling.Ignore,
+                ReferenceLoopHandling = options.ContainsKey("ReferenceLoopHandling") ? (ReferenceLoopHandling)options["ReferenceLoopHandling"] : ReferenceLoopHandling.Ignore
+            };
+
+            return settings;
+        }
+    }
+}
+#endif

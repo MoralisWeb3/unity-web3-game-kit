@@ -27,7 +27,11 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  */
+#if UNITY_WEBGL
+using Moralis.WebGL.Platform;
+#else
 using Moralis.Platform;
+#endif
 using UnityEngine;
 
 /// <summary>

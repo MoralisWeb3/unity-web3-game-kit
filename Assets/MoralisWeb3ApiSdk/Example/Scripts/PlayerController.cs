@@ -69,16 +69,21 @@ public class PlayerController : MonoBehaviour
 #endif
     }
 
-    private void Update()
+    private async void Update()
     {
         // Update character address if it has not been set
-        if (!isAuthenticated && MoralisInterface.GetUser() != null)
+        if (!isAuthenticated)
         {
-            string addr = MoralisInterface.GetUser().authData["moralisEth"]["id"].ToString();
+            var user = await MoralisInterface.GetUserAsync();
 
-            addressText.text = string.Format("{0}...{1}", addr.Substring(0, 6), addr.Substring(addr.Length - 3, 3));
+            if (user != null)
+            {
+                string addr = user.authData["moralisEth"]["id"].ToString();
 
-            isAuthenticated = true;
+                addressText.text = string.Format("{0}...{1}", addr.Substring(0, 6), addr.Substring(addr.Length - 3, 3));
+
+                isAuthenticated = true;
+            }
         }
 
         Move();

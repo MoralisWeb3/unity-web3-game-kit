@@ -27,9 +27,6 @@
  *  SOFTWARE.
  */
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Moralis.Platform;
-using Moralis.Platform.Objects;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -37,6 +34,16 @@ using WalletConnectSharp.Core.Models;
 using WalletConnectSharp.Unity;
 using Assets.Scripts;
 using Assets;
+
+#if UNITY_WEBGL
+using Cysharp.Threading.Tasks;
+using Moralis.WebGL.Platform;
+using Moralis.WebGL.Platform.Objects;
+#else
+using System.Threading.Tasks;
+using Moralis.Platform;
+using Moralis.Platform.Objects;
+#endif
 
 /// <summary>
 /// Example class that demonstrates a game menu that incorporates Wallet 
@@ -55,7 +62,7 @@ public class MainMenuScript : MonoBehaviour
 
     Image menuBackground;
 
-    void Start()
+    async void Start()
     {
         menuBackground = (Image)gameObject.GetComponent(typeof(Image));
 
@@ -74,7 +81,7 @@ public class MainMenuScript : MonoBehaviour
         joystick.SetActive(true);
 #endif
 
-        MoralisInterface.Initialize(MoralisApplicationId, MoralisServerURI, hostManifestData);
+        await MoralisInterface.Initialize(MoralisApplicationId, MoralisServerURI, hostManifestData);
 
         if (MoralisInterface.IsLoggedIn())
         {
@@ -106,7 +113,7 @@ public class MainMenuScript : MonoBehaviour
             Debug.Log("User is already logged in to Moralis.");
 
             // Transition to main game scene
-            SceneManager.LoadScene(SceneMap.GAME_VIEW);
+            //SceneManager.LoadScene(SceneMap.GAME_VIEW);
         }
         // User is not logged in, depending on build target, begin wallect connection.
         else
@@ -196,6 +203,25 @@ public class MainMenuScript : MonoBehaviour
     /// <summary>
     /// Display Moralis connector login page
     /// </summary>
+ #if UNITY_WEBGL
+    private async UniTask LoginViaConnectionPage()
+    {
+        // Use Moralis Connect page for authentication as we work to make the Wallet 
+        // Connect experience better.
+        MoralisUser user = await MobileLogin.LogIn(MoralisServerURI, MoralisApplicationId);
+
+        if (user != null)
+        {
+            // User is not null so login was successful, show first game scene.
+            //SceneManager.LoadScene(SceneMap.GAME_VIEW);
+            AuthenticationButtonOff();
+        }
+        else
+        {
+            AuthenticationButtonOn();
+        }
+    }
+#else
     private async Task LoginViaConnectionPage()
     {
         // Use Moralis Connect page for authentication as we work to make the Wallet 
@@ -213,7 +239,7 @@ public class MainMenuScript : MonoBehaviour
             AuthenticationButtonOn();
         }
     }
-
+#endif
     private void AuthenticationButtonOff()
     {
         AuthenticationButton.SetActive(false);
