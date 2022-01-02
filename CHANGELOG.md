@@ -1,4 +1,7 @@
 # Change Log
+## 1.0.2 (2022-01-01)
+- Add support for WebGL applications. This release contains many updates all geared to WebGL support.
+
 ## 1.0.1 (2021-21-xx)
 - Use Unity recommended .gitignore file
 - Fix Chest Lid convex issue

@@ -26,14 +26,30 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  */
-using Moralis.Platform.Objects;
-using Moralis.Web3Api.Models;
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Assets.Scripts;
+
 using UnityEngine.Networking;
+using System.Text;
+using System.IO;
+using System;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Net;
+
+#if UNITY_WEBGL
+using Moralis.WebGL.Platform.Objects;
+using Moralis.WebGL.Web3Api.Models;
+using Cysharp.Threading.Tasks;
+using Newtonsoft.Json;
+using Assets.MoralisWeb3ApiSdk.Example.Scripts;
+#else
+using Moralis.Platform.Objects;
+using Moralis.Web3Api.Models;
+#endif
 
 /// <summary>
 /// Sample game controller that demonstrates how to use the Moralis Web3Api to retieve 
@@ -59,22 +75,107 @@ public class TokenListController : MonoBehaviour
 
     private bool tokensLoaded;
 
-    public void PopulateWallet()
+    public async void PopulateWallet()
     {
         if (!tokensLoaded)
         {
-            StartCoroutine(BuildTokenList());
-
             // Make sure that duplicate tokens are not loaded.
             tokensLoaded = true;
+
+            // Get user object and display user name
+            MoralisUser user = await MoralisInterface.GetUserAsync();
+#if UNITY_WEBGL
+            List<Erc20TokenBalance> balances = await RetreiveBalances(user);
+
+            await BuildTokenList(balances);
+#else
+            StartCoroutine(BuildTokenList(user));
+#endif
+            
         }
     }
 
-    IEnumerator BuildTokenList()
+#if UNITY_WEBGL
+    private async UniTask<List<Erc20TokenBalance>> RetreiveBalances(MoralisUser user)
     {
-        // Get user object and display user name
-        MoralisUser user = MoralisInterface.GetUser();
+        List<Erc20TokenBalance> tokens = new List<Erc20TokenBalance>();
 
+        if (user != null)
+        {
+            string addr = user.authData["moralisEth"]["id"].ToString();
+
+            tokens = await MoralisInterface.GetClient().Web3Api.Account.GetTokenBalances(addr.ToLower(),
+                                            (ChainList)ChainId);
+        }
+
+        return tokens;
+    }
+
+    async UniTask BuildTokenList(List<Erc20TokenBalance> tokens)
+    {
+        foreach (Erc20TokenBalance token in tokens)
+        {
+            // Ignor entry without symbol or without thumbnail image
+            if (string.IsNullOrWhiteSpace(token.Symbol))
+            {
+                continue;
+            }
+
+            // Create and add an Token button to the display list. 
+            var tokenObj = Instantiate(ListItemPrefab, TokenListTransform);
+            var tokenSymbol = tokenObj.GetFirstChildComponentByName<Text>("TokenSymbolText", false);
+            var tokenBalanace = tokenObj.GetFirstChildComponentByName<Text>("TokenCountText", false);
+            var tokenImage = tokenObj.GetFirstChildComponentByName<Image>("TokenThumbNail", false);
+            var tokenButton = tokenObj.GetComponent<Button>();
+
+            var parentTransform = TokenListTransform.GetComponent<RectTransform>();
+            double balance = 0.0;
+            float tokenDecimals = 18.0f;
+
+            // Make sure a response to the balanace request weas received. The 
+            // IsNullOrWhitespace check may not be necessary ...
+            if (token != null && !string.IsNullOrWhiteSpace(token.Balance))
+            {
+                double.TryParse(token.Balance, out balance);
+                float.TryParse(token.Decimals, out tokenDecimals);
+            }
+
+            tokenSymbol.text = token.Symbol;
+            tokenBalanace.text = string.Format("{0:0.##} ", balance / (double)Mathf.Pow(10.0f, tokenDecimals));
+
+            // When button clicked display theCoingecko page for that token.
+            tokenButton.onClick.AddListener(delegate
+            {
+                // Display token CoinGecko page on click.
+                Application.OpenURL($"https://coinmarketcap.com/currencies/{token.Name}");
+            });
+
+            // If token has a thumbnail image try to retrieve the image
+            if (!string.IsNullOrWhiteSpace(token.Thumbnail))
+            {
+                // Field(s) for the cloud function.
+                IDictionary<string, object> pars = new Dictionary<string, object>();
+                pars.Add("url", token.Thumbnail);
+                string bodyData = JsonConvert.SerializeObject(pars);
+
+                ResourceResponse resourceResponse = await MoralisInterface.GetClient().Cloud.RunAsync<ResourceResponse>("loadResource", pars);
+                
+                Texture2D tokenTexture = new Texture2D(64, 64);
+                ResourceData rData = resourceResponse.resourceData;
+
+                tokenTexture.LoadImage(rData.data);
+
+                var sprite = Sprite.Create(tokenTexture,
+                            new Rect(0.0f, 0.0f, tokenTexture.width, tokenTexture.height),
+                            new Vector2(0.75f, 0.75f), 100.0f);
+
+                tokenImage.sprite = sprite;
+            }
+        }
+    }
+#else
+    IEnumerator BuildTokenList(MoralisUser user)
+    {
         if (user != null)
         {
             string addr = user.authData["moralisEth"]["id"].ToString();
@@ -143,4 +244,5 @@ public class TokenListController : MonoBehaviour
             }
         }
     }
+#endif
 }

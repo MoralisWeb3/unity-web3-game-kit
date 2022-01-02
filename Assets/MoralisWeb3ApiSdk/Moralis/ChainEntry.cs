@@ -25,7 +25,12 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  */
+
+#if UNITY_WEBGL
+using Moralis.WebGL.Web3Api.Models; 
+#else
 using Moralis.Web3Api.Models;
+#endif
 
 namespace Assets.Scripts.Moralis
 {
