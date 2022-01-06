@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Networking;
+using WalletConnectSharp.Core;
 using WalletConnectSharp.Core.Models;
 using WalletConnectSharp.Core.Network;
 using WalletConnectSharp.Unity.Models;
@@ -40,13 +41,11 @@ namespace WalletConnectSharp.Unity
         public Wallets DefaultWallet;
 
         [Serializable]
-        public class ConnectedEventNoSession : UnityEvent { }
+        public class WalletConnectEventNoSession : UnityEvent { }
         [Serializable]
-        public class DisconnectedEventWithSession : UnityEvent<WalletConnectUnitySession> { }
+        public class WalletConnectEventWithSession : UnityEvent<WalletConnectUnitySession> { }
         [Serializable]
-        public class ConnectedEventWithSession : UnityEvent<WCSessionData> { }
-        [Serializable]
-        public class ConnectionFailedEventWithSession : UnityEvent<WalletConnectUnitySession> { }
+        public class WalletConnectEventWithSessionData : UnityEvent<WCSessionData> { }
         
         public event EventHandler ConnectionStarted;
 
@@ -88,13 +87,15 @@ namespace WalletConnectSharp.Unity
         
         public int chainId = 1;
 
-        public ConnectedEventNoSession ConnectedEvent;
+        public WalletConnectEventNoSession ConnectedEvent;
 
-        public ConnectedEventWithSession ConnectedEventSession;
+        public WalletConnectEventWithSessionData ConnectedEventSession;
 
-        public DisconnectedEventWithSession DisconnectedEvent;
+        public WalletConnectEventWithSession DisconnectedEvent;
         
-        public ConnectionFailedEventWithSession ConnectionFailedEvent;
+        public WalletConnectEventWithSession ConnectionFailedEvent;
+        public WalletConnectEventWithSession NewSessionConnected;
+        public WalletConnectEventWithSession ResumedSessionConnected;
 
         public WalletConnectUnitySession Session
         {
@@ -183,11 +184,8 @@ namespace WalletConnectSharp.Unity
                     else if (!Session.Connected && !Session.Connecting)
                     {
                         StartCoroutine(SetupDefaultWallet());
-
-                        #if UNITY_ANDROID || UNITY_IOS
-                        //Whenever we send a request to the Wallet, we want to open the Wallet app
-                        Session.OnSend += (sender, session) => OpenMobileWallet();
-                        #endif
+                        
+                        SetupEvents();
 
                         return await CompleteConnect();
                     }
@@ -226,21 +224,51 @@ namespace WalletConnectSharp.Unity
             {
                 Session = new WalletConnectUnitySession(AppData, this, customBridgeUrl, _transport, ciper, chainId);
             }
+
+            StartCoroutine(SetupDefaultWallet());
             
+            SetupEvents();
+
+            return await CompleteConnect();
+        }
+
+        private void SetupEvents()
+        {
+            #if UNITY_EDITOR || DEBUG
+            //Useful for debug logging
             Session.OnSessionConnect += (sender, session) =>
             {
                 Debug.Log("[WalletConnect] Session Connected");
             };
-            Session.OnSessionDisconnect += SessionOnOnSessionDisconnect;
+            #endif
             
-            StartCoroutine(SetupDefaultWallet());
-
+            Session.OnSessionDisconnect += SessionOnOnSessionDisconnect;
+            Session.OnSessionCreated += SessionOnOnSessionCreated;
+            Session.OnSessionResumed += SessionOnOnSessionResumed;
+            
             #if UNITY_ANDROID || UNITY_IOS
             //Whenever we send a request to the Wallet, we want to open the Wallet app
             Session.OnSend += (sender, session) => OpenMobileWallet();
             #endif
+        }
 
-            return await CompleteConnect();
+        private void TeardownEvents()
+        {
+            Session.OnSessionDisconnect -= SessionOnOnSessionDisconnect;
+            Session.OnSessionCreated -= SessionOnOnSessionCreated;
+            Session.OnSessionResumed -= SessionOnOnSessionResumed;
+        }
+
+        private void SessionOnOnSessionResumed(object sender, WalletConnectSession e)
+        {
+            if (this.ResumedSessionConnected != null)
+                this.ResumedSessionConnected.Invoke(e as WalletConnectUnitySession ?? Session);
+        }
+
+        private void SessionOnOnSessionCreated(object sender, WalletConnectSession e)
+        {
+            if (this.NewSessionConnected != null)
+                this.NewSessionConnected.Invoke(e as WalletConnectUnitySession ?? Session);
         }
 
         private async Task<WCSessionData> CompleteConnect()
@@ -252,7 +280,7 @@ namespace WalletConnectSharp.Unity
                 ConnectionStarted(this, EventArgs.Empty);
             }
             
-            ConnectedEventWithSession allEvents = new ConnectedEventWithSession();
+            WalletConnectEventWithSessionData allEvents = new WalletConnectEventWithSessionData();
                 
             allEvents.AddListener(delegate(WCSessionData arg0)
             {
@@ -292,6 +320,8 @@ namespace WalletConnectSharp.Unity
             {
                 PlayerPrefs.DeleteKey(SessionKey);
             }
+            
+            TeardownEvents();
             
             if (createNewSessionOnSessionDisconnect)
             {

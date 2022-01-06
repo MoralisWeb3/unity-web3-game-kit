@@ -58,6 +58,8 @@ public class MainMenuScript : MonoBehaviour
     public GameObject AuthenticationButton;
     public WalletConnect walletConnect;
     public GameObject qrMenu;
+    public GameObject androidMenu;
+    public GameObject iosMenu;
     public GameObject joystick;
 
     Image menuBackground;
@@ -75,6 +77,8 @@ public class MainMenuScript : MonoBehaviour
         };
 
         qrMenu.SetActive(false);
+        androidMenu.SetActive(false);
+        iosMenu.SetActive(false);
 
 #if UNITY_ANDROID || UNITY_IOS
         // We're in mobile so show the joystick.
@@ -127,18 +131,18 @@ public class MainMenuScript : MonoBehaviour
             // processes separate.
 #if UNITY_ANDROID
             // By pass noraml Wallet Connect for now.
-            //androidMenu.SetActive(true);
+            androidMenu.SetActive(true);
 
             // Use Moralis Connect page for authentication as we work to make the Wallet 
             // Connect experience better.
-            await LoginViaConnectionPage();
+            //await LoginViaConnectionPage();
 #elif UNITY_IOS
             // By pass noraml Wallet Connect for now.
-            //iOsMenu.SetActive(true);
+            iosMenu.SetActive(true);
 
             // Use Moralis Connect page for authentication as we work to make the Wallet 
             // Connect experience better.
-            await LoginViaConnectionPage();
+            //await LoginViaConnectionPage();
 #else
             qrMenu.SetActive(true);
 #endif
@@ -181,6 +185,8 @@ public class MainMenuScript : MonoBehaviour
         {
             Debug.Log("User login failed.");
         }
+
+        HideWalletSelection();
     }
 
     /// <summary>
@@ -200,10 +206,19 @@ public class MainMenuScript : MonoBehaviour
         Application.Quit();
     }
 
+    public void HideWalletSelection()
+    {
+#if UNITY_ANDROID
+        androidMenu.SetActive(false);
+#elif UNITY_IOS
+        iosMenu.SetActive(false);
+#endif
+    }
+
     /// <summary>
     /// Display Moralis connector login page
     /// </summary>
- #if UNITY_WEBGL
+#if UNITY_WEBGL
     private async UniTask LoginViaConnectionPage()
     {
         // Use Moralis Connect page for authentication as we work to make the Wallet 

@@ -22,7 +22,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\Bin\Debug\</OutputPath>
-    <DefineConstants>UNITY_2020_3_24;UNITY_2020_3;UNITY_2020;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;USE_SEARCH_ENGINE_API;SCENE_TEMPLATE_MODULE;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_MONO_BDWGC;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;PLATFORM_STANDALONE;PLATFORM_STANDALONE_WIN;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_STANDARD_2_0;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <DefineConstants>UNITY_2020_3_24;UNITY_2020_3;UNITY_2020;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_INCLUDE_TESTS;USE_SEARCH_ENGINE_API;SCENE_TEMPLATE_MODULE;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_NATIVE_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_RUNTIME_PERMISSIONS;ENABLE_ENGINE_CODE_STRIPPING;ENABLE_ONSCREEN_KEYBOARD;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_MONO_BDWGC;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;ENABLE_VIDEO;PLATFORM_ANDROID;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;UNITY_CAN_SHOW_SPLASH_SCREEN;UNITY_HAS_GOOGLEVR;UNITY_HAS_TANGO;ENABLE_SPATIALTRACKING;PLATFORM_EXTENDS_VULKAN_DEVICE;PLATFORM_HAS_MULTIPLE_SWAPCHAINS;UNITY_ANDROID_SUPPORTS_SHADOWFILES;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;NET_STANDARD_2_0;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
@@ -49,7 +49,7 @@
     <UnityProjectGenerator>Package</UnityProjectGenerator>
     <UnityProjectGeneratorVersion>2.0.12</UnityProjectGeneratorVersion>
     <UnityProjectType>Game:1</UnityProjectType>
-    <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
+    <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>2020.3.24f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
@@ -62,95 +62,95 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformOffsetMin.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\LeanTime.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalRotation.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalScaleY.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Scripts\LeanStateWithTarget.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformPosition_z.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalPosition_y.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalPositionY.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\UI\LeanTransformLocalScaleXY.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformRotate.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Scripts\LeanTiming.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Scripts\LeanState.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformSetAsLastSibling.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\LeanJoinDelay.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformAnchorMin_y.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformPosition_y.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformPivot_x.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Scripts\LeanEase.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalPositionZ.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Scripts\LeanTransition.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformAnchorMax_y.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\LeanJoinInsert.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\UI\LeanRectTransformPivotY.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalScaleX.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalScale_xy.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalPosition_x.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Extras\Scripts\LeanAnimation.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformSizeDelta_x.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\AudioSource\LeanAudioSourcePitch.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalPosition_xy.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Light\LeanLightColor.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformSizeDelta_y.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Image\LeanImageFillAmount.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformOffsetMax_y.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\LeanTimeScale.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\LeanPlaySound.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\UI\LeanRectTransformAnchoredPositionY.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\SpriteRenderer\LeanSpriteRendererColor.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Graphic\LeanGraphicColor.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalScaleZ.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformPosition_x.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformOffsetMin_y.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalScale.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\LeanJoin.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformPositionZ.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformAnchorMax_x.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Light\LeanLightIntensity.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformPivot_y.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Extras\Scripts\LeanAnimationOnce.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalScale_x.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\AudioSource\LeanAudioSourceSpatialBlend.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformAnchorMin_x.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Material\LeanMaterialColor.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\LeanGet.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\CanvasGroup\LeanCanvasGroupBlocksRaycasts.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformPosition.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\LeanEvent.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Material\LeanMaterialFloat.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformPositionY.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\UI\LeanRectTransformPivotX.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\AudioSource\LeanAudioSourcePanStereo.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\CanvasGroup\LeanCanvasGroupInteractable.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformSizeDelta.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\AudioSource\LeanAudioSourceVolume.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalScale_y.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalPosition.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformAnchoredPosition_x.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\LeanDelay.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\UI\LeanRectTransformAnchoredPositionX.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformOffsetMax.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Material\LeanMaterialVector.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Extras\Scripts\LeanManualAnimation.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\CanvasGroup\LeanCanvasGroupAlpha.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformAnchoredPosition_y.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformAnchorMax.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\LeanInsert.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformPosition_xy.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformPositionX.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformOffsetMin_x.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Scripts\LeanMethod.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformTranslate.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalPositionX.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformAnchoredPosition.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalPosition_z.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Extras\Scripts\LeanAnimationRepeater.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformEulerAngles.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\GameObject\LeanGameObjectSetActive.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformAnchorMin.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Light\LeanLightRange.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalEulerAngles.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\LeanQueue.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformPivot.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalScaleY.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Scripts\LeanStateWithTarget.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformPosition_z.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\UI\LeanTransformLocalScaleXY.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformRotate.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\LeanJoinDelay.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformAnchorMin_y.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Scripts\LeanEase.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalPositionZ.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Scripts\LeanTransition.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\UI\LeanRectTransformPivotY.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\AudioSource\LeanAudioSourcePitch.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalPosition_xy.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformSizeDelta_y.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\LeanTimeScale.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformOffsetMin_y.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalScale.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\LeanJoin.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformPositionZ.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformAnchorMax_x.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformPivot_y.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalScale_x.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\AudioSource\LeanAudioSourceSpatialBlend.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Material\LeanMaterialColor.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\UI\LeanRectTransformPivotX.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\AudioSource\LeanAudioSourcePanStereo.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\CanvasGroup\LeanCanvasGroupInteractable.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformSizeDelta.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalScale_y.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\LeanDelay.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\UI\LeanRectTransformAnchoredPositionX.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformOffsetMax.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Extras\Scripts\LeanManualAnimation.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\CanvasGroup\LeanCanvasGroupAlpha.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\RectTransform\LeanRectTransformAnchorMax.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformTranslate.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalPositionX.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Light\LeanLightRange.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalEulerAngles.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\Lean\Transition\Methods\Transform\LeanTransformLocalScale_z.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -183,12 +183,6 @@
     </Reference>
     <Reference Include="UnityEngine.ClothModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.ClothModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ClusterInputModule">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.ClusterInputModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ClusterRendererModule">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.ClusterRendererModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
@@ -343,9 +337,6 @@
     <Reference Include="UnityEngine.VideoModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.VideoModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.VirtualTexturingModule">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.VirtualTexturingModule.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.WindModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.WindModule.dll</HintPath>
     </Reference>
@@ -399,6 +390,12 @@
     </Reference>
     <Reference Include="Unity.Plastic.Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.4\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging">
+      <HintPath>Assets\MoralisWeb3ApiSdk\DLLs\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core">
+      <HintPath>Assets\MoralisWeb3ApiSdk\DLLs\Common.Logging.Core.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Plastic.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.4\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
