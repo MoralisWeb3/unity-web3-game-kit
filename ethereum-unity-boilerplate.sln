@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "endel.nativewebsocket", "en
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniTask.Addressables", "UniTask.Addressables.csproj", "{F5CC6268-57BF-FB81-A497-522C5BACBDF9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityGifDecoder", "UnityGifDecoder.csproj", "{DBAF73C2-880D-6B97-E114-EE0F6465E2A5}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniTask.Editor", "UniTask.Editor.csproj", "{C35040F4-D817-8E56-78D7-48FD0717B305}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanTransition.Editor", "LeanTransition.Editor.csproj", "{2E294EDD-27B9-9A60-ECFB-0CE5E06F28CE}"
@@ -46,6 +48,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "endel.nativewebsocket", "endel.nativewebsocket.Player.csproj", "{FBD2F68F-EDB0-3A13-2494-B52249C22AF0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniTask.Addressables", "UniTask.Addressables.Player.csproj", "{7CC6AD8C-D900-BBCE-8B4F-6826D989F2CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityGifDecoder", "UnityGifDecoder.Player.csproj", "{DE7AF7B6-DCCC-908A-3086-7505A7D9E6B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +97,10 @@ Global
 		{F5CC6268-57BF-FB81-A497-522C5BACBDF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5CC6268-57BF-FB81-A497-522C5BACBDF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5CC6268-57BF-FB81-A497-522C5BACBDF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBAF73C2-880D-6B97-E114-EE0F6465E2A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBAF73C2-880D-6B97-E114-EE0F6465E2A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBAF73C2-880D-6B97-E114-EE0F6465E2A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBAF73C2-880D-6B97-E114-EE0F6465E2A5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C35040F4-D817-8E56-78D7-48FD0717B305}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C35040F4-D817-8E56-78D7-48FD0717B305}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C35040F4-D817-8E56-78D7-48FD0717B305}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -145,6 +153,10 @@ Global
 		{7CC6AD8C-D900-BBCE-8B4F-6826D989F2CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CC6AD8C-D900-BBCE-8B4F-6826D989F2CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CC6AD8C-D900-BBCE-8B4F-6826D989F2CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE7AF7B6-DCCC-908A-3086-7505A7D9E6B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE7AF7B6-DCCC-908A-3086-7505A7D9E6B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE7AF7B6-DCCC-908A-3086-7505A7D9E6B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE7AF7B6-DCCC-908A-3086-7505A7D9E6B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

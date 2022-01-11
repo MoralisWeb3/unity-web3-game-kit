@@ -31,7 +31,7 @@ namespace Moralis.WebGL.Platform.Services.ClientServices
 
             long oldPosition = dataStream.Position;
 
-            Tuple<HttpStatusCode, string> cmdResult = await CommandRunner.RunCommandAsync(new MoralisCommand($"files/{state.name}", method: "POST", sessionToken: sessionToken, contentType: state.mediatype, stream: dataStream), uploadProgress: progress, cancellationToken: cancellationToken);
+            Tuple<HttpStatusCode, string> cmdResult = await CommandRunner.RunCommandAsync(new MoralisCommand($"server/files/{state.name}", method: "POST", sessionToken: sessionToken, contentType: state.mediatype, stream: dataStream), uploadProgress: progress, cancellationToken: cancellationToken);
                 
             cancellationToken.ThrowIfCancellationRequested();
             MoralisFileState fileState = default;

@@ -33,7 +33,7 @@ namespace Moralis.Platform.Services.ClientServices
 
             long oldPosition = dataStream.Position;
 
-            return CommandRunner.RunCommandAsync(new MoralisCommand($"files/{state.name}", method: "POST", sessionToken: sessionToken, contentType: state.mediatype, stream: dataStream), uploadProgress: progress, cancellationToken: cancellationToken).OnSuccess(uploadTask =>
+            return CommandRunner.RunCommandAsync(new MoralisCommand($"server/files/{state.name}", method: "POST", sessionToken: sessionToken, contentType: state.mediatype, stream: dataStream), uploadProgress: progress, cancellationToken: cancellationToken).OnSuccess(uploadTask =>
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 
