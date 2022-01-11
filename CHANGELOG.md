@@ -5,7 +5,7 @@
 - Fix FileSave method, WebGL - Under WebGL the FileSave uri for the backend was incorrect, corrected this.
 - Issue #17 - Wallet Connect Unity, move dependancies
 - Issue #18 - Wallet Connect duplicate files
-
+- Add Gif Decoder
 ## 1.0.2 (2022-01-01)
 - Add support for WebGL applications. This release contains many updates all geared to WebGL support.
 
