@@ -113,8 +113,11 @@ namespace Moralis.Web3Api.Client
         /// <returns>Escaped string.</returns>
         public string EscapeString(string str)
         {
+#if MORALIS_UNITY
+            return UnityEngine.Networking.UnityWebRequest.EscapeURL(str);
+#else
             return HttpUtility.UrlEncode(str); 
-            //return RestSharp.Contrib.HttpUtility.UrlEncode(str);
+#endif
         }
     
         /// <summary>
