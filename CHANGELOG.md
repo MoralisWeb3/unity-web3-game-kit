@@ -1,11 +1,14 @@
 # Change Log
 ## 1.0.3 (2022-01-xx)
 - Wallet Connect Update Integration - fixes iOS and Android sign issues with Wallet Connect.
-- NEthereum integration - Include wallet connect / NEthereum library to support changing chain state in game.
+- Nethereum integration - Include wallet connect / NEthereum library to support changing chain state in game.
 - Fix FileSave method, WebGL - Under WebGL the FileSave uri for the backend was incorrect, corrected this.
+- Issue #10 - HttpUtility does not exist in current context
+- Issue #13 - Moralis Client Delete Method not Implemented.
 - Issue #17 - Wallet Connect Unity, move dependancies
 - Issue #18 - Wallet Connect duplicate files
 - Add Gif Decoder
+
 ## 1.0.2 (2022-01-01)
 - Add support for WebGL applications. This release contains many updates all geared to WebGL support.
 

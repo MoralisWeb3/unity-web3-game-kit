@@ -64,6 +64,15 @@ namespace Moralis.WebGL.Platform.Objects
 
         LinkedList<IDictionary<string, IMoralisFieldOperation>> OperationSetQueue { get; } = new LinkedList<IDictionary<string, IMoralisFieldOperation>>();
 
+        /// <summary>
+        /// Deletes this object on the server.
+        /// </summary>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        public UniTask DeleteAsync(CancellationToken cancellationToken = default)
+        {
+            return this.ObjectService.DeleteAsync(this, SessionToken, cancellationToken);
+        }
+
         public virtual async UniTask SaveAsync(CancellationToken cancellationToken = default)
         {
             IDictionary<string, IMoralisFieldOperation> operations = this.StartSave();
@@ -146,6 +155,7 @@ namespace Moralis.WebGL.Platform.Objects
                 return currentOperations;
             }
         }
+
 
 
         //internal Task DeleteAsync(Task toAwait, CancellationToken cancellationToken)

@@ -312,6 +312,17 @@ namespace Moralis
         }
 
         /// <summary>
+        /// Deletes target object from the Moralis database.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public Task DeleteAsync<T>(T target) where T : MoralisObject
+        {
+            return target.DeleteAsync();
+        }
+
+        /// <summary>
         /// Provide an object hook for Web3Api incase developer supplies a
         /// web3api client at initialize
         /// </summary>
