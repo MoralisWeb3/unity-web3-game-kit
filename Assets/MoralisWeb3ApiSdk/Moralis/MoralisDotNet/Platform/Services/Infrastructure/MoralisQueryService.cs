@@ -19,7 +19,6 @@ namespace Moralis.Platform.Services.Infrastructure
 
         IJsonSerializer JsonSerializer { get; }
         string SessionToken { get; }
-        //IMoralisDataDecoder Decoder { get; }
 
         public MoralisQueryService(IMoralisCommandRunner commandRunner, string sessionToken, IJsonSerializer jsonSerializer) => (CommandRunner, SessionToken, JsonSerializer) = (commandRunner, sessionToken, jsonSerializer);
 

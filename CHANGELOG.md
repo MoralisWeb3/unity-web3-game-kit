@@ -4,7 +4,8 @@
 - Nethereum integration - Include wallet connect / NEthereum library to support changing chain state in game.
 - Fix FileSave method, WebGL - Under WebGL the FileSave uri for the backend was incorrect, corrected this.
 - Issue #10 - HttpUtility does not exist in current context
-- Issue #13 - Moralis Client Delete Method not Implemented.
+- Issue #13 - Moralis Client Delete Method not Implemented
+- Issue #14 - Moralis Object DeleteAsync not Implemented
 - Issue #17 - Wallet Connect Unity, move dependancies
 - Issue #18 - Wallet Connect duplicate files
 - Add Gif Decoder

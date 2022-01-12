@@ -1,7 +1,6 @@
 ﻿using Moralis.WebGL.Platform.Abstractions;
 using System;
 using System.Collections.Generic;
-//using System.Net.WebSockets;
 using Moralis.Network.Client;
 using System.Threading;
 using Cysharp.Threading.Tasks;
@@ -27,7 +26,7 @@ namespace Moralis.WebGL.Platform.Queries.Live
 
         public WebSocketState State { get { return webSocket.State; } }
         
-        public async UniTask CloseAsync(WebSocketCloseCode closeCode, string reason)//, CancellationToken cancellationToken)
+        public async UniTask CloseAsync(WebSocketCloseCode closeCode, string reason)
         {
             this.CloseStatus = closeCode;
             this.CloseReasonsDescription = reason;
@@ -39,7 +38,7 @@ namespace Moralis.WebGL.Platform.Queries.Live
             await webSocket.Connect();
         }
 
-        public async UniTask SendAsync(byte[] buffer) //, WebSocketMessageType messageType, bool endOfMessage, CancellationToken cancellationToken)
+        public async UniTask SendAsync(byte[] buffer)
         {
             if (!WebSocketState.Open.Equals(webSocket.State))
                 await ConnectAsync();

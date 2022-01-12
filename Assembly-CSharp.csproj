@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -52,9 +52,6 @@
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2020.3.24f1</UnityVersion>
   </PropertyGroup>
-  <ItemGroup>
-    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
-  </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.BlockchainProcessing\BlockStorage\Repositories\ITransactionVMStackRepository.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Abstractions\IServiceHubComposer.cs" />
@@ -547,7 +544,6 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.Web3Api.Core\Interfaces\IWeb3Api.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\WalletSelectItem.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.JsonRpc.Client\RpcClientUnknownException.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Services\Infrastructure\DataEncoder.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\Filters\EthNewFilter.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.BlockchainProcessing\BlockProcessing\BlockProcessingStepsExtensions.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.Network\Client\WaitForUpdate.cs" />
@@ -601,7 +597,6 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Unity\TransactionSignedUnityRequest.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Abstractions\IUserService.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.BlockchainProcessing\BlockStorage\Entities\ITransactionLogView.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Services\Infrastructure\ObjectCoder.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\WalletConnectSharp.Unity\Utils\WaitForTask.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.Web3Api.Core\Models\BlockTransaction.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Signer\Crypto\ECKey.cs" />
@@ -794,7 +789,6 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Signer\AccessListRLPEncoderDecoder.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.BlockchainProcessing\BlockStorage\BlockStorageStepsHandlers\BlockStorageStepHandler.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\Transactions\IEthSendRawTransaction.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Services\Infrastructure\PointerOrLocalIdEncoder.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Personal\IPersonalUnlockAccount.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.JsonRpc.Client\Streaming\StreamingEventArgs.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.JsonRpc.Client\UserAuthentication.cs" />
@@ -1166,7 +1160,6 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\Contract.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\WalletConnectSharp\WalletConnectSharp.Core\Models\Ethereum\TransactionData.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Services\ClientServices\UniversalWebClient.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Services\Infrastructure\DataDecoder.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\DTOs\TransactionReceiptExtensions.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Accounts\Account.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\WalletConnectSharp\WalletConnectSharp.Core\Events\EventHandlerMap.cs" />

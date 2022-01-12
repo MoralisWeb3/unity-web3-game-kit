@@ -16,14 +16,11 @@ namespace Moralis.WebGL.Platform.Services.ClientServices
     {
         IMoralisCommandRunner CommandRunner { get; }
 
-        //IServiceHub<MoralisUser> Services { get; }
-
         IServerConnectionData ServerConnectionData { get; }
 
         IJsonSerializer JsonSerializer { get; }
 
         public MoralisCloudFunctionService(IMoralisCommandRunner commandRunner, IServerConnectionData serverConnectionData, IJsonSerializer jsonSerializer) => (CommandRunner, ServerConnectionData, JsonSerializer) = (commandRunner, serverConnectionData, jsonSerializer);
- //      public MoralisCloudFunctionService(IMoralisCommandRunner commandRunner, IServiceHub<MoralisUser> services, IServerConnectionData serverConnectionData) => (CommandRunner, Services, ServerConnectionData) = (commandRunner, services, serverConnectionData);
 
         /// <summary>
         /// Calls Moralis cloud function specified by 'name'.

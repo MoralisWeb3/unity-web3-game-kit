@@ -146,36 +146,6 @@ namespace Moralis.WebGL.Platform.Queries.Live
                         receiving = false;
                         msgSent = false;
                     }
-
-                    //SendGeneralMessage($"Listening, status: {ClientStatus}");
-                    //// Listen for next response from server.
-                    //var result = await liveWebSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
-                    //SendGeneralMessage("Result received.");
-                    //if (result.MessageType == WebSocketMessageType.Close)
-                    //{
-                    //    await ws.CloseAsync(WebSocketCloseStatus.NormalClosure, string.Empty, CancellationToken.None);
-                    //    ClientStatus = LiveQueryClientStatusTypes.Closed;
-                    //    receiving = false;
-                    //    msgSent = false;
-                    //}
-                    //else
-                    //{
-                    //    if (!receiving)
-                    //    {
-                    //        messageBytes.Clear();
-                    //        receiving = true;
-                    //    }
-
-                    //    messageBytes.AddRange(PackBuffer(buffer, result.Count));
-
-                    //    if (result.EndOfMessage)
-                    //    {
-                    //        receiving = false;
-                    //        msgSent = false;
-                    //        // Handle normal processing message.
-                    //        OnEventMessage(messageBytes.ToArray(), messageBytes.Count);
-                    //    }
-                    //}
                 }
             }
         }
@@ -192,9 +162,7 @@ namespace Moralis.WebGL.Platform.Queries.Live
         {
             ConnectRequest msg = new ConnectRequest()
             {
-                applicationId = ConncetionData.ApplicationID,
-                //InstallationId = InstallationId,
-                //SessionToken = SessionToken
+                applicationId = ConncetionData.ApplicationID
             };
 
             string json = JsonSerializer.Serialize(msg, JsonSerializer.DefaultOptions);

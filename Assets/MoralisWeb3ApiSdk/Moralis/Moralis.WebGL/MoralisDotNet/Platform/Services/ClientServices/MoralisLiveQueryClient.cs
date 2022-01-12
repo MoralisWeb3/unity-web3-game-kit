@@ -204,7 +204,7 @@ namespace Moralis.WebGL.Platform.Services.ClientServices
 
         private void HandleEventMessage(byte[] buffer, int bufferSize)
         {
-            // Loack mutex to enforce thread safty.
+            // Lock mutex to enforce thread safty.
             lock (Mutex)
             {
                 if (cancellationToken == CancellationToken.None)
@@ -229,9 +229,6 @@ namespace Moralis.WebGL.Platform.Services.ClientServices
                     ClientStatus = LiveQueryClientStatusTypes.Waiting;
                 }
 
-                //UniTask t = UniTask.Run(() =>
-                //{
-                // Reformat Parse dates
                 json = json.AdjustJsonForParseDate();
 
                 try
@@ -241,8 +238,6 @@ namespace Moralis.WebGL.Platform.Services.ClientServices
                     switch (op)
                     { 
                         case OperationTypes.connected:
-                            //Console.WriteLine("Received connected.");
-
                             this.ClientStatus = LiveQueryClientStatusTypes.Opening;
                             if (OnConnected != null)
                             {
@@ -293,7 +288,6 @@ namespace Moralis.WebGL.Platform.Services.ClientServices
 
                             break;
                         case OperationTypes.subscribed:
-                            //Console.WriteLine("Received subscribed.");
                             this.ClientStatus = LiveQueryClientStatusTypes.Open;
                             if (OnSubscribed != null)
                             {
@@ -341,19 +335,19 @@ namespace Moralis.WebGL.Platform.Services.ClientServices
 
         private void HandleConnectEvent()
         {
-            //this.ClientStatus = LiveQueryClientStatusTypes.Opening;
+            this.ClientStatus = LiveQueryClientStatusTypes.Opening;
             //HandleGeneralMessage($"Subscription Client status changed to: {this.ClientStatus}");
         }
 
         private void HandleSubscribedEvent(int requestId) 
         {
-            //this.ClientStatus = LiveQueryClientStatusTypes.Open;
+            this.ClientStatus = LiveQueryClientStatusTypes.Open;
             //HandleGeneralMessage($"Subscription Client status changed to: {this.ClientStatus}");
         }
 
         private void HandleUnsubscribedEvent(int requestId)
         {
-            //this.ClientStatus = LiveQueryClientStatusTypes.Closed;
+            this.ClientStatus = LiveQueryClientStatusTypes.Closed;
             //HandleGeneralMessage($"Subscription Client status changed to: {this.ClientStatus}");
         }
 
