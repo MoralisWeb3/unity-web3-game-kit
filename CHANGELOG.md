@@ -6,9 +6,10 @@
 - Issue #10 - HttpUtility does not exist in current context
 - Issue #13 - Moralis Client Delete Method not Implemented
 - Issue #14 - Moralis Object DeleteAsync not Implemented
-- Issue #17 - Wallet Connect Unity, move dependancies
+- Issue #17 - Wallet Connect Unity, move dependencies
 - Issue #18 - Wallet Connect duplicate files
 - Add Gif Decoder
+- Re-Order folders / namespaces to better fit dependencies, etc.
 
 ## 1.0.2 (2022-01-01)
 - Add support for WebGL applications. This release contains many updates all geared to WebGL support.

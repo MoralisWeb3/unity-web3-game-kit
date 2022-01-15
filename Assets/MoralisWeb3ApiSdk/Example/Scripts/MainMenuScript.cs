@@ -34,6 +34,7 @@ using WalletConnectSharp.Core.Models;
 using WalletConnectSharp.Unity;
 using Assets.Scripts;
 using Assets;
+using MoralisWeb3ApiSdk;
 
 #if UNITY_WEBGL
 using Cysharp.Threading.Tasks;
@@ -51,10 +52,11 @@ using Moralis.Platform.Objects;
 /// </summary>
 public class MainMenuScript : MonoBehaviour
 {
-    public string MoralisApplicationId;
-    public string MoralisServerURI;
-    public string ApplicationName;
-    public string Version;
+    public MoralisController moralisController;
+    //public string MoralisApplicationId;
+    //public string MoralisServerURI;
+    //public string ApplicationName;
+    //public string Version;
     public GameObject AuthenticationButton;
     public WalletConnect walletConnect;
     public GameObject qrMenu;
@@ -68,13 +70,13 @@ public class MainMenuScript : MonoBehaviour
     {
         menuBackground = (Image)gameObject.GetComponent(typeof(Image));
 
-        HostManifestData hostManifestData = new HostManifestData()
-        { 
-            Version = Version,
-            Identifier = ApplicationName,
-            Name = ApplicationName,
-            ShortVersion = Version
-        };
+        //HostManifestData hostManifestData = new HostManifestData()
+        //{ 
+        //    Version = Version,
+        //    Identifier = ApplicationName,
+        //    Name = ApplicationName,
+        //    ShortVersion = Version
+        //};
 
         qrMenu.SetActive(false);
         androidMenu.SetActive(false);
@@ -85,16 +87,19 @@ public class MainMenuScript : MonoBehaviour
         joystick.SetActive(true);
 #endif
 
-        await MoralisInterface.Initialize(MoralisApplicationId, MoralisServerURI, hostManifestData);
-
-        if (MoralisInterface.IsLoggedIn())
+        // await MoralisInterface.Initialize(MoralisApplicationId, MoralisServerURI, hostManifestData);
+        if (moralisController != null && moralisController)
         {
-            Debug.Log("User is already logged in to Moralis.");
-
-            // Transition to main game scene
-
+            await moralisController.Initialize();
         }
         else
+        {
+            // Moralis values not set or initialized.
+            Debug.LogError("The MoralisInterface has not been set up, please check you MoralisController in the scene.");
+        }
+
+        // If user is not logged in show the "Authenticate" button.
+        if (!MoralisInterface.IsLoggedIn())
         {
             AuthenticationButtonOn();
         }
@@ -223,7 +228,7 @@ public class MainMenuScript : MonoBehaviour
     {
         // Use Moralis Connect page for authentication as we work to make the Wallet 
         // Connect experience better.
-        MoralisUser user = await MobileLogin.LogIn(MoralisServerURI, MoralisApplicationId);
+        MoralisUser user = await MobileLogin.LogIn(moralisController.MoralisServerURI, moralisController.MoralisApplicationId);
 
         if (user != null)
         {
@@ -241,7 +246,7 @@ public class MainMenuScript : MonoBehaviour
     {
         // Use Moralis Connect page for authentication as we work to make the Wallet 
         // Connect experience better.
-        MoralisUser user = await MobileLogin.LogIn(MoralisServerURI, MoralisApplicationId);
+        MoralisUser user = await MobileLogin.LogIn(moralisController.MoralisServerURI, moralisController.MoralisApplicationId);
 
         if (user != null)
         {

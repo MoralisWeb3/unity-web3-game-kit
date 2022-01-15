@@ -28,6 +28,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 #if UNITY_WEBGL
 using Moralis.WebGL.Web3Api.Models;
@@ -53,6 +54,60 @@ namespace Assets.Scripts.Moralis
 
                 return chains; 
             } 
+        }
+        
+        /// <summary>
+        /// Retrieve an chain entry by enum value.
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static ChainEntry FromChainList(ChainList target)
+        {
+            ChainEntry result = null;
+
+            var searchResult = from c in SupportedChains
+                               where target.Equals(c.EnumValue)
+                               select c;
+
+            result = searchResult.FirstOrDefault();
+
+            return result;
+        }
+
+        /// <summary>
+        /// Retrieve an chain entry by enum value.
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static ChainEntry FromChainList(string target)
+        {
+            ChainEntry result = null;
+
+            var searchResult = from c in SupportedChains
+                               where target.Equals(c.Name)
+                               select c;
+
+            result = searchResult.FirstOrDefault();
+
+            return result;
+        }
+
+        /// <summary>
+        /// Retrieve an chain entry by enum value.
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static ChainEntry FromChainList(int target)
+        {
+            ChainEntry result = null;
+
+            var searchResult = from c in SupportedChains
+                               where target.Equals(c.ChainId)
+                               select c;
+
+            result = searchResult.FirstOrDefault();
+
+            return result;
         }
 
         /// <summary>
@@ -99,6 +154,60 @@ namespace Assets.Scripts.Moralis
 
                 return chains; 
             } 
+        }
+
+        /// <summary>
+        /// Retrieve an chain entry by enum value.
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static ChainEntry FromChainList(ChainList target)
+        {
+            ChainEntry result = null;
+
+            var searchResult = from c in SupportedChains
+                               where target.Equals(c.EnumValue)
+                               select c;
+
+            result = searchResult.FirstOrDefault();
+
+            return result;
+        }
+
+        /// <summary>
+        /// Retrieve an chain entry by enum value.
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static ChainEntry FromChainList(string target)
+        {
+            ChainEntry result = null;
+
+            var searchResult = from c in SupportedChains
+                               where target.Equals(c.Name)
+                               select c;
+
+            result = searchResult.FirstOrDefault();
+
+            return result;
+        }
+
+        /// <summary>
+        /// Retrieve an chain entry by enum value.
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static ChainEntry FromChainList(int target)
+        {
+            ChainEntry result = null;
+
+            var searchResult = from c in SupportedChains
+                               where target.Equals(c.ChainId)
+                               select c;
+
+            result = searchResult.FirstOrDefault();
+
+            return result;
         }
 
         /// <summary>

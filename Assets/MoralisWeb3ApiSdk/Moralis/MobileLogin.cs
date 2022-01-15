@@ -31,6 +31,7 @@ using UnityEngine;
 using Assets.Scripts.Moralis;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using MoralisWeb3ApiSdk;
 
 #if UNITY_WEBGL
 

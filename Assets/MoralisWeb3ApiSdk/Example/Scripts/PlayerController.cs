@@ -28,6 +28,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using MoralisWeb3ApiSdk;
 
 /// <summary>
 /// Sample game script used to control the player's object.
