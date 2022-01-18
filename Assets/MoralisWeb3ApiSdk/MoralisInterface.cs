@@ -65,6 +65,8 @@ namespace MoralisWeb3ApiSdk
 /// </summary>
 public class MoralisInterface : MonoBehaviour
 {
+    private static string web3ClientRpcUrl;
+
     // Singleton instance of Moralis so that is it is available application 
     // wide after being initialized.
     private static MoralisClient moralis;
@@ -119,6 +121,8 @@ public class MoralisInterface : MonoBehaviour
         // For unity apps the local storage value must also be set.
         connectionData.LocalStoragePath = Application.persistentDataPath;
 
+        web3ClientRpcUrl = web3RpcUrl;
+
         Debug.Log($"Set LocalStoragePath to {connectionData.LocalStoragePath}");
 
         // TODO Make this optional!
@@ -148,11 +152,6 @@ public class MoralisInterface : MonoBehaviour
         {
             Debug.Log("Connected to Moralis!");
             user = await moralis.GetCurrentUserAsync();
-        }
-
-        if (!String.IsNullOrEmpty(web3RpcUrl))
-        {
-            await SetupWeb3(web3RpcUrl);
         }
     }
 
@@ -215,17 +214,26 @@ public class MoralisInterface : MonoBehaviour
     {
         return moralis.LogOutAsync();
     }
-    
+
+    public static async Task SetupWeb3()
+    { 
+        await SetupWeb3(web3ClientRpcUrl);
+    }
+
     /// <summary>
     /// Initializes the Web3 connection to the supplied RPC Url. Call this to change the target chain.
     /// </summary>
     /// <param name="rpcUrl"></param>
     /// <returns></returns>
-    public static async UniTask SetupWeb3(string rpcUrl)
+    public static async Task SetupWeb3(string rpcUrl)
     {
-        WalletConnectSession client = new WalletConnectSession(clientMetaData);
+        if (String.IsNullOrWhiteSpace(rpcUrl) || clientMetaData == null)
+        {
+            Debug.Log("Web3 RPC Node Url or Wallet Connect Metadata not provided.");
+            return;
+        }
 
-        await client.Connect();
+        WalletConnectSession client = WalletConnect.Instance.Session;
 
         Web3Client = new Web3(client.CreateProvider(new Uri(rpcUrl)));
     }
@@ -243,6 +251,8 @@ public class MoralisInterface : MonoBehaviour
     /// </summary>
     public class MoralisInterface : MonoBehaviour
     {
+        private static string web3ClientRpcUrl;
+
         // Singleton instance of Moralis so that is it is available application 
         // wide after being initialized.
         private static MoralisClient moralis;
@@ -295,6 +305,8 @@ public class MoralisInterface : MonoBehaviour
             connectionData.ServerURI = serverUri;
             connectionData.ApiKey = web3ApiKey;
 
+            web3ClientRpcUrl = web3RpcUrl;
+
             // For unity apps the local storage value must also be set.
             connectionData.LocalStoragePath = Application.persistentDataPath;
 
@@ -330,11 +342,6 @@ public class MoralisInterface : MonoBehaviour
                 Initialized = true;
                 Debug.Log("Connected to Moralis!");
                 user = moralis.GetCurrentUser();
-            }
-
-            if (!String.IsNullOrEmpty(web3RpcUrl))
-            {
-                await SetupWeb3(web3RpcUrl);
             }
         }
 
@@ -403,6 +410,11 @@ public class MoralisInterface : MonoBehaviour
             return moralis.LogOutAsync();
         }
 
+        public static async Task SetupWeb3()
+        { 
+            await SetupWeb3(web3ClientRpcUrl);
+        }
+
         /// <summary>
         /// Initializes the Web3 connection to the supplied RPC Url. Call this to change the target chain.
         /// </summary>
@@ -410,11 +422,17 @@ public class MoralisInterface : MonoBehaviour
         /// <returns></returns>
         public static async Task SetupWeb3(string rpcUrl)
         {
-            WalletConnectSession client = new WalletConnectSession(clientMetaData);
+            if (String.IsNullOrWhiteSpace(rpcUrl) || clientMetaData == null)
+            {
+                Debug.Log("Web3 RPC Node Url or Wallet Connect Metadata not provided.");
+                return;
+            }
 
-            await client.Connect();
+            WalletConnectSession client = WalletConnect.Instance.Session;
 
             Web3Client = new Web3(client.CreateProvider(new Uri(rpcUrl)));
+
+            Debug.Log("Web3 client setup");
         }
 
         /// <summary>

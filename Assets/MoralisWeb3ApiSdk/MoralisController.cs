@@ -43,8 +43,8 @@ namespace MoralisWeb3ApiSdk
 {
     public class MoralisController : MonoBehaviour
     {
-        public string MoralisApplicationId;
         public string MoralisServerURI;
+        public string MoralisApplicationId;
         public string ApplicationName;
         public string Version;
         public string ApplicationDescription;
@@ -104,6 +104,9 @@ namespace MoralisWeb3ApiSdk
             }
         }
 #endif
-
+        public async void WalletConnectSessionEstablished(WalletConnectUnitySession session)
+        {
+            await MoralisInterface.SetupWeb3();
+        }
     }
 }
