@@ -101,9 +101,6 @@ namespace Moralis.WebGL.Platform.Services.ClientServices
                 newCommand.Headers.Add(new KeyValuePair<string, string>("X-Parse-Installation-Id", guid?.ToString()));
             }
 
-            // Locks needed due to installationFetchTask continuation newCommand.Headers.Add-call-related race condition (occurred once in Unity).
-            // TODO: Consider removal of installationFetchTask variable.
-
             lock (newCommand.Headers)
             {
                 newCommand.Headers.Add(new KeyValuePair<string, string>("X-Parse-Application-Id", ServerConnectionData.ApplicationID));

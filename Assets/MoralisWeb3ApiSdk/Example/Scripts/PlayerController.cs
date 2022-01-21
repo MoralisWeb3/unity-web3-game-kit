@@ -28,6 +28,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using MoralisWeb3ApiSdk;
 
 /// <summary>
 /// Sample game script used to control the player's object.
@@ -91,11 +92,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             StartCoroutine(Attack());
-        }
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            Die();
         }
     }
 

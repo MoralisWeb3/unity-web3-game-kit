@@ -32,13 +32,8 @@ namespace Moralis.WebGL.Platform.Services.ClientServices
             MoralisFileState state = await serviceHub.FileService.SaveAsync(file.State, file.DataStream, sessionToken, progress, cancellationToken);
 
             file.State = state;
-
-            //file.TaskQueue.Enqueue(toAwait => serviceHub.FileService.SaveAsync(file.State, file.DataStream, sessionTask.Result().GetAwaiter().GetResult(), progress, cancellationToken), cancellationToken).OnSuccess(task => file.State = task.Result<MoralisFileState>().GetAwaiter().GetResult()));
         }
-        //public static Task SaveFileAsync(this IServiceHub serviceHub, ParseFile file, IProgress<IDataTransferLevel> progress, CancellationToken cancellationToken = default) => file.TaskQueue.Enqueue(toAwait => serviceHub.FileController.SaveAsync(file.State, file.DataStream, serviceHub.GetCurrentSessionToken(), progress, cancellationToken), cancellationToken).OnSuccess(task => file.State = task.Result);
-
-#warning Make serviceHub null by default once dependents properly inject it when needed.
-
+        
         /// <summary>
         /// Saves the file to the Parse cloud.
         /// </summary>

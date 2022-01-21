@@ -97,13 +97,12 @@ namespace Moralis.Platform.Services.ClientServices
         /// <summary>
         /// Gets the currently logged in MoralisUser with a valid session, either from memory or disk
         /// if necessary.
+        /// TODO Decide if this shoiuld be made async since the WebGL version is.
         /// </summary>
         public static MoralisUser GetCurrentUser<TUser>(this IServiceHub<TUser> serviceHub) where TUser : MoralisUser
         {
             Task<TUser> userTask = GetCurrentUserAsync(serviceHub);
-
-            // TODO (hallucinogen): this will without a doubt fail in Unity. How should we fix it?
-
+            // Wait for get user task to complete.
             userTask.Wait();
             return userTask.Result;
         }

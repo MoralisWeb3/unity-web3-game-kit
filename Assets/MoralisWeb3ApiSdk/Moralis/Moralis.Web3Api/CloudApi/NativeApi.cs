@@ -417,7 +417,9 @@ namespace Moralis.Web3Api.CloudApi
 			// Verify the required parameter 'abi' is set
 			if (abi == null) throw new ApiException(400, "Missing required parameter 'abi' when calling RunContractFunction");
 
-			var postBody = new Dictionary<String, String>();
+//			var postBody = new Dictionary<String, String>();
+			var postBody = new Dictionary<String, object>();
+
 			var queryParams = new Dictionary<String, String>();
 			var headerParams = new Dictionary<String, String>();
 			var formParams = new Dictionary<String, String>();
@@ -426,7 +428,8 @@ namespace Moralis.Web3Api.CloudApi
 			var path = "/functions/runContractFunction";
 			if (address != null) postBody.Add("address", ApiClient.ParameterToString(address));
 			if (functionName != null) postBody.Add("function_name", ApiClient.ParameterToString(functionName));
-			if (abi != null) postBody.Add("abi", ApiClient.ParameterToString(abi));
+			if (abi != null) postBody.Add("abi", abi.Abi);
+			if (abi != null) postBody.Add("params", abi.Params);
 			if (subdomain != null) postBody.Add("subdomain", ApiClient.ParameterToString(subdomain));
 			if (providerUrl != null) postBody.Add("providerUrl", ApiClient.ParameterToString(providerUrl));
 			if(chain != null) postBody.Add("chain", ApiClient.ParameterToHex((long)chain));

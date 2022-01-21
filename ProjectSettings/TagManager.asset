@@ -9,6 +9,7 @@ TagManager:
   - QrConnectMenu
   - AndroidConnectMenu
   - ErrorPanel
+  - CanBeAttacked
   layers:
   - Default
   - TransparentFX

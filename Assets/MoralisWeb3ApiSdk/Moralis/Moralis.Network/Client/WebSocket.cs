@@ -1,14 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Net.WebSockets;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading;
-//#if UNITY_WEBGL && !UNITY_EDITOR
 using AOT;
 using System.Runtime.InteropServices;
-//#endif
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Events;
@@ -16,9 +9,6 @@ using Cysharp.Threading.Tasks;
 
 namespace Moralis.Network.Client
 {
-
-//#if UNITY_WEBGL && !UNITY_EDITOR
-
   /// <summary>
   /// WebSocket class bound to JSLIB.
   /// </summary>
@@ -178,7 +168,4 @@ namespace Moralis.Network.Client
     }
 
   }
-
-//#endif
-
 }

@@ -40,14 +40,6 @@ public class OrcController : MonoBehaviour
 
     private Animator anim;
     private int currentHealth;
-    /* For future use.
-    private float moveSpeed = 10f;
-    private Vector3 moveDirection;
-    private Vector3 velocity;
-    private float gravity = -9.81f;
-    private bool isGrounded;
-    private float groundCheckDistance = 0.2f;
-    */
 
     // Start is called before the first frame update
     void Start()
@@ -56,29 +48,34 @@ public class OrcController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         anim = GetComponentInChildren<Animator>();
         healthBar.SetMaxHealth(maxHealth);
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        // Orc Update here.
-    }
-
+    /// <summary>
+    /// Called when player strikes chest with sword.
+    /// </summary>
+    /// <param name="damage"></param>
     public void InflictDamage(int damage)
     {
+        // Adjust health
         currentHealth -= damage;
 
+        if (currentHealth < 0) currentHealth = 0;
+        // Adjust healthbar.
         healthBar.SetHealth(currentHealth);
-
+        // If health is 0 or less, run Die animation.
         if (currentHealth <= 0)
         {
             Die();
         }
     }
 
-
+    /// <summary>
+    /// Handle Orc is dead.
+    /// </summary>
     private void Die()
-    { 
+    {
         // Die action here.
+        anim.SetTrigger("DIE");
     }
 }

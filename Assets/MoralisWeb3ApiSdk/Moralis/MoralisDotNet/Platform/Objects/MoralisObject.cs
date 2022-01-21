@@ -64,6 +64,12 @@ namespace Moralis.Platform.Objects
 
         LinkedList<IDictionary<string, IMoralisFieldOperation>> OperationSetQueue { get; } = new LinkedList<IDictionary<string, IMoralisFieldOperation>>();
 
+        /// <summary>
+        /// Deletes this object on the server.
+        /// </summary>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        public Task DeleteAsync(CancellationToken cancellationToken = default) => TaskQueue.Enqueue(toAwait => DeleteAsync(toAwait, cancellationToken), cancellationToken);
+
         public virtual async Task SaveAsync(CancellationToken cancellationToken = default)
         {
             IDictionary<string, IMoralisFieldOperation> operations = this.StartSave();
@@ -147,18 +153,17 @@ namespace Moralis.Platform.Objects
             }
         }
 
+        internal Task DeleteAsync(Task toAwait, CancellationToken cancellationToken)
+        {
+            if (String.IsNullOrWhiteSpace(objectId))
+            {
+                return Task.FromResult(0);
+            }
 
-        //internal Task DeleteAsync(Task toAwait, CancellationToken cancellationToken)
-        //{
-        //    if (ObjectId == null)
-        //    {
-        //        return Task.FromResult(0);
-        //    }
+            string sessionToken = GetCurrentSessionToken();
 
-        //    string sessionToken = GetCurrentSessionToken();
-
-        //    return toAwait.OnSuccess(_ => Services.ObjectController.DeleteAsync(State, sessionToken, cancellationToken)).Unwrap().OnSuccess(_ => IsDirty = true);
-        //}
+            return toAwait.OnSuccess(_ => this.ObjectService.DeleteAsync(this, sessionToken, cancellationToken)).Unwrap().OnSuccess(_ => IsDirty = true);
+        }
 
         //internal virtual Task<T> FetchAsyncInternal<T>(Task toAwait, CancellationToken cancellationToken) where T : MoralisObject => toAwait.OnSuccess(_ => ObjectId == null ? throw new InvalidOperationException("Cannot refresh an object that hasn't been saved to the server.") : Services.ObjectService.FetchAsync(this, GetCurrentSessionToken(), Services, cancellationToken)).Unwrap().OnSuccess(task =>
         //{

@@ -27,7 +27,7 @@ namespace Moralis.WebGL.Platform
                 Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyProductAttribute>()?.Product != null ? Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyProductAttribute>()?.Product :
                 Assembly.GetEntryAssembly().GetName().Name,
             ShortVersion = Assembly.GetEntryAssembly().GetName().Version.ToString(),
-            // TODO: For Xamarin, use manifest parsing, and for Unity, use some kind of package identifier API.
+
             Identifier = AppDomain.CurrentDomain.FriendlyName
         };
 

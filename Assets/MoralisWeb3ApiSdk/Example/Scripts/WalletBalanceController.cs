@@ -29,6 +29,7 @@
  */
 using UnityEngine;
 using UnityEngine.UI;
+using MoralisWeb3ApiSdk;
 
 #if UNITY_WEBGL
 using Moralis.WebGL.Platform.Objects;

@@ -60,7 +60,7 @@ using Newtonsoft.Json;
 /// NOTE: This was designed spoecifically to retrieve image files for the
 ///       sample TokenListController. Other resource may require modification.
 /// </summary>
-namespace Assets.MoralisWeb3ApiSdk.Example.Scripts
+namespace MoralisWeb3ApiSdk.Example.Scripts
 {
     /// <summary>
     /// Raw data element of the resource loaded.

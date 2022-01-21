@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
-//using BCLWebClient = System.Net.Http.HttpClient;
 using WebRequest = Moralis.WebGL.Web3Api.Models.WebRequest;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -39,17 +38,14 @@ namespace Moralis.WebGL.Web3Api
             "x-parse-installation-id",
             "content-type"
         };
-        public UniversalWebClient() { } //: this(new BCLWebClient { }) { }
 
-        //  public UniversalWebClient(BCLWebClient client) => Client = client;
+        public UniversalWebClient() { }
 
-        // BCLWebClient Client { get; set; }
-
-        public async UniTask<Tuple<HttpStatusCode, Dictionary<string, string>, string>> ExecuteAsync(WebRequest httpRequest) //, UploadHandler uploadProgress, DownloadHandler downloadProgress)
+        public async UniTask<Tuple<HttpStatusCode, Dictionary<string, string>, string>> ExecuteAsync(WebRequest httpRequest) 
         {
             Tuple<HttpStatusCode, Dictionary<string, string>, string> result = default;
 
-            UnityWebRequest webRequest; // = new UnityWebRequest(httpRequest.Target, httpRequest.Method); //, downloadProgress, uploadProgress);
+            UnityWebRequest webRequest;
             
             switch (httpRequest.Method)
             {
@@ -71,23 +67,13 @@ namespace Moralis.WebGL.Web3Api
             {
                 foreach (KeyValuePair<string, string> header in httpRequest.Headers)
                 {
-                    //if (ContentHeaders.Contains(header.Key))
-                    //{
-                    //    webRequest.SetRequestHeader(header.Key, header.Value);
-                    //}
-                    //else
-                    //{
                     if (!String.IsNullOrWhiteSpace(header.Value) && allowedHeaders.Contains(header.Key.ToLower()))
                     {
                         webRequest.SetRequestHeader(header.Key, header.Value);
                         Debug.Log($"Adding Header: {header.Key} value: {header.Value}");
                     }
-                    //}
                 }
             }
-
-            //webRequest.SetRequestHeader("Cache-Control", "no-cache");
-            //webRequest.SetRequestHeader("IfModifiedSince", DateTimeOffset.UtcNow.ToString());
 
             try
             {
@@ -120,24 +106,6 @@ namespace Moralis.WebGL.Web3Api
 
             return result;
         }
-
-        //private IEnumerator OnNetworkResponse(UnityWebRequest req)
-        //{
-
-        //    yield return req.SendWebRequest();
-
-        //    if (UnityWebRequest.Result.ConnectionError.Equals(req.result) ||
-        //        UnityWebRequest.Result.DataProcessingError.Equals(req.result) ||
-        //        UnityWebRequest.Result.ProtocolError.Equals(req.result))
-        //        Debug.Log("A web-request error has occured: " + req.GetResponseHeader(""));
-        //    else
-        //        Debug.Log("Success " + req.downloadHandler.text);
-
-        //    byte[] results = req.downloadHandler.data;
-        //    Debug.Log("Second Success");
-        //    // Some code after success
-
-        //}
 
         private UnityWebRequest CreatePostRequest(WebRequest httpRequest)
         {

@@ -43,18 +43,14 @@ namespace Moralis.WebGL.Platform.Services
             "x-parse-installation-id",
             "content-type"
         };
-        public UniversalWebClient() { } //: this(new BCLWebClient { }) { }
+        public UniversalWebClient() { }
 
-        //  public UniversalWebClient(BCLWebClient client) => Client = client;
-
-        // BCLWebClient Client { get; set; }
-
-        public async UniTask<Tuple<HttpStatusCode, string>> ExecuteAsync(WebRequest httpRequest) //, UploadHandler uploadProgress, DownloadHandler downloadProgress)
+        public async UniTask<Tuple<HttpStatusCode, string>> ExecuteAsync(WebRequest httpRequest)
         {
             Tuple<HttpStatusCode, string> result = default;
 
-            UnityWebRequest webRequest; // = new UnityWebRequest(httpRequest.Target, httpRequest.Method); //, downloadProgress, uploadProgress);
-            
+            UnityWebRequest webRequest; 
+
             switch (httpRequest.Method)
             {
                 case "DELETE":
@@ -75,23 +71,13 @@ namespace Moralis.WebGL.Platform.Services
             {
                 foreach (KeyValuePair<string, string> header in httpRequest.Headers)
                 {
-                    //if (ContentHeaders.Contains(header.Key))
-                    //{
-                    //    webRequest.SetRequestHeader(header.Key, header.Value);
-                    //}
-                    //else
-                    //{
                     if (!String.IsNullOrWhiteSpace(header.Value) && allowedHeaders.Contains(header.Key.ToLower()))
                     {
                         webRequest.SetRequestHeader(header.Key, header.Value);
                         Debug.Log($"Adding Header: {header.Key} value: {header.Value}");
                     }
-                    //}
                 }
             }
-
-            //webRequest.SetRequestHeader("Cache-Control", "no-cache");
-            //webRequest.SetRequestHeader("IfModifiedSince", DateTimeOffset.UtcNow.ToString());
 
             try
             {
@@ -125,24 +111,6 @@ namespace Moralis.WebGL.Platform.Services
             return result;
         }
 
-        //private IEnumerator OnNetworkResponse(UnityWebRequest req)
-        //{
-
-        //    yield return req.SendWebRequest();
-
-        //    if (UnityWebRequest.Result.ConnectionError.Equals(req.result) ||
-        //        UnityWebRequest.Result.DataProcessingError.Equals(req.result) ||
-        //        UnityWebRequest.Result.ProtocolError.Equals(req.result))
-        //        Debug.Log("A web-request error has occured: " + req.GetResponseHeader(""));
-        //    else
-        //        Debug.Log("Success " + req.downloadHandler.text);
-
-        //    byte[] results = req.downloadHandler.data;
-        //    Debug.Log("Second Success");
-        //    // Some code after success
-
-        //}
-
         private UnityWebRequest CreatePostRequest(WebRequest httpRequest)
         {
             string requestData = null;
@@ -158,11 +126,10 @@ namespace Moralis.WebGL.Platform.Services
             data.Read(buffer, 0, buffer.Length);
             data.Position = 0;
 
-            //requestData = Encoding.UTF8.GetString(buffer);
             req.uploadHandler = (UploadHandler)new UploadHandlerRaw(buffer);
             req.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
 
-            return req; // UnityWebRequest.Post(httpRequest.Target, requestData);
+            return req; 
         }
 
         private UnityWebRequest CreatePutRequest(WebRequest httpRequest)

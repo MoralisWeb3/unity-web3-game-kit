@@ -11,11 +11,10 @@ namespace Moralis.WebGL.Platform.Operations
     {
         ReadOnlyCollection<object> Data { get; }
 
-        //[JsonProperty("__op")]
         public string __op { get { return "Add"; } }
 
-        //[JsonProperty("objects")]
         public IEnumerable<object> objects => Data;
+
         public MoralisAddOperation(IEnumerable<object> objects) => Data = new ReadOnlyCollection<object>(objects.ToList());
 
         public IMoralisFieldOperation MergeWithPrevious(IMoralisFieldOperation previous) => previous switch

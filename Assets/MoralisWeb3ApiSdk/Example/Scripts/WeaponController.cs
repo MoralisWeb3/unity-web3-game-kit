@@ -1,5 +1,5 @@
 /**
- *           Module: MoralisSessionTokenResponse.cs
+ *           Module: WeaponController.cs
  *  Descriptiontion: Sample script that can be attached to a weapon object and trigger 
  *                   a collision event to any listening objects.
  *           Author: Moralis Web3 Technology AB, 559307-5988 - David B. Goodrich
@@ -34,11 +34,19 @@ using UnityEngine;
 /// </summary>
 public class WeaponController : MonoBehaviour
 {
-    // Listening object, must implement IWeaponCollisionHandler
-    public UnityEngine.Object collisionHandler;
+
+    //// Listening object, must implement IWeaponCollisionHandler
+    //public UnityEngine.Object collisionHandler;
 
     private void OnCollisionEnter(Collision collision)
     {
-        ((IWeaponCollisionHandler)collisionHandler).OnWeaponCollision(gameObject, collision);
+        // ((IWeaponCollisionHandler)collisionHandler).OnWeaponCollision(gameObject, collision);
+        if (collision.collider.tag.Equals("CanBeAttacked"))
+        {
+            Debug.Log($"Sword hit {collision.collider.name}");
+
+            collision.gameObject.GetComponent<Attackable>().OnInflictDamage(1);
+
+        }
     }
 }

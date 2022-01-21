@@ -39,13 +39,14 @@ using System.IO;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Net;
+using MoralisWeb3ApiSdk;
 
 #if UNITY_WEBGL
 using Moralis.WebGL.Platform.Objects;
 using Moralis.WebGL.Web3Api.Models;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
-using Assets.MoralisWeb3ApiSdk.Example.Scripts;
+using MoralisWeb3ApiSdk.Example.Scripts;
 #else
 using Moralis.Platform.Objects;
 using Moralis.Web3Api.Models;

@@ -33,10 +33,10 @@ If you need help with setting up the boilerplate or have other questions - don't
 ![Demo](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/add.gif)
 
 - Open MoralisWeb3ApiSdk->Example and double-click on the DemoScene object.
-- In the "Hierachy" panel under DemoScene expand "UICanvas" then "UIPanel".
-- In the "Inspector" section find the sub-section titled "MainMenuScript".
-- If the "MainMenuScript" sub-section is not expanded, expand it.
-- Using the information from your Moralis Server, fill in Application Id and Server URL.
+- In the "Hierachy" panel under DemoScene select "MoralisSetup".
+- In the "Inspector" section find the sub-section titled "MoralisController".
+- If the "MoralisController" sub-section is not expanded, expand it.
+- Using the information from your Moralis Server, fill in Application Id, Server URL, and Speedy node Url (make sure this is for POLYGON MUMBAI for the demo to work properly).
 ![Demo](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/insertvalues.gif)
 
 - Run the application by clicking the Play icon located at the top, center of the Unity3D IDE.
@@ -44,7 +44,13 @@ If you need help with setting up the boilerplate or have other questions - don't
 - To walk around use the mouse for direction, the 'W' key to move forward and the 'S' key to move backwards. 
     - In desktop and WebGL builds use the 'SHIFT' key with the 'W' and 'S' keys to run.
     - Use the space bar to jump
-- Note the purpose of the demo is to show how to authenticate with and interact with Moralis in a Unity3D game. THough you can  swing your character's sword hitting things has no effect.
+    - Use the Left mouse button to swing your sword.
+- Open the chest by bashin it with your sword. Inside is a game object that is also an NFT, you can claim this by clicking on it. 
+    **NOTE** Your wallet must be connected to the Polygon Mumbai test network and you account will need some funds. Use the Polygon [Faucet](https://faucet.polygon.technology/) to send yourself test funds.
+    **NOTE** You can claim the NFT only once per address. If you re-run the demo after claiming the NFT, it will not be in the chest. Examine the _AwaradableController.cs_ file to see how this is done. You can change the code so that the mug still shows but trying to claim it will only waste gas as the one award per address is also re-enforced at the contract level. 
+    - Yes, you can view your claimed NFT in Opensea.io and other NFT viewers if connected to the Polygon Mumbai network.
+    - If you examine the Metadata for the NFT you will see that in addition to the noraml PNG there is a URL for an Unity3D Prefab that can be programmatically loaded in Untiy 3D games and a link for a _.fbx_ file that can be loaded in most 3D modeling applications and game engines including Blender.
+- Note the purpose of the demo is to show how to authenticate with and interact with Moralis and Web3 in a Unity3D game. Other than looking around, killing the orcs, openning the chest and claiming the NFT, there is not a lot to do. 
 - **IMPORTANT** If you want to create WebGL builds or want to run the Demo in WebGL, please read the [Web3GL](#web3gl) section prior to running the demo in WebGL.
 
 This boilerplate project has been tested with the following Unity3D Releases:
@@ -67,7 +73,8 @@ This boilerplate project has been tested with the following Unity3D Releases:
     - [`Authentication Data`](#authentication-data)
     - [`HostManifestData`](#hostmanifestdata)
     - [`ServerConnectionData`](#server-connectiondata)
-- [Web3GL](#web3gl)
+- [Web3](#web3)
+- [WebGL](#webgl)
 - [🏗 Ethereum Web3Api Methods](#-ethereum-web3api-methods)
     - [`Web3Api Notes`](#web3api-notes)
     - [`Chains`](#chains)
@@ -348,7 +355,62 @@ In Unity3D applications the HostManifestData object is used to pass information 
 ## `ServerConnectionData`
 Description here
 
-# Web3GL 
+# Web3
+The Web3 object is used for executing Evm RPC calls, meaning transactions directly against the chain. While the [Web3Api](#-ethereum-web3api-methods) is more efficient for most Web3 calls, the Web3Api does not support state changes or transactions. The Web3 object does allow state change and transactions against the change.
+
+For Web3 support, an [Nethereum](https://nethereum.com/) Web3 object is exposed in the **MoralisInterface**. Developers can use the Web3 object directly.
+
+**IMPORTANT** Before it can be used, the Web3 object must be initialized, unfortunetly this cannot be done until a connection to the wallet is established. For this demo we added the following methods to the _MainMenuScript.cs_ file:
+```
+    private void InitializeWeb3()
+    {
+        MoralisInterface.SetupWeb3();
+
+        // Create an entry for the Game Rewards Contract.
+        MoralisInterface.InsertContractInstance("Rewards", GameAwardContractAbi(), "mumbai", "0x05af21b57d2E378F90106B229E717DC96c7Bb5e2");
+    } 
+
+    /// <summary>
+    /// Must be referenced by the WalletConnect Game object
+    /// </summary>
+    /// <param name="session"></param>
+    public void WalletConnectSessionEstablished(WalletConnectUnitySession session)
+    {
+        InitializeWeb3();
+    }
+```
+In the Unity3D IDE under Heirarchy find and select the WalletConnect object
+![WalletConect](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/walletconnect_obj.gif)
+Under the Inspector find the events associated with New Session Connected and Resumed Session Connected
+![WalletConectEvents](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/wc_session_connected_events.gif)
+The method above should be referenced by both of these events.
+
+To make Web3 calls easier we have included a few tools.
+
+First, a EvmContractManager object provides an easy way to set up contracts that are reflected across several chains. The Contract andits functions can be easily retrieved from any where in you code via MoralisInterface.
+
+To setup a contract instance use InsertContractInstance:
+```
+MoralisInterface.InsertContractInstance("Rewards", GameAwardContractAbi(), "mumbai", "0x05af21b57d2E378F90106B229E717DC96c7Bb5e2");
+```
+In this example a contract with key "Rewards" is created using the contract ABI (as json), the main chain the contract is on, and the address of the contract on that chain. For a live example please see the _MainMenuScript.cs_ file.
+
+By calling _MoralisInterface.AddContractChainAddress([CONTRACT KEY], [CHAIN ID], [CONTRACT ADDRESS])_ you can create multiple chain specific instances of the same contract using the ABI originally added with [CONTRACT KEY].
+
+To retrieve an Nethereum contract instance call:
+```
+Contract c = MoralisInterface.EvmContractInstance([CONTRACT KEY], [CHAIN ID]);
+```
+
+To retrieve an Nethereum contract function instance call:
+```
+Function f = MoralisInterface.EvmContractFunctionInstance([CONTRACT KEY], [CHAIN ID], [FUNCTION NAME]);
+```
+
+To execute a transaction you can call _MoralisInstance.SendEvmTransactionAsync_ or _MoralisInterface.SendTransactionAndWaitForReceiptAsync_. These functions represent only a couple of the variants available from the _Nethereum.Contracts.Function_ object.
+
+
+# WebGL 
 Due to the way WebGL works, for security reasons it does not support outbound calls or multi-threading. The Moralis SDK depends heavily on both. As a solution we created a duplicate of the SDK that specifically geared to be compatible with WebGL.
 
 For most functionality the switch between other build types and WebGL should be seemless, with two exceptions.
@@ -641,7 +703,25 @@ Runs a given function of a contract abi and returns readonly data
 - **providerUrl** _string_ OPTIONAL web3 provider url to user when using local dev chain
 #### Example
 ```
-string result = MoralisInterface.GetClient().Web3Api.Native.RunContractFunction(address, functionName, ChainList.eth);
+// Function ABI input parameters
+object[] inputParams = new object[1];
+inputParams[0] = new { internalType="uint256", name="id", type="uint256" };
+// Function ABI Output parameters
+object[] outputParams = new object[1];
+outputParams[0] = new { internalType="string", name="", type="string" };
+// Function ABI
+object[] abi = new object[1];
+abi[0] = new { inputs=inputParams, name="uri", outputs=outputParams, stateMutability="view", type="function" };
+
+// Define request object
+RunContractDto rcd = new RunContractDto()
+{
+    Abi = abi,
+    Params = new { id = "15310200874782" }
+};
+
+// Call contract function, response is always a string.
+string resp = MoralisInterface.GetClient().Web3Api.Native.RunContractFunction("0x698d7D745B7F5d8EF4fdB59CeB660050b3599AC3", "uri", rcd, ChainList.mumbai);
 ```
 
 ## `Resolve`
