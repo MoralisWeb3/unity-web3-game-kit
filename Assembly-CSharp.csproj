@@ -56,6 +56,7 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\Scripts\NftObjectController.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.BlockchainProcessing\BlockStorage\Repositories\ITransactionVMStackRepository.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Abstractions\IServiceHubComposer.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Queries\Live\ErrorMessage.cs" />
@@ -607,6 +608,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Signer\Crypto\ECKey.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.Web3Api.Core\Interfaces\IResolveApi.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.Web3Api\CloudApi\TokenApi.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\Scripts\AwardableController.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\Extensions\FunctionMessageExtensions.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.Web3Api\Moralis.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.JsonRpc.RpcClient\BasicAuthenticationHeaderHelper.cs" />
@@ -847,6 +849,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Queries\Live\QueryEventMessage.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\EthGasPrice.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.Web3Api.Core\Models\IpfsFileRequest.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\Scripts\CustomNftMetadata.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\WalletConnectSharp\WalletConnectSharp.Core\Utils\Hex.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Objects\MoralisObject.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.Web3Api.Core\Models\NftOwner.cs" />
@@ -863,6 +866,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Model\LogBloomFilter.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.BlockchainProcessing\BlockStorage\Repositories\InMemoryTransactionLogRepository.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\Services\IEthGetTransactionErrorReason.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Example\Scripts\Attackable.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Model\BlockHeader.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Personal\IPersonalNewAccount.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.BlockchainProcessing\BlockchainProcessor.cs" />

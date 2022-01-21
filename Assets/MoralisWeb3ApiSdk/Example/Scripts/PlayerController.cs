@@ -93,11 +93,6 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(Attack());
         }
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            Die();
-        }
     }
 
     public void JoystickInput(Vector2 vector2)

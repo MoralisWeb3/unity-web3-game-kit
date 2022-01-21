@@ -10,6 +10,10 @@
 - Issue #18 - Wallet Connect duplicate files
 - Add Gif Decoder
 - Re-Order folders / namespaces to better fit dependencies, etc.
+- Fix issue with Web3Api call contract function to pass abi / params as seperate items instead of children of an object.
+- Add Nethereum wrappers for ease of use.
+- Enhance the demo so that the orcs can be killed, the chest opened, and add effects to the player's sword.
+- Add an NFT that can be claimed once per address on Mumbai network.
 
 ## 1.0.2 (2022-01-01)
 - Add support for WebGL applications. This release contains many updates all geared to WebGL support.

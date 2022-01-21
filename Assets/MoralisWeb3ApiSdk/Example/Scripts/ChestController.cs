@@ -25,6 +25,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  */
+using Assets.MoralisWeb3ApiSdk.Example.Scripts;
 using UnityEngine;
 
 /// <summary>
@@ -34,36 +35,58 @@ public class ChestController : MonoBehaviour
 {
     public HealthBar healthBar;
     public int maxHealth = 3;
-
+    public GameObject[] treasures;
+    public float raiseTreasure = 0.15f;
     private int currentHealth;
+    private Animator anim;
+    private bool open = false;
 
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        anim = GetComponentInChildren<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    /// <summary>
+    /// Called when player strikes chest with sword.
+    /// </summary>
+    /// <param name="damage"></param>
     public void InflictDamage(int damage)
     {
+        // If already open, ignore further hits.
+        if (open) return;
+        // Adjust health
         currentHealth -= damage;
-
+        // Adjust healtbar
         healthBar.SetHealth(currentHealth);
-
+        // If chest beaten, open it.
         if (currentHealth <= 0)
         {
-            Die();
+            Open();
         }
     }
 
-    private void Die()
+    private void Open()
     {
-        // Die action here.
+        // Run open animation
+        anim.SetTrigger("OPEN");
+        // Capture that chest is open
+        open = true;
+
+        // Raise treasures to float above the chest.
+        foreach (GameObject t in treasures)
+        {
+            AwardableController ac = null;
+
+            t.TryGetComponent<AwardableController>(out ac);
+
+            if (ac != null)
+            {
+                ac.Display(new Vector3(0, raiseTreasure, 0));
+                ac.SetCanBeClaimed();
+            }
+        }
     }
 }

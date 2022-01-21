@@ -39,6 +39,8 @@ using WalletConnectSharp.Core.Models;
 using WalletConnectSharp.NEthereum;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.RPC.Eth.Transactions;
+using Nethereum.Contracts;
+using Nethereum.Hex.HexTypes;
 
 #if UNITY_WEBGL
 using Cysharp.Threading.Tasks;
@@ -66,6 +68,7 @@ namespace MoralisWeb3ApiSdk
 public class MoralisInterface : MonoBehaviour
 {
     private static string web3ClientRpcUrl;
+    private static EvmContractManager contractManager;
 
     // Singleton instance of Moralis so that is it is available application 
     // wide after being initialized.
@@ -112,11 +115,16 @@ public class MoralisInterface : MonoBehaviour
             throw new ArgumentException("Complete host manifest data was not supplied.");
         }
 
+        // Create instance of Evm Contract Manager.
+        contractManager = new EvmContractManager();
+
         // Set Moralis conenction values.
         connectionData = new ServerConnectionData();
         connectionData.ApplicationID = applicationId;
         connectionData.ServerURI = serverUri;
         connectionData.ApiKey = web3ApiKey;
+
+        web3ClientRpcUrl = web3RpcUrl;
 
         // For unity apps the local storage value must also be set.
         connectionData.LocalStoragePath = Application.persistentDataPath;
@@ -144,12 +152,15 @@ public class MoralisInterface : MonoBehaviour
         // new MoralisClient<YourUser>(connectionData, address, Web3ApiClient)
         moralis = new MoralisClient(connectionData, new Web3ApiClient(), jsonSerializer);
 
+        clientMetaData = clientMeta;
+
         if (moralis == null)
         { 
             Debug.Log("Moralis connection failed!"); 
         }
         else
         {
+            Initialized = true;
             Debug.Log("Connected to Moralis!");
             user = await moralis.GetCurrentUserAsync();
         }
@@ -213,35 +224,222 @@ public class MoralisInterface : MonoBehaviour
     public static UniTask LogOutAsync()
     {
         return moralis.LogOutAsync();
-    }
-
-    public static async Task SetupWeb3()
-    { 
-        await SetupWeb3(web3ClientRpcUrl);
-    }
-
-    /// <summary>
-    /// Initializes the Web3 connection to the supplied RPC Url. Call this to change the target chain.
-    /// </summary>
-    /// <param name="rpcUrl"></param>
-    /// <returns></returns>
-    public static async Task SetupWeb3(string rpcUrl)
-    {
-        if (String.IsNullOrWhiteSpace(rpcUrl) || clientMetaData == null)
-        {
-            Debug.Log("Web3 RPC Node Url or Wallet Connect Metadata not provided.");
-            return;
         }
 
-        WalletConnectSession client = WalletConnect.Instance.Session;
+        public static async UniTask SetupWeb3()
+        {
+            await SetupWeb3(web3ClientRpcUrl);
+        }
 
-        Web3Client = new Web3(client.CreateProvider(new Uri(rpcUrl)));
-    }
+        /// <summary>
+        /// Initializes the Web3 connection to the supplied RPC Url. Call this to change the target chain.
+        /// </summary>
+        /// <param name="rpcUrl"></param>
+        /// <returns></returns>
+        public static async UniTask SetupWeb3(string rpcUrl)
+        {
+            if (String.IsNullOrWhiteSpace(rpcUrl) || clientMetaData == null)
+            {
+                Debug.Log("Web3 RPC Node Url or Wallet Connect Metadata not provided.");
+                return;
+            }
 
-    /// <summary>
-    /// Provide quick access to the Moralis Web3API Supported chains list.
-    /// </summary>
-    public static List<ChainEntry> SupportedChains => SupportedEvmChains.SupportedChains;
+            WalletConnectSession client = WalletConnect.Instance.Session;
+
+            Web3Client = new Web3(client.CreateProvider(new Uri(rpcUrl)));
+        }
+
+        /// <summary>
+        /// Creates and adds a contract instance based on ABI and associates it to specified chain and address.
+        /// </summary>
+        /// <param name="key">How you identify the contract instance.</param>
+        /// <param name="abi">ABI of the contract in standard ABI json format</param>
+        /// <param name="baseChainId">The initial chain Id used to interact with this contract</param>
+        /// <param name="baseContractAddress">The initial contract address of the contract on specified chain</param>
+        public static void InsertContractInstance(string key, string abi, string baseChainId, string baseContractAddress)
+        {
+            if (Web3Client == null)
+            {
+                Debug.LogError("Web3 has not been setup yet.");
+            }
+            else
+            {
+                EvmContractItem eci = new EvmContractItem(Web3Client, abi, baseChainId, baseContractAddress);
+
+                contractManager.InsertContractInstance(key, eci);
+            }
+        }
+
+        /// <summary>
+        /// Adds a contract address for a chain to a specific contract. Contract for key must exist.
+        /// </summary>
+        /// <param name="key">How you identify the contract instance.</param>
+        /// <param name="chainId">The The chain the contract is deployed on.</param>
+        /// <param name="contractAddress">Address the contract is deployed at</param>
+        public static void AddContractChainAddress(string key, string chainId, string contractAddress)
+        {
+            if (Web3Client == null)
+            {
+                Debug.LogError("Web3 has not been setup yet.");
+            }
+            else
+            {
+                contractManager.AddChainInstanceToContract(key, Web3Client, chainId, contractAddress);
+            }
+        }
+
+        /// <summary>
+        /// Retrieves the specified contract instance if it exists.
+        /// </summary>
+        /// <param name="key">How you identify the contract instance.</param>
+        /// <param name="chainId">The The chain the contract is deployed on.</param>
+        /// <returns>Nethereum.Contracts.Contract</returns>
+        public static Contract EvmContractInstance(string key, string chainId)
+        {
+            Contract contract = null;
+
+            if (Web3Client == null)
+            {
+                Debug.LogError("Web3 has not been setup yet.");
+            }
+            else
+            {
+                if (contractManager.Contracts.ContainsKey(key) &&
+                    contractManager.Contracts[key].ChainContractMap.ContainsKey(chainId))
+                {
+                    contract = contractManager.Contracts[key].ChainContractMap[chainId].ContractInstance;
+                }
+            }
+
+            return contract;
+        }
+        
+        /// <summary>
+        /// Get an Nethereum Function instance from a specific contract.
+        /// </summary>
+        /// <param name="key">How you identify the contract instance.</param>
+        /// <param name="chainId">The The chain the contract is deployed on.</param>
+        /// <param name="functionName">Name of the function to return</param>
+        /// <returns>Function</returns>
+        public static Function EvmContractFunctionInstance(string key, string chainId, string functionName)
+        {
+            Contract contract = EvmContractInstance(key, chainId);
+            Function function = null;
+
+            if (contract != null)
+            {
+                function = contract.GetFunction(functionName);
+            }
+
+            return function;
+        }
+
+        /// <summary>
+        /// Executes a NEthereum SendTransactionAsync which executes a function 
+        /// on a EVM contract (can change state) and returns response as a 
+        /// string.
+        /// </summary>
+        /// <param name="contractKey">How you identify the contract instance.</param>
+        /// <param name="chainId">he The chain the contract is deployed on.</param>
+        /// <param name="functionName">name of function to call</param>
+        /// <param name="transactionInput">NEthereum TransactionInput object</param>
+        /// <param name="functionInput">Function params</param>
+        /// <returns>string</returns>
+        public static async UniTask<string> SendEvmTransactionAsync(string contractKey, string chainId, string functionName, TransactionInput transactionInput, object[] functionInput)
+        {
+            string result = null;
+
+            if (Web3Client == null)
+            {
+                Debug.LogError("Web3 has not been setup yet.");
+            }
+            else
+            {
+                if (contractManager.Contracts.ContainsKey(contractKey) &&
+                    contractManager.Contracts[contractKey].ChainContractMap.ContainsKey(chainId))
+                {
+                    Tuple<bool, string, string> resp = await contractManager.SendTransactionAsync(contractKey, chainId, functionName, transactionInput, functionInput);
+
+                    if (resp.Item1) result = resp.Item2;
+                }
+            }
+
+            return result;
+        }
+
+        public static async UniTask<string> SendEvmTransactionAsync(string contractKey, string chainId, string functionName, string fromaddress, HexBigInteger gas, HexBigInteger value, object[] functionInput)
+        {
+            string result = null;
+
+            if (Web3Client == null)
+            {
+                Debug.LogError("Web3 has not been setup yet.");
+            }
+            else
+            {
+                if (contractManager.Contracts.ContainsKey(contractKey) &&
+                    contractManager.Contracts[contractKey].ChainContractMap.ContainsKey(chainId))
+                {
+                    Tuple<bool, string, string> resp = await contractManager.SendTransactionAsync(contractKey, chainId, functionName, fromaddress, gas, value, functionInput);
+
+                    if (resp.Item1)
+                    {
+                        result = resp.Item2;
+                    }
+                    else
+                    {
+                        Debug.LogError($"Evm Transaction failed: {resp.Item3}");
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="contractKey"></param>
+        /// <param name="chainId"></param>
+        /// <param name="functionName"></param>
+        /// <param name="fromaddress"></param>
+        /// <param name="gas"></param>
+        /// <param name="value"></param>
+        /// <param name="functionInput"></param>
+        /// <returns></returns>
+        public static async UniTask<string> SendTransactionAndWaitForReceiptAsync(string contractKey, string chainId, string functionName, string fromaddress, HexBigInteger gas, HexBigInteger value, object[] functionInput)
+        {
+            string result = null;
+
+            if (Web3Client == null)
+            {
+                Debug.LogError("Web3 has not been setup yet.");
+            }
+            else
+            {
+                if (contractManager.Contracts.ContainsKey(contractKey) &&
+                    contractManager.Contracts[contractKey].ChainContractMap.ContainsKey(chainId))
+                {
+                    Tuple<bool, string, string> resp = await contractManager.SendTransactionAndWaitForReceiptAsync(contractKey, chainId, functionName, fromaddress, gas, value, functionInput);
+
+                    if (resp.Item1)
+                    {
+                        result = resp.Item2;
+                    }
+                    else
+                    {
+                        Debug.LogError($"Evm Transaction failed: {resp.Item3}");
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Provide quick access to the Moralis Web3API Supported chains list.
+        /// </summary>
+        public static List<ChainEntry> SupportedChains => SupportedEvmChains.SupportedChains;
 }
 #else
 
@@ -252,6 +450,7 @@ public class MoralisInterface : MonoBehaviour
     public class MoralisInterface : MonoBehaviour
     {
         private static string web3ClientRpcUrl;
+        private static EvmContractManager contractManager;
 
         // Singleton instance of Moralis so that is it is available application 
         // wide after being initialized.
@@ -299,6 +498,9 @@ public class MoralisInterface : MonoBehaviour
                 throw new ArgumentException("Complete host manifest data was not supplied.");
             }
 
+            // Create instance of Evm Contract Manager.
+            contractManager = new EvmContractManager();
+
             // Set Moralis conenction values.
             connectionData = new ServerConnectionData();
             connectionData.ApplicationID = applicationId;
@@ -309,8 +511,6 @@ public class MoralisInterface : MonoBehaviour
 
             // For unity apps the local storage value must also be set.
             connectionData.LocalStoragePath = Application.persistentDataPath;
-
-            Debug.Log($"Set LocalStoragePath to {connectionData.LocalStoragePath}");
 
             // TODO Make this optional!
             connectionData.Key = "";
@@ -323,6 +523,9 @@ public class MoralisInterface : MonoBehaviour
 
             // Define a Unity specific Json Serializer.
             UnityNewtosoftSerializer jsonSerializer = new UnityNewtosoftSerializer();
+
+            // If user passed web3apikey, add it to configuration.
+            if (web3ApiKey is { }) Configuration.ApiKey["X-API-Key"] = web3ApiKey;
 
             // Create an instance of Moralis Server Client
             // NOTE: Web3ApiClient is optional. If you are not using the Moralis 
@@ -410,9 +613,9 @@ public class MoralisInterface : MonoBehaviour
             return moralis.LogOutAsync();
         }
 
-        public static async Task SetupWeb3()
+        public static void SetupWeb3()
         { 
-            await SetupWeb3(web3ClientRpcUrl);
+            SetupWeb3(web3ClientRpcUrl);
         }
 
         /// <summary>
@@ -420,7 +623,7 @@ public class MoralisInterface : MonoBehaviour
         /// </summary>
         /// <param name="rpcUrl"></param>
         /// <returns></returns>
-        public static async Task SetupWeb3(string rpcUrl)
+        public static void SetupWeb3(string rpcUrl)
         {
             if (String.IsNullOrWhiteSpace(rpcUrl) || clientMetaData == null)
             {
@@ -431,8 +634,204 @@ public class MoralisInterface : MonoBehaviour
             WalletConnectSession client = WalletConnect.Instance.Session;
 
             Web3Client = new Web3(client.CreateProvider(new Uri(rpcUrl)));
+        }
 
-            Debug.Log("Web3 client setup");
+        /// <summary>
+        /// Creates and adds a contract instance based on ABI and associates it to specified chain and address.
+        /// </summary>
+        /// <param name="key">How you identify the contract instance.</param>
+        /// <param name="abi">ABI of the contract in standard ABI json format</param>
+        /// <param name="baseChainId">The initial chain Id used to interact with this contract</param>
+        /// <param name="baseContractAddress">The initial contract address of the contract on specified chain</param>
+        public static void InsertContractInstance(string key, string abi, string baseChainId, string baseContractAddress)
+        {
+            if (Web3Client == null)
+            {
+                Debug.LogError("Web3 has not been setup yet.");
+            }
+            else
+            {
+                EvmContractItem eci = new EvmContractItem(Web3Client, abi, baseChainId, baseContractAddress);
+
+                contractManager.InsertContractInstance(key, eci);
+            }
+        }
+
+        /// <summary>
+        /// Adds a contract address for a chain to a specific contract. Contract for key must exist.
+        /// </summary>
+        /// <param name="key">How you identify the contract instance.</param>
+        /// <param name="chainId">The The chain the contract is deployed on.</param>
+        /// <param name="contractAddress">Address the contract is deployed at</param>
+        public static void AddContractChainAddress(string key, string chainId, string contractAddress)
+        {
+            if (Web3Client == null)
+            {
+                Debug.LogError("Web3 has not been setup yet.");
+            }
+            else
+            {
+                contractManager.AddChainInstanceToContract(key, Web3Client, chainId, contractAddress);
+            }
+        }
+
+        /// <summary>
+        /// Retrieves the specified contract instance if it exists.
+        /// </summary>
+        /// <param name="key">How you identify the contract instance.</param>
+        /// <param name="chainId">The The chain the contract is deployed on.</param>
+        /// <returns>Nethereum.Contracts.Contract</returns>
+        public static Contract EvmContractInstance(string key, string chainId)
+        {
+            Contract contract = null;
+
+            if (Web3Client == null)
+            {
+                Debug.LogError("Web3 has not been setup yet.");
+            }
+            else
+            {
+                if (contractManager.Contracts.ContainsKey(key) && 
+                    contractManager.Contracts[key].ChainContractMap.ContainsKey(chainId))
+                {
+                    contract = contractManager.Contracts[key].ChainContractMap[chainId].ContractInstance;
+                }
+            }
+
+            return contract;
+        }
+
+        /// <summary>
+        /// Get an Nethereum Function instance from a specific contract.
+        /// </summary>
+        /// <param name="key">How you identify the contract instance.</param>
+        /// <param name="chainId">The The chain the contract is deployed on.</param>
+        /// <param name="functionName">Name of the function to return</param>
+        /// <returns>Function</returns>
+        public static Function EvmContractFunctionInstance(string key, string chainId, string functionName)
+        {
+            Contract contract = EvmContractInstance(key, chainId);
+            Function function = null;
+
+            if (contract != null)
+            {
+                function = contract.GetFunction(functionName);
+            }
+
+            return function;
+        }
+
+        /// <summary>
+        /// Executes a NEthereum SendTransactionAsync which executes a function 
+        /// on a EVM contract (can change state) and returns response as a 
+        /// string.
+        /// </summary>
+        /// <param name="contractKey">How you identify the contract instance.</param>
+        /// <param name="chainId">he The chain the contract is deployed on.</param>
+        /// <param name="functionName">name of function to call</param>
+        /// <param name="transactionInput">NEthereum TransactionInput object</param>
+        /// <param name="functionInput">Function params</param>
+        /// <returns>string</returns>
+        public static async Task<string> SendEvmTransactionAsync(string contractKey, string chainId, string functionName, TransactionInput transactionInput, object[] functionInput)
+        {
+            string result = null;
+
+            if (Web3Client == null)
+            {
+                Debug.LogError("Web3 has not been setup yet.");
+            }
+            else
+            {
+                if (contractManager.Contracts.ContainsKey(contractKey) &&
+                    contractManager.Contracts[contractKey].ChainContractMap.ContainsKey(chainId))
+                {
+                    Tuple<bool,string,string> resp = await contractManager.SendTransactionAsync(contractKey, chainId, functionName, transactionInput, functionInput);
+
+                    if (resp.Item1) result = resp.Item2;
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="contractKey"></param>
+        /// <param name="chainId"></param>
+        /// <param name="functionName"></param>
+        /// <param name="fromaddress"></param>
+        /// <param name="gas"></param>
+        /// <param name="value"></param>
+        /// <param name="functionInput"></param>
+        /// <returns></returns>
+        public static async Task<string> SendEvmTransactionAsync(string contractKey, string chainId, string functionName, string fromaddress, HexBigInteger gas, HexBigInteger value, object[] functionInput)
+        {
+            string result = null;
+
+            if (Web3Client == null)
+            {
+                Debug.LogError("Web3 has not been setup yet.");
+            }
+            else
+            {
+                if (contractManager.Contracts.ContainsKey(contractKey) &&
+                    contractManager.Contracts[contractKey].ChainContractMap.ContainsKey(chainId))
+                {
+                    Tuple<bool, string, string> resp = await contractManager.SendTransactionAsync(contractKey, chainId, functionName, fromaddress, gas, value, functionInput);
+ 
+                    if (resp.Item1)
+                    {
+                        result = resp.Item2;
+                    }
+                    else
+                    {
+                        Debug.LogError($"Evm Transaction failed: {resp.Item3}");
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="contractKey"></param>
+        /// <param name="chainId"></param>
+        /// <param name="functionName"></param>
+        /// <param name="fromaddress"></param>
+        /// <param name="gas"></param>
+        /// <param name="value"></param>
+        /// <param name="functionInput"></param>
+        /// <returns></returns>
+        public static async Task<string> SendTransactionAndWaitForReceiptAsync(string contractKey, string chainId, string functionName, string fromaddress, HexBigInteger gas, HexBigInteger value, object[] functionInput)
+        {
+            string result = null;
+
+            if (Web3Client == null)
+            {
+                Debug.LogError("Web3 has not been setup yet.");
+            }
+            else
+            {
+                if (contractManager.Contracts.ContainsKey(contractKey) &&
+                    contractManager.Contracts[contractKey].ChainContractMap.ContainsKey(chainId))
+                {
+                    Tuple<bool, string, string> resp = await contractManager.SendTransactionAndWaitForReceiptAsync(contractKey, chainId, functionName, fromaddress, gas, value, functionInput);
+
+                    if (resp.Item1)
+                    {
+                        result = resp.Item2;
+                    }
+                    else
+                    {
+                        Debug.LogError($"Evm Transaction failed: {resp.Item3}");
+                    }
+                }
+            }
+
+            return result;
         }
 
         /// <summary>

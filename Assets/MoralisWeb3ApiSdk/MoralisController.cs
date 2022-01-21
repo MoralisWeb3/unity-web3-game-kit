@@ -28,6 +28,7 @@
  */
 #if UNITY_WEBGL
 using Moralis.WebGL.Platform;
+using Moralis.WebGL.Web3Api.Models;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 #else
@@ -38,6 +39,8 @@ using System.Threading.Tasks;
 using WalletConnectSharp.Core.Models;
 using UnityEngine;
 using WalletConnectSharp.Unity;
+using Moralis.Web3Api.Models;
+using Assets.Scripts.Moralis;
 
 namespace MoralisWeb3ApiSdk
 {
@@ -56,31 +59,7 @@ namespace MoralisWeb3ApiSdk
 
 
 #if UNITY_WEBGL
-    public async UniTask Initialize()
-    {
-        if (!MoralisInterface.Initialized)
-        {
-            HostManifestData hostManifestData = new HostManifestData()
-            {
-                Version = Version,
-                Identifier = ApplicationName,
-                Name = ApplicationName,
-                ShortVersion = Version
-            };
-
-            ClientMeta clientMeta = new ClientMeta()
-            {
-                Name = ApplicationName,
-                Description = ApplicationDescription,
-                Icons = ApplicationIcons,
-                URL = ApplicationUrl
-            };
-
-            await MoralisInterface.Initialize(MoralisApplicationId, MoralisServerURI, hostManifestData, clientMeta, Web3RpcNodeUrl);
-        }
-    }
-#else
-        public async Task Initialize()
+        public async UniTask Initialize()
         {
             if (!MoralisInterface.Initialized)
             {
@@ -103,10 +82,35 @@ namespace MoralisWeb3ApiSdk
                 await MoralisInterface.Initialize(MoralisApplicationId, MoralisServerURI, hostManifestData, clientMeta, Web3RpcNodeUrl);
             }
         }
-#endif
-        public async void WalletConnectSessionEstablished(WalletConnectUnitySession session)
+
+
+#else
+        public async Task Initialize()
         {
-            await MoralisInterface.SetupWeb3();
+            if (!MoralisInterface.Initialized)
+            {
+                HostManifestData hostManifestData = new HostManifestData()
+                {
+                    Version = Version,
+                    Identifier = ApplicationName,
+                    Name = ApplicationName,
+                    ShortVersion = Version
+                };
+
+                ClientMeta clientMeta = new ClientMeta()
+                {
+                    Name = ApplicationName,
+                    Description = ApplicationDescription,
+                    Icons = ApplicationIcons,
+                    URL = ApplicationUrl
+                };
+
+                // Initialize and register the Moralis, Moralis Web3Api and NEthereum Web3 clients
+                await MoralisInterface.Initialize(MoralisApplicationId, MoralisServerURI, hostManifestData, clientMeta, Web3RpcNodeUrl);
+            }
         }
+#endif
+
+
     }
 }
