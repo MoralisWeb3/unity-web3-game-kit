@@ -46,7 +46,7 @@ If you need help with setting up the boilerplate or have other questions - don't
     - Use the space bar to jump
     - Use the Left mouse button to swing your sword.
 - Open the chest by bashing it with your sword. Inside is a game object that is also an NFT, you can claim this by clicking on it. **Watch your wallet for the transaction request!**
-- **NOTE** Your wallet must be connected to the Polygon Mumbai test network and you account will need some funds. Use the Polygon [Faucet](https://faucet.polygon.technology/) to send yourself test funds.
+- **NOTE** Your wallet must be connected to the Polygon Mumbai test network and your account will need some funds. Use the Polygon [Faucet](https://faucet.polygon.technology/) to send yourself test funds.
 - **NOTE** You can claim the NFT only once per address. If you re-run the demo after claiming the NFT, it will not be in the chest. Examine the _AwardableController.cs_ file to see how this is done. You can change the code so that the mug still shows but trying to claim it will only waste gas as the one award per address is also re-enforced at the contract level. 
     - Yes, you can view your claimed NFT in Opensea.io and other NFT viewers if connected to the Polygon Mumbai network.
     - If you examine the Metadata for the NFT you will see that in addition to the noraml PNG there is a URL for an Unity3D Prefab that can be programmatically loaded in Untiy 3D games and a link for a _.fbx_ file that can be loaded in most 3D modeling applications and game engines including Blender.
