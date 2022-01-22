@@ -37,7 +37,11 @@ If you need help with setting up the boilerplate or have other questions - don't
 - In the "Inspector" section find the sub-section titled "MoralisController".
 - If the "MoralisController" sub-section is not expanded, expand it.
 - Using the information from your Moralis Server, fill in Application Id, Server URL, and Speedy node Url (make sure this is for POLYGON MUMBAI for the demo to work properly).
-![Demo](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/insertvalues.gif)
+![insertvalues](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/insertvalues.gif)
+- **NOTE** If, after importing but before runnit the package, you see an error that describes something as "unsafe", it is probably due to a block of code in Nethereum SCrypt.cs. Open Build Settings then Player Settings
+![unsafe](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/unsafe.gif)
+    - Check the box titled "Allow 'unsafe' code". Rebuild your game.
+
 
 - Run the application by clicking the Play icon located at the top, center of the Unity3D IDE.
 - Click on the "Authenticate" button to authenticate to Moralis using your Wallet.
@@ -55,7 +59,7 @@ If you need help with setting up the boilerplate or have other questions - don't
 
 This boilerplate project has been tested with the following Unity3D Releases:
 1. 2020.2
-2. 2020.3.25f1 (latest)
+2. 2020.3.26 (latest)
 3. 2021.2.5
 
 # 🧭 Table of contents
