@@ -38,9 +38,9 @@ If you need help with setting up the boilerplate or have other questions - don't
 - If the "MoralisController" sub-section is not expanded, expand it.
 - Using the information from your Moralis Server, fill in Application Id, Server URL, and Speedy node Url (make sure this is for POLYGON MUMBAI for the demo to work properly).
 ![insertvalues](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/insertvalues.gif)
-- **NOTE** If, after importing but before runnit the package, you see an error that describes something as "unsafe", it is probably due to a block of code in Nethereum SCrypt.cs. Open Build Settings then Player Settings
+- **NOTE** If, after importing but before running the package, you see an error that describes something as "unsafe", it is probably due to a block of code in Nethereum SCrypt.cs. Open Build Settings then Player Settings
 ![unsafe](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/unsafe.gif)
-    - Check the box titled "Allow 'unsafe' code". Rebuild your game.
+    - Scroll down. Check the box titled "Allow 'unsafe' code". Rebuild your game.
 
 
 - Run the application by clicking the Play icon located at the top, center of the Unity3D IDE.
