@@ -54,7 +54,7 @@ If you need help with setting up the boilerplate or have other questions - don't
 - **NOTE** You can claim the NFT only once per address. If you re-run the demo after claiming the NFT, it will not be in the chest. Examine the _AwardableController.cs_ file to see how this is done. You can change the code so that the mug still shows but trying to claim it will only waste gas as the one award per address is also re-enforced at the contract level. 
     - Yes, you can view your claimed NFT in Opensea.io and other NFT viewers if connected to the Polygon Mumbai network.
     - If you examine the Metadata for the NFT you will see that in addition to the noraml PNG there is a URL for an Unity3D Prefab that can be programmatically loaded in Untiy 3D games and a link for a _.fbx_ file that can be loaded in most 3D modeling applications and game engines including Blender.
-- Note the purpose of the demo is to show how to authenticate with and interact with Moralis and Web3 in a Unity3D game. Other than looking around, killing the orcs, openning the chest and claiming the NFT, there is not a lot to do. 
+- Note the purpose of the demo is to show how to authenticate with and interact with Moralis and Web3 in a Unity3D game. Other than looking around, slaying the orcs, openning the chest and claiming the NFT, there is not a lot to do. 
 - **IMPORTANT** If you want to create WebGL builds or want to run the Demo in WebGL, please read the [Web3GL](#web3gl) section prior to running the demo in WebGL.
 
 This boilerplate project has been tested with the following Unity3D Releases:
