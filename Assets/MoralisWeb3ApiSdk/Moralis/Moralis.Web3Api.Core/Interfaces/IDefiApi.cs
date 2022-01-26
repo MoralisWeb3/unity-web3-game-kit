@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Moralis.Web3Api.Models;
 
@@ -22,7 +23,7 @@ namespace Moralis.Web3Api.Interfaces
 		/// </param>
 		/// <param name="providerUrl">web3 provider url to user when using local dev chain</param>
 		/// <returns>Returns the pair reserves</returns>
-		ReservesCollection GetPairReserves (string pairAddress, ChainList chain, string toBlock=null, string toDate=null, string providerUrl=null);
+		Task<ReservesCollection> GetPairReserves (string pairAddress, ChainList chain, string toBlock=null, string toDate=null, string providerUrl=null);
 
 		/// <summary>
 		/// Fetches and returns pair data of the provided token0+token1 combination.
@@ -39,7 +40,7 @@ namespace Moralis.Web3Api.Interfaces
 		/// * If 'to_date' and 'to_block' are provided, 'to_block' will be used.
 		/// </param>
 		/// <returns>Returns the pair address of the two tokens</returns>
-		ReservesCollection GetPairAddress (string exchange, string token0Address, string token1Address, ChainList chain, string toBlock=null, string toDate=null);
+		Task<ReservesCollection> GetPairAddress (string exchange, string token0Address, string token1Address, ChainList chain, string toBlock=null, string toDate=null);
 
 	}
 }

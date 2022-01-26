@@ -83,7 +83,7 @@ public class WalletBalanceController : MonoBehaviour
 #else
             // Retrieve account balanace.
             NativeBalance bal =
-                MoralisInterface.GetClient().Web3Api.Account.GetNativeBalance(addr.ToLower(),
+                await MoralisInterface.GetClient().Web3Api.Account.GetNativeBalance(addr.ToLower(),
                                             (ChainList)ChainId);
 #endif
             double balance = 0.0;

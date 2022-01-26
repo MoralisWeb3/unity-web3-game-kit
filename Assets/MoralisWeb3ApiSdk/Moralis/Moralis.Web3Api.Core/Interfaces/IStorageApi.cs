@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Moralis.Web3Api.Models;
 
@@ -16,7 +17,7 @@ namespace Moralis.Web3Api.Interfaces
 		/// </summary>
 		/// <param name="abi">Array of JSON and Base64 Supported</param>
 		/// <returns>Returns the path to the uploaded files</returns>
-		List<IpfsFile> UploadFolder (List<IpfsFileRequest> abi);
+		Task<List<IpfsFile>> UploadFolder (List<IpfsFileRequest> abi);
 
 	}
 }

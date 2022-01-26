@@ -8,7 +8,7 @@
 *
 * MIT License
 *  
-* Copyright (c) 2021 Moralis Web3 Technology AB, 559307-5988
+* Copyright (c) 2022 Moralis Web3 Technology AB, 559307-5988
 *  
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the 'Software'), to deal
@@ -30,6 +30,7 @@
 */ 
             using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using RestSharp;
 using Newtonsoft.Json;
 using Moralis.Web3Api.Client;
@@ -98,7 +99,7 @@ namespace Moralis.Web3Api.CloudApi
 		/// </summary>
 		/// <param name="abi">Array of JSON and Base64 Supported</param>
 		/// <returns>Returns the path to the uploaded files</returns>
-		public List<IpfsFile> UploadFolder (List<IpfsFileRequest> abi)
+		public async Task<List<IpfsFile>> UploadFolder (List<IpfsFileRequest> abi)
 		{
 
 			// Verify the required parameter 'abi' is set
@@ -118,7 +119,7 @@ namespace Moralis.Web3Api.CloudApi
 
 			string bodyData = postBody.Count > 0 ? JsonConvert.SerializeObject(postBody) : null;
 
-			IRestResponse response = (IRestResponse)ApiClient.CallApi(path, Method.POST, queryParams, bodyData, headerParams, formParams, fileParams, authSettings);
+			IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.POST, queryParams, bodyData, headerParams, formParams, fileParams, authSettings));
 
 			if (((int)response.StatusCode) >= 400)
 				throw new ApiException((int)response.StatusCode, "Error calling UploadFolder: " + response.Content, response.Content);

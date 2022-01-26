@@ -8,7 +8,7 @@
 *
 * MIT License
 *  
-* Copyright (c) 2021 Moralis Web3 Technology AB, 559307-5988
+* Copyright (c) 2022 Moralis Web3 Technology AB, 559307-5988
 *  
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the 'Software'), to deal
@@ -28,8 +28,9 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */ 
-using System;
+            using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using RestSharp;
 using Newtonsoft.Json;
 using Moralis.Web3Api.Client;
@@ -104,7 +105,7 @@ namespace Moralis.Web3Api.Api
 		/// </param>
 		/// <param name="providerUrl">web3 provider url to user when using local dev chain</param>
 		/// <returns>Returns the pair reserves</returns>
-		public ReservesCollection GetPairReserves (string pairAddress, ChainList chain, string toBlock=null, string toDate=null, string providerUrl=null)
+		public async Task<ReservesCollection> GetPairReserves (string pairAddress, ChainList chain, string toBlock=null, string toDate=null, string providerUrl=null)
 		{
 
 			// Verify the required parameter 'pairAddress' is set
@@ -129,7 +130,7 @@ namespace Moralis.Web3Api.Api
 
 			string bodyData = postBody.Count > 0 ? JsonConvert.SerializeObject(postBody) : null;
 
-			IRestResponse response = (IRestResponse)ApiClient.CallApi(path, Method.GET, queryParams, bodyData, headerParams, formParams, fileParams, authSettings);
+			IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.GET, queryParams, bodyData, headerParams, formParams, fileParams, authSettings));
 
 			if (((int)response.StatusCode) >= 400)
 				throw new ApiException((int)response.StatusCode, "Error calling GetPairReserves: " + response.Content, response.Content);
@@ -153,7 +154,7 @@ namespace Moralis.Web3Api.Api
 		/// * If 'to_date' and 'to_block' are provided, 'to_block' will be used.
 		/// </param>
 		/// <returns>Returns the pair address of the two tokens</returns>
-		public ReservesCollection GetPairAddress (string exchange, string token0Address, string token1Address, ChainList chain, string toBlock=null, string toDate=null)
+		public async Task<ReservesCollection> GetPairAddress (string exchange, string token0Address, string token1Address, ChainList chain, string toBlock=null, string toDate=null)
 		{
 
 			// Verify the required parameter 'exchange' is set
@@ -184,7 +185,7 @@ namespace Moralis.Web3Api.Api
 
 			string bodyData = postBody.Count > 0 ? JsonConvert.SerializeObject(postBody) : null;
 
-			IRestResponse response = (IRestResponse)ApiClient.CallApi(path, Method.GET, queryParams, bodyData, headerParams, formParams, fileParams, authSettings);
+			IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.GET, queryParams, bodyData, headerParams, formParams, fileParams, authSettings));
 
 			if (((int)response.StatusCode) >= 400)
 				throw new ApiException((int)response.StatusCode, "Error calling GetPairAddress: " + response.Content, response.Content);

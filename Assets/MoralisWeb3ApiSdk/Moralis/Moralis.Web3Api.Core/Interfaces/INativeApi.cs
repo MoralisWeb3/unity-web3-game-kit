@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Moralis.Web3Api.Models;
 
@@ -17,7 +18,7 @@ namespace Moralis.Web3Api.Interfaces
 		/// <param name="chain">The chain to query</param>
 		/// <param name="subdomain">The subdomain of the moralis server to use (Only use when selecting local devchain as chain)</param>
 		/// <returns>Returns the contents of a block</returns>
-		Block GetBlock (string blockNumberOrHash, ChainList chain, string subdomain=null);
+		Task<Block> GetBlock (string blockNumberOrHash, ChainList chain, string subdomain=null);
 
 		/// <summary>
 		/// Gets the closest block of the provided date
@@ -26,7 +27,7 @@ namespace Moralis.Web3Api.Interfaces
 		/// <param name="chain">The chain to query</param>
 		/// <param name="providerUrl">web3 provider url to user when using local dev chain</param>
 		/// <returns>Returns the blocknumber and corresponding date and timestamp</returns>
-		BlockDate GetDateToBlock (string date, ChainList chain, string providerUrl=null);
+		Task<BlockDate> GetDateToBlock (string date, ChainList chain, string providerUrl=null);
 
 		/// <summary>
 		/// Gets the logs from an address
@@ -61,7 +62,7 @@ namespace Moralis.Web3Api.Interfaces
 		/// <param name="topic2">topic2</param>
 		/// <param name="topic3">topic3</param>
 		/// <returns>Returns the logs of an address</returns>
-		LogEventByAddress GetLogsByAddress (string address, ChainList chain, string subdomain=null, string blockNumber=null, string fromBlock=null, string toBlock=null, string fromDate=null, string toDate=null, string topic0=null, string topic1=null, string topic2=null, string topic3=null);
+		Task<LogEventByAddress> GetLogsByAddress (string address, ChainList chain, string subdomain=null, string blockNumber=null, string fromBlock=null, string toBlock=null, string fromDate=null, string toDate=null, string topic0=null, string topic1=null, string topic2=null, string topic3=null);
 
 		/// <summary>
 		/// Gets NFT transfers by block number or block hash
@@ -71,8 +72,10 @@ namespace Moralis.Web3Api.Interfaces
 		/// <param name="subdomain">The subdomain of the moralis server to use (Only use when selecting local devchain as chain)</param>
 		/// <param name="offset">offset</param>
 		/// <param name="limit">limit</param>
+		/// <param name="cursor">The cursor returned in the last response (for getting the next page)
+		/// </param>
 		/// <returns>Returns the contents of a block</returns>
-		NftTransferCollection GetNFTTransfersByBlock (string blockNumberOrHash, ChainList chain, string subdomain=null, int? offset=null, int? limit=null);
+		Task<NftTransferCollection> GetNFTTransfersByBlock (string blockNumberOrHash, ChainList chain, string subdomain=null, int? offset=null, int? limit=null, string cursor=null);
 
 		/// <summary>
 		/// Gets the contents of a block transaction by hash
@@ -80,8 +83,8 @@ namespace Moralis.Web3Api.Interfaces
 		/// <param name="transactionHash">The transaction hash</param>
 		/// <param name="chain">The chain to query</param>
 		/// <param name="subdomain">The subdomain of the moralis server to use (Only use when selecting local devchain as chain)</param>
-		/// <returns>Returns the contents of a block transaction</returns>
-		BlockTransaction GetTransaction (string transactionHash, ChainList chain, string subdomain=null);
+		/// <returns>Transaction details by transaction hash</returns>
+		Task<BlockTransaction> GetTransaction (string transactionHash, ChainList chain, string subdomain=null);
 
 		/// <summary>
 		/// Gets events in descending order based on block number
@@ -111,7 +114,7 @@ namespace Moralis.Web3Api.Interfaces
 		/// <param name="offset">offset</param>
 		/// <param name="limit">limit</param>
 		/// <returns>Returns a collection of events by topic</returns>
-		List<LogEvent> GetContractEvents (string address, string topic, object abi, ChainList chain, string subdomain=null, string providerUrl=null, int? fromBlock=null, int? toBlock=null, string fromDate=null, string toDate=null, int? offset=null, int? limit=null);
+		Task<List<LogEvent>> GetContractEvents (string address, string topic, RunContractDto abi, ChainList chain, string subdomain=null, string providerUrl=null, int? fromBlock=null, int? toBlock=null, string fromDate=null, string toDate=null, int? offset=null, int? limit=null);
 
 		/// <summary>
 		/// Runs a given function of a contract abi and returns readonly data
@@ -123,7 +126,7 @@ namespace Moralis.Web3Api.Interfaces
 		/// <param name="subdomain">The subdomain of the moralis server to use (Only use when selecting local devchain as chain)</param>
 		/// <param name="providerUrl">web3 provider url to user when using local dev chain</param>
 		/// <returns>Returns response of the function executed</returns>
-		string RunContractFunction (string address, string functionName, RunContractDto abi, ChainList chain, string subdomain=null, string providerUrl=null);
+		Task<string> RunContractFunction (string address, string functionName, RunContractDto abi, ChainList chain, string subdomain=null, string providerUrl=null);
 
 	}
 }

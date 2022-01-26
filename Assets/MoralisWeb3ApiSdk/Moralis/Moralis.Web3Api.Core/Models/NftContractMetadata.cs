@@ -27,20 +27,6 @@ namespace Moralis.Web3Api.Models
 		public string Name { get; set; }
 
 		/// <summary>
-		/// The abi of the token Contract
-		/// </summary>
-		[DataMember(Name = "abi", EmitDefaultValue = false)]
-		[JsonProperty(PropertyName = "abi")]
-		public string Abi { get; set; }
-
-		/// <summary>
-		/// value -1 if the contract does not support token_uri
-		/// </summary>
-		[DataMember(Name = "supports_token_uri", EmitDefaultValue = false)]
-		[JsonProperty(PropertyName = "supports_token_uri")]
-		public int? SupportsTokenUri { get; set; }
-
-		/// <summary>
 		/// Timestamp of when the contract was last synced with the node
 		/// </summary>
 		[DataMember(Name = "synced_at", EmitDefaultValue = false)]
@@ -74,8 +60,6 @@ namespace Moralis.Web3Api.Models
 			sb.Append("class NftContractMetadata{");
 			sb.Append("  TokenAddress ").Append(TokenAddress).Append("\n");
 			sb.Append("  Name ").Append(Name).Append("\n");
-			sb.Append("  Abi ").Append(Abi).Append("\n");
-			sb.Append("  SupportsTokenUri ").Append(SupportsTokenUri).Append("\n");
 			sb.Append("  SyncedAt ").Append(SyncedAt).Append("\n");
 			sb.Append("  Symbol ").Append(Symbol).Append("\n");
 			sb.Append("  ContractType ").Append(ContractType).Append("\n");

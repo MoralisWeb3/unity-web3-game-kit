@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Moralis.Web3Api.Models;
 
@@ -35,7 +36,7 @@ namespace Moralis.Web3Api.Interfaces
 		/// <param name="offset">offset</param>
 		/// <param name="limit">limit</param>
 		/// <returns>Returns a collection of native transactions.</returns>
-		TransactionCollection GetTransactions (string address, ChainList chain, string subdomain=null, int? fromBlock=null, int? toBlock=null, string fromDate=null, string toDate=null, int? offset=null, int? limit=null);
+		Task<TransactionCollection> GetTransactions (string address, ChainList chain, string subdomain=null, int? fromBlock=null, int? toBlock=null, string fromDate=null, string toDate=null, int? offset=null, int? limit=null);
 
 		/// <summary>
 		/// Gets native balance for a specific address
@@ -45,7 +46,7 @@ namespace Moralis.Web3Api.Interfaces
 		/// <param name="providerUrl">web3 provider url to user when using local dev chain</param>
 		/// <param name="toBlock">The block number on which the balances should be checked</param>
 		/// <returns>Returns native balance for a specific address</returns>
-		NativeBalance GetNativeBalance (string address, ChainList chain, string providerUrl=null, decimal? toBlock=null);
+		Task<NativeBalance> GetNativeBalance (string address, ChainList chain, string providerUrl=null, decimal? toBlock=null);
 
 		/// <summary>
 		/// Gets token balances for a specific address
@@ -54,8 +55,9 @@ namespace Moralis.Web3Api.Interfaces
 		/// <param name="chain">The chain to query</param>
 		/// <param name="subdomain">The subdomain of the moralis server to use (Only use when selecting local devchain as chain)</param>
 		/// <param name="toBlock">The block number on which the balances should be checked</param>
+		/// <param name="tokenAddresses">The addresses to get balances for (Optional)</param>
 		/// <returns>Returns token balances for a specific address</returns>
-		List<Erc20TokenBalance> GetTokenBalances (string address, ChainList chain, string subdomain=null, decimal? toBlock=null);
+		Task<List<Erc20TokenBalance>> GetTokenBalances (string address, ChainList chain, string subdomain=null, decimal? toBlock=null, List<String> tokenAddresses=null);
 
 		/// <summary>
 		/// Gets ERC20 token transactions in descending order based on block number
@@ -82,7 +84,7 @@ namespace Moralis.Web3Api.Interfaces
 		/// <param name="offset">offset</param>
 		/// <param name="limit">limit</param>
 		/// <returns>Returns a collection of token transactions.</returns>
-		Erc20TransactionCollection GetTokenTransfers (string address, ChainList chain, string subdomain=null, int? fromBlock=null, int? toBlock=null, string fromDate=null, string toDate=null, int? offset=null, int? limit=null);
+		Task<Erc20TransactionCollection> GetTokenTransfers (string address, ChainList chain, string subdomain=null, int? fromBlock=null, int? toBlock=null, string fromDate=null, string toDate=null, int? offset=null, int? limit=null);
 
 		/// <summary>
 		/// Gets NFTs owned by the given address
@@ -97,8 +99,9 @@ namespace Moralis.Web3Api.Interfaces
 		/// <param name="format">The format of the token id</param>
 		/// <param name="offset">offset</param>
 		/// <param name="limit">limit</param>
+		/// <param name="tokenAddresses">The addresses to get balances for (Optional)</param>
 		/// <returns>Returns a collection of nft owners</returns>
-		NftOwnerCollection GetNFTs (string address, ChainList chain, string format=null, int? offset=null, int? limit=null);
+		Task<NftOwnerCollection> GetNFTs (string address, ChainList chain, string format=null, int? offset=null, int? limit=null, List<String> tokenAddresses=null);
 
 		/// <summary>
 		/// Gets the transfers of the tokens matching the given parameters
@@ -109,8 +112,10 @@ namespace Moralis.Web3Api.Interfaces
 		/// <param name="direction">The transfer direction</param>
 		/// <param name="offset">offset</param>
 		/// <param name="limit">limit</param>
+		/// <param name="cursor">The cursor returned in the last response (for getting the next page)
+		/// </param>
 		/// <returns>Returns a collection of NFT transfer</returns>
-		NftTransferCollection GetNFTTransfers (string address, ChainList chain, string format=null, string direction=null, int? offset=null, int? limit=null);
+		Task<NftTransferCollection> GetNFTTransfers (string address, ChainList chain, string format=null, string direction=null, int? offset=null, int? limit=null, string cursor=null);
 
 		/// <summary>
 		/// Gets NFTs owned by the given address
@@ -126,7 +131,7 @@ namespace Moralis.Web3Api.Interfaces
 		/// <param name="offset">offset</param>
 		/// <param name="limit">limit</param>
 		/// <returns>Returns a collection of nft owners</returns>
-		NftOwnerCollection GetNFTsForContract (string address, string tokenAddress, ChainList chain, string format=null, int? offset=null, int? limit=null);
+		Task<NftOwnerCollection> GetNFTsForContract (string address, string tokenAddress, ChainList chain, string format=null, int? offset=null, int? limit=null);
 
 	}
 }

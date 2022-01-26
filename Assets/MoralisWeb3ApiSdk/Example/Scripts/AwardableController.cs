@@ -87,7 +87,7 @@ public class AwardableController : MonoBehaviour
                     ChainList.mumbai);
 #else
                 NftOwnerCollection noc =
-                    MoralisInterface.GetClient().Web3Api.Account.GetNFTsForContract(addr.ToLower(),
+                    await MoralisInterface.GetClient().Web3Api.Account.GetNFTsForContract(addr.ToLower(),
                     AwardContractAddress,
                     ChainList.mumbai);
 #endif

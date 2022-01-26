@@ -48,6 +48,7 @@ using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using MoralisWeb3ApiSdk.Example.Scripts;
 #else
+using System.Threading.Tasks;
 using Moralis.Platform.Objects;
 using Moralis.Web3Api.Models;
 #endif
@@ -90,7 +91,9 @@ public class TokenListController : MonoBehaviour
 
             await BuildTokenList(balances);
 #else
-            StartCoroutine(BuildTokenList(user));
+            List<Erc20TokenBalance> tokens = await LoadTokens(user);
+
+            StartCoroutine( BuildTokenList(tokens));
 #endif
             
         }
@@ -175,16 +178,25 @@ public class TokenListController : MonoBehaviour
         }
     }
 #else
-    IEnumerator BuildTokenList(MoralisUser user)
+    private async Task<List<Erc20TokenBalance>> LoadTokens(MoralisUser user)
     {
+        List<Erc20TokenBalance> tokens = new List<Erc20TokenBalance>();
+
         if (user != null)
         {
             string addr = user.authData["moralisEth"]["id"].ToString();
 
-            List<Erc20TokenBalance> tokens =
-                MoralisInterface.GetClient().Web3Api.Account.GetTokenBalances(addr.ToLower(),
+            tokens = await MoralisInterface.GetClient().Web3Api.Account.GetTokenBalances(addr.ToLower(),
                                             (ChainList)ChainId);
+        }
 
+        return tokens;
+    }
+
+    IEnumerator BuildTokenList(List<Erc20TokenBalance> tokens)
+    {
+        if (tokens.Count > 0)
+        {
             foreach (Erc20TokenBalance token in tokens)
             {
                 // Ignor entry without symbol
