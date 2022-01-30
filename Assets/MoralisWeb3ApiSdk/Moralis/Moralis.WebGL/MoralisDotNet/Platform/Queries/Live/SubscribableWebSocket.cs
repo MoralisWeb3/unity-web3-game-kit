@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if UNITY_WEBGL
+using System;
 using System.Text;
 using System.Threading;
 using UnityEngine;
@@ -212,3 +213,4 @@ namespace Moralis.WebGL.Platform.Queries.Live
         }
     }
 }
+#endif

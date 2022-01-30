@@ -1,4 +1,5 @@
-﻿using Moralis.WebGL.Platform.Abstractions;
+﻿#if UNITY_WEBGL
+using Moralis.WebGL.Platform.Abstractions;
 using System;
 using System.Collections.Generic;
 using Moralis.Network.Client;
@@ -73,3 +74,4 @@ namespace Moralis.WebGL.Platform.Queries.Live
         }
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if UNITY_WEBGL
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
@@ -390,3 +391,4 @@ namespace Moralis.WebGL.Platform.Services.ClientServices
         }
     }
 }
+#endif

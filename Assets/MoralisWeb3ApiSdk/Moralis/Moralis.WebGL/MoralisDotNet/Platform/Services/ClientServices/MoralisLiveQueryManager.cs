@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if UNITY_WEBGL
+using System;
 using System.Collections.Generic;
 using Moralis.WebGL.Platform.Abstractions;
 using Moralis.WebGL.Platform.Objects;
@@ -93,3 +94,4 @@ namespace Moralis.WebGL.Platform.Services.ClientServices
         }
     }
 }
+#endif

@@ -7,3 +7,11 @@ Update Mode: updateDependencies
 The following packages were updated:
   com.unity.collab-proxy from version 1.13.5 to 1.15.4
   com.unity.ide.visualstudio from version 2.0.11 to 2.0.12
+
+=== Thu Jan 27 14:19:27 2022
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.collab-proxy from version 1.15.4 to 1.15.7
