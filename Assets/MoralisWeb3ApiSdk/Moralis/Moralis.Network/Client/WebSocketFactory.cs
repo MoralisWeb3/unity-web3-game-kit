@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if UNITY_WEBGL
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.WebSockets;
@@ -143,3 +144,4 @@ namespace Moralis.Network.Client
 */
     }
 }
+#endif

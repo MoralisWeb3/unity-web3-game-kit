@@ -605,6 +605,17 @@ public class MoralisInterface : MonoBehaviour
         }
 
         /// <summary>
+        /// Login using username and password.
+        /// </summary>
+        /// <param name="username">username / Email</param>
+        /// <param name="password">user password</param>
+        /// <returns>MoralisUser</returns>
+        public static Task<MoralisUser> LogInAsync(string username, string password)
+        {
+            return moralis.UserService.LogInAsync(username, password, moralis.ServiceHub);
+        }
+
+        /// <summary>
         /// Logout the user session.
         /// </summary>
         /// <returns></returns>

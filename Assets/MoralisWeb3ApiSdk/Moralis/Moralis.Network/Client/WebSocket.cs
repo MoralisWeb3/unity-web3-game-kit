@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if UNITY_WEBGL
+using System;
 using System.Collections.Generic;
 using AOT;
 using System.Runtime.InteropServices;
@@ -169,3 +170,4 @@ namespace Moralis.Network.Client
 
   }
 }
+#endif

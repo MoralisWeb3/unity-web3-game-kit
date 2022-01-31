@@ -24,14 +24,14 @@ namespace Moralis.Platform.Objects
         {
             this.username = userName;
             this.authData = authData ?? new Dictionary<string, IDictionary<string, object>>();
-            this.sessionToken = sessionToken;
+            this.SessionToken = sessionToken;
         }
 
         public string username;
 
         public IDictionary<string, IDictionary<string, object>> authData; 
 
-        public string sessionToken;
+        //public string sessionToken;
         public string password;
         public string email;
 
