@@ -706,9 +706,8 @@ namespace Moralis.Platform.Queries
             Dictionary<string, object> result = new Dictionary<string, object>();
 
             if (Filters != null)
-                result["where"] = JsonSerializer.Serialize(Filters);//PointerOrLocalIdEncoder.Instance.Encode(Filters, Services);
-            else
-                result["where"] = new object();
+                result["where"] = JsonSerializer.Serialize(Filters);
+
             if (Orderings != null)
                 result["order"] = String.Join(",", Orderings.ToArray());
             if (SkipAmount != null)
