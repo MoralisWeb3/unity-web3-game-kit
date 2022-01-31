@@ -189,8 +189,9 @@ namespace Moralis.WebGL
 
         public void Dispose()
         {
+#if UNITY_WEBGL
             MoralisLiveQueryManager.DisposeService();
-
+#endif
         }
 
         /// <summary>

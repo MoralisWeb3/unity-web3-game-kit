@@ -102,7 +102,9 @@ namespace WalletConnectSharp.Unity.Network
             };
 
             nextClient.OnMessage += OnMessageReceived;
+#if !UNITY_EDITOR
             nextClient.OnClose += ClientTryReconnect;
+#endif
             nextClient.OnError += (e) => {
 
                 Debug.Log("[WebSocket] OnError " + e);

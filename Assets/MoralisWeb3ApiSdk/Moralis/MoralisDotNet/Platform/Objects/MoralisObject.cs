@@ -17,8 +17,8 @@ namespace Moralis.Platform.Objects
     {
         public MoralisObject()
         {
-            this.ClassName = String.Empty;
-            this.objectId = String.Empty;
+            this.ClassName = this.GetType().Name;
+            this.objectId = null; 
             this.createdAt = DateTime.Now;
             this.updatedAt = DateTime.Now;
             this.ACL = new MoralisAcl();
