@@ -81,7 +81,7 @@ namespace Moralis.WebGL.Platform.Services
             //ConfigurationController ??= new ParseConfigurationController(CommandRunner, CacheController, Decoder);
             FileService ??= new MoralisFileService(CommandRunner, JsonSerializer);
             ObjectService ??= new MoralisObjectService(CommandRunner, ServerConnectionData, JsonSerializer);
-            QueryService ??= new MoralisQueryService(CommandRunner, this.CurrentUserService.CurrentUser.SessionToken, JsonSerializer);
+            QueryService ??= new MoralisQueryService(CommandRunner, this.CurrentUserService.CurrentUser.SessionToken, JsonSerializer, ObjectService);
             SessionService ??= new MoralisSessionService<TUser>(CommandRunner, JsonSerializer);
             UserService ??= new MoralisUserService<TUser>(CommandRunner, JsonSerializer);
             CurrentUserService ??= new MoralisCurrentUserService<TUser>(CacheService, JsonSerializer);

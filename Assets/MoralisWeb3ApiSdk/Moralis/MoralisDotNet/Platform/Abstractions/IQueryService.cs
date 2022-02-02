@@ -9,6 +9,7 @@ namespace Moralis.Platform.Abstractions
 {
     public interface IQueryService
     {
+        IObjectService ObjectService { get; }
         //Task<IEnumerable<T>> FindAsync<T>(MoralisQuery<T> query, MoralisUser user, CancellationToken cancellationToken = default) where T : MoralisObject;
 
         //Task<IEnumerable<T>> AggregateAsync<T>(MoralisQuery<T> query, MoralisUser user, CancellationToken cancellationToken = default) where T : MoralisObject;

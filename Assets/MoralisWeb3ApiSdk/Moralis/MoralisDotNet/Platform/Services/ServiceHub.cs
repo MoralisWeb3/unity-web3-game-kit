@@ -56,7 +56,7 @@ namespace Moralis.Platform.Services
         public IUserService<TUser> UserService => LateInitializer.GetValue(() => new MoralisUserService<TUser>(CommandRunner, JsonSerializer));
         public ICurrentUserService<TUser> CurrentUserService => LateInitializer.GetValue(() => new MoralisCurrentUserService<TUser>(CacheService, JsonSerializer));
         public IObjectService ObjectService => LateInitializer.GetValue(() => new MoralisObjectService(CommandRunner, ServerConnectionData, JsonSerializer));
-        public IQueryService QueryService => LateInitializer.GetValue(() => new MoralisQueryService(CommandRunner, this.CurrentUserService.CurrentUser?.SessionToken, JsonSerializer));
+        public IQueryService QueryService => LateInitializer.GetValue(() => new MoralisQueryService(CommandRunner, this.CurrentUserService.CurrentUser?.SessionToken, JsonSerializer, ObjectService));
         public ISessionService<TUser> SessionService => LateInitializer.GetValue(() => new MoralisSessionService<TUser>(CommandRunner, JsonSerializer));
         public ICloudFunctionService CloudFunctionService => LateInitializer.GetValue(() => new MoralisCloudFunctionService(CommandRunner, ServerConnectionData, JsonSerializer));
         public IFileService FileService => LateInitializer.GetValue(() => new MoralisFileService(CommandRunner, JsonSerializer));

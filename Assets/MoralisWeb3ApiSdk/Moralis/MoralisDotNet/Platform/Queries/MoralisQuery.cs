@@ -591,7 +591,18 @@ namespace Moralis.Platform.Queries
         public Task<IEnumerable<T>> AggregateAsync(CancellationToken cancellationToken)
         {
             EnsureNotInstallationQuery();
-            return QueryService.AggregateAsync<T>(this, SessionToken, cancellationToken).OnSuccess(task => task.Result);
+            //return QueryService.AggregateAsync<T>(this, SessionToken, cancellationToken).OnSuccess(task => task.Result);
+            return QueryService.AggregateAsync<T>(this, SessionToken, cancellationToken).OnSuccess(task => {
+                IEnumerable<T> items = task.Result;
+
+                foreach (T i in items)
+                {
+                    i.ObjectService = this.QueryService.ObjectService;
+                    i.SessionToken = this.SessionToken;
+                }
+
+                return items;
+            });
         }
 
         /// <summary>
@@ -608,7 +619,18 @@ namespace Moralis.Platform.Queries
         public Task<IEnumerable<T>> FindAsync(CancellationToken cancellationToken)
         {
             EnsureNotInstallationQuery();
-            return QueryService.FindAsync(this, SessionToken, cancellationToken).OnSuccess(task => task.Result);
+            return QueryService.FindAsync(this, SessionToken, cancellationToken).OnSuccess(task =>
+            {
+                IEnumerable<T> items = task.Result;
+
+                foreach (T i in items)
+                {
+                    i.ObjectService = this.QueryService.ObjectService;
+                    i.SessionToken = this.SessionToken;
+                }
+
+                return items;
+            }); //task.Result);
         }
 
         /// <summary>
@@ -625,7 +647,17 @@ namespace Moralis.Platform.Queries
         public Task<IEnumerable<T>> DistinctAsync(CancellationToken cancellationToken)
         {
             EnsureNotInstallationQuery();
-            return QueryService.DistinctAsync(this, SessionToken, cancellationToken).OnSuccess(task => task.Result);
+            return QueryService.DistinctAsync(this, SessionToken, cancellationToken).OnSuccess(task => {
+                IEnumerable<T> items = task.Result;
+
+                foreach (T i in items)
+                {
+                    i.ObjectService = this.QueryService.ObjectService;
+                    i.SessionToken = this.SessionToken;
+                }
+
+                return items;
+            }); // task.Result);
         }
 
         /// <summary>
@@ -642,7 +674,14 @@ namespace Moralis.Platform.Queries
         public Task<T> FirstOrDefaultAsync(CancellationToken cancellationToken)
         {
             EnsureNotInstallationQuery();
-            return QueryService.FirstAsync<T>(this, SessionToken, cancellationToken).OnSuccess(task => task.Result);
+            return QueryService.FirstAsync<T>(this, SessionToken, cancellationToken).OnSuccess(task => {
+                T i = task.Result;
+
+                i.ObjectService = this.QueryService.ObjectService;
+                i.SessionToken = this.SessionToken;
+
+                return i;
+            }); // task.Result);
         }
 
         /// <summary>
