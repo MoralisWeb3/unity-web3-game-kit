@@ -22,7 +22,9 @@ namespace Moralis.WebGL.Platform.Services.Infrastructure
         string SessionToken { get; }
         //IMoralisDataDecoder Decoder { get; }
 
-        public MoralisQueryService(IMoralisCommandRunner commandRunner, string sessionToken, IJsonSerializer jsonSerializer) => (CommandRunner, SessionToken, JsonSerializer) = (commandRunner, sessionToken, jsonSerializer);
+        public IObjectService ObjectService { get; }
+
+        public MoralisQueryService(IMoralisCommandRunner commandRunner, string sessionToken, IJsonSerializer jsonSerializer, IObjectService objectService) => (CommandRunner, SessionToken, JsonSerializer, ObjectService) = (commandRunner, sessionToken, jsonSerializer, objectService);
 
         public async UniTask<IEnumerable<T>> FindAsync<T>(MoralisQuery<T> query, string sessionToken, CancellationToken cancellationToken = default) where T : MoralisObject
         {

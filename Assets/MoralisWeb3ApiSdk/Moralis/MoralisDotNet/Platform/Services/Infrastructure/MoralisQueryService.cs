@@ -20,7 +20,9 @@ namespace Moralis.Platform.Services.Infrastructure
         IJsonSerializer JsonSerializer { get; }
         string SessionToken { get; }
 
-        public MoralisQueryService(IMoralisCommandRunner commandRunner, string sessionToken, IJsonSerializer jsonSerializer) => (CommandRunner, SessionToken, JsonSerializer) = (commandRunner, sessionToken, jsonSerializer);
+        public IObjectService ObjectService { get; }
+
+        public MoralisQueryService(IMoralisCommandRunner commandRunner, string sessionToken, IJsonSerializer jsonSerializer, IObjectService objectService) => (CommandRunner, SessionToken, JsonSerializer, ObjectService) = (commandRunner, sessionToken, jsonSerializer, objectService);
 
         public Task<IEnumerable<T>> FindAsync<T>(MoralisQuery<T> query, string sessionToken, CancellationToken cancellationToken = default) where T : MoralisObject => FindAsync(query.ClassName, query.BuildParameters(), sessionToken, cancellationToken).OnSuccess(t => JsonSerializer.Deserialize<List<T>>(t.Result) as IEnumerable<T>);
 

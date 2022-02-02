@@ -47,7 +47,6 @@ namespace Moralis.Platform.Services.ClientServices
                 if ((int)task.Result.Item1 < 300)
                 {
                     user = JsonSerializer.Deserialize<TUser>(task.Result.Item2.ToString());
-                    user.SessionToken = user.SessionToken;
                 }
 
                 return user;
