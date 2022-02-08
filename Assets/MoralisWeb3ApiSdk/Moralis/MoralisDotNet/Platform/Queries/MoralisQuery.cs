@@ -98,6 +98,10 @@ namespace Moralis.Platform.Queries
             {
                 Filters = new Dictionary<string, object>(MergeWhereClauses(where));
             }
+            else
+            {
+                Filters = new Dictionary<string, object>();
+            }
 
             if (includes is { })
             {
@@ -598,7 +602,7 @@ namespace Moralis.Platform.Queries
                 foreach (T i in items)
                 {
                     i.ObjectService = this.QueryService.ObjectService;
-                    i.SessionToken = this.SessionToken;
+                    i.sessionToken = this.SessionToken;
                 }
 
                 return items;
@@ -626,7 +630,7 @@ namespace Moralis.Platform.Queries
                 foreach (T i in items)
                 {
                     i.ObjectService = this.QueryService.ObjectService;
-                    i.SessionToken = this.SessionToken;
+                    i.sessionToken = this.SessionToken;
                 }
 
                 return items;
@@ -653,7 +657,7 @@ namespace Moralis.Platform.Queries
                 foreach (T i in items)
                 {
                     i.ObjectService = this.QueryService.ObjectService;
-                    i.SessionToken = this.SessionToken;
+                    i.sessionToken = this.SessionToken;
                 }
 
                 return items;
@@ -678,7 +682,7 @@ namespace Moralis.Platform.Queries
                 T i = task.Result;
 
                 i.ObjectService = this.QueryService.ObjectService;
-                i.SessionToken = this.SessionToken;
+                i.sessionToken = this.SessionToken;
 
                 return i;
             }); // task.Result);
@@ -746,6 +750,8 @@ namespace Moralis.Platform.Queries
 
             if (Filters != null)
                 result["where"] = JsonSerializer.Serialize(Filters);
+            else
+                result["where"] = new Dictionary<string, object>();
 
             if (Orderings != null)
                 result["order"] = String.Join(",", Orderings.ToArray());
