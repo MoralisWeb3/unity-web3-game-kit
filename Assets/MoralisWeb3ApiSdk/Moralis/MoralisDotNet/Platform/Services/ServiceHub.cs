@@ -56,7 +56,7 @@ namespace Moralis.Platform.Services
         public IUserService<TUser> UserService => LateInitializer.GetValue(() => new MoralisUserService<TUser>(CommandRunner, JsonSerializer));
         public ICurrentUserService<TUser> CurrentUserService => LateInitializer.GetValue(() => new MoralisCurrentUserService<TUser>(CacheService, JsonSerializer));
         public IObjectService ObjectService => LateInitializer.GetValue(() => new MoralisObjectService(CommandRunner, ServerConnectionData, JsonSerializer));
-        public IQueryService QueryService => LateInitializer.GetValue(() => new MoralisQueryService(CommandRunner, this.CurrentUserService.CurrentUser?.SessionToken, JsonSerializer, ObjectService));
+        public IQueryService QueryService => LateInitializer.GetValue(() => new MoralisQueryService(CommandRunner, this.CurrentUserService.CurrentUser?.sessionToken, JsonSerializer, ObjectService));
         public ISessionService<TUser> SessionService => LateInitializer.GetValue(() => new MoralisSessionService<TUser>(CommandRunner, JsonSerializer));
         public ICloudFunctionService CloudFunctionService => LateInitializer.GetValue(() => new MoralisCloudFunctionService(CommandRunner, ServerConnectionData, JsonSerializer));
         public IFileService FileService => LateInitializer.GetValue(() => new MoralisFileService(CommandRunner, JsonSerializer));
@@ -73,7 +73,7 @@ namespace Moralis.Platform.Services
             else
                 thing = (T)Activator.CreateInstance(typeof(T));
 
-            thing.SessionToken = this.CurrentUserService.CurrentUser?.SessionToken;
+            thing.sessionToken = this.CurrentUserService.CurrentUser?.sessionToken;
             thing.ObjectService = this.ObjectService;
 
             return thing;

@@ -164,7 +164,7 @@ namespace Moralis.WebGL
         public async UniTask<MoralisQuery<T>> Query<T>() where T : MoralisObject
         {
             MoralisUser user = await GetCurrentUserAsync();
-            return new MoralisQuery<T>(this.QueryService, InstallationService, moralisService.ServerConnectionData, moralisService.JsonSerializer, user.SessionToken); //, logger);
+            return new MoralisQuery<T>(this.QueryService, InstallationService, moralisService.ServerConnectionData, moralisService.JsonSerializer, user.sessionToken); //, logger);
         }
 
         public T Create<T>(object[] parameters = null) where T : MoralisObject

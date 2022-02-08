@@ -162,7 +162,7 @@ namespace Moralis
 
         public MoralisQuery<T> Query<T>() where T : MoralisObject
         {
-            return new MoralisQuery<T>(this.QueryService, InstallationService, moralisService.ServerConnectionData, moralisService.JsonSerializer, GetCurrentUser().SessionToken); //, logger);
+            return new MoralisQuery<T>(this.QueryService, InstallationService, moralisService.ServerConnectionData, moralisService.JsonSerializer, GetCurrentUser().sessionToken); //, logger);
         }
 
         public T Create<T>(object[] parameters = null) where T : MoralisObject

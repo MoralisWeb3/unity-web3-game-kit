@@ -71,7 +71,6 @@ namespace Moralis.WebGL.Platform.Services.ClientServices
             if ((int)cmdResp.Item1 < 300)
             {
                 user = JsonSerializer.Deserialize<TUser>(cmdResp.Item2.ToString());
-                user.SessionToken = user.sessionToken;
             }
             else
             {

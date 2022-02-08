@@ -66,7 +66,7 @@ namespace Moralis.Platform.Services
             else
                 thing = (T)Activator.CreateInstance(typeof(T));
 
-            thing.SessionToken = this.CurrentUserService.CurrentUser.SessionToken;
+            thing.sessionToken = this.CurrentUserService.CurrentUser.sessionToken;
             thing.ObjectService = this.ObjectService;
 
             return thing;

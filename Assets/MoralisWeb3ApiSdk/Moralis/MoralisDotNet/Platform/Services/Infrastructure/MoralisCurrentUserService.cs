@@ -92,7 +92,7 @@ namespace Moralis.Platform.Services.Infrastructure
             }
         }
 
-        public Task<string> GetCurrentSessionTokenAsync(IServiceHub<TUser> serviceHub, CancellationToken cancellationToken = default) => GetAsync(serviceHub, cancellationToken).OnSuccess(task => task.Result?.SessionToken);
+        public Task<string> GetCurrentSessionTokenAsync(IServiceHub<TUser> serviceHub, CancellationToken cancellationToken = default) => GetAsync(serviceHub, cancellationToken).OnSuccess(task => task.Result?.sessionToken);
 
         public Task LogOutAsync(IServiceHub<TUser> serviceHub, CancellationToken cancellationToken = default) => TaskQueue.Enqueue(toAwait => toAwait.ContinueWith(_ => GetAsync(serviceHub, cancellationToken)).Unwrap().OnSuccess(task => ClearFromDisk()), cancellationToken);
 

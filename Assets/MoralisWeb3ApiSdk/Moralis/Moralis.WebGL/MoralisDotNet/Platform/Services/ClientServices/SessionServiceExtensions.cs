@@ -54,7 +54,7 @@ namespace Moralis.WebGL.Platform.Services.ClientServices
             {
                 MoralisSession ms = await serviceHub.SessionService.UpgradeToRevocableSessionAsync(sessionToken, serviceHub, cancellationToken);
 
-                return ms.SessionToken;
+                return ms.sessionToken;
             }
         }
     }

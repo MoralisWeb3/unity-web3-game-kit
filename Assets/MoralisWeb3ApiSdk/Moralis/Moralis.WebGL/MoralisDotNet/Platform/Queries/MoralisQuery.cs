@@ -603,7 +603,7 @@ namespace Moralis.WebGL.Platform.Queries
             foreach (T i in aggResp)
             {
                 i.ObjectService = this.QueryService.ObjectService;
-                i.SessionToken = this.SessionToken;
+                i.sessionToken = this.SessionToken;
             }
 
             return aggResp;
@@ -628,7 +628,7 @@ namespace Moralis.WebGL.Platform.Queries
             foreach (T i in items)
             {
                 i.ObjectService = this.QueryService.ObjectService;
-                i.SessionToken = this.SessionToken;
+                i.sessionToken = this.SessionToken;
             }
 
             return items;
@@ -653,7 +653,7 @@ namespace Moralis.WebGL.Platform.Queries
             foreach (T i in items)
             {
                 i.ObjectService = this.QueryService.ObjectService;
-                i.SessionToken = this.SessionToken;
+                i.sessionToken = this.SessionToken;
             }
 
             return items;
@@ -676,7 +676,7 @@ namespace Moralis.WebGL.Platform.Queries
             T item = await QueryService.FirstAsync<T>(this, SessionToken, cancellationToken);
 
             item.ObjectService = this.QueryService.ObjectService;
-            item.SessionToken = this.SessionToken;
+            item.sessionToken = this.SessionToken;
 
             return item;
         }
@@ -741,7 +741,7 @@ namespace Moralis.WebGL.Platform.Queries
             }
 
             result.ObjectService = this.QueryService.ObjectService;
-            result.SessionToken = this.SessionToken;
+            result.sessionToken = this.SessionToken;
 
             return result;
         }

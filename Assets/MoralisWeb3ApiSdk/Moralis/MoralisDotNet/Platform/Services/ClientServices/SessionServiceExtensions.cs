@@ -27,12 +27,12 @@ namespace Moralis.Platform.Services.ClientServices
         public static Task<MoralisSession> GetCurrentSessionAsync<TUser>(this IServiceHub<TUser> serviceHub, CancellationToken cancellationToken) where TUser : MoralisUser => serviceHub.GetCurrentSessionAsync<TUser>(cancellationToken).OnSuccess(task => task.Result switch
         {
             null => Task.FromResult<MoralisSession>(default),
-            { SessionToken: null } => Task.FromResult<MoralisSession>(default),
-            { SessionToken: { } sessionToken } => serviceHub.SessionService.GetSessionAsync(sessionToken, serviceHub, cancellationToken).OnSuccess(successTask => successTask.Result)
+            { sessionToken: null } => Task.FromResult<MoralisSession>(default),
+            { sessionToken: { } sessionToken } => serviceHub.SessionService.GetSessionAsync(sessionToken, serviceHub, cancellationToken).OnSuccess(successTask => successTask.Result)
         }).Unwrap();
 
         public static Task RevokeSessionAsync<TUser>(this IServiceHub<TUser> serviceHub, string sessionToken, CancellationToken cancellationToken) where TUser : MoralisUser => sessionToken is null || !serviceHub.SessionService.IsRevocableSessionToken(sessionToken) ? Task.CompletedTask : serviceHub.SessionService.RevokeAsync(sessionToken, cancellationToken);
 
-        public static Task<string> UpgradeToRevocableSessionAsync<TUser>(this IServiceHub<TUser> serviceHub, string sessionToken, CancellationToken cancellationToken) where TUser : MoralisUser => sessionToken is null || serviceHub.SessionService.IsRevocableSessionToken(sessionToken) ? Task.FromResult(sessionToken) : serviceHub.SessionService.UpgradeToRevocableSessionAsync(sessionToken, serviceHub, cancellationToken).OnSuccess(task => task.Result.SessionToken);
+        public static Task<string> UpgradeToRevocableSessionAsync<TUser>(this IServiceHub<TUser> serviceHub, string sessionToken, CancellationToken cancellationToken) where TUser : MoralisUser => sessionToken is null || serviceHub.SessionService.IsRevocableSessionToken(sessionToken) ? Task.FromResult(sessionToken) : serviceHub.SessionService.UpgradeToRevocableSessionAsync(sessionToken, serviceHub, cancellationToken).OnSuccess(task => task.Result.sessionToken);
     }
 }

@@ -55,7 +55,7 @@ namespace Moralis.Platform.Services
             else
                 thing = (T)Activator.CreateInstance(typeof(T));
 
-            thing.SessionToken = this.CurrentUserService.CurrentUser.SessionToken;
+            thing.sessionToken = this.CurrentUserService.CurrentUser.sessionToken;
             thing.ObjectService = this.ObjectService;
 
             return thing;
@@ -81,7 +81,7 @@ namespace Moralis.Platform.Services
             //ConfigurationController ??= new ParseConfigurationController(CommandRunner, CacheController, Decoder);
             FileService ??= new MoralisFileService(CommandRunner, JsonSerializer);
             ObjectService ??= new MoralisObjectService(CommandRunner, ServerConnectionData, JsonSerializer);
-            QueryService ??= new MoralisQueryService(CommandRunner, this.CurrentUserService.CurrentUser.SessionToken, JsonSerializer, ObjectService);
+            QueryService ??= new MoralisQueryService(CommandRunner, this.CurrentUserService.CurrentUser.sessionToken, JsonSerializer, ObjectService);
             SessionService ??= new MoralisSessionService<TUser>(CommandRunner, JsonSerializer);
             UserService ??= new MoralisUserService<TUser>(CommandRunner, JsonSerializer);
             CurrentUserService ??= new MoralisCurrentUserService<TUser>(CacheService, JsonSerializer);

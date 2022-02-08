@@ -1,5 +1,8 @@
 # Change Log
-## 1.0.3 (2022-01-xx)
+## 1.0.4 (2022-02-xx)
+- Integrate SolanaAPI to 
+
+## 1.0.3 (2022-01-21)
 - Wallet Connect Update Integration - fixes iOS and Android sign issues with Wallet Connect.
 - Nethereum integration - Include wallet connect / NEthereum library to support changing chain state in game.
 - Fix FileSave method, WebGL - Under WebGL the FileSave uri for the backend was incorrect, corrected this.

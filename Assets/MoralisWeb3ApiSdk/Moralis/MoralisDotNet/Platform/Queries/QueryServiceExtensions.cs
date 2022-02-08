@@ -9,7 +9,7 @@ namespace Moralis.Platform.Queries
 {
     public static class QueryServiceExtensions
     {
-        public static MoralisQuery<T> GetQuery<T, TUser>(this IServiceHub<TUser> serviceHub) where T : MoralisObject where TUser : MoralisUser => new MoralisQuery<T>(serviceHub.QueryService, serviceHub.InstallationService, serviceHub.ServerConnectionData, serviceHub.JsonSerializer, serviceHub.CurrentUserService.CurrentUser.SessionToken);
+        public static MoralisQuery<T> GetQuery<T, TUser>(this IServiceHub<TUser> serviceHub) where T : MoralisObject where TUser : MoralisUser => new MoralisQuery<T>(serviceHub.QueryService, serviceHub.InstallationService, serviceHub.ServerConnectionData, serviceHub.JsonSerializer, serviceHub.CurrentUserService.CurrentUser.sessionToken);
 
         /// <summary>
         /// Constructs a query that is the and of the given queries.
@@ -76,7 +76,7 @@ namespace Moralis.Platform.Queries
                 //andValue.Add(JsonConvert.DeserializeObject<IDictionary<string, object>>(where.ToString()));
             }
 
-            return new MoralisQuery<T>(new MoralisQuery<T>(serviceHub.QueryService, serviceHub.InstallationService, serviceHub.ServerConnectionData, serviceHub.JsonSerializer, serviceHub.CurrentUserService.CurrentUser?.SessionToken, className), where: new Dictionary<string, object> { ["$and"] = andValue });
+            return new MoralisQuery<T>(new MoralisQuery<T>(serviceHub.QueryService, serviceHub.InstallationService, serviceHub.ServerConnectionData, serviceHub.JsonSerializer, serviceHub.CurrentUserService.CurrentUser?.sessionToken, className), where: new Dictionary<string, object> { ["$and"] = andValue });
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Moralis.Platform.Queries
                 //orValue.Add(JsonConvert.DeserializeObject<IDictionary<string, object>>(where.ToString()));
             }
 
-            return new MoralisQuery<T>(new MoralisQuery<T>(serviceHub.QueryService, serviceHub.InstallationService, serviceHub.ServerConnectionData, serviceHub.JsonSerializer, serviceHub.CurrentUserService.CurrentUser.SessionToken, className), where: new Dictionary<string, object> { ["$or"] = orValue });
+            return new MoralisQuery<T>(new MoralisQuery<T>(serviceHub.QueryService, serviceHub.InstallationService, serviceHub.ServerConnectionData, serviceHub.JsonSerializer, serviceHub.CurrentUserService.CurrentUser.sessionToken, className), where: new Dictionary<string, object> { ["$or"] = orValue });
         }
 
         /// <summary>
@@ -162,7 +162,7 @@ namespace Moralis.Platform.Queries
                 norValue.Add(serviceHub.JsonSerializer.Deserialize<IDictionary<string, object>>(where.ToString()));
             }
 
-            return new MoralisQuery<T>(new MoralisQuery<T>(serviceHub.QueryService, serviceHub.InstallationService, serviceHub.ServerConnectionData, serviceHub.JsonSerializer, serviceHub.CurrentUserService.CurrentUser.SessionToken, className), where: new Dictionary<string, object> { ["$nor"] = norValue });
+            return new MoralisQuery<T>(new MoralisQuery<T>(serviceHub.QueryService, serviceHub.InstallationService, serviceHub.ServerConnectionData, serviceHub.JsonSerializer, serviceHub.CurrentUserService.CurrentUser.sessionToken, className), where: new Dictionary<string, object> { ["$nor"] = norValue });
         }
     }
 

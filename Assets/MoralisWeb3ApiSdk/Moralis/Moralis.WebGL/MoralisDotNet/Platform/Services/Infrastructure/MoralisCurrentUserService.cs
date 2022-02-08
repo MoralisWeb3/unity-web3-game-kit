@@ -117,7 +117,7 @@ namespace Moralis.WebGL.Platform.Services.Infrastructure
         {
             string result = null;
             TUser user = await GetAsync(serviceHub, cancellationToken);
-            result = user?.SessionToken;
+            result = user?.sessionToken;
 
             return result;
         }
