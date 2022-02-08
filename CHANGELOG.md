@@ -1,6 +1,6 @@
 # Change Log
-## 1.0.4 (2022-02-xx)
-- Integrate SolanaAPI to 
+## 1.0.4 (2022-02-08)
+- Integrate SolanaAPI into Moralis / Unity SDK 
 
 ## 1.0.3 (2022-01-21)
 - Wallet Connect Update Integration - fixes iOS and Android sign issues with Wallet Connect.
