@@ -47,6 +47,7 @@ using Cysharp.Threading.Tasks;
 
 using Moralis.WebGL;
 using Moralis.WebGL.Web3Api.Client;
+using Moralis.WebGL.SolanaApi.Client;
 using Moralis.WebGL.Platform;
 using Moralis.WebGL.Platform.Objects;
 #else
@@ -54,6 +55,7 @@ using System.Threading.Tasks;
 
 using Moralis;
 using Moralis.Web3Api.Client;
+using Moralis.SolanaApi.Client;
 using Moralis.Platform;
 using Moralis.Platform.Objects;
 #endif
@@ -145,12 +147,16 @@ public class MoralisInterface : MonoBehaviour
         // Define a Unity specific Json Serializer.
         UnityNewtosoftSerializer jsonSerializer = new UnityNewtosoftSerializer();
 
+        // If user passed web3apikey, add it to configuration.
+        if (web3ApiKey is { }) Moralis.WebGL.SolanaApi.Client.Configuration.ApiKey["X-API-Key"] = web3ApiKey;
+        if (web3ApiKey is { }) Moralis.WebGL.Web3Api.Client.Configuration.ApiKey["X-API-Key"] = web3ApiKey;
+
         // Create an instance of Moralis Server Client
         // NOTE: Web3ApiClient is optional. If you are not using the Moralis 
         // Web3Api REST API you can call the method with just connectionData
         // NOTE: If you are using a custom user object use 
         // new MoralisClient<YourUser>(connectionData, address, Web3ApiClient)
-        moralis = new MoralisClient(connectionData, new Web3ApiClient(), jsonSerializer);
+        moralis = new MoralisClient(connectionData, new Web3ApiClient(), new SolanaApiClient(), jsonSerializer);
 
         clientMetaData = clientMeta;
 
@@ -525,14 +531,15 @@ public class MoralisInterface : MonoBehaviour
             UnityNewtosoftSerializer jsonSerializer = new UnityNewtosoftSerializer();
 
             // If user passed web3apikey, add it to configuration.
-            if (web3ApiKey is { }) Configuration.ApiKey["X-API-Key"] = web3ApiKey;
+            if (web3ApiKey is { }) Moralis.SolanaApi.Client.Configuration.ApiKey["X-API-Key"] = web3ApiKey;
+            if (web3ApiKey is { }) Moralis.Web3Api.Client.Configuration.ApiKey["X-API-Key"] = web3ApiKey;
 
             // Create an instance of Moralis Server Client
             // NOTE: Web3ApiClient is optional. If you are not using the Moralis 
             // Web3Api REST API you can call the method with just connectionData
             // NOTE: If you are using a custom user object use 
             // new MoralisClient<YourUser>(connectionData, address, Web3ApiClient)
-            moralis = new MoralisClient(connectionData, new Web3ApiClient(), jsonSerializer);
+            moralis = new MoralisClient(connectionData, new Web3ApiClient(), new SolanaApiClient(), jsonSerializer);
 
             clientMetaData = clientMeta;
 

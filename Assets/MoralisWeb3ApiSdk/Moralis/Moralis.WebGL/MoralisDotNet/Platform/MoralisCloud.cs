@@ -21,7 +21,7 @@ namespace Moralis.WebGL.Platform
         {
             MoralisUser user = await this.ServiceHub.GetCurrentUserAsync();
 
-            T result = await this.ServiceHub.CloudFunctionService.CallFunctionAsync<T>(name, parameters, user is { } ? user.SessionToken : "");
+            T result = await this.ServiceHub.CloudFunctionService.CallFunctionAsync<T>(name, parameters, user is { } ? user.sessionToken : "");
 
             return result;
         }

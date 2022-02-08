@@ -20,11 +20,10 @@ namespace Moralis.Platform.Objects
             DateTime? createdAt = null,
             DateTime? updatedAt = null,
             MoralisAcl ACL = null,
-            string sessionToken = null) : base("_User", objectId, createdAt, updatedAt, ACL)
+            string sessionToken = null) : base("_User", objectId, sessionToken, createdAt, updatedAt, ACL)
         {
             this.username = userName;
             this.authData = authData ?? new Dictionary<string, IDictionary<string, object>>();
-            this.SessionToken = sessionToken;
         }
 
         public string username;

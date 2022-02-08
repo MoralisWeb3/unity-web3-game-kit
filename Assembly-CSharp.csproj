@@ -22,7 +22,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\Bin\Debug\</OutputPath>
-    <DefineConstants>UNITY_2020_3_26;UNITY_2020_3;UNITY_2020;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;USE_SEARCH_ENGINE_API;SCENE_TEMPLATE_MODULE;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_MONO_BDWGC;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;PLATFORM_STANDALONE;PLATFORM_STANDALONE_WIN;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_STANDARD_2_0;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER;MORALIS_UNITY</DefineConstants>
+    <DefineConstants>UNITY_2020_3_26;UNITY_2020_3;UNITY_2020;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_INCLUDE_TESTS;USE_SEARCH_ENGINE_API;SCENE_TEMPLATE_MODULE;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_NATIVE_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_RUNTIME_PERMISSIONS;ENABLE_ENGINE_CODE_STRIPPING;ENABLE_ONSCREEN_KEYBOARD;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_MONO_BDWGC;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;ENABLE_VIDEO;PLATFORM_ANDROID;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;UNITY_CAN_SHOW_SPLASH_SCREEN;UNITY_HAS_GOOGLEVR;UNITY_HAS_TANGO;ENABLE_SPATIALTRACKING;PLATFORM_EXTENDS_VULKAN_DEVICE;PLATFORM_HAS_MULTIPLE_SWAPCHAINS;UNITY_ANDROID_SUPPORTS_SHADOWFILES;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;NET_STANDARD_2_0;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER;MORALIS_UNITY</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
@@ -49,7 +49,7 @@
     <UnityProjectGenerator>Package</UnityProjectGenerator>
     <UnityProjectGeneratorVersion>2.0.12</UnityProjectGeneratorVersion>
     <UnityProjectType>Game:1</UnityProjectType>
-    <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
+    <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>2020.3.26f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
@@ -61,6 +61,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Abstractions\IServiceHubComposer.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Queries\Live\ErrorMessage.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Utilities\JsonUtilities.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.SolanaApi\CloudApi\AccountApi.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.Web3Api.Core\Models\NftMetadataCollection.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Constants.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.JsonRpc.Client\RpcClientTimeoutException.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\QueryHandlers\QueryHandlerBase.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\Blocks\EthGetBlockWithTransactionsByNumber.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.BlockchainProcessing\BlockProcessing\BlockCrawlOrchestrator.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.SolanaApi\Interfaces\INftApi.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Utilities\FlexibleDictionaryWrapper.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\Transactions\IEthCall.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.ABI\FunctionEncoding\ByteCodeLibraryLinker.cs" />
@@ -121,6 +123,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.BlockchainProcessing\BlockStorage\Entities\Mapping\AddressTransactionMapping.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.ABI\ABIDeserialisation\ExpandoConvertor.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Utilities\JsonUtilities.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.SolanaApi\Interfaces\ISolanaApi.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Services\RelativeCacheLocationMutator.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\Subscriptions\EthLogsSubscriptionRequestBuilder.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\IEthAccounts.cs" />
@@ -139,6 +142,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Signer\EthECDSASignatureFactory.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.Web3Api.Core\Models\ReservesCollection.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\EvmContractInstance.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.SolanaApi\Client\ApiException.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.Web3Api.Core\Models\Erc20Price.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Utilities\MoralisFileExtensions.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Services\ClientServices\MoralisCommandRunner.cs" />
@@ -168,6 +172,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\UnityNewtosoftSerializer.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Utilities\LockSet.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Queries\Live\SubscribeRequest.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.SolanaApi\Client\ApiClient.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.Web3Api.Core\Models\NftContractMetadata.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.ABI\Decoders\ITypeDecoder.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\DTOs\SyncingOutput.cs" />
@@ -176,6 +181,8 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\DTOs\Comparers\FilterLogBlockNumberTransactionIndexLogIndexComparer.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Abstractions\ISessionService.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\Subscriptions\EthSyncingSubscription.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.SolanaApi\Api\AccountApi.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.SolanaApi\CloudApi\NftApi.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Queries\Live\ConnectRequest.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Util\WaitStrategy.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\MessageEncodingServices\IContractMessageTransactionInputCreator.cs" />
@@ -220,6 +227,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Services\RelativeCacheLocationMutator.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\Scripts\TokenListController.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.BlockchainProcessing\BlockProcessing\CrawlerSteps\CrawlerStepCompleted.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.SolanaApi\Client\ApiException.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\ContractHandlers\IContractTransactionHandler.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Abstractions\IInstallationService.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\TransactionHandlers\MultiSend\MultiSend.cs" />
@@ -230,6 +238,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.Web3Api.Core\Models\Resolve.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.ABI\FunctionEncoding\Attributes\IFunctionOutputDTO.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\DTOs\ValueObjects\TransactionReceiptVO.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.SolanaApi\Api\NftApi.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\WalletConnectSharp\WalletConnectSharp.Core\Network\ICipher.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.ABI\Encoders\AddressTypeEncoder.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.Web3Api.Core\Interfaces\IStorageApi.cs" />
@@ -241,6 +250,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Signer\LegacyTransactionChainId.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\Compilation\IEthGetCompilers.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\WalletConnectSharp\WalletConnectSharp.Core\Events\Model\JsonRpcRequestEvent.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.SolanaApi\Interfaces\ISolanaApi.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.Web3Api.Core\Models\HistoricalNftTransfer.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Services\Models\WebRequest.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Abstractions\IJsonConvertible.cs" />
@@ -262,6 +272,8 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.Web3Api.Core\Interfaces\IWeb3Api.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Services\ClientServices\MoralisService.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Services\Infrastructure\InstallationService.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.SolanaApi\Models\SplNft.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.SolanaApi\Models\FileParameter.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Abstractions\ILiveQueryClient.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Services\ClientServices\MoralisCommandRunner.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\WalletConnectSharp\WalletConnectSharp.Core\Events\EventManager.cs" />
@@ -340,9 +352,11 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\ContractHandlers\ContractDeploymentHandler.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Hex\BigInteger.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisSubscriptionQuery.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.SolanaApi\Models\NftMetadata.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Signer\SignedTransactionBase.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Hex\HexConvertors\IHexConvertor.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\Exceptions\FilterInputNotForEventException.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.SolanaApi\Models\CloudFunctionResult.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.ABI\Model\ContractABI.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\Uncles\IEthGetUncleCountByBlockHash.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Shh\SymKey\ShhHasSymKey.cs" />
@@ -401,10 +415,12 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.ABI\FunctionEncoding\Attributes\FunctionOutputAttribute.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Shh\DTOs\MessageInput.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\WalletConnectSharp\WalletConnectSharp.Core\Models\Ethereum\WalletAddEthChain.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.SolanaApi\Models\SplTokenBalanace.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Util\Sha3Keccack.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.BlockchainProcessing\Processor\Processor.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\Services\EthApiFilterService.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\EventLog.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.SolanaApi\Client\Configuration.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\Transactions\EthCall.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.KeyStore\Crypto\SCrypt.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.Web3Api.Core\Models\WebRequest.cs" />
@@ -421,6 +437,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Unity\UnityRPCRequests.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Operations\MoralisDeleteOperation.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\DTOs\TransactionExtensions.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.SolanaApi\Models\Portfolio.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.Web3Api.Core\Models\Erc20TransactionCollection.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Objects\MoralisFileState.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.ABI\FunctionEncoding\Attributes\FunctionAttribute.cs" />
@@ -452,6 +469,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\Builders\FilterInput\FilterInputBuilder_T.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\Filters\IEthUninstallFilter.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\ShhApiService.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.SolanaApi\Models\MetaplexNft.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.Web3Api.Core\Models\Nft.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Shh\KeyPair\ShhGetPrivateKey.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Unity\SuggestTipUnityRequestStrategy.cs" />
@@ -464,6 +482,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RLP\RLPStringFormatter.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Queries\Live\OperationTypes.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\ContractHandlers\ContractQueryEthCallHandler.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.SolanaApi\CloudApi\AccountApi.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\WalletConnectSharp.Unity\Network\WebGLAESCipher.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\EthGetCode.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Signer\RLPDecoder.cs" />
@@ -476,6 +495,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.ABI\ByteCodeConstants.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\Transactions\EthGetTransactionByHash.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Queries\Live\MoralisClientWebSocket.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.SolanaApi\Models\MetaplexNft.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\Comparers\EventLogBlockNumberTransactionIndexComparer.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.ABI\FunctionEncoding\Attributes\EventAttribute.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.Web3Api.Core\Models\LogEventByAddress.cs" />
@@ -486,6 +506,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\EventBase.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.KeyStore\Crypto\KeyStoreCrypto.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Operations\MoralisIncrementOperation.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.SolanaApi\Interfaces\IAccountApi.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\Uncles\IEthGetUncleByBlockHashAndIndex.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.ABI\FunctionEncoding\Attributes\ErrorAttribute.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.ABI\FunctionEncoding\ParameterOutput.cs" />
@@ -496,6 +517,8 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Hex\HexTypes\HexTypeFactory.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.Web3Api.Core\Models\RestRequest.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Unity\UnityRequest.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.SolanaApi\CloudApi\NftApi.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.SolanaApi\Client\ApiClient.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Shh\KeyPair\ShhDeleteKeyPair.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Abstractions\LiveQueryCallbacks.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Queries\Live\ErrorMessage.cs" />
@@ -539,6 +562,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\DeploymentHandlers\DeploymentSigner.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Util\UnitConversion.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\DTOs\BlockParameterJsonConverter.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.SolanaApi\Models\SplTokenBalanace.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Objects\MoralisAcl.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\Mining\EthGetWork.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Queries\QueryExtensions.cs" />
@@ -574,6 +598,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\TransactionReceipts\ITransactionReceiptService.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Queries\Live\MoralisLiveQueryDelegates.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.JsonRpc.Client\RpcError.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.SolanaApi\Interfaces\IWebClient.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Utilities\Conversion.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Abstractions\IWebClient.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\PersonalApiService.cs" />
@@ -626,6 +651,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.BlockchainProcessing\LogProcessing\BlockRangeRequestStrategy.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\INetApiService.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Queries\Live\SubscribableWebSocket.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.SolanaApi\Models\Enums.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Services\ClientServices\MoralisCloudFunctionService.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Signer\Transaction1559.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.ABI\BytesType.cs" />
@@ -656,6 +682,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.Web3Api.Core\Models\Trade.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Abstractions\ICurrentObjectService.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.ABI\Decoders\TypeDecoder.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.SolanaApi\Models\SplNft.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.BlockchainProcessing\BlockStorage\Entities\Mapping\ContractMapping.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\WalletConnectSharp.Unity\UI\ChooseWalletScreen.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.KeyStore\Model\CipherParams.cs" />
@@ -687,6 +714,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Accounts\External\ExternalAccountSignerTransactionManager.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.Network\Client\WebSocketException.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.Web3Api.Core\Models\NftMetadata.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.SolanaApi\Models\Enums.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Util\ByteUtil.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Operations\MoralisAddOperation.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\Services\IEthApiUncleService.cs" />
@@ -705,8 +733,10 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\FeeSuggestionService.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\TransactionManagers\EtherTransferTransactionInputBuilder.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\QueryHandlers\QueryRawHandler.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.SolanaApi\Models\NativeBalance.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.BlockchainProcessing\Services\IBlockchainLogProcessingService.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\Builders\ContractBuilder.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.SolanaApi\Interfaces\INftApi.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\IEthGasPrice.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Shh\IShhVersion.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\EthGetStorageAt.cs" />
@@ -795,6 +825,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Abstractions\IRelativeCacheLocationGenerator.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Abstractions\ICustomServiceHub.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Signer\AccessListRLPEncoderDecoder.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.SolanaApi\Models\WebRequest.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.BlockchainProcessing\BlockStorage\BlockStorageStepsHandlers\BlockStorageStepHandler.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\Transactions\IEthSendRawTransaction.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.JsonRpc.Client\Streaming\StreamingEventArgs.cs" />
@@ -862,6 +893,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Web3\IWeb3.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\MoralisDynamic.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Services\OrchestrationServiceHub.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.SolanaApi\Models\NftMetadata.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.ABI\Model\Parameter.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Model\LogBloomFilter.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.BlockchainProcessing\BlockStorage\Repositories\InMemoryTransactionLogRepository.cs" />
@@ -897,6 +929,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Abstractions\IMutableServiceHub.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\DTOs\ValueObjects\FilterLogVO.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\Builders\ABITypedRegistry.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.SolanaApi\Models\Portfolio.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.ABI\FunctionEncoding\EventTopicDecoder.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.Web3Api\Client\Configuration.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\Blocks\IEthBlockNumber.cs" />
@@ -906,6 +939,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\ContractHandlers\IContractQueryHandler.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Signer\TransactionVerificationAndRecovery.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Abstractions\IQueryService.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.SolanaApi\Models\NativeBalance.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.Web3Api.Core\Interfaces\IDefiApi.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Util\AddressExtensions.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.JsonRpc.Client\ClientBase.cs" />
@@ -991,11 +1025,13 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Shh\MessageFilter\IShhNewMessageFilter.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\MoralisServiceHub.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\ErrorBase.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.SolanaApi\Api\AccountApi.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Queries\MutableObjectState.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\Builders\FunctionBuilder.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Shh\DTOs\MessageFilterInput.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Queries\MoralisQuery.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\QueryHandlers\QueryDecoderBaseHandler.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.SolanaApi\Client\SolanaApiClient.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.BlockchainProcessing\BlockProcessing\CrawlerSteps\TransactionReceiptCrawlerStep.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\WalletConnectSharp\WalletConnectSharp.Core\Models\WCSessionRequestRequest.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.BlockchainProcessing\BlockStorage\Entities\Mapping\TransactionVmStructMapping.cs" />
@@ -1005,6 +1041,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\Compilation\EthCompileLLL.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.ABI\Encoders\ITypeEncoder.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.Web3Api.Core\Interfaces\IResolveApi.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.SolanaApi\Api\NftApi.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Services\ClientServices\SessionServiceExtensions.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.Web3Api.Core\Models\TransactionCollection.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\MoralisInterface.cs" />
@@ -1042,6 +1079,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.Web3Api\Api\NativeApi.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.Web3Api\Moralis.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\Subscriptions\EthUnsubscribeRequestBuilder.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.SolanaApi\MoralisSolanaClient.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.KeyStore\JsonDeserialisation\CipherParamsDTO.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\WalletConnectSharp\WalletConnectSharp.Core\Events\EventDelegator.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Abstractions\IRelativeCacheLocationGenerator.cs" />
@@ -1049,6 +1087,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Services\MutableServiceHub.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Abstractions\IObjectService.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\Transactions\IEthGetTransactionCount.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.SolanaApi\MoralisSolanaClient.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\DeploymentHandlers\DeploymentTransactionSenderHandler.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.JsonRpc.Client\IBaseClient.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.BlockchainProcessing\ProgressRepositories\JsonBlockProgressRepository.cs" />
@@ -1100,6 +1139,8 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Shh\DTOs\ShhMessage.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.JsonRpc.Client\RPCLogger.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\TransactionHandlers\ITransactionSenderHandler.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.SolanaApi\Client\Configuration.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.SolanaApi\Models\CloudFunctionResult.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\IEthProtocolVersion.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\DeployContract.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Signer\Chain.cs" />
@@ -1109,6 +1150,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\QueryHandlers\MultiCall\MulticallInputOutput.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\TransactionHandlers\TransactionSenderHandler.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.BlockchainProcessing\BlockStorage\BlockStorageProcessingSteps.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.SolanaApi\UniversalWebClient.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Services\ClientServices\MoralisUserService.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.BlockchainProcessing\BlockProcessing\CrawlerSteps\FilterLogCrawlerStep.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Accounts\KeyPath.cs" />
@@ -1131,6 +1173,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.JsonRpc.Client\RPCResponseException.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Eth\DTOs\EthNewSubscriptionInput.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Abstractions\ILiveQueryService.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.SolanaApi\Client\SolanaApiClient.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Contracts\Services\EthApiContractService.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.BlockchainProcessing\BlockStorage\Repositories\InMemoryBlockchainStorageRepositoryContext.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Util\AddressUtil.cs" />
@@ -1217,6 +1260,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\WalletConnectSharp\WalletConnectSharp.Core\Events\IEvent.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Queries\Live\SubscribableWebSocket.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\WalletConnectSharp\WalletConnectSharp.Core\Models\WCSessionUpdate.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.SolanaApi\Interfaces\IAccountApi.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Services\ServiceHub.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1280,12 +1324,6 @@
     </Reference>
     <Reference Include="UnityEngine.ClothModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.26f1\Editor\Data\Managed\UnityEngine\UnityEngine.ClothModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ClusterInputModule">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.26f1\Editor\Data\Managed\UnityEngine\UnityEngine.ClusterInputModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ClusterRendererModule">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.26f1\Editor\Data\Managed\UnityEngine\UnityEngine.ClusterRendererModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.26f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
@@ -1439,9 +1477,6 @@
     </Reference>
     <Reference Include="UnityEngine.VideoModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.26f1\Editor\Data\Managed\UnityEngine\UnityEngine.VideoModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.VirtualTexturingModule">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.26f1\Editor\Data\Managed\UnityEngine\UnityEngine.VirtualTexturingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.WindModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.26f1\Editor\Data\Managed\UnityEngine\UnityEngine.WindModule.dll</HintPath>

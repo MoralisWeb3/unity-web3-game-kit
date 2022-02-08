@@ -23,18 +23,20 @@ namespace Moralis.WebGL.Platform.Objects
             this.updatedAt = DateTime.Now;
             this.ACL = new MoralisAcl();
             this.IsDirty = false;
-            this.SessionToken = string.Empty;
+            this.sessionToken = string.Empty;
             this.ObjectService = null;
         }
 
         public MoralisObject(string className, 
             string objectId = null,
+            string sessionToken = null,
             DateTime? createdAt = null,
             DateTime? updatedAt = null,
             MoralisAcl ACL = null)
         {
             this.ClassName = className;
             this.objectId = objectId;
+            this.sessionToken = sessionToken;
             this.createdAt = createdAt;
             this.updatedAt = updatedAt;
             this.ACL = ACL;
@@ -42,12 +44,12 @@ namespace Moralis.WebGL.Platform.Objects
         }
 
         public string objectId;
+        public string sessionToken;
         public DateTime? createdAt;
         public DateTime? updatedAt;
         public MoralisAcl ACL; 
         public string ClassName { get; set; }
         internal bool IsDirty { get; set; }
-        internal string SessionToken { get; set; }
         internal IObjectService ObjectService { get; set; }
         internal TaskQueue TaskQueue { get; } = new TaskQueue { };
         internal object Mutex { get; } = new object { };
@@ -70,13 +72,13 @@ namespace Moralis.WebGL.Platform.Objects
         /// <param name="cancellationToken">The cancellation token.</param>
         public UniTask DeleteAsync(CancellationToken cancellationToken = default)
         {
-            return this.ObjectService.DeleteAsync(this, SessionToken, cancellationToken);
+            return this.ObjectService.DeleteAsync(this, sessionToken, cancellationToken);
         }
 
         public virtual async UniTask SaveAsync(CancellationToken cancellationToken = default)
         {
             IDictionary<string, IMoralisFieldOperation> operations = this.StartSave();
-            string resp = await this.ObjectService.SaveAsync(this, operations, SessionToken, cancellationToken);
+            string resp = await this.ObjectService.SaveAsync(this, operations, sessionToken, cancellationToken);
 
             Console.WriteLine($"Save response: {resp}");
 
@@ -177,7 +179,7 @@ namespace Moralis.WebGL.Platform.Objects
         //});
 
 
-        internal string GetCurrentSessionToken() => this.SessionToken;
+        internal string GetCurrentSessionToken() => this.sessionToken;
 
         /// <summary>
         /// Fetches this object with the data from the server.

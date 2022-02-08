@@ -121,6 +121,14 @@ This boilerplate project has been tested with the following Unity3D Releases:
         - [`GetTokenPrice`](#gettokenprice)
         - [`GetWalletTokenIdTransfers`](#getwallettokenidtransfers)
         - [`SearchNFTs`](#searchnfts)
+- [🏗 Solana Api Methods](#-solana-api-methods)
+    - [Solana Account](#solana-account)
+        - [`Solana Balance`](#solana-balance)
+        - [`Solana GetNFTs`](#solana-getnfts)
+        - [`Solana GetPortfolio`](solana-getportfolio)
+        - [`Solana GetSplTokens`](solana-getspltokens)
+    - [Solana NFT](#solana-nft)
+        - [`Solana GetNFTMetadata`](#solana-getnftmetadata)
 - [Helpful Tools](#helpful-tools)
   
 # 🏗 Moralis SDK
@@ -989,6 +997,36 @@ Gets NFTs that match a given metadata search.
 NftMetadataCollection metadata = MoralisInterface.GetClient().Web3Api.Token.SearchNFTs(q, ChainList.eth, null, null, null, null, null, null, 0, 10);
 ```
 
+# 🏗 Solana Api Methods
+
+## Solana Account
+
+### `Solana Balance`
+```
+NativeBalance bal = await MoralisSolanaClient.SolanaApi.Account.Balance(NetworkTypes.mainnet, "6XU36wCxWobLx5Rtsb58kmgAJKVYmMVqy4SHXxENAyAe");
+```
+
+### `Solana GetNFTs`
+```
+List<SplNft> bal = await MoralisSolanaClient.SolanaApi.Account.GetNFTs(NetworkTypes.mainnet, "6XU36wCxWobLx5Rtsb58kmgAJKVYmMVqy4SHXxENAyAe");
+```
+
+### `Solana GetPortfolio`
+```
+Portfolio bal = await MoralisSolanaClient.SolanaApi.Account.GetPortfolio(NetworkTypes.mainnet, "6XU36wCxWobLx5Rtsb58kmgAJKVYmMVqy4SHXxENAyAe");
+```
+
+### `Solana GetSplTokens`
+```
+List<SplTokenBalanace> bal = await MoralisSolanaClient.SolanaApi.Account.GetSplTokens(NetworkTypes.mainnet, "6XU36wCxWobLx5Rtsb58kmgAJKVYmMVqy4SHXxENAyAe");
+```
+
+## Solana NFT
+
+### `Solana GetNFTMetadata`
+```
+NftMetadata bal = await MoralisSolanaClient.SolanaApi.Nft.GetNFTMetadata(NetworkTypes.mainnet, "6XU36wCxWobLx5Rtsb58kmgAJKVYmMVqy4SHXxENAyAe");
+```
 
 # Helpful Tools
 1. [Unity3d Assets](https://assetstore.unity.com/)

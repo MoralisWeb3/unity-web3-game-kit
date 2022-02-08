@@ -9,6 +9,7 @@ using Moralis.Platform.Utilities;
 using System.Collections.Generic;
 using System.Threading;
 using Moralis.Web3Api.Interfaces;
+using Moralis.SolanaApi.Interfaces;
 using Moralis.Platform.Services.Infrastructure;
 
 namespace Moralis
@@ -18,7 +19,7 @@ namespace Moralis
         string serverAuthToken = "";
         string serverAuthType = "";
 
-        public MoralisClient(ServerConnectionData connectionData, IWeb3Api web3Api = null, IJsonSerializer jsonSerializer = null)
+        public MoralisClient(ServerConnectionData connectionData, IWeb3Api web3Api = null, ISolanaApi solanaApi = null, IJsonSerializer jsonSerializer = null)
         {
             if (jsonSerializer == null)
             {
@@ -54,7 +55,20 @@ namespace Moralis
                 {
                     this.Web3Api.Initialize(connectionData.ServerURI);
                 }
+            }
 
+            this.SolanaApi = solanaApi;
+
+            if (this.SolanaApi is { })
+            {
+                if (connectionData.ApiKey is { })
+                {
+                    this.SolanaApi.Initialize();
+                }
+                else
+                {
+                    this.SolanaApi.Initialize(connectionData.ServerURI);
+                }
             }
         }
 
@@ -148,7 +162,7 @@ namespace Moralis
 
         public MoralisQuery<T> Query<T>() where T : MoralisObject
         {
-            return new MoralisQuery<T>(this.QueryService, InstallationService, moralisService.ServerConnectionData, moralisService.JsonSerializer, GetCurrentUser().SessionToken); //, logger);
+            return new MoralisQuery<T>(this.QueryService, InstallationService, moralisService.ServerConnectionData, moralisService.JsonSerializer, GetCurrentUser().sessionToken); //, logger);
         }
 
         public T Create<T>(object[] parameters = null) where T : MoralisObject
@@ -302,6 +316,11 @@ namespace Moralis
         /// web3api client at initialize
         /// </summary>
         public IWeb3Api Web3Api { get; private set; }
+
+        /// <summary>
+        /// Provide an object hook for SolanaApi
+        /// </summary>
+        public ISolanaApi SolanaApi { get; private set; }
 
         /// <summary>
         /// Included so that this can be set prior to initialization for systems

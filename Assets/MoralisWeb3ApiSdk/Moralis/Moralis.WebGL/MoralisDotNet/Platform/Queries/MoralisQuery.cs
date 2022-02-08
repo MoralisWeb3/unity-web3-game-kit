@@ -98,6 +98,10 @@ namespace Moralis.WebGL.Platform.Queries
             {
                 Filters = new Dictionary<string, object>(MergeWhereClauses(where));
             }
+            else
+            {
+                Filters = new Dictionary<string, object>();
+            }
 
             if (includes is { })
             {
@@ -599,7 +603,7 @@ namespace Moralis.WebGL.Platform.Queries
             foreach (T i in aggResp)
             {
                 i.ObjectService = this.QueryService.ObjectService;
-                i.SessionToken = this.SessionToken;
+                i.sessionToken = this.SessionToken;
             }
 
             return aggResp;
@@ -624,7 +628,7 @@ namespace Moralis.WebGL.Platform.Queries
             foreach (T i in items)
             {
                 i.ObjectService = this.QueryService.ObjectService;
-                i.SessionToken = this.SessionToken;
+                i.sessionToken = this.SessionToken;
             }
 
             return items;
@@ -649,7 +653,7 @@ namespace Moralis.WebGL.Platform.Queries
             foreach (T i in items)
             {
                 i.ObjectService = this.QueryService.ObjectService;
-                i.SessionToken = this.SessionToken;
+                i.sessionToken = this.SessionToken;
             }
 
             return items;
@@ -672,7 +676,7 @@ namespace Moralis.WebGL.Platform.Queries
             T item = await QueryService.FirstAsync<T>(this, SessionToken, cancellationToken);
 
             item.ObjectService = this.QueryService.ObjectService;
-            item.SessionToken = this.SessionToken;
+            item.sessionToken = this.SessionToken;
 
             return item;
         }
@@ -737,7 +741,7 @@ namespace Moralis.WebGL.Platform.Queries
             }
 
             result.ObjectService = this.QueryService.ObjectService;
-            result.SessionToken = this.SessionToken;
+            result.sessionToken = this.SessionToken;
 
             return result;
         }
@@ -749,9 +753,10 @@ namespace Moralis.WebGL.Platform.Queries
             Dictionary<string, object> result = new Dictionary<string, object>();
 
             if (Filters != null)
-                result["where"] = JsonSerializer.Serialize(Filters);//PointerOrLocalIdEncoder.Instance.Encode(Filters, Services);
+                result["where"] = JsonSerializer.Serialize(Filters);
             else
-                result["where"] = new object();
+                result["where"] = new Dictionary<string, object>();
+
             if (Orderings != null)
                 result["order"] = String.Join(",", Orderings.ToArray());
             if (SkipAmount != null)
