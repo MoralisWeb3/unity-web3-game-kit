@@ -11,6 +11,7 @@ using Moralis.WebGL.Web3Api.Interfaces;
 using Moralis.WebGL.Platform.Services.Infrastructure;
 
 using Cysharp.Threading.Tasks;
+using Moralis.WebGL.SolanaApi.Interfaces;
 
 namespace Moralis.WebGL
 {
@@ -19,7 +20,7 @@ namespace Moralis.WebGL
         string serverAuthToken = "";
         string serverAuthType = "";
 
-        public MoralisClient(ServerConnectionData connectionData, IWeb3Api web3Api = null, IJsonSerializer jsonSerializer = null)
+        public MoralisClient(ServerConnectionData connectionData, IWeb3Api web3Api = null, ISolanaApi solanaApi = null, IJsonSerializer jsonSerializer = null)
         {
             if (jsonSerializer == null)
             {
@@ -55,7 +56,20 @@ namespace Moralis.WebGL
                 {
                     this.Web3Api.Initialize(connectionData.ServerURI);
                 }
+            }
 
+            this.SolanaApi = solanaApi;
+
+            if (this.SolanaApi is { })
+            {
+                if (connectionData.ApiKey is { })
+                {
+                    this.SolanaApi.Initialize();
+                }
+                else
+                {
+                    this.SolanaApi.Initialize(connectionData.ServerURI);
+                }
             }
         }
 
@@ -305,6 +319,11 @@ namespace Moralis.WebGL
         /// web3api client at initialize
         /// </summary>
         public IWeb3Api Web3Api { get; private set; }
+
+        /// <summary>
+        /// Provide an object hook for SolanaApi
+        /// </summary>
+        public ISolanaApi SolanaApi { get; private set; }
 
         /// <summary>
         /// Included so that this can be set prior to initialization for systems
