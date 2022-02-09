@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -52,9 +52,6 @@
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>2020.3.26f1</UnityVersion>
   </PropertyGroup>
-  <ItemGroup>
-    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
-  </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\Scripts\NftObjectController.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.BlockchainProcessing\BlockStorage\Repositories\ITransactionVMStackRepository.cs" />
@@ -1291,9 +1288,9 @@
     <None Include="Assets\MoralisWeb3ApiSdk\Packages\BouncyCastle.Crypto\BouncyCastle.Crypto.dll" />
     <None Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\csc.rsp" />
     <None Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\MoralisWeb3ApiSdk\DLLs\Common.Logging.dll" />
-    <None Include="Assets\mcs.rsp" />
     <None Include="Assets\MoralisWeb3ApiSdk\Packages\System.Drawing.Common\netstandard2.0\System.Drawing.Common.dll" />
     <None Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\TextMesh Pro\Shaders\TMP_Sprite.shader" />
   </ItemGroup>

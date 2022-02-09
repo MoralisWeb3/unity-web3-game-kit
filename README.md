@@ -414,12 +414,37 @@ To retrieve an Nethereum contract instance call:
 Contract c = MoralisInterface.EvmContractInstance([CONTRACT KEY], [CHAIN ID]);
 ```
 
-To retrieve an Nethereum contract function instance call:
+Retrieve an Nethereum contract function instance:
 ```
 Function f = MoralisInterface.EvmContractFunctionInstance([CONTRACT KEY], [CHAIN ID], [FUNCTION NAME]);
 ```
 
-To execute a transaction you can call _MoralisInstance.SendEvmTransactionAsync_ or _MoralisInterface.SendTransactionAndWaitForReceiptAsync_. These functions represent only a couple of the variants available from the _Nethereum.Contracts.Function_ object.
+Call function with no parameters
+```
+// No parameters
+object[] pars = new object[0];
+string jsonResult = await f.CallAsync(pars);
+
+```
+
+Call function with parameters
+```
+object[] pars = {"My string", 2};
+string jsonResult = await f.CallAsync(pars);
+```
+
+Call function with parameters, specify from, gas, and value.
+```
+string playerAddress = "0x37bd48252f4dcE15C7147eA82b31978a00750f81";
+object[] pars = {"My string", 2};
+Nethereum.Hex.HexTypes.HexBigInteger g = new Nethereum.Hex.HexTypes.HexBigInteger(80);
+Nethereum.Hex.HexTypes.HexBigInteger wei = new Nethereum.Hex.HexTypes.HexBigInteger(1000);
+string jsonResult = await func.CallAsync(playerAddress, new Nethereum.Hex.HexTypes.HexBigInteger(80), new Nethereum.Hex.HexTypes.HexBigInteger(1000), pars);
+```
+
+For other call function varients see the Nethereum [documentation](https://nethereum.com/).
+
+To execute a transaction you can also call _MoralisInstance.SendEvmTransactionAsync_ or _MoralisInterface.SendTransactionAndWaitForReceiptAsync_. These functions represent only a couple of the variants available from the _Nethereum.Contracts.Function_ object.
 
 
 # WebGL 

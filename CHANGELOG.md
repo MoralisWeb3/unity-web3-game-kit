@@ -1,6 +1,11 @@
 # Change Log
 ## 1.0.4 (2022-02-08)
+- Issue #19 - Moralis User and Moralis Object both have a session token property
+- Issue #23 - Moralis Web3Api (non WebGl) API Clients are not Asynchronous. 
+- Issue #25 - iOS XCODE Update Causes Build Error 
+- Issue #27 - Create Object Does Not Set ClassName 
 - Issue #31 - Integrate SolanaAPI into Moralis / Unity SDK 
+- Issue #34 - Null ObjectService in MoralisObjects loaded via Query 
 
 ## 1.0.3 (2022-01-21)
 - Wallet Connect Update Integration - fixes iOS and Android sign issues with Wallet Connect.
