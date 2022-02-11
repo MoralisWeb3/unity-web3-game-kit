@@ -178,8 +178,11 @@ public class MainMenuScript : MonoBehaviour
 
         Debug.Log($"Signature {response} for {address} was returned.");
 
+        string appId = MoralisInterface.GetClient().ApplicationId;
+        // Retrieve server time for authentication.
+        long serverTime = await MoralisInterface.GetClient().Cloud.RunAsync<long>("getServerTime", new Dictionary<string, object>());
         // Create moralis auth data from message signing response.
-        Dictionary<string, object> authData = new Dictionary<string, object> { { "id", address }, { "signature", response }, { "data", "Moralis Authentication" } };
+        Dictionary<string, object> authData = new Dictionary<string, object> { { "id", address }, { "signature", response }, { "data", $"Moralis Authentication\n\nId: {appId}:{serverTime}" } };
 
         Debug.Log("Logging in user.");
 
