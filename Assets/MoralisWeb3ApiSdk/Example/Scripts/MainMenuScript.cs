@@ -208,8 +208,6 @@ public class MainMenuScript : MonoBehaviour
         }
 
         HideWalletSelection();
-
-        SaveScore(10.0f);
     }
 
     public class MyScores : MoralisObject
@@ -218,17 +216,6 @@ public class MainMenuScript : MonoBehaviour
         public float Seconds;
     }
 
-    async void SaveScore(float time)
-    {
-        var user = await MoralisInterface.GetUserAsync();
-        var addr = user.authData["moralisEth"]["id"].ToString();
-       //var ens = MoralisInterface.GetClient().Web3Api.Resolve.ResolveAddress(addr);
-        var score = MoralisInterface.GetClient().Create<MyScores>();
-        score.Name = "Bob"; // !string.IsNullOrEmpty(ens.Name) ? ens.Name : addr;
-        score.Seconds = time;
-        await score.SaveAsync();
-        Debug.Log("SavedScore");
-    }
     /// <summary>
     /// Closeout connections and quit the application.
     /// </summary>
