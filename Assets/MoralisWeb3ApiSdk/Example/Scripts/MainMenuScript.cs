@@ -171,15 +171,27 @@ public class MainMenuScript : MonoBehaviour
         Debug.Log("Wallet connection received");
         // Extract wallet address from the Wallet Connect Session data object.
         string address = data.accounts[0].ToLower();
+        string appId = MoralisInterface.GetClient().ApplicationId;
+        long serverTime = 0;
+
+        // Retrieve server time from Moralis Server for message signature
+        Dictionary<string, object> serverTimeResponse = await MoralisInterface.GetClient().Cloud.RunAsync<Dictionary<string, object>>("getServerTime", new Dictionary<string, object>());
+
+        if (serverTimeResponse == null || !serverTimeResponse.ContainsKey("dateTime") ||
+            !long.TryParse(serverTimeResponse["dateTime"].ToString(), out serverTime))
+        {
+            Debug.Log("Failed to retrieve server time from Moralis Server!");
+        }
 
         Debug.Log($"Sending sign request for {address} ...");
 
-        string response = await walletConnect.Session.EthPersonalSign(address, "Moralis Authentication");
+        string signMessage = $"Moralis Authentication\n\nId: {appId}:{serverTime}";
+        string response = await walletConnect.Session.EthPersonalSign(address, signMessage);
 
         Debug.Log($"Signature {response} for {address} was returned.");
 
         // Create moralis auth data from message signing response.
-        Dictionary<string, object> authData = new Dictionary<string, object> { { "id", address }, { "signature", response }, { "data", "Moralis Authentication" } };
+        Dictionary<string, object> authData = new Dictionary<string, object> { { "id", address }, { "signature", response }, { "data", signMessage } }; 
 
         Debug.Log("Logging in user.");
 
@@ -196,8 +208,6 @@ public class MainMenuScript : MonoBehaviour
         }
 
         HideWalletSelection();
-
-        SaveScore(10.0f);
     }
 
     public class MyScores : MoralisObject
@@ -206,17 +216,6 @@ public class MainMenuScript : MonoBehaviour
         public float Seconds;
     }
 
-    async void SaveScore(float time)
-    {
-        var user = await MoralisInterface.GetUserAsync();
-        var addr = user.authData["moralisEth"]["id"].ToString();
-       //var ens = MoralisInterface.GetClient().Web3Api.Resolve.ResolveAddress(addr);
-        var score = MoralisInterface.GetClient().Create<MyScores>();
-        score.Name = "Bob"; // !string.IsNullOrEmpty(ens.Name) ? ens.Name : addr;
-        score.Seconds = time;
-        await score.SaveAsync();
-        Debug.Log("SavedScore");
-    }
     /// <summary>
     /// Closeout connections and quit the application.
     /// </summary>

@@ -47696,7 +47696,7 @@ PrefabInstance:
       objectReference: {fileID: 71058177}
     - target: {fileID: 6266890725912523073, guid: 116667ed98661304da1568439e2a3426, type: 3}
       propertyPath: Web3RpcNodeUrl
-      value: RPC NODE URL
+      value: RPC NODE URI
       objectReference: {fileID: 0}
     - target: {fileID: 6266890725912523073, guid: 116667ed98661304da1568439e2a3426, type: 3}
       propertyPath: MoralisServerURI
