@@ -210,12 +210,6 @@ public class MainMenuScript : MonoBehaviour
         HideWalletSelection();
     }
 
-    public class MyScores : MoralisObject
-    {
-        public string Name;
-        public float Seconds;
-    }
-
     /// <summary>
     /// Closeout connections and quit the application.
     /// </summary>

@@ -2,10 +2,79 @@
 using System.Collections.Generic;
 using System.Linq;
 using Moralis.WebGL.Platform.Abstractions;
+using Newtonsoft.Json;
 
 namespace Moralis.WebGL.Platform.Objects
 {
-    public class MoralisAcl : IJsonConvertible
+    class MoralisAclJsonConvertor : JsonConverter
+    {
+        public override bool CanConvert(Type objectType)
+        {
+            return true;
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            //MyCustomType myCustomType = new MyCustomType();//for null values        
+            Dictionary<string, object> acl = new Dictionary<string, object>();
+            string key = String.Empty;
+
+            while (reader.Read())
+            {
+                var tokenType = reader.TokenType;
+                if (reader.TokenType == JsonToken.PropertyName)
+                {
+                    key = (reader.Value as string) ?? string.Empty;
+                }
+                else if (reader.TokenType == JsonToken.StartObject)
+                {
+                    Dictionary<string, object> cntlDict = new Dictionary<string, object>();
+                    var cntlKey = string.Empty;
+
+                    while (reader.Read())
+                    {
+                        if (reader.TokenType == JsonToken.PropertyName)
+                        {
+                            cntlKey = (reader.Value as string) ?? string.Empty;
+                        }
+                        else if (reader.TokenType == JsonToken.Boolean)
+                        {
+                            bool? b = reader.Value as bool?;
+                            cntlDict.Add(cntlKey, b.Value);
+                        }
+                        if (reader.TokenType == JsonToken.EndObject)
+                        {
+                            acl.Add(key, cntlDict);
+                            break;
+                        }
+                    }
+                }
+                else if (reader.TokenType == JsonToken.EndObject)
+                {
+                    break;
+                }
+            }
+
+            return new MoralisAcl(acl);
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            if (value == null || !(value is MoralisAcl))
+            {
+                serializer.Serialize(writer, null);
+                return;
+            }
+
+            Dictionary<string, object> acl = ((MoralisAcl)value).ToParameterDictionary();
+
+            serializer.Serialize(writer, acl);
+        }
+    }
+
+
+    [JsonConverter(typeof(MoralisAclJsonConvertor))]
+    public class MoralisAcl
     {
         private enum AccessKind
         {
@@ -43,7 +112,7 @@ namespace Moralis.WebGL.Platform.Objects
             SetWriteAccess(owner, true);
         }
 
-        IDictionary<string, object> IJsonConvertible.ConvertToJSON()
+        public Dictionary<string, object> ToParameterDictionary()
         {
             Dictionary<string, object> result = new Dictionary<string, object>();
             foreach (string user in readers.Union(writers))
