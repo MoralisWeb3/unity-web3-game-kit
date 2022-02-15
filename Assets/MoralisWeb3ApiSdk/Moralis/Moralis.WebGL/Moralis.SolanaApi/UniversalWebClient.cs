@@ -36,6 +36,7 @@ namespace Moralis.WebGL.SolanaApi
         {
             "x-parse-application-id",
             "x-parse-installation-id",
+            "x-parse-session-token",
             "content-type"
         };
 
