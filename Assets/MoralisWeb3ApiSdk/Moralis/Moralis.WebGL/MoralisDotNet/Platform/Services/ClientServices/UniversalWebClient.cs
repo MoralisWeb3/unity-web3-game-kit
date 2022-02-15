@@ -41,6 +41,7 @@ namespace Moralis.WebGL.Platform.Services
         {
             "x-parse-application-id",
             "x-parse-installation-id",
+            "x-parse-session-token",
             "content-type"
         };
         public UniversalWebClient() { }

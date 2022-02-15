@@ -62,6 +62,7 @@ public class MainMenuScript : MonoBehaviour
     public GameObject qrMenu;
     public GameObject androidMenu;
     public GameObject iosMenu;
+    public GameObject webWalletMenu;
     public GameObject joystick;
 
     Image menuBackground;
@@ -85,6 +86,7 @@ public class MainMenuScript : MonoBehaviour
         qrMenu.SetActive(false);
         androidMenu.SetActive(false);
         iosMenu.SetActive(false);
+        webWalletMenu.SetActive(false);
 
 #if UNITY_ANDROID || UNITY_IOS
         // We're in mobile so show the joystick.
@@ -152,6 +154,8 @@ public class MainMenuScript : MonoBehaviour
             // Use Moralis Connect page for authentication as we work to make the Wallet 
             // Connect experience better.
             //await LoginViaConnectionPage();
+#elif UNITY_WEBGL
+            webWalletMenu.SetActive(true);
 #else
             qrMenu.SetActive(true);
 #endif

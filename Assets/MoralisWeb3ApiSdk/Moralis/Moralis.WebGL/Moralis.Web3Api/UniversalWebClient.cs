@@ -36,6 +36,7 @@ namespace Moralis.WebGL.Web3Api
         {
             "x-parse-application-id",
             "x-parse-installation-id",
+            "x-parse-session-token",
             "content-type"
         };
 
