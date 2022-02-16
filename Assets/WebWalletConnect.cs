@@ -1,16 +1,15 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Runtime.InteropServices;
 using MoralisWeb3ApiSdk;
+
 #if UNITY_WEBGL
 using Cysharp.Threading.Tasks;
 using Moralis.WebGL.Platform.Objects;
-#else
-using System.Threading.Tasks;
-using Moralis.Platform.Objects;
-#endif
+#endif 
 
 [AddComponentMenu("Moralis/WebWalletConnect")]
 public class WebWalletConnect : MonoBehaviour
@@ -29,6 +28,7 @@ public class WebWalletConnect : MonoBehaviour
     public UnityEvent OnUserFromSessionIsTrue;
     public UnityEvent OnUserFromSessionIsFalse;
 
+    #if UNITY_WEBGL
     async void Start()
     { 
         #if UNITY_WEBGL && !UNITY_EDITOR
@@ -90,4 +90,5 @@ public class WebWalletConnect : MonoBehaviour
             }
         }
     }
+    #endif
 }
