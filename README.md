@@ -1,5 +1,7 @@
 # `ethereum-unity-boilerplate`
 
+*IMPORTANT, USE OF SPEEDY NODE IS NO LONGER REQUIRED*
+
 > Unity components and hooks for fast building of web3 games. With this SDK you can build web3 games for mobile, desktop, Xbox, Playstation and other platforms.
 This boilerplate allows you to authenticate users using crypto wallets on any platform.
 
@@ -36,7 +38,7 @@ If you need help with setting up the boilerplate or have other questions - don't
 - In the "Hierachy" panel under DemoScene select "MoralisSetup".
 - In the "Inspector" section find the sub-section titled "MoralisController".
 - If the "MoralisController" sub-section is not expanded, expand it.
-- Using the information from your Moralis Server, fill in Application Id, Server URL, and Speedy node Url (make sure this is for POLYGON MUMBAI for the demo to work properly).
+- Using the information from your Moralis Server, fill in Application Id, and Server URL.
 ![insertvalues](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/insertvalues.gif)
 - **NOTE** If, after importing but before running the package, you see an error that describes something as "unsafe", it is probably due to a block of code in Nethereum SCrypt.cs. Open Build Settings then Player Settings
 ![unsafe](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/unsafe.gif)

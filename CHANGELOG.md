@@ -1,4 +1,16 @@
 # Change Log
+# 1.0.7 (2022-02-18)
+- Issue #57 - WalletConnect.AppData not automatically set
+- Issue #59 - Web3Api.Native.GetContractEvents - invalid parameter
+- Issue #61 - Speedynode Should not be used in Client 
+
+# 1.0.6 (2022-02-14)
+- Critical auth bug.
+- Issue #49 - Cannot set public access in ACL
+
+## 1.0.5 (2022-02-11)
+- Issue #43 - Authentication - retrieve and add server time to authentication message.
+
 ## 1.0.4 (2022-02-08)
 - Issue #19 - Moralis User and Moralis Object both have a session token property
 - Issue #23 - Moralis Web3Api (non WebGl) API Clients are not Asynchronous. 
