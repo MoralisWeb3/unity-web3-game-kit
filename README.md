@@ -41,7 +41,7 @@ If you need help with setting up the boilerplate or have other questions - don't
 - Using the information from your Moralis Server, fill in Application Id, and Server URL.
 ![insertvalues](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/insertvalues.gif)
 - **FOR WEBGL** In Player Settings change the WebGL template to the Moralis WebGL Template
-![webgltemplate](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/webgltemplate.gif)
+![webgltemplate](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/features/webgl-metamask/gifs/webgltemplate.gif)
 - **NOTE** If, after importing but before running the package, you see an error that describes something as "unsafe", it is probably due to a block of code in Nethereum SCrypt.cs. Open Build Settings then Player Settings
 ![unsafe](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/unsafe.gif)
     - Scroll down. Check the box titled "Allow 'unsafe' code". Rebuild your game.
