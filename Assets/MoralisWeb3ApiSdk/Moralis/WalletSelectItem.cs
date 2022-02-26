@@ -28,7 +28,7 @@
  */
 using System;
 
-namespace Assets.Scripts
+namespace Morlais
 {
     [Serializable]
     public class WalletSelectItem

@@ -25,7 +25,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  */
-namespace Assets.Scripts.Moralis
+namespace Moralis
 {
     /// <summary>
     /// Response to REST request for a Login Token.

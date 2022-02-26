@@ -33,7 +33,7 @@ using System.Linq;
 #if UNITY_WEBGL
 using Moralis.WebGL.Web3Api.Models;
 
-namespace Assets.Scripts.Moralis
+namespace Moralis
 {
     /// <summary>
     /// Provides a easy way to get detail about an EVM chain for all EVM chains 
@@ -133,7 +133,7 @@ namespace Assets.Scripts.Moralis
 #else
 using Moralis.Web3Api.Models;
 
-namespace Assets.Scripts.Moralis
+namespace Moralis
 {
     /// <summary>
     /// Provides a easy way to get detail about an EVM chain for all EVM chains 

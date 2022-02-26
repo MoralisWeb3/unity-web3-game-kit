@@ -33,7 +33,7 @@ using Cysharp.Threading.Tasks;
 using System.Threading.Tasks;
 #endif
 
-namespace Assets.Scripts
+namespace Moralis
 {
     public interface ISubscriptionQuery
     {

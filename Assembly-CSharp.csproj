@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -52,6 +52,9 @@
     <UnityBuildTarget>WebGL:20</UnityBuildTarget>
     <UnityVersion>2020.3.26f1</UnityVersion>
   </PropertyGroup>
+  <ItemGroup>
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\MoralisWeb3ApiSdk\Example\Scripts\NftObjectController.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.BlockchainProcessing\BlockStorage\Repositories\ITransactionVMStackRepository.cs" />
@@ -414,6 +417,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.ABI\FunctionEncoding\Attributes\FunctionOutputAttribute.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Shh\DTOs\MessageInput.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\WalletConnectSharp\WalletConnectSharp.Core\Models\Ethereum\WalletAddEthChain.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Web3GL.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.SolanaApi\Models\SplTokenBalanace.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Util\Sha3Keccack.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.BlockchainProcessing\Processor\Processor.cs" />
@@ -487,6 +491,7 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.Signer\RLPDecoder.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Operations\MoralisSetOperation.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\WalletConnectSharp.NEthereum\Client\FallbackProvider.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\DeadRpcReadClient.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\MoralisDotNet\Platform\Objects\MoralisUser.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Nethereum\Nethereum.RPC\Shh\KeyPair\ShhGetPublicKey.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\WalletConnectSharp\WalletConnectSharp.Core\Models\Ethereum\Types\EvmTypedData.cs" />
@@ -1261,7 +1266,22 @@
     <Compile Include="Assets\MoralisWeb3ApiSdk\WalletConnectSharp\WalletConnectSharp.Core\Models\WCSessionUpdate.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Moralis.SolanaApi\Interfaces\IAccountApi.cs" />
     <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\MoralisDotNet\Platform\Services\ServiceHub.cs" />
-    <Compile Include="Assets\MoralisWeb3ApiSdk\DeadRpcReadClient.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Hex\HexConvertors\Extensions\HexByteConvertorExtensions.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Hex\HexTypes\HexTypeJsonConverter.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Hex\HexTypes\HexUTF8String.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Models\ClientMeta.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Hex\HexTypes\HexBigIntegerNumberExtensions.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Hex\HexConvertors\HexBigIntegerBigEndianConvertor.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Hex\HexConvertors\HexUTF8StringConvertor.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Hex\HexTypes\HexType.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Models\TransactionInput.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Hex\HexTypes\HexBigInteger.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Hex\HexConvertors\Extensions\HexBigIntegerConvertorExtensions.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Hex\HexTypes\HexTypeFactory.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Hex\HexConvertors\IHexConvertor.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Models\CallInput.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Moralis\Moralis.WebGL\Hex\HexConvertors\Extensions\HexStringUTF8ConvertorExtensions.cs" />
+    <Compile Include="Assets\MoralisWeb3ApiSdk\Constants.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\MoralisWeb3ApiSdk\Example\3rdParty\TextMesh Pro\Shaders\TMPro.cginc" />

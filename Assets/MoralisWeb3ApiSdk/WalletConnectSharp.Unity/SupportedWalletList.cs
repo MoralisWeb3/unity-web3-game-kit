@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Morlais;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using WalletConnectSharp.Unity.Models;
 

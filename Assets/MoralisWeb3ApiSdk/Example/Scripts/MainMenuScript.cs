@@ -32,12 +32,15 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using WalletConnectSharp.Core.Models;
 using WalletConnectSharp.Unity;
-using Assets.Scripts;
+using Moralis;
 using Assets;
 using MoralisWeb3ApiSdk;
+using Moralis.WebGL.Hex.HexTypes;
+using System.Numerics;
 
 #if UNITY_WEBGL
 using Cysharp.Threading.Tasks;
+using Moralis.WebGL;
 using Moralis.WebGL.Platform;
 using Moralis.WebGL.Platform.Objects;
 #else
@@ -152,11 +155,74 @@ public class MainMenuScript : MonoBehaviour
             // Use Moralis Connect page for authentication as we work to make the Wallet 
             // Connect experience better.
             //await LoginViaConnectionPage();
+#elif UNITY_WEBGL
+            await LoginWithWeb3();
 #else
             qrMenu.SetActive(true);
 #endif
         }
     }
+
+#if UNITY_WEBGL
+    /// <summary>
+    /// Login using web3
+    /// </summary>
+    /// <returns></returns>
+    public async UniTask LoginWithWeb3()
+    {
+        string userAddr = "";
+        if (!Web3GL.IsConnected())
+        {
+            userAddr = await MoralisInterface.SetupWeb3();
+        }
+        else
+        {
+            userAddr = Web3GL.Account();
+        }
+
+        if (string.IsNullOrWhiteSpace(userAddr))
+        {
+            Debug.LogError("Could not login or fetch account from web3.");
+        }
+        else {
+            string address = Web3GL.Account().ToLower();
+            string appId = MoralisInterface.GetClient().ApplicationId;
+            long serverTime = 0;
+
+            // Retrieve server time from Moralis Server for message signature
+            Dictionary<string, object> serverTimeResponse = await MoralisInterface.GetClient().Cloud.RunAsync<Dictionary<string, object>>("getServerTime", new Dictionary<string, object>());
+
+            if (serverTimeResponse == null || !serverTimeResponse.ContainsKey("dateTime") ||
+                !long.TryParse(serverTimeResponse["dateTime"].ToString(), out serverTime))
+            {
+                Debug.Log("Failed to retrieve server time from Moralis Server!");
+            }
+
+            string signMessage = $"Moralis Authentication\n\nId: {appId}:{serverTime}";
+
+            string signature = await Web3GL.Sign(signMessage);
+
+            Debug.Log($"Signature {signature} for {address} was returned.");
+
+            // Create moralis auth data from message signing response.
+            Dictionary<string, object> authData = new Dictionary<string, object> { { "id", address }, { "signature", signature }, { "data", signMessage } };
+
+            Debug.Log("Logging in user.");
+
+            // Attempt to login user.
+            MoralisUser user = await MoralisInterface.LogInAsync(authData);
+
+            if (user != null)
+            {
+                Debug.Log($"User {user.username} logged in successfully. ");
+            }
+            else
+            {
+                Debug.Log("User login failed.");
+            }
+        }
+    }
+#endif
 
     /// <summary>
     /// Handles the Wallet Connect OnConnection event.
@@ -183,9 +249,10 @@ public class MainMenuScript : MonoBehaviour
             Debug.Log("Failed to retrieve server time from Moralis Server!");
         }
 
+        string signMessage = $"Moralis Authentication\n\nId: {appId}:{serverTime}";
+
         Debug.Log($"Sending sign request for {address} ...");
 
-        string signMessage = $"Moralis Authentication\n\nId: {appId}:{serverTime}";
         string response = await walletConnect.Session.EthPersonalSign(address, signMessage);
 
         Debug.Log($"Signature {response} for {address} was returned.");
@@ -257,26 +324,6 @@ public class MainMenuScript : MonoBehaviour
             AuthenticationButtonOn();
         }
     }
-
-    
-    private async UniTask InitializeWeb3()
-    {
-        await MoralisInterface.SetupWeb3();
-
-        // Create an entry for the Game Rewards Contract.
-        MoralisInterface.InsertContractInstance("Rewards", GameAwardContractAbi(), "mumbai", "0x698d7D745B7F5d8EF4fdB59CeB660050b3599AC3");
-    }
-        
-    public async void WalletConnectSessionEstablished(WalletConnectUnitySession session)
-    {
-        await InitializeWeb3();
-    }
-
-
-    public async void WalletConnectConnected()
-    {
-        await InitializeWeb3();
-    }
 #else
     private async Task LoginViaConnectionPage()
     {
@@ -301,7 +348,7 @@ public class MainMenuScript : MonoBehaviour
         MoralisInterface.SetupWeb3();
 
         // Create an entry for the Game Rewards Contract.
-        MoralisInterface.InsertContractInstance("Rewards", GameAwardContractAbi(), "mumbai", "0x05af21b57d2E378F90106B229E717DC96c7Bb5e2");
+        MoralisInterface.InsertContractInstance("Rewards", Constants.MUG_ABI, Constants.MUG_CHAIN, Constants.MUG_CONTRACT_ADDRESS);
     }
 
     /// <summary>
@@ -335,10 +382,5 @@ public class MainMenuScript : MonoBehaviour
         Color color = menuBackground.color;
         color = new Color(0f, 0f, 0f, 0.7f);
         menuBackground.color = color;
-    }
-
-    private string GameAwardContractAbi()
-    {
-        return "[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"nftContractAddress\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"ApprovalForAll\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"},{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"values\",\"type\":\"uint256[]\"}],\"name\":\"TransferBatch\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"TransferSingle\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"value\",\"type\":\"string\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"URI\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"accounts\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"}],\"name\":\"balanceOfBatch\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"claimReward\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"}],\"name\":\"isApprovedForAll\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"url\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"mint\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"onERC1155BatchReceived\",\"outputs\":[{\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"onERC1155Received\",\"outputs\":[{\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"amounts\",\"type\":\"uint256[]\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"safeBatchTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"safeTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"setApprovalForAll\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"contractAddress\",\"type\":\"address\"}],\"name\":\"updateTargetContract\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"uri\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]";
     }
 }

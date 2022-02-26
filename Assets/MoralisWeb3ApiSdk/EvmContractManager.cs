@@ -27,16 +27,20 @@
  */
 using System;
 using System.Collections.Generic;
+
+#if UNITY_WEBGL
+using Moralis.WebGL;
+using Moralis.WebGL.Models;
+using Moralis.WebGL.Hex.HexTypes;
+using Cysharp.Threading.Tasks;
+#else
+using System.Threading.Tasks;
 using Nethereum.Contracts;
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Web3;
-
-#if UNITY_WEBGL
-using Cysharp.Threading.Tasks;
-#else
-using System.Threading.Tasks;
 #endif
+
 namespace MoralisWeb3ApiSdk
 {
     /// <summary>
@@ -44,6 +48,7 @@ namespace MoralisWeb3ApiSdk
     /// </summary>
     public class EvmContractManager
     {
+#if !UNITY_WEBGL
         /// <summary>
         /// All defined contract instances
         /// </summary>
@@ -53,6 +58,8 @@ namespace MoralisWeb3ApiSdk
         {
             Contracts = new Dictionary<string, EvmContractItem>();
         }
+
+
 
         /// <summary>
         /// Adds a chain instance of a contract to a specific contract set. 
@@ -150,92 +157,6 @@ namespace MoralisWeb3ApiSdk
 
             return functionInstance;
         }
-
-#if UNITY_WEBGL
-        /// <summary>
-        /// Executes a contract SendTransaction, used for executing contract functions that change state.
-        /// </summary>
-        /// <param name="contractKey"></param>
-        /// <param name="chainId"></param>
-        /// <param name="functionName"></param>
-        /// <param name="transactionInput"></param>
-        /// <param name="functionInput"></param>
-        /// <returns></returns>
-        public async UniTask<Tuple<bool, string, string>> SendTransactionAsync(string contractKey, string chainId, string functionName, TransactionInput transactionInput, object[] functionInput)
-        {
-            Tuple<bool, string, string> result = new Tuple<bool, string, string>(false, "", "");
-
-            Function targetFunction = GetContractFunction(contractKey, chainId, functionName);
-
-            if (targetFunction != null)
-            {
-                try
-                {
-                    string resp = await targetFunction.SendTransactionAsync(transactionInput, functionInput);
-
-                    result = new Tuple<bool, string, string>(true, resp, "");
-                }
-                catch (Exception exp)
-                {
-                    result = new Tuple<bool, string, string>(false, "", exp.Message);
-                }
-            }
-
-            return result;
-        }
-
-        public async UniTask<Tuple<bool,string,string>> SendTransactionAsync(string contractKey, string chainId, string functionName, string fromAddress, HexBigInteger gas, HexBigInteger value, object[] functionInput)
-        {
-            Tuple<bool, string, string> result = new Tuple<bool, string, string>(false,"","");
-
-            Function targetFunction = GetContractFunction(contractKey, chainId, functionName);
-
-            if (targetFunction != null)
-            {
-                try
-                {
-                    string resp = await targetFunction.SendTransactionAsync(fromAddress, gas, value, functionInput);
-                    result = new Tuple<bool, string, string>(true, resp, "");
-                }
-                catch (Exception exp)
-                {
-                    result = new Tuple<bool, string, string>(false, "", exp.Message);
-                }
-            }
-
-            return result;
-        }
-
-
-        public async UniTask<Tuple<bool, string, string>> SendTransactionAndWaitForReceiptAsync(string contractKey, string chainId, string functionName, string fromAddress, HexBigInteger gas, HexBigInteger value, object[] functionInput)
-        {
-            Tuple<bool, string, string> result = new Tuple<bool, string, string>(false, "", "");
-
-            Function targetFunction = GetContractFunction(contractKey, chainId, functionName);
-
-            if (targetFunction != null)
-            {
-                try
-                {
-                    TransactionReceipt resp = await targetFunction.SendTransactionAndWaitForReceiptAsync(fromAddress, gas, value, new System.Threading.CancellationTokenSource(), functionInput);
-                    if (resp.Succeeded() && resp.HasErrors() == false)
-                    {
-                        result = new Tuple<bool, string, string>(true, resp.TransactionHash, "");
-                    }
-                    else
-                    {
-                        result = new Tuple<bool, string, string>(true, "", "Transaction Failed.");
-                    }
-                }
-                catch (Exception exp)
-                {
-                    result = new Tuple<bool, string, string>(false, "", exp.Message);
-                }
-            }
-
-            return result;
-        }
-#else
 
         /// <summary>
         /// Executes a contract SendTransaction, used for executing contract functions that change state.

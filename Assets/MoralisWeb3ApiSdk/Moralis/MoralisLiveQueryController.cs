@@ -35,7 +35,7 @@ using Moralis.WebGL;
 using Moralis.WebGL.Platform.Queries;
 using Moralis.WebGL.Platform.Objects;
 
-namespace Assets.Scripts
+namespace Moralis
 {
     /// <summary>
     /// A class that autonmates subscription handling for vaious 
