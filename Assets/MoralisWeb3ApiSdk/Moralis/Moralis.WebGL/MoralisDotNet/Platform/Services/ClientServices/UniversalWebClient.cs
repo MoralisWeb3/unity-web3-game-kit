@@ -81,6 +81,8 @@ namespace Moralis.WebGL.Platform.Services
 
             try
             {
+                string x = JsonConvert.SerializeObject(webRequest);
+                Debug.Log($"\n\nWebRequest\n----------\v{x}\n\n");
                 await webRequest.SendWebRequest();
             }
             catch (Exception exp)
