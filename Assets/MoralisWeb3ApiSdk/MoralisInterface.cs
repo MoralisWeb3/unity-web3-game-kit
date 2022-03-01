@@ -97,7 +97,7 @@ namespace MoralisWeb3ApiSdk
         /// <param name="serverUri"></param>
         /// <param name="hostData"></param>
         /// <param name="web3ApiKey"></param>
-        public static async UniTask Initialize(string applicationId, string serverUri, HostManifestData hostData, ClientMeta clientMeta = null, string web3RpcUrl = null, string web3ApiKey = null)
+        public static async UniTask Initialize(string applicationId, string serverUri, HostManifestData hostData, ClientMeta clientMeta = null, string web3ApiKey = null)
         {
             // Application Id is requried.
             if (string.IsNullOrEmpty(applicationId))
@@ -135,8 +135,6 @@ namespace MoralisWeb3ApiSdk
             // For unity apps the local storage value must also be set.
             connectionData.LocalStoragePath = Application.persistentDataPath;
 
-            web3ClientRpcUrl = web3RpcUrl;
-
             Debug.Log($"Set LocalStoragePath to {connectionData.LocalStoragePath}");
 
             // TODO Make this optional!
@@ -152,8 +150,8 @@ namespace MoralisWeb3ApiSdk
             UnityNewtosoftSerializer jsonSerializer = new UnityNewtosoftSerializer();
 
             // If user passed web3apikey, add it to configuration.
-            if (web3ApiKey is { }) Moralis.WebGL.Web3Api.Client.Configuration.ApiKey["X-API-Key"] = web3ApiKey;
             if (web3ApiKey is { }) Moralis.WebGL.SolanaApi.Client.Configuration.ApiKey["X-API-Key"] = web3ApiKey;
+            if (web3ApiKey is { }) Moralis.WebGL.Web3Api.Client.Configuration.ApiKey["X-API-Key"] = web3ApiKey;
 
             // Create an instance of Moralis Server Client
             // NOTE: Web3ApiClient is optional. If you are not using the Moralis 

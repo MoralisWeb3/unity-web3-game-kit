@@ -103,8 +103,19 @@ namespace Moralis.WebGL.Platform.Services.ClientServices
 
             lock (newCommand.Headers)
             {
-                newCommand.Headers.Add(new KeyValuePair<string, string>("X-Parse-Application-Id", ServerConnectionData.ApplicationID));
-                newCommand.Headers.Add(new KeyValuePair<string, string>("X-Parse-Client-Version", MoralisService<TUser>.Version.ToString()));
+                KeyValuePair<string, string> appId = new KeyValuePair<string, string>("X-Parse-Application-Id", ServerConnectionData.ApplicationID);
+
+                if (!newCommand.Headers.Contains(appId))
+                {
+                    newCommand.Headers.Add(appId);
+                }
+
+                KeyValuePair<string, string> clientVersion = new KeyValuePair<string, string>("X-Parse-Client-Version", MoralisService<TUser>.Version.ToString());
+
+                if (!newCommand.Headers.Contains(clientVersion))
+                {
+                    newCommand.Headers.Add(clientVersion);
+                }
 
                 if (ServerConnectionData.Headers != null)
                 {

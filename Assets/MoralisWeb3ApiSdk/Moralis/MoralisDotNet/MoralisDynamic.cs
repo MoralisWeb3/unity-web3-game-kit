@@ -16,7 +16,6 @@ namespace Moralis
     public class MoralisClient<TUser> where TUser : MoralisUser
     {
         string serverAuthToken = "";
-        string serverAuthType = "";
 
         public MoralisClient(ServerConnectionData connectionData, IWeb3Api web3Api = null, ISolanaApi solanaApi = null, IJsonSerializer jsonSerializer = null)
         {

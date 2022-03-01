@@ -190,8 +190,6 @@ namespace Moralis.Platform.Services.ClientServices
 
                     user.authData[authType] = data;
 
-#warning Check if SynchronizeAllAuthData should accept an IServiceHub for consistency on which actions take place on which IServiceHub implementation instance.
-
                     user.SynchronizeAllAuthData();
                 }
 
@@ -212,8 +210,6 @@ namespace Moralis.Platform.Services.ClientServices
 
             if (curUser != null)
             {
-#warning Check if SynchronizeAllAuthData should accept an IServiceHub for consistency on which actions take place on which IServiceHub implementation instance.
-
                 curUser.SynchronizeAuthData(provider);
             }
         }

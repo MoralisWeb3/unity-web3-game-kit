@@ -65,12 +65,17 @@ namespace Moralis.WebGL.SolanaApi
 
             if (httpRequest.Headers != null)
             {
-                foreach (KeyValuePair<string, string> header in httpRequest.Headers)
+                if (httpRequest.Headers != null)
                 {
-                    if (!String.IsNullOrWhiteSpace(header.Value) && allowedHeaders.Contains(header.Key.ToLower()))
+                    foreach (KeyValuePair<string, string> header in httpRequest.Headers)
                     {
-                        webRequest.SetRequestHeader(header.Key, header.Value);
-                        Debug.Log($"Adding Header: {header.Key} value: {header.Value}");
+                        if (webRequest.GetRequestHeader(header.Key) != null) continue;
+
+                        if (!String.IsNullOrWhiteSpace(header.Value) &&
+                            allowedHeaders.Contains(header.Key.ToLower()))
+                        {
+                            webRequest.SetRequestHeader(header.Key, header.Value);
+                        }
                     }
                 }
             }

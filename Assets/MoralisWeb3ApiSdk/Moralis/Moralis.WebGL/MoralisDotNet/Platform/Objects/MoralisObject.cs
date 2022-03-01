@@ -77,8 +77,14 @@ namespace Moralis.WebGL.Platform.Objects
 
         public virtual async UniTask SaveAsync(CancellationToken cancellationToken = default)
         {
+            // MoralisUser is a special case not all properties can be passed to save.
+            if (this is MoralisUser) ((MoralisUser)this).SetSaving(true);
+
             IDictionary<string, IMoralisFieldOperation> operations = this.StartSave();
             string resp = await this.ObjectService.SaveAsync(this, operations, sessionToken, cancellationToken);
+
+            // Set user saving false so that local persistence has full object.
+            if (this is MoralisUser) ((MoralisUser)this).SetSaving(false);
 
             Console.WriteLine($"Save response: {resp}");
 
