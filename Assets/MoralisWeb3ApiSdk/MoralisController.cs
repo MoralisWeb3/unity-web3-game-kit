@@ -55,7 +55,13 @@ namespace MoralisWeb3ApiSdk
         public string ApplicationUrl;
 
         public WalletConnect walletConnect;
-
+        private void OnValidate()
+        {
+            if (MoralisServerURI == "SERVER URI" || string.IsNullOrWhiteSpace(MoralisServerURI) || MoralisApplicationId == "APPLICATION ID" || string.IsNullOrWhiteSpace(MoralisApplicationId))
+            {
+                Debug.LogError("Setup your Moralis Server URI and Application Id before running. For more help read the Quick Start on: https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate#-quick-start");
+            }
+        }
 
 #if UNITY_WEBGL
         public async UniTask Initialize()
