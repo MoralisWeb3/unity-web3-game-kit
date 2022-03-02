@@ -26,7 +26,10 @@
  *  SOFTWARE.
  */
 using System.Collections.Generic;
-using Assets.Scripts.Moralis;
+using Moralis;
+
+#if !UNITY_WEBGL
+
 using Nethereum.Contracts;
 using Nethereum.Web3;
 
@@ -84,3 +87,4 @@ namespace MoralisWeb3ApiSdk
         }
     }
 }
+#endif

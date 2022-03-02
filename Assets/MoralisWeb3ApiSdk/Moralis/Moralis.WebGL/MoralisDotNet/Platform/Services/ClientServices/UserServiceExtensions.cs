@@ -59,7 +59,6 @@ namespace Moralis.WebGL.Platform.Services.ClientServices
         {
             TUser user = await serviceHub.UserService.GetUserAsync(sessionToken, serviceHub, cancellationToken);
 
-
             await SaveCurrentUserAsync<TUser>(serviceHub, user);
 
             return user;

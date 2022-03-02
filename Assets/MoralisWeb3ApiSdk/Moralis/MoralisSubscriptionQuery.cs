@@ -36,7 +36,7 @@ using Moralis.WebGL.Platform.Objects;
 using Moralis.WebGL.Platform.Queries;
 using Moralis.WebGL.Platform.Services.ClientServices;
 
-namespace Assets.Scripts
+namespace Moralis
 {
     /// <summary>
     /// Provides a wrapper around the query subscription process to facilitate automated

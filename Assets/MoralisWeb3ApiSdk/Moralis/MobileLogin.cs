@@ -28,7 +28,6 @@
 using System;
 using Newtonsoft.Json;
 using UnityEngine;
-using Assets.Scripts.Moralis;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using MoralisWeb3ApiSdk;
@@ -38,7 +37,7 @@ using MoralisWeb3ApiSdk;
 using Cysharp.Threading.Tasks;
 using Moralis.WebGL.Platform.Objects;
 
-namespace Assets.Scripts
+namespace Moralis
 {
     public class MobileLogin
     {
@@ -148,7 +147,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Moralis.Platform.Objects;
 
-namespace Assets.Scripts
+namespace Moralis
 {
     public class MobileLogin
     {

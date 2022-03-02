@@ -25,8 +25,10 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  */
-using Assets.Scripts.Moralis;
+using Moralis;
+#if !UNITY_WEBGL
 using Nethereum.Contracts;
+#endif
 
 namespace MoralisWeb3ApiSdk
 {
@@ -39,10 +41,14 @@ namespace MoralisWeb3ApiSdk
         /// Contract address on this chain.
         /// </summary>
         public string ContractAddress { get; set; }
+
+#if !UNITY_WEBGL
         /// <summary>
         /// Contract Instance derived from ABI
         /// </summary>
         public Contract ContractInstance { get; set; }
+
+#endif
         /// <summary>
         /// Evm Chain information.
         /// </summary>

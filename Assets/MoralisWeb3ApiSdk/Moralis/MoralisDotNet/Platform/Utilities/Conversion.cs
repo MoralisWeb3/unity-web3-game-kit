@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 namespace Moralis.Platform.Utilities
 {
-#warning Possibly should be refactored.
 
     /// <summary>
     /// A set of utilities for converting generic types between each other.

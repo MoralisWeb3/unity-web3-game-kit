@@ -1,4 +1,12 @@
 # Change Log
+# WebGL / Wallet Browser Pre-Release
+- Issue #32 - Replace Wallet Connect with In-Browser Wallet Interface for WebGL
+- Issue #39 - Web3: Add Integrated Transfer Method
+- Issue #70 - User Save Fails
+- Fixed WebGL error: Unsupported internal call for IL2CPP:RuntimeInformation::GetRuntimeArchitecture
+- Check if the user has setup the Server URI and Application Id
+- Remove Speedy Node Requirement and Defects
+
 # 1.0.7 (2022-02-18)
 - Issue #57 - WalletConnect.AppData not automatically set
 - Issue #59 - Web3Api.Native.GetContractEvents - invalid parameter

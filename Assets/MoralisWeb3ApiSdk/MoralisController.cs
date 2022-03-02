@@ -27,6 +27,7 @@
  *  SOFTWARE.
  */
 #if UNITY_WEBGL
+using Moralis.WebGL.Models;
 using Moralis.WebGL.Platform;
 using Moralis.WebGL.Web3Api.Models;
 using System.Collections.Generic;
@@ -35,12 +36,11 @@ using Cysharp.Threading.Tasks;
 using Moralis.Platform;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-#endif
 using WalletConnectSharp.Core.Models;
+#endif
 using UnityEngine;
 using WalletConnectSharp.Unity;
 using Moralis.Web3Api.Models;
-using Assets.Scripts.Moralis;
 
 namespace MoralisWeb3ApiSdk
 {
@@ -84,12 +84,9 @@ namespace MoralisWeb3ApiSdk
                     URL = ApplicationUrl
                 };
 
-                walletConnect.AppData = clientMeta;
-
                 await MoralisInterface.Initialize(MoralisApplicationId, MoralisServerURI, hostManifestData, clientMeta);
             }
         }
-
 
 #else
         public async Task Initialize()
@@ -119,7 +116,6 @@ namespace MoralisWeb3ApiSdk
             }
         }
 #endif
-
 
     }
 }

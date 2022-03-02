@@ -28,20 +28,21 @@
  *  SOFTWARE.
  */
 using MoralisWeb3ApiSdk;
-using Nethereum.Hex.HexTypes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
-using Nethereum.Contracts;
 using System.Numerics;
 #if UNITY_WEBGL
 using Moralis.WebGL.Platform.Objects;
 using Moralis.WebGL.Web3Api.Models;
+using Moralis.WebGL.Hex.HexTypes;
 #else
 using System.Threading.Tasks;
+using Nethereum.Contracts;
+using Nethereum.Hex.HexTypes;
 using Moralis.Platform.Objects;
 using Moralis.Web3Api.Models;
 #endif
@@ -97,9 +98,14 @@ public class AwardableController : MonoBehaviour
 
                 if (ownership != null && ownership.Count() > 0)
                 {
+                    Debug.Log("Already Owns Mug.");
                     isOwned = true;
                     // Hide the NFT Gmae object since it is already owned.
                     transform.gameObject.SetActive(false);
+                }
+                else
+                {
+                    Debug.Log("Does not own Mug.");
                 }
             }
             catch (Exception exp)
@@ -146,15 +152,25 @@ public class AwardableController : MonoBehaviour
 
         if (BigInteger.TryParse(NftTokenId, out bi))
         {
+
+#if UNITY_WEBGL
+
+            // Convert token id to hex as this is what the contract call expects
+            object[] pars = new object[] { bi.ToString() };
+
+            // Set gas estimate
+            HexBigInteger gas = new HexBigInteger(0);
+            string resp = await MoralisInterface.ExecuteFunction(Constants.MUG_CONTRACT_ADDRESS, Constants.MUG_ABI, Constants.MUG_CLAIM_FUNCTION, pars, new HexBigInteger("0x0"), gas, gas);
+#else
+
             // Convert token id to hex as this is what the contract call expects
             object[] pars = new object[] { bi.ToString("x") };
 
             // Set gas estimate
-            HexBigInteger gas = new HexBigInteger(80000); 
-
+            HexBigInteger gas = new HexBigInteger(0);
             // Call the contract to claim the NFT reward.
             string resp = await MoralisInterface.SendEvmTransactionAsync("Rewards", "mumbai", "claimReward", addr, gas, new HexBigInteger("0x0"), pars);
-
+#endif
             // Hide the NFT GameObject since it has been claimed
             // You could also play a victory sound etc.
             transform.gameObject.SetActive(false);
