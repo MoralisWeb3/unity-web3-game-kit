@@ -267,28 +267,28 @@ separate these from the main code. To facilitate this we have included the _**Mo
 #### Example MoralisLiveQueryCallbacks Use
 ```
 MoralisLiveQueryCallbacks<Hero> callbacks = new MoralisLiveQueryCallbacks<Hero>();
-callbacks.OnConnectedEvent += (() => { Console.WriteLine("Connection Established."); });
-callbacks.OnSubscribedEvent += ((requestId) => { Console.WriteLine($"Subscription {requestId} created."); });
-callbacks.OnUnsubscribedEvent += ((requestId) => { Console.WriteLine($"Unsubscribed from {requestId}."); });
+callbacks.OnConnectedEvent += (() => { Debug.Log("Connection Established."); });
+callbacks.OnSubscribedEvent += ((requestId) => { Debug.Log($"Subscription {requestId} created."); });
+callbacks.OnUnsubscribedEvent += ((requestId) => { Debug.Log($"Unsubscribed from {requestId}."); });
 callbacks.OnErrorEvent += ((ErrorMessage em) =>
 {
-    Console.WriteLine($"ERROR: code: {em.code}, msg: {em.error}, requestId: {em.requestId}");
+    Debug.Log($"ERROR: code: {em.code}, msg: {em.error}, requestId: {em.requestId}");
 });
 callbacks.OnCreateEvent += ((item, requestId) =>
 {
-    Console.WriteLine($"Created hero: name: {item.Name}, level: {item.Level}, strength: {item.Strength} warcry: {item.Warcry}");
+    Debug.Log($"Created hero: name: {item.Name}, level: {item.Level}, strength: {item.Strength} warcry: {item.Warcry}");
 });
 callbacks.OnUpdateEvent += ((item, requestId) =>
 {
-    Console.WriteLine($"Updated hero: name: {item.Name}, level: {item.Level}, strength: {item.Strength} warcry: {item.Warcry}");
+    Debug.Log($"Updated hero: name: {item.Name}, level: {item.Level}, strength: {item.Strength} warcry: {item.Warcry}");
 });
 callbacks.OnDeleteEvent += ((item, requestId) =>
 {
-    Console.WriteLine($"Hero {item.Name} has been defeated and removed from the roll!");
+    Debug.Log($"Hero {item.Name} has been defeated and removed from the roll!");
 });
 callbacks.OnGeneralMessageEvent += ((text) =>
 {
-    Console.WriteLine($"Websocket message: {text}");
+    Debug.Log($"Websocket message: {text}");
 });
 ```
 
