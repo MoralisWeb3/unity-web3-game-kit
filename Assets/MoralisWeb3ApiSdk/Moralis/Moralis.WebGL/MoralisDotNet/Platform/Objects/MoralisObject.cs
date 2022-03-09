@@ -75,13 +75,40 @@ namespace Moralis.WebGL.Platform.Objects
             return this.ObjectService.DeleteAsync(this, sessionToken, cancellationToken);
         }
 
-        public virtual async UniTask SaveAsync(CancellationToken cancellationToken = default)
+        public virtual async UniTask<bool> SaveAsync(CancellationToken cancellationToken = default)
         {
+            try
+            { 
             // MoralisUser is a special case not all properties can be passed to save.
             if (this is MoralisUser) ((MoralisUser)this).SetSaving(true);
 
             IDictionary<string, IMoralisFieldOperation> operations = this.StartSave();
             string resp = await this.ObjectService.SaveAsync(this, operations, sessionToken, cancellationToken);
+
+            Dictionary<string, object> obj = JsonUtilities.Parse(resp) as Dictionary<string, object>;
+
+            if (obj.ContainsKey("objectId"))
+            {
+                this.objectId = (string)obj["objectId"];
+            }
+
+            if (obj.ContainsKey("createdAt"))
+            {
+                DateTime dt = DateTime.Now;
+                if (DateTime.TryParse(obj["createdAt"].ToString(), out dt))
+                {
+                    this.createdAt = dt;
+                }
+            }
+
+            if (obj.ContainsKey("updatedAt"))
+            {
+                DateTime dt = DateTime.Now;
+                if (DateTime.TryParse(obj["updatedAt"].ToString(), out dt))
+                {
+                    this.updatedAt = dt;
+                }
+            }
 
             // Set user saving false so that local persistence has full object.
             if (this is MoralisUser) ((MoralisUser)this).SetSaving(false);
@@ -90,7 +117,14 @@ namespace Moralis.WebGL.Platform.Objects
 
             OperationSetQueue.Clear();
 
-            return;
+                return true;
+            }
+            catch (Exception exp)
+            {
+                Console.WriteLine($"Save failed: {exp.Message}");
+            }
+
+            return false;
         }
 
         /// <summary>

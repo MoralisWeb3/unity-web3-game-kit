@@ -72,22 +72,57 @@ namespace Moralis.Platform.Objects
         /// <param name="cancellationToken">The cancellation token.</param>
         public Task DeleteAsync(CancellationToken cancellationToken = default) => TaskQueue.Enqueue(toAwait => DeleteAsync(toAwait, cancellationToken), cancellationToken);
 
-        public virtual async Task SaveAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<bool> SaveAsync(CancellationToken cancellationToken = default)
         {
-            // MoralisUser is a special case not all properties can be passed to save.
-            if (this is MoralisUser) ((MoralisUser)this).SetSaving(true);
+            try
+            {
+                // MoralisUser is a special case not all properties can be passed to save.
+                if (this is MoralisUser) ((MoralisUser)this).SetSaving(true);
 
-            IDictionary<string, IMoralisFieldOperation> operations = this.StartSave();
-            string resp = await this.ObjectService.SaveAsync(this, operations, sessionToken, cancellationToken);
-            
-            // Set user saving false so that local persistence has full object.
-            if (this is MoralisUser) ((MoralisUser)this).SetSaving(false);
+                IDictionary<string, IMoralisFieldOperation> operations = this.StartSave();
+                string resp = await this.ObjectService.SaveAsync(this, operations, sessionToken, cancellationToken);
 
-            Console.WriteLine($"Save response: {resp}");
+                Dictionary<string, object> obj = JsonUtilities.Parse(resp) as Dictionary<string, object>;
 
-            OperationSetQueue.Clear();
+                if (obj.ContainsKey("objectId"))
+                {
+                    this.objectId = (string)obj["objectId"];
+                }
 
-            return;
+                if (obj.ContainsKey("createdAt"))
+                {
+                    DateTime dt = DateTime.Now;
+                    if (DateTime.TryParse(obj["createdAt"].ToString(), out dt))
+                    {
+                        this.createdAt = dt;
+                    }
+                }
+
+                if (obj.ContainsKey("updatedAt"))
+                {
+                    DateTime dt = DateTime.Now;
+                    if (DateTime.TryParse(obj["updatedAt"].ToString(), out dt))
+                    {
+                        this.updatedAt = dt;
+                    }
+                }
+
+                // Set user saving false so that local persistence has full object.
+                if (this is MoralisUser) ((MoralisUser)this).SetSaving(false);
+
+                Console.WriteLine($"Save response: {resp}");
+
+                OperationSetQueue.Clear();
+
+                return true;
+            }
+            catch (Exception exp)
+            {
+                Console.WriteLine($"Save failed: {exp.Message}");
+            }
+
+            return false;
+
         }
 
         /// <summary>
