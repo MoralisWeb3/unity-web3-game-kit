@@ -1,5 +1,5 @@
 # Change Log
-# 1.0.9 (2022-03-xx)
+# 1.0.9 (2022-03-09)
 - Issue #82 - Web3Api Native RunContractFunction Deserialization fails
 - Issue #80 - WebGL, LiveQuery - DELETE: Good response has an Empty content
 - Issue #75 - eature Request: CreateAsync
