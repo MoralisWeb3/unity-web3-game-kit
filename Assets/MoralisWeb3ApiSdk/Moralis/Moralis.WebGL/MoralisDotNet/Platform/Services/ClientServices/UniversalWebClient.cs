@@ -91,7 +91,7 @@ namespace Moralis.WebGL.Platform.Services
             }
 
             HttpStatusCode responseStatus = HttpStatusCode.BadRequest;
-            string responseText = null;
+            string responseText = "{}";
 
             if (Enum.IsDefined(typeof(HttpStatusCode), (int)webRequest.responseCode))
             {
@@ -105,7 +105,7 @@ namespace Moralis.WebGL.Platform.Services
             }
             else
             {
-                responseText = webRequest.downloadHandler.text;
+                responseText = webRequest.downloadHandler == null ? responseText : webRequest.downloadHandler.text;
             }
 
             result = new Tuple<HttpStatusCode, string>(responseStatus, responseText);

@@ -457,7 +457,10 @@ namespace Moralis.Web3Api.Api
 			else if (((int)response.StatusCode) == 0)
 				throw new ApiException((int)response.StatusCode, "Error calling RunContractFunction: " + response.ErrorMessage, response.ErrorMessage);
 
-			return (string)ApiClient.Deserialize(response.Content, typeof(string), response.Headers);
+			object respObject = (object)ApiClient.Deserialize(response.Content, typeof(object), response.Headers);
+
+			return JsonConvert.SerializeObject(respObject);
+
 		}
 	}
 }
