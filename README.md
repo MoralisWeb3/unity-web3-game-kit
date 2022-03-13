@@ -886,7 +886,7 @@ Get the nft trades for a given contracts and marketplace
 - **limit** _integer_ OPTIONAL Limit
 #### Example
 ```
-TradesCollection trades = MoralisInterface.GetClient().Web3Api.Token.GetNFTTrades(address, ChainList.eth);
+TradeCollection trades = MoralisInterface.GetClient().Web3Api.Token.GetNFTTrades(address, ChainList.eth);
 ```
 
 ### `GetNftTransfersFromToBlock`
