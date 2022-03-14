@@ -25,6 +25,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  */
+using System;
 using System.Collections.Generic;
 using Moralis;
 
@@ -38,6 +39,7 @@ namespace MoralisWeb3ApiSdk
     /// <summary>
     /// Wraps a list on Nethereum contract instances by chain
     /// </summary>
+    [Obsolete("This class has been deprecated.")]
     public class EvmContractItem
     {
         /// <summary>

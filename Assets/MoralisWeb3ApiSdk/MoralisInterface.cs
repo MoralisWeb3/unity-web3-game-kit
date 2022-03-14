@@ -260,14 +260,25 @@ namespace MoralisWeb3ApiSdk
         /// <param name="gas"></param>
         /// <param name="gasPrice"></param>
         /// <returns></returns>
-        public async static UniTask<string> SendTransactionAsync(string recipient, HexBigInteger value, HexBigInteger gas = null, HexBigInteger gasPrice = null)
+        public async static UniTask<string> SendTransactionAsync(string recipientAddress, HexBigInteger value, HexBigInteger gas = null, HexBigInteger gasPrice = null)
         {
             string g = "";
             string gp = "";
+            string txnHash = null;
 
             if (gas != null) g = gas.Value.ToString();
             if (gasPrice != null) gp = gasPrice.Value.ToString();
-            string txnHash = await Web3GL.SendTransaction(recipient, value.Value.ToString(), g, gp);
+
+            try
+            {
+                txnHash = await Web3GL.SendTransaction(recipientAddress, value.Value.ToString(), g, gp);
+
+                Debug.Log($"Transfered {value.Value} WEI from {recipientAddress} to {recipientAddress}.  TxnHash: {txnHash}");
+            }
+            catch (Exception exp)
+            {
+                Debug.Log($"Transfer of {value.Value} WEI from {recipientAddress} to {recipientAddress} failed!");
+            }
 
             return txnHash;
         }
@@ -283,7 +294,7 @@ namespace MoralisWeb3ApiSdk
         /// <param name="gas"></param>
         /// <param name="gasPrice"></param>
         /// <returns></returns>
-        public async static UniTask<string> ExecuteFunction(string contractAddress,
+        public async static UniTask<string> ExecuteContractFunction(string contractAddress,
             string abi,
             string functionName,
             object[] args,
@@ -512,8 +523,6 @@ namespace MoralisWeb3ApiSdk
             Web3Client = new Web3(client.CreateProvider( new DeadRpcReadClient((string s) => {
                 Debug.LogError(s);
             })));
-            //
-            //Web3Client = new Web3(client.CreateProvider(new Uri(rpcUrl)));
         }
 
         /// <summary>
@@ -523,6 +532,7 @@ namespace MoralisWeb3ApiSdk
         /// <param name="abi">ABI of the contract in standard ABI json format</param>
         /// <param name="baseChainId">The initial chain Id used to interact with this contract</param>
         /// <param name="baseContractAddress">The initial contract address of the contract on specified chain</param>
+        [Obsolete("This method is deprecated. This method will not be replaced.")]
         public static void InsertContractInstance(string key, string abi, string baseChainId, string baseContractAddress)
         {
             if (Web3Client == null)
@@ -543,6 +553,7 @@ namespace MoralisWeb3ApiSdk
         /// <param name="key">How you identify the contract instance.</param>
         /// <param name="chainId">The The chain the contract is deployed on.</param>
         /// <param name="contractAddress">Address the contract is deployed at</param>
+        [Obsolete("This method is deprecated. This method will not be replaced.")]
         public static void AddContractChainAddress(string key, string chainId, string contractAddress)
         {
             if (Web3Client == null)
@@ -561,6 +572,7 @@ namespace MoralisWeb3ApiSdk
         /// <param name="key">How you identify the contract instance.</param>
         /// <param name="chainId">The The chain the contract is deployed on.</param>
         /// <returns>Nethereum.Contracts.Contract</returns>
+        [Obsolete("This method is deprecated. This method will not be replaced.")]
         public static Contract EvmContractInstance(string key, string chainId)
         {
             Contract contract = null;
@@ -588,6 +600,7 @@ namespace MoralisWeb3ApiSdk
         /// <param name="chainId">The The chain the contract is deployed on.</param>
         /// <param name="functionName">Name of the function to return</param>
         /// <returns>Function</returns>
+        [Obsolete("This method is deprecated. This method will not be replaced.")]
         public static Function EvmContractFunctionInstance(string key, string chainId, string functionName)
         {
             Contract contract = EvmContractInstance(key, chainId);
@@ -612,6 +625,7 @@ namespace MoralisWeb3ApiSdk
         /// <param name="transactionInput">NEthereum TransactionInput object</param>
         /// <param name="functionInput">Function params</param>
         /// <returns>string</returns>
+        [Obsolete("This method is deprecated. Please use SendTransactionAsync or ExecuteContractFunction as appropriate.")]
         public static async Task<string> SendEvmTransactionAsync(string contractKey, string chainId, string functionName, TransactionInput transactionInput, object[] functionInput)
         {
             string result = null;
@@ -625,7 +639,7 @@ namespace MoralisWeb3ApiSdk
                 if (contractManager.Contracts.ContainsKey(contractKey) &&
                     contractManager.Contracts[contractKey].ChainContractMap.ContainsKey(chainId))
                 {
-                    Tuple<bool,string,string> resp = await contractManager.SendTransactionAsync(contractKey, chainId, functionName, transactionInput, functionInput);
+                    Tuple<bool, string, string> resp = await contractManager.SendTransactionAsync(contractKey, chainId, functionName, transactionInput, functionInput);
 
                     if (resp.Item1) result = resp.Item2;
                 }
@@ -645,6 +659,7 @@ namespace MoralisWeb3ApiSdk
         /// <param name="value"></param>
         /// <param name="functionInput"></param>
         /// <returns></returns>
+        [Obsolete("This method is deprecated. Please use SendTransactionAsync or ExecuteContractFunction as appropriate.")]
         public static async Task<string> SendEvmTransactionAsync(string contractKey, string chainId, string functionName, string fromaddress, HexBigInteger gas, HexBigInteger value, object[] functionInput)
         {
             string result = null;
@@ -659,7 +674,7 @@ namespace MoralisWeb3ApiSdk
                     contractManager.Contracts[contractKey].ChainContractMap.ContainsKey(chainId))
                 {
                     Tuple<bool, string, string> resp = await contractManager.SendTransactionAsync(contractKey, chainId, functionName, fromaddress, gas, value, functionInput);
- 
+
                     if (resp.Item1)
                     {
                         result = resp.Item2;
@@ -685,6 +700,7 @@ namespace MoralisWeb3ApiSdk
         /// <param name="value"></param>
         /// <param name="functionInput"></param>
         /// <returns></returns>
+        [Obsolete("This method is deprecated. Please use SendTransactionAsync or ExecuteContractFunction as appropriate.")]
         public static async Task<string> SendTransactionAndWaitForReceiptAsync(string contractKey, string chainId, string functionName, string fromaddress, HexBigInteger gas, HexBigInteger value, object[] functionInput)
         {
             string result = null;
@@ -714,10 +730,103 @@ namespace MoralisWeb3ApiSdk
             return result;
         }
 
+
+
+        /// <summary>
+        /// Performs a transfer of value to receipient.
+        /// </summary>
+        /// <param name="recipient"></param>
+        /// <param name="value"></param>
+        /// <param name="gas"></param>
+        /// <param name="gasPrice"></param>
+        /// <returns></returns>
+        public async static Task<string> SendTransactionAsync(string recipientAddress, HexBigInteger value, HexBigInteger gas = null, HexBigInteger gasPrice = null)
+        {
+            string txnHash = null;
+
+            // Retrieve from address, the address used to athenticate the user.
+            MoralisUser user = await MoralisInterface.GetUserAsync();
+            string fromAddress = user.authData["moralisEth"]["id"].ToString();
+
+            // Create transaction request.
+            TransactionInput txnRequest = new TransactionInput()
+            {
+                Data = String.Empty,
+                From = fromAddress,
+                To = recipientAddress,
+                Value = value
+            };
+
+            try
+            {
+                // Execute the transaction.
+                txnHash = await MoralisInterface.Web3Client.Eth.TransactionManager.SendTransactionAsync(txnRequest);
+
+                Debug.Log($"Transfered {value.Value} WEI from {fromAddress} to {recipientAddress}.  TxnHash: {txnHash}");
+            }
+            catch (Exception exp)
+            {
+                Debug.Log($"Transfer of {value.Value} WEI from {fromAddress} to {recipientAddress} failed: {exp.Message}");
+            }
+
+            return txnHash;
+        }
+
+        /// <summary>
+        /// Executes a contract function.
+        /// </summary>
+        /// <param name="contractAddress"></param>
+        /// <param name="abi"></param>
+        /// <param name="functionName"></param>
+        /// <param name="args"></param>
+        /// <param name="value"></param>
+        /// <param name="gas"></param>
+        /// <param name="gasPrice"></param>
+        /// <returns></returns>
+        public async static Task<string> ExecuteContractFunction(string contractAddress,
+            string abi,
+            string functionName,
+            object[] args,
+            HexBigInteger value,
+            HexBigInteger gas,
+            HexBigInteger gasPrice)
+        {
+            string result = null;
+            string gasValue = gas.Value.ToString();
+            string gasPriceValue = gasPrice.ToString();
+
+            if (gasValue.Equals("0") || gasValue.Equals("0x0")) gasValue = "";
+
+            if (gasPriceValue.Equals("0") || gasPriceValue.Equals("0x0")) gasPriceValue = "";
+
+            try
+            {            
+                // Retrieve from address, the address used to athenticate the user.
+                MoralisUser user = await MoralisInterface.GetUserAsync();
+                string fromAddress = user.authData["moralisEth"]["id"].ToString();
+
+                Contract contractInstance = Web3Client.Eth.GetContract(abi, contractAddress);
+                Function function = contractInstance.GetFunction(functionName);
+
+                if (function != null)
+                {
+                    result = await function.SendTransactionAsync(fromAddress, gas, value, args);
+                
+                }
+            }
+            catch (Exception exp)
+            {
+                Debug.Log($"Call to {functionName} failed due to: {exp.Message}");
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Provide quick access to the Moralis Web3API Supported chains list.
         /// </summary>
         public static List<ChainEntry> SupportedChains => SupportedEvmChains.SupportedChains;
+
     }
 #endif
 }

@@ -46,6 +46,7 @@ namespace MoralisWeb3ApiSdk
     /// <summary>
     /// Creates a simple way to create and access a set of contracts by chain.
     /// </summary>
+    [Obsolete("This class has been deprecated.")]
     public class EvmContractManager
     {
 #if !UNITY_WEBGL
