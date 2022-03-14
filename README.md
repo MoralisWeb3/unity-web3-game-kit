@@ -540,7 +540,8 @@ Gets native balance for a specific address
 - **toBlock** _string_ OPTIONAL The maximum block number from where to get the logs.
 #### Example
 ```
-NativeBalance balance = MoralisInterface.GetClient().Web3Api.Account.GetNativeBalance(address.ToLower(), ChainList.eth);
+NativeBalance balance = await MoralisInterface.GetClient().Web3Api.Account.GetNativeBalance(address.ToLower(), ChainList.eth);
+Debug.Log($"GetNativeBalance Balance: {balance.Balance}");
 ```
 
 ### `GetNFTs`
@@ -553,7 +554,21 @@ Gets NFTs owned by the given address
 - **order** _string_ OPTIONAL The field(s) to order on and if it should be ordered in ascending or descending order. Specified by: fieldName1.order,fieldName2.order. Example 1: "name", "name.ASC", "name.DESC", Example 2: "Name and Symbol", "name.ASC,symbol.DESC"
 #### Example
 ```
-NftOwnerCollection balance = MoralisInterface.GetClient().Web3Api.Account.GetNFTs(address.ToLower(), ChainList.eth);
+NftOwnerCollection nftCollection = await MoralisInterface.GetClient().Web3Api.Account.GetNFTs(userAddress, chainId);
+
+if (nftCollection.Total < 1)
+{
+    Debug.Log($"User {userAddress} does not have any NFTs on chain {chainId.ToString()}");
+}
+else
+{
+    Debug.Log($"Nfts for User {userAddress}");
+
+    foreach (NftOwner nft in nftCollection.Result)
+    {
+        Debug.Log($"TokenId: {nft.TokenId}, Name: {nft.Name}, Balance: {nft.Amount}");
+    }
+}
 ```
 
 ### `GetNFTsForContract`
@@ -567,7 +582,8 @@ Gets NFTs owned by the given address
 - **order** _string_ OPTIONAL The field(s) to order on and if it should be ordered in ascending or descending order. Specified by: fieldName1.order,fieldName2.order. Example 1: "name", "name.ASC", "name.DESC", Example 2: "Name and Symbol", "name.ASC,symbol.DESC"
 #### Example
 ```
-NftOwnerCollection balance = MoralisInterface.GetClient().Web3Api.Account.GetNFTsForContract(address.ToLower(), tokenAddress, ChainList.eth);
+NftOwnerCollection resp = await MoralisInterface.GetClient().Web3Api.Account.GetNFTsForContract(address.ToLower(), "0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", ChainList.eth);
+Debug.Log($"GetNFTsForContract Count: {resp.Total}");
 ```
 
 ### `GetNFTTransfers`
@@ -581,7 +597,8 @@ Gets the transfers of the tokens matching the given parameters
 - **order** _string_ OPTIONAL The field(s) to order on and if it should be ordered in ascending or descending order. Specified by: fieldName1.order,fieldName2.order. Example 1: "name", "name.ASC", "name.DESC", Example 2: "Name and Symbol", "name.ASC,symbol.DESC"
 #### Example
 ```
-NftTransferCollection balance = MoralisInterface.GetClient().Web3Api.Account.GetNFTTransfers(address.ToLower(), ChainList.eth);
+NftTransferCollection balance = await MoralisInterface.GetClient().Web3Api.Account.GetNFTTransfers(address.ToLower(), ChainList.eth);
+Debug.Log($"GetNFTTransfers Matches: {balance.Total}");
 ```
 
 ### `GetTokenBalances`
@@ -592,7 +609,8 @@ Gets token balances for a specific address
 - **toBlock** _string_ OPTIONAL The maximum block number from where to get the logs.
 #### Example
 ```
-List<Erc20TokenBalance> balance = MoralisInterface.GetClient().Web3Api.Account.GetTokenBalances(address.ToLower(), ChainList.eth);
+List<Erc20TokenBalance> balance = await MoralisInterface.GetClient().Web3Api.Account.GetTokenBalances(address.ToLower(), ChainList.eth);
+Debug.Log($"GetTokenBalances Count: {balance.Count}");
 ```
 
 ### `GetTokenTransfers`
@@ -608,7 +626,8 @@ Gets ERC20 token transactions in descending order based on block number
 - **limit** _integer_ OPTIONAL Limit
 #### Example
 ```
-Erc20TransactionCollection balance = MoralisInterface.GetClient().Web3Api.Account.GetTokenTransfers(address.ToLower(), ChainList.eth);
+Erc20TransactionCollection balance = await MoralisInterface.GetClient().Web3Api.Account.GetTokenTransfers(address.ToLower(), ChainList.eth);
+Debug.Log($"GetTokenTransfers Count: {balance.Total}");
 ```
 
 ### `GetTransactions`
@@ -624,7 +643,8 @@ Gets native transactions in descending order based on block number
 - **limit** _integer_ OPTIONAL Limit
 #### Example
 ```
-TransactionCollection balance = MoralisInterface.GetClient().Web3Api.Account.GetTransactions(address.ToLower(), ChainList.eth);
+TransactionCollection balance = await MoralisInterface.GetClient().Web3Api.Account.GetTransactions(address.ToLower(), ChainList.eth);
+Debug.Log($"GetTransactions Count: {balance.Total}");
 ```
 
 ## `Defi`
@@ -791,7 +811,8 @@ Resolves an Unstoppable domain and returns the address
 - **currency** _string_ OPTIONAL The currency to query.
 #### Example
 ```
-Resolve result = MoralisInterface.GetClient().Web3Api.Resolve.ResolveDomain(domain);
+Resolve resp = await MoralisInterface.GetClient().Web3Api.Resolve.ResolveDomain("brad.crypto");
+Debug.Log($"ResolveDomain Address: {resp.Address}");
 ```
 
 ### `ResolveAddress`
@@ -799,7 +820,8 @@ Resolves an ETH address and find the ENS name
 - **address** _string_ REQUIRED The wallet address to perform reverse lookup on.
 #### Example
 ```
-Ens result = MoralisInterface.GetClient().Web3Api.Resolve.ResolveAddress(address);
+Ens resp = await MoralisInterface.GetClient().Web3Api.Resolve.ResolveAddress("0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045");
+Debug.Log($"ResolveAddress Name: {resp.Name}");
 ```
 
 ## `Storage`
