@@ -671,7 +671,7 @@ Block block = MoralisInterface.GetClient().Web3Api.Native.GetBlock(blockNumberOr
 ### `GetContractEvents`
 Gets events in descending order based on block number
 - **address** _string_ REQUIRED Target address
-- **topic** _string_ REQUIRED The topic of the event
+- **topic** _string_ REQUIRED The topic of the event. This is the hash of the function
 - **chain** _ChainList_ REQUIRED The chain to query
 - **subdomain** _string_ OPTIONAL The subdomain of the moralis server to use (Only use when selecting local devchain as chain)
 - **providerUrl** _string_ OPTIONAL web3 provider url to user when using local dev chain
@@ -683,7 +683,17 @@ Gets events in descending order based on block number
 - **limit** _integer_ OPTIONAL Limit
 #### Example
 ```
-List<LogEvent> logEvents = MoralisInterface.GetClient().Web3Api.Native.GetContractEvents(address, topic, ChainList.eth);
+    // Event ABI input parameters
+    object[] inputParams = new object[3];
+    inputParams[0] = new { indexed = true, internalType = "bytes32", name = "role", type = "bytes32" };
+    inputParams[1] = new { indexed = true, internalType = "address", name = "account", type = "address" };
+    inputParams[2] = new { indexed = true, internalType = "address", name = "sender", type = "address" };
+    // Event ABI
+    object abi = new { anonymous = false, inputs = inputParams, name = "RoleGranted", type = "event" };
+
+    List<LogEvent> logEvents = await MoralisInterface.GetClient().Web3Api.Native.GetContractEvents("0x698d7D745B7F5d8EF4fdB59CeB660050b3599AC3", "0x2f8788117e7eff1d82e926ec794901d17c78024a50270940304540a733656f0d", abi, ChainList.mumbai);
+
+    Debug.Log($"Contract Function returned {logEvents.Count} events");
 ```
 
 ### `GetDateToBlock`
@@ -693,7 +703,9 @@ Gets the closest block of the provided date
 - **providerUrl** _string_ OPTIONAL web3 provider url to user when using local dev chain
 #### Example
 ```
-BlockDate blockDate = MoralisInterface.GetClient().Web3Api.Native.GetDateToBlock(date, ChainList.eth);
+string blockNumberOrHash = "25509457";
+Block block = await MoralisInterface.GetClient().Web3Api.Native.GetBlock(blockNumberOrHash, chainId);
+Debug.Log($"GetBlock BlockNumber: {block.Number}, Transaction Count: {block.TransactionCount}");
 ```
 
 ### `GetLogsByAddress`
@@ -712,7 +724,8 @@ Gets the logs from an address
 - **topic3** _string_ OPTIONAL 
 #### Example
 ```
-LogEventByAddress logEvents = MoralisInterface.GetClient().Web3Api.Native.GetLogsByAddress(address, ChainList.eth);
+LogEventByAddress logEvents = await MoralisInterface.GetClient().Web3Api.Native.GetLogsByAddress(userAddress, chainId);
+Debug.Log($"GetLogsByAddress BlockNumber: {logEvents.BlockNumber}, Transaction Count: {logEvents.Data}");
 ```
 
 ### `GetNFTTransfersByBlock`
@@ -722,7 +735,8 @@ Gets NFT transfers by block number or block hash
 - **subdomain** _string_ OPTIONAL The subdomain of the moralis server to use (Only use when selecting local devchain as chain)
 #### Example
 ```
-NftTransferCollection nftTransfers = MoralisInterface.GetClient().Web3Api.Native.GetNFTTransfersByBlock(blockNumberOrHash, ChainList.eth);
+NftTransferCollection nftTransfers = await MoralisInterface.GetClient().Web3Api.Native.GetNFTTransfersByBlock("500000", chainId);
+Debug.Log($"GetNFTTransfersByBlock Nfts returned: {nftTransfers.Result.Count}");
 ```
 
 ### `GetTransaction`
@@ -732,7 +746,9 @@ Gets the contents of a block transaction by hash
 - **subdomain** _string_ OPTIONAL The subdomain of the moralis server to use (Only use when selecting local devchain as chain)
 #### Example
 ```
-BlockTransaction blockTransaction = MoralisInterface.GetClient().Web3Api.Native.GetTransaction(transactionHash, ChainList.eth);
+string transactionHash = "0xe1ec2dd9964f4dc59b53dce083917abfb5ab5191a37cb1e21566969caa614fcd";
+BlockTransaction blockTransaction = await MoralisInterface.GetClient().Web3Api.Native.GetTransaction(transactionHash, ChainList.mumbai);
+Debug.Log($"Block transaction BlackNumber: {blockTransaction.BlockNumber}, from Address: {blockTransaction.FromAddress}");
 ```
 
 ### `RunContractFunction`
@@ -746,13 +762,13 @@ Runs a given function of a contract abi and returns readonly data
 ```
 // Function ABI input parameters
 object[] inputParams = new object[1];
-inputParams[0] = new { internalType="uint256", name="id", type="uint256" };
+inputParams[0] = new { internalType = "uint256", name = "id", type = "uint256" };
 // Function ABI Output parameters
 object[] outputParams = new object[1];
-outputParams[0] = new { internalType="string", name="", type="string" };
+outputParams[0] = new { internalType = "string", name = "", type = "string" };
 // Function ABI
 object[] abi = new object[1];
-abi[0] = new { inputs=inputParams, name="uri", outputs=outputParams, stateMutability="view", type="function" };
+abi[0] = new { inputs = inputParams, name = "uri", outputs = outputParams, stateMutability = "view", type = "function" };
 
 // Define request object
 RunContractDto rcd = new RunContractDto()
@@ -761,8 +777,9 @@ RunContractDto rcd = new RunContractDto()
     Params = new { id = "15310200874782" }
 };
 
-// Call contract function, response is always a string.
-string resp = MoralisInterface.GetClient().Web3Api.Native.RunContractFunction("0x698d7D745B7F5d8EF4fdB59CeB660050b3599AC3", "uri", rcd, ChainList.mumbai);
+string resp = await MoralisInterface.GetClient().Web3Api.Native.RunContractFunction("0x698d7D745B7F5d8EF4fdB59CeB660050b3599AC3", "uri", rcd, ChainList.mumbai);
+
+Debug.Log($"Contract Function returned: {resp}");
 ```
 
 ## `Resolve`
