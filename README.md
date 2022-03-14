@@ -692,6 +692,7 @@ Block block = MoralisInterface.GetClient().Web3Api.Native.GetBlock(blockNumberOr
 Gets events in descending order based on block number
 - **address** _string_ REQUIRED Target address
 - **topic** _string_ REQUIRED The topic of the event. This is the hash of the function
+- **abi** _object_ REQUIRED ABI of the event being searched for. See example below for object format.
 - **chain** _ChainList_ REQUIRED The chain to query
 - **subdomain** _string_ OPTIONAL The subdomain of the moralis server to use (Only use when selecting local devchain as chain)
 - **providerUrl** _string_ OPTIONAL web3 provider url to user when using local dev chain
@@ -774,6 +775,7 @@ Debug.Log($"Block transaction BlackNumber: {blockTransaction.BlockNumber}, from 
 ### `RunContractFunction`
 Runs a given function of a contract abi and returns readonly data
 - **address** _string_ REQUIRED Target address
+- **abi** _object_ REQUIRED Abi of the Function being called - see example for format.
 - **chain** _ChainList_ REQUIRED The chain to query
 - **functionName** _string_ REQUIRED Function name of the target function.
 - **subdomain** _string_ OPTIONAL The subdomain of the moralis server to use (Only use when selecting local devchain as chain)
