@@ -26,6 +26,7 @@
  *  SOFTWARE.
  */
 using Moralis;
+using System;
 #if !UNITY_WEBGL
 using Nethereum.Contracts;
 #endif
@@ -35,6 +36,7 @@ namespace MoralisWeb3ApiSdk
     /// <summary>
     /// Defines specific copontract / chain instnace
     /// </summary>
+    [Obsolete("This class has been deprecated.")]
     public class EvmContractInstance
     {
         /// <summary>
