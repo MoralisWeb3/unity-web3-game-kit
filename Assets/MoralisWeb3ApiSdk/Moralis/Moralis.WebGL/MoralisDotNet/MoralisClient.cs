@@ -17,8 +17,7 @@ namespace Moralis.WebGL
 {
     public class MoralisClient : IDisposable
     {
-        string serverAuthToken = "";
-        string serverAuthType = "";
+        string serverAuthToken = String.Empty;
 
         public MoralisClient(ServerConnectionData connectionData, IWeb3Api web3Api = null, ISolanaApi solanaApi = null, IJsonSerializer jsonSerializer = null)
         {
