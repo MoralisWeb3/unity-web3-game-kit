@@ -861,7 +861,8 @@ Gets data, including metadata (where available), for all token ids for the given
 - **order** _string_ OPTIONAL If the order should be Ascending or Descending based on the blocknumber on which the NFT was minted. Allowed values: "ASC", "DESC"
 #### Example
 ```
-NftCollection nfts = MoralisInterface.GetClient().Web3Api.Token.GetAllTokenIds(address, ChainList.eth, null, 0, 10);
+NftCollection resp = await MoralisInterface.GetClient().Web3Api.Token.GetAllTokenIds("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", ChainList.eth, null, 0, 10);
+Debug.Log($"GetAllTokenIds returned {resp.Total} Nfts");
 ```
 
 ### `GetContractNFTTransfers`
@@ -874,7 +875,8 @@ Gets the transfers of the tokens matching the given parameters
 - **order** _string_ OPTIONAL If the order should be Ascending or Descending based on the blocknumber on which the NFT was minted. Allowed values: "ASC", "DESC"
 #### Example
 ```
-NftTransferCollection nftTransers = MoralisInterface.GetClient().Web3Api.Token.GetContractNFTTransfers(address, ChainList.eth, null, 0, 10);
+NftTransferCollection resp = await MoralisInterface.GetClient().Web3Api.Token.GetContractNFTTransfers("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", ChainList.eth, null, 0, 10);
+Debug.Log($"GetContractNFTTransfers returned {resp.Total} Nft transfer entries");
 ```
 
 ### `GetNFTLowestPrice`
@@ -886,7 +888,8 @@ Get the lowest price found for a nft token contract for the last x days (only tr
 - **marketplace** _string_ OPTIONAL web3 marketplace from where to get the trades (only opensea is supported at the moment)
 #### Example
 ```
-Trade trade = MoralisInterface.GetClient().Web3Api.Token.GetNFTLowestPrice(address, ChainList.eth);
+Trade resp = await MoralisInterface.GetClient().Web3Api.Token.GetNFTLowestPrice("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", ChainList.eth, 2000);
+Debug.Log($"GetNFTLowestPrice Price: {resp.Price}");
 ```
 
 ### `GetNFTMetadata`
@@ -895,7 +898,8 @@ Gets the contract level metadata (name, symbol, base token uri) for the given co
 - **chain** _ChainList_ REQUIRED The chain to query
 #### Example
 ```
-NftContractMetadata metadata = MoralisInterface.GetClient().Web3Api.Token.GetNFTMetadata(address, ChainList.eth);
+NftContractMetadata resp = await MoralisInterface.GetClient().Web3Api.Token.GetNFTMetadata("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", ChainList.eth);
+Debug.Log($"GetNFTMetadata Name: {resp.Name}, TokenAddress: {resp.TokenAddress}");
 ```
 
 ### `GetNFTOwners`
@@ -908,7 +912,8 @@ Gets all owners of NFT items within a given contract collection
 - **order** _string_ OPTIONAL If the order should be Ascending or Descending based on the blocknumber on which the NFT was minted. Allowed values: "ASC", "DESC"
 #### Example
 ```
-NftOwnerCollection owners = MoralisInterface.GetClient().Web3Api.Token.GetNFTOwners(address, ChainList.eth);
+NftOwnerCollection resp = await MoralisInterface.GetClient().Web3Api.Token.GetNFTOwners("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", ChainList.eth, null, 0, 10);
+Debug.Log($"GetNFTOwners returned {resp.Total} Nft Owner records");
 ```
 
 ### `GetNFTTrades`
@@ -925,7 +930,8 @@ Get the nft trades for a given contracts and marketplace
 - **limit** _integer_ OPTIONAL Limit
 #### Example
 ```
-TradeCollection trades = MoralisInterface.GetClient().Web3Api.Token.GetNFTTrades(address, ChainList.eth);
+TradeCollection resp = await MoralisInterface.GetClient().Web3Api.Token.GetNFTTrades("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", ChainList.eth, null, null, null, null, null, null, 0, 10);
+Debug.Log($"GetNFTTrades returned {resp.Total} Nft trades");
 ```
 
 ### `GetNftTransfersFromToBlock`
@@ -941,10 +947,11 @@ Gets the transfers of the tokens from a block number to a block number
 - **order** _string_ OPTIONAL If the order should be Ascending or Descending based on the blocknumber on which the NFT was minted. Allowed values: "ASC", "DESC"
 #### Example
 ```
-NftTransferCollection transfers = MoralisInterface.GetClient().Web3Api.Token.GetNftTransfersFromToBlock(ChainList.eth);
+NftTransferCollection resp = await MoralisInterface.GetClient().Web3Api.Token.GetNftTransfersFromToBlock(ChainList.eth, 99999, 25999999, null, null, null, 0, 10);
+Debug.Log($"GetNftTransfersFromToBlock returned {resp.Total} Nft Transfers");
 ```
 
-### `GetTokenAdressTransfers`
+### `GetTokenAddressTransfers`
 Gets ERC20 token contract transactions in descending order based on block number
 - **address** _string_ REQUIRED Target address
 - **chain** _ChainList_ REQUIRED The chain to query
@@ -957,7 +964,8 @@ Gets ERC20 token contract transactions in descending order based on block number
 - **limit** _integer_ OPTIONAL Limit
 #### Example
 ```
-List<Erc20Transaction> transactions = MoralisInterface.GetClient().Web3Api.Token.GetTokenAdressTransfers(address, ChainList.eth);
+Erc20TransactionCollection resp = await MoralisInterface.GetClient().Web3Api.Token.GetTokenAddressTransfers("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", ChainList.eth, null, null, null, null, null, 0, 10);
+Debug.Log($"GetTokenAddressTransfers returned {resp.Total} transfer entries");
 ```
 
 ### `GetTokenAllowance`
@@ -980,7 +988,8 @@ Gets data, including metadata (where available), for the given token id of the g
 - **foramt** _string_ OPTIONAL The format of the token id
 #### Example
 ```
-Nft nft = MoralisInterface.GetClient().Web3Api.Token.GetTokenIdMetadata(address, tokenId, ChainList.eth);
+Nft resp = await MoralisInterface.GetClient().Web3Api.Token.GetTokenIdMetadata("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", "10", ChainList.eth);
+Debug.Log($"GetTokenIdMetadata Name: {resp.Name}, Amount: {resp.Amount}");
 ```
 
 ### `GetTokenIdOwners`
@@ -994,7 +1003,8 @@ Gets all owners of NFT items within a given contract collection
 - **order** _string_ OPTIONAL If the order should be Ascending or Descending based on the blocknumber on which the NFT was minted. Allowed values: "ASC", "DESC"
 #### Example
 ```
-NftOwnerCollection owners = MoralisInterface.GetClient().Web3Api.Token.GetTokenIdOwners(address, tokenId, ChainList.eth, null, 0, 10);
+NftOwnerCollection resp = await MoralisInterface.GetClient().Web3Api.Token.GetTokenIdOwners("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", "10", ChainList.eth, null, 0, 10);
+Debug.Log($"GetTokenIdOwners returned {resp.Total} Nfts");
 ```
 
 ### `GetTokenMetadata`
@@ -1007,7 +1017,8 @@ Returns metadata (name, symbol, decimals, logo) for a given token contract addre
 ```
 List<string> addresses = new List<string>();
 addresses.Add("0x6b175474e89094c44da98b954eedeac495271d0f");
-List<Erc20Metadata> resp = web3Api.Token.GetTokenMetadata(addresses, ChainList.eth);
+List<Erc20Metadata> resp = await MoralisInterface.GetClient().Web3Api.Token.GetTokenMetadata(addresses, ChainList.eth);
+Debug.Log($"GetTokenMetadata returned {resp.Count} entries.");
 ```
 
 ### `GetTokenMetadataBySymbol`
@@ -1019,7 +1030,8 @@ Returns metadata (name, symbol, decimals, logo) for a given token contract addre
 ```
 List<string> symbols = new List<string>();
 symbols.Add("DAI");
-List<Erc20Metadata> resp = web3Api.Token.GetTokenMetadataBySymbol(symbols, ChainList.eth);
+List<Erc20Metadata> resp = await MoralisInterface.GetClient().Web3Api.Token.GetTokenMetadataBySymbol(symbols, ChainList.eth);
+Debug.Log($"GetTokenMetadataBySymbol returned {resp.Count} entries.");
 ```
 
 ### `GetTokenPrice`
@@ -1031,7 +1043,8 @@ Returns the price nominated in the native token and usd for a given token contra
 - **toBlock** _string_ OPTIONAL The maximum block number from where to get the logs.
 #### Example
 ```
-Erc20Price tkenPrice = MoralisInterface.GetClient().Web3Api.Token.GetTokenPrice(address, ChainList.eth);
+Erc20Price resp = await MoralisInterface.GetClient().Web3Api.Token.GetTokenPrice("0x6b175474e89094c44da98b954eedeac495271d0f", ChainList.eth);
+Debug.Log($"GetTokenPrice Price: {resp.UsdPrice} USD");
 ```
 
 ### `GetWalletTokenIdTransfers`
@@ -1045,7 +1058,8 @@ Gets the transfers of the tokens matching the given parameters
 - **order** _string_ OPTIONAL If the order should be Ascending or Descending based on the blocknumber on which the NFT was minted. Allowed values: "ASC", "DESC"
 #### Example
 ```
-NftTransferCollection transfers = MoralisInterface.GetClient().Web3Api.Token.GetWalletTokenIdTransfers(address, tokenId, ChainList.eth);
+NftTransferCollection resp = await MoralisInterface.GetClient().Web3Api.Token.GetWalletTokenIdTransfers("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", "10", ChainList.eth, null, 0, 10);
+Debug.Log($"GetWalletTokenIdTransfers returned {resp.Total} Nfts");
 ```
 
 ### `SearchNFTs`
@@ -1062,7 +1076,8 @@ Gets NFTs that match a given metadata search.
 - **limit** _integer_ OPTIONAL Limit
 #### Example
 ```
-NftMetadataCollection metadata = MoralisInterface.GetClient().Web3Api.Token.SearchNFTs(q, ChainList.eth, null, null, null, null, null, null, 0, 10);
+NftMetadataCollection resp = await MoralisInterface.GetClient().Web3Api.Token.SearchNFTs("Apes", ChainList.eth, null, null, null, null, null, null, 0, 10);
+Debug.Log($"SearchNFTs returned {resp.Total} Nfts");
 ```
 
 # 🏗 Solana Api Methods
