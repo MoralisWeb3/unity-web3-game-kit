@@ -201,38 +201,50 @@ MoralisUser user = await MoralisInterface.LogInAsync(authData);
 
 ## `Queries`
 Queries provide a way to retrieve information from your Moralis database.
-#### Required Using Statement(s)
+#### Required Using Statement(s) Non-WebGL
 ```
 using Moralis;
 using Moralis.Platform.Objects;
 ```
+
+#### Required Using Statement(s) WebGL
+```
+using Moralis.WebGl;
+using Moralis.WebGl.Platform.Objects;
+```
 The following example will return all Hero records where 'Level' is equal to 3.
-#### SDK Example Query
-```
-MoralisQuery<Hero> q = moralis.Query<Hero>().WhereEqualTo("Level", 3);
-IEnumerable<Hero> result = await q.FindAsync();
-```
-#### Unity3D Example
+#### (Non-WebGL) Example Query
 ```
 MoralisQuery<Hero> q = MoralisInterface.GetClient().Query<Hero>().WhereEqualTo("Level", 3);
 IEnumerable<Hero> result = await q.FindAsync();
 ```
+#### (WebGL) Example
+```
+MoralisQuery<Hero> q = MoralisInterface.GetClient().Query<Hero>();
+q = q.WhereEqualTo("Level", 3);
+IEnumerable<Hero> result = await q.FindAsync();
+```
 
 The Moralis Dot Net SDK supports the same query methods as the JS SDK. For example creating 'OR', 'AND', and 'NOR' queries.
-For this example we will take the query from the above example and construct a 'OR' query that also returns records where the hero's name is 'Zuko'.
+For this example we will take a base query and construct an 'OR' query that returns records where Level is greater or equal to '3' OR the hero's name is 'Zuko'.
 Furthermore we will sort (order) the result set by the hero's strength, descending.
-#### SDK Example OR query
+#### (Non-WebGL) Example OR query
 ```
-MoralisQuery<Hero> q1 = moralis.BuildOrQuery<Hero>(new MoralisQuery<Hero>[] { q, moralis.Query<Hero>().WhereEqualTo("Name", "Zuko") })
+MoralisQuery<Hero> q = MoralisInterface.GetClient().Query<Hero>().WhereEqualTo("Level", 3);
+MoralisQuery<PlayerData> q1 = MoralisInterface.GetClient()
+    .BuildOrQuery<PlayerData>(new MoralisQuery<PlayerData>[] { 
+        q, MoralisInterface.GetClient().Query<PlayerData>().WhereEqualTo("Name", "Zuko") 
+    })
     .OrderByDescending("Strength");
-IEnumerable<Hero> result = await q1.FindAsync();
+IEnumerable<PlayerData> resp = await q1.FindAsync();
 ```
-#### Unity3D Example OR query
+#### (WebGL) Example OR query
 ```
-MoralisQuery<Hero> q1 = MoralisInterface.GetClient()
-    .BuildOrQuery<Hero>(new MoralisQuery<Hero>[] { q, MoralisInterface.GetClient().Query<Hero>().WhereEqualTo("Name", "Zuko") })
-    .OrderByDescending("Strength");
-IEnumerable<Hero> result = await q1.FindAsync();
+MoralisQuery<PlayerData> q = await MoralisInterface.GetClient().Query<PlayerData>();
+MoralisQuery<PlayerData> q1 = q.WhereGreaterThanOrEqualTo("Level", 2);
+MoralisQuery<PlayerData> q2 = q.WhereEqualTo("Name", "Zuko");
+MoralisQuery<PlayerData> q3 = MoralisInterface.GetClient().BuildOrQuery<PlayerData>(new MoralisQuery<PlayerData>[] { q1, q2 }).OrderByDescending("Strength");
+IEnumerable<PlayerData> result = await q3.FindAsync();
 ```
 
 ## `Live Queries`
