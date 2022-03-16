@@ -220,7 +220,7 @@ IEnumerable<Hero> result = await q.FindAsync();
 ```
 #### (WebGL) Example
 ```
-MoralisQuery<Hero> q = MoralisInterface.GetClient().Query<Hero>();
+MoralisQuery<Hero> q = await MoralisInterface.GetClient().Query<Hero>();
 q = q.WhereEqualTo("Level", 3);
 IEnumerable<Hero> result = await q.FindAsync();
 ```
