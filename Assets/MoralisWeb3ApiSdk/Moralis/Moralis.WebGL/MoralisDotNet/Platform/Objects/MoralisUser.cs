@@ -92,7 +92,18 @@ namespace Moralis.WebGL.Platform.Objects
        
         internal ICurrentUserService<MoralisUser> CurrentUserService { get; set; }
 
-        internal UniTask SignUpAsync(UniTask toAwait, CancellationToken cancellationToken) => throw new NotFiniteNumberException();
+
+        // internal Task SignUpAsync(Task toAwait, CancellationToken cancellationToken) => throw new NotFiniteNumberException();
+        internal async UniTask SignUpAsync(Task toAwait, CancellationToken cancellationToken)
+        {
+            if (String.IsNullOrEmpty(this.objectId))
+            {
+                if (String.IsNullOrEmpty(this.username)) throw new ArgumentException("User username required for this action.");
+                if (String.IsNullOrEmpty(this.password)) throw new ArgumentException("User password required for this action.");
+
+                await this.SaveAsync();
+            }
+        }
 
         public Dictionary<string, object> ToParameterDictionary()
         {
