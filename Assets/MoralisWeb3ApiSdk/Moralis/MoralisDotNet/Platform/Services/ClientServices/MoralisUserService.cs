@@ -47,6 +47,9 @@ namespace Moralis.Platform.Services.ClientServices
                 result = JsonSerializer.Deserialize<TUser>(cmdResp.Item2.ToString());
 
                 result.ObjectService = this.ObjectService;
+                result.ACL = new MoralisAcl(result);
+
+                await result.SaveAsync();
             }
 
             return result;
