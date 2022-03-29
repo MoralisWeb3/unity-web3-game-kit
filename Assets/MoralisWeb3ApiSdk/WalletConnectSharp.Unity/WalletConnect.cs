@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using Assets.Scripts;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Events;
@@ -23,19 +22,15 @@ namespace WalletConnectSharp.Unity
     public class WalletConnect : BindableMonoBehavior
     {
         public const string SessionKey = "__WALLETCONNECT_SESSION__";
-
-        /// <summary>
-        /// FOR FUTURE USE - when using W.C. for iOS this list will limit the wallets
-        /// displayed to the user.
-        /// </summary>
-        public List<string> AllowedWalletIds;
-
+        
         public Dictionary<string, AppEntry> SupportedWallets
         {
             get;
             private set;
         }
-        
+
+        public List<string> AllowedWalletIds;
+
         public AppEntry SelectedWallet { get; set; }
 
         public Wallets DefaultWallet;
@@ -48,6 +43,7 @@ namespace WalletConnectSharp.Unity
         public class WalletConnectEventWithSessionData : UnityEvent<WCSessionData> { }
         
         public event EventHandler ConnectionStarted;
+        public event EventHandler NewSessionStarted;
 
         [BindComponent]
         private NativeWebSocketTransport _transport;
@@ -223,6 +219,9 @@ namespace WalletConnectSharp.Unity
             else
             {
                 Session = new WalletConnectUnitySession(AppData, this, customBridgeUrl, _transport, ciper, chainId);
+                
+                if (NewSessionStarted != null)
+                    NewSessionStarted(this, EventArgs.Empty);
             }
 
             StartCoroutine(SetupDefaultWallet());
@@ -329,16 +328,22 @@ namespace WalletConnectSharp.Unity
             }
         }
 
+        private string FormatWalletName(string name)
+        {
+            return name.Replace('.', ' ').Replace('|', ' ').Replace(")", "").Replace("(", "").Replace("'", "")
+                .Replace(" ", "").Replace("1", "One").ToLower();
+        }
+
         private IEnumerator SetupDefaultWallet()
         {
             yield return FetchWalletList(false);
 
-            var wallet = SupportedWallets.Values.FirstOrDefault(a => a.name.ToLower() == DefaultWallet.ToString().ToLower());
+            var wallet = SupportedWallets.Values.FirstOrDefault(a => FormatWalletName(a.name) == DefaultWallet.ToString().ToLower());
 
             if (wallet != null)
             {
-                yield return DownloadImagesFor(wallet.id);
                 SelectedWallet = wallet;
+                yield return DownloadImagesFor(wallet.id);
                 Debug.Log("Setup default wallet " + wallet.name);
             }
         }
@@ -355,6 +360,8 @@ namespace WalletConnectSharp.Unity
             foreach (var size in sizes)
             {
                 var url = "https://registry.walletconnect.org/logo/" + size + "/" + id + ".jpeg";
+
+                Debug.Log($"Loading picture for {id}");
 
                 using (UnityWebRequest imageRequest = UnityWebRequestTexture.GetTexture(url))
                 {
@@ -390,11 +397,13 @@ namespace WalletConnectSharp.Unity
 
         public IEnumerator FetchWalletList(bool downloadImages = true)
         {
+
             using (UnityWebRequest webRequest = UnityWebRequest.Get("https://registry.walletconnect.org/data/wallets.json"))
             {
+
                 // Request and wait for the desired page.
                 yield return webRequest.SendWebRequest();
-                
+
                 if (webRequest.isNetworkError)
                 {
                     Debug.Log("Error Getting Wallet Info: " + webRequest.error);
@@ -405,12 +414,31 @@ namespace WalletConnectSharp.Unity
 
                     SupportedWallets = JsonConvert.DeserializeObject<Dictionary<string, AppEntry>>(json);
 
-                    if (downloadImages)
+#if UNITY_IOS
+                    // Filter wallets by the allowed wallets list.
+                    if (AllowedWalletIds != null && AllowedWalletIds.Count > 0)
                     {
-                        foreach (var id in SupportedWallets.Keys)
+                        Dictionary<string, AppEntry> temp = new Dictionary<string, AppEntry>();
+
+                        foreach (string k in SupportedWallets.Keys)
                         {
-                            yield return DownloadImagesFor(id);
+                            if (AllowedWalletIds.Contains(k))
+                            {
+                                temp.Add(k, SupportedWallets[k]);
+                            }
                         }
+
+                        SupportedWallets = temp;
+                    }
+#endif
+                }
+            
+
+                if (downloadImages)
+                {
+                    foreach (var id in SupportedWallets.Keys)
+                    {
+                        yield return DownloadImagesFor(id);
                     }
                 }
             }

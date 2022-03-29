@@ -25,6 +25,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  */
+using MoralisWeb3ApiSdk;
 using System;
 using UnityEngine;
 
@@ -54,7 +55,10 @@ public class MouseLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Rotate();
+        if (MoralisInterface.IsLoggedIn())
+        {
+            Rotate();
+        }
     }
 
     public void JoystickInput(Vector2 vector2)

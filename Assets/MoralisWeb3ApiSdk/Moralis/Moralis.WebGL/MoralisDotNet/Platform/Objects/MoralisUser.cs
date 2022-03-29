@@ -94,7 +94,7 @@ namespace Moralis.WebGL.Platform.Objects
 
 
         // internal Task SignUpAsync(Task toAwait, CancellationToken cancellationToken) => throw new NotFiniteNumberException();
-        internal async UniTask SignUpAsync(Task toAwait, CancellationToken cancellationToken)
+        internal async UniTask SignUpAsync(UniTask toAwait, CancellationToken cancellationToken)
         {
             if (String.IsNullOrEmpty(this.objectId))
             {

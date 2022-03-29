@@ -86,12 +86,14 @@ public class PlayerController : MonoBehaviour
                 isAuthenticated = true;
             }
         }
-
-        Move();
-
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        else
         {
-            StartCoroutine(Attack());
+            Move();
+
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                StartCoroutine(Attack());
+            }
         }
     }
 

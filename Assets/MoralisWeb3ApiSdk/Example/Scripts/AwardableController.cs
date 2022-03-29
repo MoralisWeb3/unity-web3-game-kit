@@ -160,7 +160,7 @@ public class AwardableController : MonoBehaviour
 
             // Set gas estimate
             HexBigInteger gas = new HexBigInteger(0);
-            string resp = await MoralisInterface.ExecuteFunction(Constants.MUG_CONTRACT_ADDRESS, Constants.MUG_ABI, Constants.MUG_CLAIM_FUNCTION, pars, new HexBigInteger("0x0"), gas, gas);
+            string resp = await MoralisInterface.ExecuteContractFunction(Constants.MUG_CONTRACT_ADDRESS, Constants.MUG_ABI, Constants.MUG_CLAIM_FUNCTION, pars, new HexBigInteger("0x0"), gas, gas);
 #else
 
             // Convert token id to hex as this is what the contract call expects
