@@ -9,8 +9,8 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using Newtonsoft.Json;
-using RestSharp;
-using RestSharp.Extensions;
+using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace Moralis.Web3Api.Client
 {
@@ -25,11 +25,15 @@ namespace Moralis.Web3Api.Client
         /// Initializes a new instance of the <see cref="ApiClient" /> class.
         /// </summary>
         /// <param name="basePath">The base path.</param>
-        public ApiClient(String basePath = "http://localhost:3063/api/v2")
+        public ApiClient(String basePath = "http://localhost:3063", string apiVersion= "/api/v2")
         {
             BasePath = basePath;
-            RestClient = new RestClient(BasePath);
+            RestClient = new HttpClient(); //new RestClient(BasePath);
+            RestClient.BaseAddress = new Uri(BasePath);
+            ApiVersion = apiVersion;
         }
+
+        public string ApiVersion { get; set; }
 
         /// <summary>
         /// Gets or sets the base path.
@@ -41,7 +45,8 @@ namespace Moralis.Web3Api.Client
         /// Gets or sets the RestClient.
         /// </summary>
         /// <value>An instance of the RestClient</value>
-        public RestClient RestClient { get; set; }
+        //public RestClient RestClient { get; set; }
+        public HttpClient RestClient { get; set; }
 
         /// <summary>
         /// Gets the default header.
@@ -49,6 +54,49 @@ namespace Moralis.Web3Api.Client
         public Dictionary<String, String> DefaultHeader
         {
             get { return _defaultHeaderMap; }
+        }
+
+        public async Task<HttpResponseMessage> CallApi(String path, HttpMethod method, String postBody,
+            Dictionary<String, String> headerParams, Dictionary<String, String> queryParams, String[] authSettings)
+        {
+            // Add Api & Version as HttpClient strips this off.
+            path = $"{ApiVersion}{path}";
+            
+            // Add query parameters to path.
+            if (queryParams.Count > 0)
+            {
+                using (var content = new FormUrlEncodedContent(queryParams))
+                {
+                    string query = content.ReadAsStringAsync().Result;
+
+                    path = $"{path}?{query}";
+                }
+            }
+
+            //var request = new RestRequest(path, method);
+            var request = new HttpRequestMessage(method, path);
+
+            UpdateParamsForAuth(headerParams, authSettings);
+
+            // add default header, if any
+            foreach (var defaultHeader in _defaultHeaderMap)
+                request.Headers.Add(defaultHeader.Key, defaultHeader.Value);
+
+            // add header parameter, if any
+            foreach (var param in headerParams)
+                request.Headers.Add(param.Key, param.Value);
+
+            if (postBody != null)
+            { 
+                request.Content = new StringContent(postBody, Encoding.UTF8, "application/json");
+            }
+
+            Task<HttpResponseMessage> restTask = Task.Run(() =>
+            {
+                return RestClient.SendAsync(request);
+            });
+
+            return await restTask;
         }
 
         /// <summary>
@@ -63,55 +111,58 @@ namespace Moralis.Web3Api.Client
         /// <param name="fileParams">File parameters.</param>
         /// <param name="authSettings">Authentication settings.</param>
         /// <returns>Object</returns>
-        public async Task<Object> CallApi(String path, RestSharp.Method method, Dictionary<String, String> queryParams, String postBody,
+        public async Task<Object> CallApi(String path, HttpMethod method, Dictionary<String, String> queryParams, String postBody,
             Dictionary<String, String> headerParams, Dictionary<String, String> formParams,
-            Dictionary<String, FileParameter> fileParams, String[] authSettings)
+            Dictionary<String, object> fileParams, String[] authSettings)
+   //         Dictionary<String, FileParameter> fileParams, String[] authSettings)
         {
+            return CallApi(path, method, postBody, headerParams, queryParams, authSettings);
+            //    //var request = new RestRequest(path, method);
+            //    var request = new HttpRequestMessage(method, path );
 
-            var request = new RestRequest(path, method);
+            //    UpdateParamsForAuth(queryParams, headerParams, authSettings);
 
-            UpdateParamsForAuth(queryParams, headerParams, authSettings);
+            //    // add default header, if any
+            //    foreach (var defaultHeader in _defaultHeaderMap)
+            //        request.Headers.Add(defaultHeader.Key, defaultHeader.Value);
+            //    //request.AddHeader(defaultHeader.Key, defaultHeader.Value);
 
-            // add default header, if any
-            foreach (var defaultHeader in _defaultHeaderMap)
-                request.AddHeader(defaultHeader.Key, defaultHeader.Value);
+            //    // add header parameter, if any
+            //    foreach (var param in headerParams)
+            //        request.Headers.Add(param.Key, param.Value);
 
-            // add header parameter, if any
-            foreach (var param in headerParams)
-                request.AddHeader(param.Key, param.Value);
+            //    //// add query parameter, if any
+            //    //foreach (var param in queryParams)
+            //    //    request.Pa(param.Key, param.Value, ParameterType.QueryString);
 
-            // add query parameter, if any
-            foreach (var param in queryParams)
-                request.AddParameter(param.Key, param.Value, ParameterType.QueryString);
+            //    //// add form parameter, if any
+            //    //foreach (var param in formParams)
+            //    //    request.AddParameter(param.Key, param.Value, ParameterType.QueryString);
 
-            // add form parameter, if any
-            foreach (var param in formParams)
-                request.AddParameter(param.Key, param.Value, ParameterType.QueryString);
+            //    //// add file parameter, if any
+            //    //foreach (var param in fileParams)
+            //    //    request.AddFile(param.Value.Name, param.Value.Writer, param.Value.FileName, param.Value.ContentLength, param.Value.ContentType);
+            //    ////request.AddFile(param.Value.Name, param.Value.Writer, param.Value.FileName, param.Value.ContentType);
 
-            // add file parameter, if any
-            foreach (var param in fileParams)
-                request.AddFile(param.Value.Name, param.Value.Writer, param.Value.FileName, param.Value.ContentLength, param.Value.ContentType);
-            //request.AddFile(param.Value.Name, param.Value.Writer, param.Value.FileName, param.Value.ContentType);
+            //    //if (postBody != null) // http body (model) parameter
+            //    //    request.AddParameter("application/json", postBody, ParameterType.RequestBody);
 
-            if (postBody != null) // http body (model) parameter
-                request.AddParameter("application/json", postBody, ParameterType.RequestBody);
+            //    Task<Object> restTask = Task.Run(() =>
+            //    {
+            //        return (Object)RestClient.Execute(request);
+            //    });
 
-            Task<Object> restTask = Task.Run(() =>
-            {
-                return (Object)RestClient.Execute(request);
-            });
-
-            return await restTask;
+            //    return await restTask;
 
         }
 
-        /// <summary>
-        /// Add default header.
-        /// </summary>
-        /// <param name="key">Header field name.</param>
-        /// <param name="value">Header field value.</param>
-        /// <returns></returns>
-        public void AddDefaultHeader(string key, string value)
+            /// <summary>
+            /// Add default header.
+            /// </summary>
+            /// <param name="key">Header field name.</param>
+            /// <param name="value">Header field value.</param>
+            /// <returns></returns>
+            public void AddDefaultHeader(string key, string value)
         {
             _defaultHeaderMap.Add(key, value);
         }
@@ -123,7 +174,7 @@ namespace Moralis.Web3Api.Client
         /// <returns>Escaped string.</returns>
         public string EscapeString(string str)
         {
-#if UNITY_2017_1_OR_NEWER
+#if MORALIS_UNITY
             return UnityEngine.Networking.UnityWebRequest.EscapeURL(str);
 #else
             return HttpUtility.UrlEncode(str);
@@ -136,13 +187,13 @@ namespace Moralis.Web3Api.Client
         /// <param name="name">Parameter name.</param>
         /// <param name="stream">Input stream.</param>
         /// <returns>FileParameter.</returns>
-        public FileParameter ParameterToFile(string name, Stream stream)
-        {
-            if (stream is FileStream)
-                return FileParameter.Create(name, stream.ReadAsBytes(), Path.GetFileName(((FileStream)stream).Name));
-            else
-                return FileParameter.Create(name, stream.ReadAsBytes(), "no_file_name_provided");
-        }
+        //public FileParameter ParameterToFile(string name, Stream stream)
+        //{
+        //    if (stream is FileStream)
+        //        return FileParameter.Create(name, stream.ReadAsBytes(), Path.GetFileName(((FileStream)stream).Name));
+        //    else
+        //        return FileParameter.Create(name, stream.ReadAsBytes(), "no_file_name_provided");
+        //}
 
         /// <summary>
         /// If parameter is DateTime, output in a formatted string (default ISO 8601), customizable with Configuration.DateTime.
@@ -188,6 +239,56 @@ namespace Moralis.Web3Api.Client
         /// <param name="type">Object type.</param>
         /// <param name="headers">HTTP headers.</param>
         /// <returns>Object representation of the JSON string.</returns>
+        public async Task<object> Deserialize(HttpContent content, Type type, HttpResponseHeaders headers = null)
+        {
+            string jsonContent = await content.ReadAsStringAsync();
+
+            if (type == typeof(Object)) // return an object
+            {
+                return jsonContent;
+            }
+
+            if (type == typeof(Stream))
+            {
+                var filePath = String.IsNullOrEmpty(Configuration.TempFolderPath)
+                    ? Path.GetTempPath()
+                    : Configuration.TempFolderPath;
+
+                var fileName = filePath + Guid.NewGuid();
+                if (headers != null)
+                {
+                    var regex = new Regex(@"Content-Disposition:.*filename=['""]?([^'""\s]+)['""]?$");
+                    var match = regex.Match(headers.ToString());
+                    if (match.Success)
+                        fileName = filePath + match.Value.Replace("\"", "").Replace("'", "");
+                }
+                File.WriteAllText(fileName, jsonContent);
+                return new FileStream(fileName, FileMode.Open);
+
+            }
+
+            if (type.Name.StartsWith("System.Nullable`1[[System.DateTime")) // return a datetime object
+            {
+                return DateTime.Parse(jsonContent, null, System.Globalization.DateTimeStyles.RoundtripKind);
+            }
+
+            if (type == typeof(String) || type.Name.StartsWith("System.Nullable")) // return primitive type
+            {
+                return ConvertType(content, type);
+            }
+
+            // at this point, it must be a model (json)
+            try
+            {
+                return JsonConvert.DeserializeObject(jsonContent, type);
+            }
+            catch (IOException e)
+            {
+                throw new ApiException(500, e.Message);
+            }
+        }
+
+/*
         public object Deserialize(string content, Type type, IList<Parameter> headers = null)
         {
             if (type == typeof(Object)) // return an object
@@ -234,7 +335,7 @@ namespace Moralis.Web3Api.Client
                 throw new ApiException(500, e.Message);
             }
         }
-
+*/
         /// <summary>
         /// Serialize an object into JSON string.
         /// </summary>
@@ -276,6 +377,12 @@ namespace Moralis.Web3Api.Client
         /// <param name="authSettings">Authentication settings.</param>
         public void UpdateParamsForAuth(Dictionary<String, String> queryParams, Dictionary<String, String> headerParams, string[] authSettings)
         {
+            UpdateParamsForAuth(headerParams, authSettings);
+        }
+
+        public void UpdateParamsForAuth(Dictionary<String, String> headerParams, string[] authSettings)
+        {
+
             if (authSettings == null || authSettings.Length == 0)
                 return;
 

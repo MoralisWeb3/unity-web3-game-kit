@@ -31,11 +31,12 @@
             using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using RestSharp;
+//using RestSharp;
 using Newtonsoft.Json;
 using Moralis.Web3Api.Client;
 using Moralis.Web3Api.Interfaces;
 using Moralis.Web3Api.Models;
+using System.Net.Http;
 
 namespace Moralis.Web3Api.Api
 {
@@ -110,12 +111,12 @@ namespace Moralis.Web3Api.Api
 			var queryParams = new Dictionary<String, String>();
 			var headerParams = new Dictionary<String, String>();
 			var formParams = new Dictionary<String, String>();
-			var fileParams = new Dictionary<String, FileParameter>();
+			//var fileParams = new Dictionary<String, FileParameter>();
 
 			var path = "/block/{block_number_or_hash}";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "block_number_or_hash" + "}", ApiClient.ParameterToString(blockNumberOrHash));
-			queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(subdomain != null) queryParams.Add("subdomain", ApiClient.ParameterToString(subdomain));
 
 			// Authentication setting, if any
@@ -123,14 +124,15 @@ namespace Moralis.Web3Api.Api
 
 			string bodyData = postBody.Count > 0 ? JsonConvert.SerializeObject(postBody) : null;
 
-			IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.GET, queryParams, bodyData, headerParams, formParams, fileParams, authSettings));
+//			IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.GET, queryParams, bodyData, headerParams, formParams, fileParams, authSettings));
+			HttpResponseMessage response = await ApiClient.CallApi(path, HttpMethod.Get, bodyData, headerParams, queryParams, authSettings);
 
 			if (((int)response.StatusCode) >= 400)
 				throw new ApiException((int)response.StatusCode, "Error calling GetBlock: " + response.Content, response.Content);
 			else if (((int)response.StatusCode) == 0)
-				throw new ApiException((int)response.StatusCode, "Error calling GetBlock: " + response.ErrorMessage, response.ErrorMessage);
+				throw new ApiException((int)response.StatusCode, "Error calling GetBlock: " + response.ReasonPhrase, response.ReasonPhrase);
 
-			return (Block)ApiClient.Deserialize(response.Content, typeof(Block), response.Headers);
+			return (Block)(await ApiClient.Deserialize(response.Content, typeof(Block), response.Headers));
 		}
 		/// <summary>
 		/// Gets the closest block of the provided date
@@ -149,13 +151,13 @@ namespace Moralis.Web3Api.Api
 			var queryParams = new Dictionary<String, String>();
 			var headerParams = new Dictionary<String, String>();
 			var formParams = new Dictionary<String, String>();
-			var fileParams = new Dictionary<String, FileParameter>();
+			//var fileParams = new Dictionary<String, FileParameter>();
 
 			var path = "/dateToBlock";
 			path = path.Replace("{format}", "json");
 
 			if(date != null) queryParams.Add("date", ApiClient.ParameterToString(date));
-			queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(providerUrl != null) queryParams.Add("providerUrl", ApiClient.ParameterToString(providerUrl));
 
 			// Authentication setting, if any
@@ -163,14 +165,15 @@ namespace Moralis.Web3Api.Api
 
 			string bodyData = postBody.Count > 0 ? JsonConvert.SerializeObject(postBody) : null;
 
-			IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.GET, queryParams, bodyData, headerParams, formParams, fileParams, authSettings));
+			//IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.GET, queryParams, bodyData, headerParams, formParams, fileParams, authSettings));
+			HttpResponseMessage response = await ApiClient.CallApi(path, HttpMethod.Get, bodyData, headerParams, queryParams, authSettings);
 
 			if (((int)response.StatusCode) >= 400)
 				throw new ApiException((int)response.StatusCode, "Error calling GetDateToBlock: " + response.Content, response.Content);
 			else if (((int)response.StatusCode) == 0)
-				throw new ApiException((int)response.StatusCode, "Error calling GetDateToBlock: " + response.ErrorMessage, response.ErrorMessage);
+				throw new ApiException((int)response.StatusCode, "Error calling GetDateToBlock: " + response.ReasonPhrase, response.ReasonPhrase);
 
-			return (BlockDate)ApiClient.Deserialize(response.Content, typeof(BlockDate), response.Headers);
+			return (BlockDate)(await ApiClient.Deserialize(response.Content, typeof(BlockDate), response.Headers));
 		}
 		/// <summary>
 		/// Gets the logs from an address
@@ -215,12 +218,12 @@ namespace Moralis.Web3Api.Api
 			var queryParams = new Dictionary<String, String>();
 			var headerParams = new Dictionary<String, String>();
 			var formParams = new Dictionary<String, String>();
-			var fileParams = new Dictionary<String, FileParameter>();
+			//var fileParams = new Dictionary<String, FileParameter>();
 
 			var path = "/{address}/logs";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "address" + "}", ApiClient.ParameterToString(address));
-			queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(subdomain != null) queryParams.Add("subdomain", ApiClient.ParameterToString(subdomain));
 			if(blockNumber != null) queryParams.Add("block_number", ApiClient.ParameterToString(blockNumber));
 			if(fromBlock != null) queryParams.Add("from_block", ApiClient.ParameterToString(fromBlock));
@@ -237,14 +240,15 @@ namespace Moralis.Web3Api.Api
 
 			string bodyData = postBody.Count > 0 ? JsonConvert.SerializeObject(postBody) : null;
 
-			IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.GET, queryParams, bodyData, headerParams, formParams, fileParams, authSettings));
+			//IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.GET, queryParams, bodyData, headerParams, formParams, fileParams, authSettings));
+			HttpResponseMessage response = await ApiClient.CallApi(path, HttpMethod.Get, bodyData, headerParams, queryParams, authSettings);
 
 			if (((int)response.StatusCode) >= 400)
 				throw new ApiException((int)response.StatusCode, "Error calling GetLogsByAddress: " + response.Content, response.Content);
 			else if (((int)response.StatusCode) == 0)
-				throw new ApiException((int)response.StatusCode, "Error calling GetLogsByAddress: " + response.ErrorMessage, response.ErrorMessage);
+				throw new ApiException((int)response.StatusCode, "Error calling GetLogsByAddress: " + response.ReasonPhrase, response.ReasonPhrase);
 
-			return (LogEventByAddress)ApiClient.Deserialize(response.Content, typeof(LogEventByAddress), response.Headers);
+			return (LogEventByAddress)(await ApiClient.Deserialize(response.Content, typeof(LogEventByAddress), response.Headers));
 		}
 		/// <summary>
 		/// Gets NFT transfers by block number or block hash
@@ -267,12 +271,12 @@ namespace Moralis.Web3Api.Api
 			var queryParams = new Dictionary<String, String>();
 			var headerParams = new Dictionary<String, String>();
 			var formParams = new Dictionary<String, String>();
-			var fileParams = new Dictionary<String, FileParameter>();
+			//var fileParams = new Dictionary<String, FileParameter>();
 
 			var path = "/block/{block_number_or_hash}/nft/transfers";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "block_number_or_hash" + "}", ApiClient.ParameterToString(blockNumberOrHash));
-			queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(subdomain != null) queryParams.Add("subdomain", ApiClient.ParameterToString(subdomain));
 			if(offset != null) queryParams.Add("offset", ApiClient.ParameterToString(offset));
 			if(limit != null) queryParams.Add("limit", ApiClient.ParameterToString(limit));
@@ -283,14 +287,15 @@ namespace Moralis.Web3Api.Api
 
 			string bodyData = postBody.Count > 0 ? JsonConvert.SerializeObject(postBody) : null;
 
-			IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.GET, queryParams, bodyData, headerParams, formParams, fileParams, authSettings));
+			//IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.GET, queryParams, bodyData, headerParams, formParams, fileParams, authSettings));
+			HttpResponseMessage response = await ApiClient.CallApi(path, HttpMethod.Get, bodyData, headerParams, queryParams, authSettings);
 
 			if (((int)response.StatusCode) >= 400)
 				throw new ApiException((int)response.StatusCode, "Error calling GetNFTTransfersByBlock: " + response.Content, response.Content);
 			else if (((int)response.StatusCode) == 0)
-				throw new ApiException((int)response.StatusCode, "Error calling GetNFTTransfersByBlock: " + response.ErrorMessage, response.ErrorMessage);
+				throw new ApiException((int)response.StatusCode, "Error calling GetNFTTransfersByBlock: " + response.ReasonPhrase, response.ReasonPhrase);
 
-			return (NftTransferCollection)ApiClient.Deserialize(response.Content, typeof(NftTransferCollection), response.Headers);
+			return (NftTransferCollection)(await ApiClient.Deserialize(response.Content, typeof(NftTransferCollection), response.Headers)) ;
 		}
 		/// <summary>
 		/// Gets the contents of a block transaction by hash
@@ -309,12 +314,12 @@ namespace Moralis.Web3Api.Api
 			var queryParams = new Dictionary<String, String>();
 			var headerParams = new Dictionary<String, String>();
 			var formParams = new Dictionary<String, String>();
-			var fileParams = new Dictionary<String, FileParameter>();
+			//var fileParams = new Dictionary<String, FileParameter>();
 
 			var path = "/transaction/{transaction_hash}";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "transaction_hash" + "}", ApiClient.ParameterToString(transactionHash));
-			queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(subdomain != null) queryParams.Add("subdomain", ApiClient.ParameterToString(subdomain));
 
 			// Authentication setting, if any
@@ -322,14 +327,15 @@ namespace Moralis.Web3Api.Api
 
 			string bodyData = postBody.Count > 0 ? JsonConvert.SerializeObject(postBody) : null;
 
-			IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.GET, queryParams, bodyData, headerParams, formParams, fileParams, authSettings));
+			//IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.GET, queryParams, bodyData, headerParams, formParams, fileParams, authSettings));
+			HttpResponseMessage response = await ApiClient.CallApi(path, HttpMethod.Get, bodyData, headerParams, queryParams, authSettings);
 
 			if (((int)response.StatusCode) >= 400)
 				throw new ApiException((int)response.StatusCode, "Error calling GetTransaction: " + response.Content, response.Content);
 			else if (((int)response.StatusCode) == 0)
-				throw new ApiException((int)response.StatusCode, "Error calling GetTransaction: " + response.ErrorMessage, response.ErrorMessage);
+				throw new ApiException((int)response.StatusCode, "Error calling GetTransaction: " + response.ReasonPhrase, response.ReasonPhrase);
 
-			return (BlockTransaction)ApiClient.Deserialize(response.Content, typeof(BlockTransaction), response.Headers);
+			return (BlockTransaction)(await ApiClient.Deserialize(response.Content, typeof(BlockTransaction), response.Headers)) ;
 		}
 		/// <summary>
 		/// Gets events in descending order based on block number
@@ -375,14 +381,17 @@ namespace Moralis.Web3Api.Api
 			var queryParams = new Dictionary<String, String>();
 			var headerParams = new Dictionary<String, String>();
 			var formParams = new Dictionary<String, String>();
-			var fileParams = new Dictionary<String, FileParameter>();
+			//var fileParams = new Dictionary<String, FileParameter>();
 
 			var path = "/{address}/events";
+			//var path = "/{address}/events?chain={chain}&topic={topic}";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "address" + "}", ApiClient.ParameterToString(address));
-			if (topic != null) queryParams.Add("topic", ApiClient.ParameterToString(topic));
-			queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
-			if(subdomain != null) queryParams.Add("subdomain", ApiClient.ParameterToString(subdomain));
+			//path = path.Replace("{" + "chain" + "}", chain.ToString());
+            //path = path.Replace("{" + "topic" + "}", topic);
+            if (chain != null) queryParams.Add("chain", chain.ToString());
+            if (topic != null) queryParams.Add("topic", topic);
+            if (subdomain != null) queryParams.Add("subdomain", ApiClient.ParameterToString(subdomain));
 			if(providerUrl != null) queryParams.Add("providerUrl", ApiClient.ParameterToString(providerUrl));
 			if(fromBlock != null) queryParams.Add("from_block", ApiClient.ParameterToString(fromBlock));
 			if(toBlock != null) queryParams.Add("to_block", ApiClient.ParameterToString(toBlock));
@@ -396,14 +405,15 @@ namespace Moralis.Web3Api.Api
 
 			string bodyData = JsonConvert.SerializeObject(abi);
 
-			IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.POST, queryParams, bodyData, headerParams, formParams, fileParams, authSettings));
+			//IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.POST, queryParams, bodyData, headerParams, formParams, fileParams, authSettings));
+			HttpResponseMessage response = await ApiClient.CallApi(path, HttpMethod.Post, bodyData, headerParams, queryParams, authSettings);
 
 			if (((int)response.StatusCode) >= 400)
 				throw new ApiException((int)response.StatusCode, "Error calling GetContractEvents: " + response.Content, response.Content);
 			else if (((int)response.StatusCode) == 0)
-				throw new ApiException((int)response.StatusCode, "Error calling GetContractEvents: " + response.ErrorMessage, response.ErrorMessage);
+				throw new ApiException((int)response.StatusCode, "Error calling GetContractEvents: " + response.ReasonPhrase, response.ReasonPhrase);
 
-			LogEventResponse resp = (LogEventResponse)ApiClient.Deserialize(response.Content, typeof(LogEventResponse), response.Headers);
+			LogEventResponse resp = (LogEventResponse)(await ApiClient.Deserialize(response.Content, typeof(LogEventResponse), response.Headers));
 
 			return resp.Events;
 		}
@@ -433,7 +443,7 @@ namespace Moralis.Web3Api.Api
 			var queryParams = new Dictionary<String, String>();
 			var headerParams = new Dictionary<String, String>();
 			var formParams = new Dictionary<String, String>();
-			var fileParams = new Dictionary<String, FileParameter>();
+			//var fileParams = new Dictionary<String, FileParameter>();
 
 			var path = "/{address}/function";
 			path = path.Replace("{format}", "json");
@@ -441,7 +451,7 @@ namespace Moralis.Web3Api.Api
 			if (abi != null) postBody.Add("abi", abi.Abi);
 			if (abi != null) postBody.Add("params", abi.Params);
 			if (functionName != null) queryParams.Add("function_name", ApiClient.ParameterToString(functionName));
-			queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(subdomain != null) queryParams.Add("subdomain", ApiClient.ParameterToString(subdomain));
 			if(providerUrl != null) queryParams.Add("providerUrl", ApiClient.ParameterToString(providerUrl));
 
@@ -450,17 +460,17 @@ namespace Moralis.Web3Api.Api
 
 			string bodyData = postBody.Count > 0 ? JsonConvert.SerializeObject(postBody) : null;
 
-			IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.POST, queryParams, bodyData, headerParams, formParams, fileParams, authSettings));
+			//IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.POST, queryParams, bodyData, headerParams, formParams, fileParams, authSettings));
+			HttpResponseMessage response = await ApiClient.CallApi(path, HttpMethod.Post, bodyData, headerParams, queryParams, authSettings);
 
 			if (((int)response.StatusCode) >= 400)
 				throw new ApiException((int)response.StatusCode, "Error calling RunContractFunction: " + response.Content, response.Content);
 			else if (((int)response.StatusCode) == 0)
-				throw new ApiException((int)response.StatusCode, "Error calling RunContractFunction: " + response.ErrorMessage, response.ErrorMessage);
+				throw new ApiException((int)response.StatusCode, "Error calling RunContractFunction: " + response.ReasonPhrase, response.ReasonPhrase);
 
-			object respObject = (object)ApiClient.Deserialize(response.Content, typeof(object), response.Headers);
-
+			object respObject = (object)(await ApiClient.Deserialize(response.Content, typeof(object), response.Headers));
+			
 			return JsonConvert.SerializeObject(respObject);
-
 		}
 	}
 }

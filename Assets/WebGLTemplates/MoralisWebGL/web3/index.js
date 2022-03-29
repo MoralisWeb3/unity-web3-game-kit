@@ -5,6 +5,9 @@ document.body.appendChild(Object.assign(document.createElement("script"), { type
 
 window.web3ChainId = 1;
 
+let provider;
+let web3;
+
 // Define web3gl to unity interface
 window.web3gl = {
   networkId: 0,
@@ -19,8 +22,113 @@ window.web3gl = {
   sendContractResponse: "",
 };
 
-let provider;
-let web3;
+// Define Live Queries
+window.moralisLiveQueries = {
+    requestId: 0,
+    webSockets: {},
+    openSocket,
+    openSocketResponse: "",
+    closeSocket,
+    closeSocketResponse: "",
+    sendRequest,
+    getErrors,
+    getMessages,
+    getSocketState
+};
+
+
+async function openSocket(key, path) { 
+    return new Promise((resolve, reject) => {
+        let reqId = window.moralisLiveQueries.requestId++;
+        let ws = {
+            socketUrl: path,
+            requestId: reqId,
+            socket: null,
+            messages: [],
+            errors: [],
+            onmessage: function (data) {
+                var msg = JSON.stringify(data.data);
+                console.log('onmessage: ' + msg);
+                ws.messages.push(data.data);
+            },
+            onerror: function (data) {
+                var msg = JSON.stringify(data.data);
+                console.log('onerror: ' + msg);
+                ws.errors.push(data.data);
+
+            }
+        };
+
+        ws.socket = new WebSocket(path);
+
+        ws.socket.onmessage = ws.onmessage;
+
+        ws.socket.onopen = function (e) {
+            var msg = JSON.stringify(e);
+
+            window.moralisLiveQueries.openSocketResponse = msg;
+            // Resolve the promise - we are connected
+            resolve();
+        };
+
+        ws.socket.onclose = function (event) {
+            if (event.wasClean) {
+                window.moralisLiveQueries.closeSocketResponse = event; //`[${key} close] Connection closed cleanly, code=${event.code} reason=${event.reason}`;
+            } else {
+                // e.g. server process killed or network down
+                // event.code is usually 1006 in this case
+                window.moralisLiveQueries.closeSocketResponse = `[${key} close] Connection died`;
+            }
+        };
+
+        window.moralisLiveQueries.webSockets[key] = ws;
+    });
+}
+
+function getSocketState(key) {
+    var state = 3; // default to closed.
+    if (window.moralisLiveQueries.webSockets[key]) {
+        state = window.moralisLiveQueries.webSockets[key].socket.readyState;
+    }
+    return state;
+}
+
+function closeSocket(key) {
+    if (window.moralisLiveQueries.webSockets[key]) {
+        window.moralisLiveQueries.webSockets[key].socket.close();
+    }
+}
+
+function sendRequest(key, msg) {
+    if (window.moralisLiveQueries.webSockets[key]) {
+        window.moralisLiveQueries.webSockets[key].socket.send(msg);
+    }
+}
+
+// Get any messages in the message queue of websoket key.
+function getMessages(key) {
+    var resp = [];
+
+    if (window.moralisLiveQueries.webSockets[key]) {
+        resp = [...window.moralisLiveQueries.webSockets[key].messages];
+        window.moralisLiveQueries.webSockets[key].messages = [];
+    }
+
+    return resp;
+}
+
+// Get any errors in the error queue of websoket key.
+function getErrors(key) {
+    var resp = [];
+
+    if (window.moralisLiveQueries.webSockets[key]) {
+        resp = [...window.moralisLiveQueries.webSockets[key].errors];
+        window.moralisLiveQueries.webSockets[key].errors = [];
+    }
+
+    return resp;
+}
+// END Moralis WebSocket -----------------------------------------------------
 
 /*
 Establish connection to web3.

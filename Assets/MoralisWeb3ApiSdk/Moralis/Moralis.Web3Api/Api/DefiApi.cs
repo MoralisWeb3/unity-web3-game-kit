@@ -31,11 +31,12 @@
             using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using RestSharp;
+//using RestSharp;
 using Newtonsoft.Json;
 using Moralis.Web3Api.Client;
 using Moralis.Web3Api.Interfaces;
 using Moralis.Web3Api.Models;
+using System.Net.Http;
 
 namespace Moralis.Web3Api.Api
 {
@@ -115,12 +116,12 @@ namespace Moralis.Web3Api.Api
 			var queryParams = new Dictionary<String, String>();
 			var headerParams = new Dictionary<String, String>();
 			var formParams = new Dictionary<String, String>();
-			var fileParams = new Dictionary<String, FileParameter>();
+			var fileParams = new Dictionary<String, object>();
 
 			var path = "/{pair_address}/reserves";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "pair_address" + "}", ApiClient.ParameterToString(pairAddress));
-			queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(toBlock != null) queryParams.Add("to_block", ApiClient.ParameterToString(toBlock));
 			if(toDate != null) queryParams.Add("to_date", ApiClient.ParameterToString(toDate));
 			if(providerUrl != null) queryParams.Add("provider_url", ApiClient.ParameterToString(providerUrl));
@@ -130,14 +131,15 @@ namespace Moralis.Web3Api.Api
 
 			string bodyData = postBody.Count > 0 ? JsonConvert.SerializeObject(postBody) : null;
 
-			IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.GET, queryParams, bodyData, headerParams, formParams, fileParams, authSettings));
+			//IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.GET, queryParams, bodyData, headerParams, formParams, fileParams, authSettings));
+			HttpResponseMessage response = await ApiClient.CallApi(path, HttpMethod.Get, bodyData, headerParams, queryParams, authSettings);
 
 			if (((int)response.StatusCode) >= 400)
 				throw new ApiException((int)response.StatusCode, "Error calling GetPairReserves: " + response.Content, response.Content);
 			else if (((int)response.StatusCode) == 0)
-				throw new ApiException((int)response.StatusCode, "Error calling GetPairReserves: " + response.ErrorMessage, response.ErrorMessage);
+				throw new ApiException((int)response.StatusCode, "Error calling GetPairReserves: " + response.ReasonPhrase, response.ReasonPhrase);
 
-			return (ReservesCollection)ApiClient.Deserialize(response.Content, typeof(ReservesCollection), response.Headers);
+			return (ReservesCollection)(await ApiClient.Deserialize(response.Content, typeof(ReservesCollection), response.Headers));
 		}
 		/// <summary>
 		/// Fetches and returns pair data of the provided token0+token1 combination.
@@ -170,13 +172,14 @@ namespace Moralis.Web3Api.Api
 			var queryParams = new Dictionary<String, String>();
 			var headerParams = new Dictionary<String, String>();
 			var formParams = new Dictionary<String, String>();
-			var fileParams = new Dictionary<String, FileParameter>();
+			var fileParams = new Dictionary<String, object>();
 
 			var path = "/{token0_address}/{token1_address}/pairAddress";
 			path = path.Replace("{format}", "json");
-			path = path.Replace("{" + "token0_address" + "}", ApiClient.ParameterToString(token0Address));			path = path.Replace("{" + "token1_address" + "}", ApiClient.ParameterToString(token1Address));
+			path = path.Replace("{" + "token0_address" + "}", ApiClient.ParameterToString(token0Address));			
+			path = path.Replace("{" + "token1_address" + "}", ApiClient.ParameterToString(token1Address));
 			if(exchange != null) queryParams.Add("exchange", ApiClient.ParameterToString(exchange));
-			queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
+			if(chain != null) queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(toBlock != null) queryParams.Add("to_block", ApiClient.ParameterToString(toBlock));
 			if(toDate != null) queryParams.Add("to_date", ApiClient.ParameterToString(toDate));
 
@@ -185,14 +188,15 @@ namespace Moralis.Web3Api.Api
 
 			string bodyData = postBody.Count > 0 ? JsonConvert.SerializeObject(postBody) : null;
 
-			IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.GET, queryParams, bodyData, headerParams, formParams, fileParams, authSettings));
+			//IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.GET, queryParams, bodyData, headerParams, formParams, fileParams, authSettings));
+			HttpResponseMessage response = await ApiClient.CallApi(path, HttpMethod.Get, bodyData, headerParams, queryParams, authSettings);
 
 			if (((int)response.StatusCode) >= 400)
 				throw new ApiException((int)response.StatusCode, "Error calling GetPairAddress: " + response.Content, response.Content);
 			else if (((int)response.StatusCode) == 0)
-				throw new ApiException((int)response.StatusCode, "Error calling GetPairAddress: " + response.ErrorMessage, response.ErrorMessage);
+				throw new ApiException((int)response.StatusCode, "Error calling GetPairAddress: " + response.ReasonPhrase, response.ReasonPhrase);
 
-			return (ReservesCollection)ApiClient.Deserialize(response.Content, typeof(ReservesCollection), response.Headers);
+			return (ReservesCollection)(await ApiClient.Deserialize(response.Content, typeof(ReservesCollection), response.Headers));
 		}
 	}
 }

@@ -66,6 +66,17 @@ namespace Moralis.WebGL.Platform.Services.ClientServices
         }
 
         /// <summary>
+        /// For WebGL Only should be called on Unity Update.
+        /// </summary>
+        public void HandleUpdateEvent()
+        {
+            foreach (ILiveQueryClient c in clients)
+            {
+                c.HandleUpdateEvent();
+            }
+        }
+
+        /// <summary>
         /// Create and return a subscription to the specified query.
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -91,6 +102,11 @@ namespace Moralis.WebGL.Platform.Services.ClientServices
         public static void DisposeService()
         {
             instance.Dispose();
+        }
+
+        public static void UpdateWebSockets()
+        {
+            instance.HandleUpdateEvent();
         }
     }
 }

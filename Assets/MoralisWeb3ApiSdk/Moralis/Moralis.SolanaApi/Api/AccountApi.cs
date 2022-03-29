@@ -1,9 +1,9 @@
 ﻿using Moralis.SolanaApi.Client;
 using Moralis.SolanaApi.Interfaces;
 using Moralis.SolanaApi.Models;
-using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Moralis.SolanaApi.Api
@@ -72,14 +72,15 @@ namespace Moralis.SolanaApi.Api
 			// Authentication setting, if any
 			String[] authSettings = new String[] { "ApiKeyAuth" };
 
-			IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.GET, null, null, headerParams, null, null, authSettings));
+			//IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.GET, null, null, headerParams, null, null, authSettings));
+			HttpResponseMessage response = await ApiClient.CallApi(path, HttpMethod.Get, null, headerParams, null, authSettings);
 
 			if (((int)response.StatusCode) >= 400)
 				throw new ApiException((int)response.StatusCode, "Error calling Balance: " + response.Content, response.Content);
 			else if (((int)response.StatusCode) == 0)
-				throw new ApiException((int)response.StatusCode, "Error calling Balance: " + response.ErrorMessage, response.ErrorMessage);
+				throw new ApiException((int)response.StatusCode, "Error calling Balance: " + response.ReasonPhrase, response.ReasonPhrase);
 
-			return (NativeBalance)ApiClient.Deserialize(response.Content, typeof(NativeBalance), response.Headers);
+			return (NativeBalance)(await ApiClient.Deserialize(response.Content, typeof(NativeBalance), response.Headers));
 
 		}
 
@@ -97,14 +98,15 @@ namespace Moralis.SolanaApi.Api
 			// Authentication setting, if any
 			String[] authSettings = new String[] { "ApiKeyAuth" };
 
-			IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.GET, null, null, headerParams, null, null, authSettings));
+			//IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.GET, null, null, headerParams, null, null, authSettings));
+			HttpResponseMessage response = await ApiClient.CallApi(path, HttpMethod.Get, null, headerParams, null, authSettings);
 
 			if (((int)response.StatusCode) >= 400)
 				throw new ApiException((int)response.StatusCode, "Error calling GetSplTokens: " + response.Content, response.Content);
 			else if (((int)response.StatusCode) == 0)
-				throw new ApiException((int)response.StatusCode, "Error calling GetSplTokens: " + response.ErrorMessage, response.ErrorMessage);
+				throw new ApiException((int)response.StatusCode, "Error calling GetSplTokens: " + response.ReasonPhrase, response.ReasonPhrase);
 
-			return (List<SplTokenBalanace>)ApiClient.Deserialize(response.Content, typeof(List<SplTokenBalanace>), response.Headers);
+			return (List<SplTokenBalanace>)(await ApiClient.Deserialize(response.Content, typeof(List<SplTokenBalanace>), response.Headers));
 		}
 
 		public async Task<List<SplNft>> GetNFTs(NetworkTypes network, string address)
@@ -121,14 +123,15 @@ namespace Moralis.SolanaApi.Api
 			// Authentication setting, if any
 			String[] authSettings = new String[] { "ApiKeyAuth" };
 
-			IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.GET, null, null, headerParams, null, null, authSettings));
+			//IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.GET, null, null, headerParams, null, null, authSettings));
+			HttpResponseMessage response = await ApiClient.CallApi(path, HttpMethod.Get, null, headerParams, null, authSettings);
 
 			if (((int)response.StatusCode) >= 400)
 				throw new ApiException((int)response.StatusCode, "Error calling GetNFTs: " + response.Content, response.Content);
 			else if (((int)response.StatusCode) == 0)
-				throw new ApiException((int)response.StatusCode, "Error calling GetNFTs: " + response.ErrorMessage, response.ErrorMessage);
+				throw new ApiException((int)response.StatusCode, "Error calling GetNFTs: " + response.ReasonPhrase, response.ReasonPhrase);
 
-			return (List<SplNft>)ApiClient.Deserialize(response.Content, typeof(List<SplNft>), response.Headers);
+			return (List<SplNft>)(await ApiClient .Deserialize(response.Content, typeof(List<SplNft>), response.Headers));
 		}
 
 		public async Task<Portfolio> GetPortfolio(NetworkTypes network, string address)
@@ -145,14 +148,15 @@ namespace Moralis.SolanaApi.Api
 			// Authentication setting, if any
 			String[] authSettings = new String[] { "ApiKeyAuth" };
 
-			IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.GET, null, null, headerParams, null, null, authSettings));
+			//IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.GET, null, null, headerParams, null, null, authSettings));
+			HttpResponseMessage response = await ApiClient.CallApi(path, HttpMethod.Get, null, headerParams, null, authSettings);
 
 			if (((int)response.StatusCode) >= 400)
 				throw new ApiException((int)response.StatusCode, "Error calling GetPortfolio: " + response.Content, response.Content);
 			else if (((int)response.StatusCode) == 0)
-				throw new ApiException((int)response.StatusCode, "Error calling GetPortfolio: " + response.ErrorMessage, response.ErrorMessage);
+				throw new ApiException((int)response.StatusCode, "Error calling GetPortfolio: " + response.ReasonPhrase, response.ReasonPhrase);
 
-			return (Portfolio)ApiClient.Deserialize(response.Content, typeof(Portfolio), response.Headers);
+			return (Portfolio)(await ApiClient.Deserialize(response.Content, typeof(Portfolio), response.Headers));
 		}
 	}
 }

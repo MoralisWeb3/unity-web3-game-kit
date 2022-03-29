@@ -10,7 +10,7 @@ using Moralis.WebGL.Platform.Objects;
 using Moralis.WebGL.Platform.Utilities;
 
 using Cysharp.Threading.Tasks;
-using static Moralis.Platform.Resources;
+using static Moralis.Platform.ResourceWrapper;
 
 namespace Moralis.WebGL.Platform.Services.Infrastructure
 {
