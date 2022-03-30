@@ -1,4 +1,13 @@
 # Change Log
+# 1.1.0 (2022-03-30)
+- Issue #90 - iOS Wallet Images not loaded and displayed
+- Issue #81 - WebGL LiveQuery Callbacks are not fired.
+- Issue #77 - How to login with just username/email and password?
+- Issue #72 - User SignUp, Without Wallet, Fails
+- Issue #56 - WebGL Error with Unity 2021.2.11f1
+- Issue #41 - Error on quit
+- Issue #15 - Live Queries Throw Unexpected Exception when Network Connection is Dropped.
+
 # 1.0.9 (2022-03-09)
 - Issue #82 - Web3Api Native RunContractFunction Deserialization fails
 - Issue #80 - WebGL, LiveQuery - DELETE: Good response has an Empty content
