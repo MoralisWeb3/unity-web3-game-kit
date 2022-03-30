@@ -83,6 +83,8 @@ namespace Moralis.Web3Api.Client
             // and Cloud Function API should be used.
             else
             {
+                client.ApiVersion = "server";
+
                 this.Account = new Moralis.Web3Api.CloudApi.AccountApi(client);
                 this.Defi = new Moralis.Web3Api.CloudApi.DefiApi(client);
                 this.Native = new Moralis.Web3Api.CloudApi.NativeApi(client);

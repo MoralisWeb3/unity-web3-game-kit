@@ -99,7 +99,7 @@ namespace Moralis.WebGL.Platform.Queries.Live
         }
 
         bool msgSent = false;
-        
+
         public void PingWebsocket ()
         {
             if (!connected) return;

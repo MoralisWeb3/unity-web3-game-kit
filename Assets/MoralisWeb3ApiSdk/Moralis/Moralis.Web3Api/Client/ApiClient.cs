@@ -25,7 +25,7 @@ namespace Moralis.Web3Api.Client
         /// Initializes a new instance of the <see cref="ApiClient" /> class.
         /// </summary>
         /// <param name="basePath">The base path.</param>
-        public ApiClient(String basePath = "http://localhost:3063", string apiVersion= "/api/v2")
+        public ApiClient(String basePath = "http://localhost:3063", string apiVersion="/api/v2")
         {
             BasePath = basePath;
             RestClient = new HttpClient(); //new RestClient(BasePath);
