@@ -28,14 +28,15 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */ 
-            using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using RestSharp;
+//using RestSharp;
 using Newtonsoft.Json;
 using Moralis.Web3Api.Client;
 using Moralis.Web3Api.Interfaces;
 using Moralis.Web3Api.Models;
+using System.Net.Http;
 
 namespace Moralis.Web3Api.CloudApi
 {
@@ -110,7 +111,7 @@ namespace Moralis.Web3Api.CloudApi
 			var queryParams = new Dictionary<String, String>();
 			var headerParams = new Dictionary<String, String>();
 			var formParams = new Dictionary<String, String>();
-			var fileParams = new Dictionary<String, FileParameter>();
+			var fileParams = new Dictionary<String, object>();
 
 			var path = "/functions/resolveDomain";
 			if (domain != null) postBody.Add("domain", ApiClient.ParameterToString(domain));
@@ -121,14 +122,15 @@ namespace Moralis.Web3Api.CloudApi
 
 			string bodyData = postBody.Count > 0 ? JsonConvert.SerializeObject(postBody) : null;
 
-			IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.POST, queryParams, bodyData, headerParams, formParams, fileParams, authSettings));
+			//IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.POST, queryParams, bodyData, headerParams, formParams, fileParams, authSettings));
+			HttpResponseMessage response = await ApiClient.CallApi(path, HttpMethod.Post, bodyData, headerParams, queryParams, authSettings);
 
 			if (((int)response.StatusCode) >= 400)
 				throw new ApiException((int)response.StatusCode, "Error calling ResolveDomain: " + response.Content, response.Content);
 			else if (((int)response.StatusCode) == 0)
-				throw new ApiException((int)response.StatusCode, "Error calling ResolveDomain: " + response.ErrorMessage, response.ErrorMessage);
+				throw new ApiException((int)response.StatusCode, "Error calling ResolveDomain: " + response.ReasonPhrase, response.ReasonPhrase);
 
-			return ((CloudFunctionResult<Resolve>)ApiClient.Deserialize(response.Content, typeof(CloudFunctionResult<Resolve>), response.Headers)).Result;
+			return ((CloudFunctionResult<Resolve>)(await ApiClient.Deserialize(response.Content, typeof(CloudFunctionResult<Resolve>), response.Headers))).Result;
 		}
 		/// <summary>
 		/// Resolves an ETH address and find the ENS name
@@ -146,7 +148,7 @@ namespace Moralis.Web3Api.CloudApi
 			var queryParams = new Dictionary<String, String>();
 			var headerParams = new Dictionary<String, String>();
 			var formParams = new Dictionary<String, String>();
-			var fileParams = new Dictionary<String, FileParameter>();
+			var fileParams = new Dictionary<String, object>();
 
 			var path = "/functions/resolveAddress";
 			if (address != null) postBody.Add("address", ApiClient.ParameterToString(address));
@@ -156,14 +158,15 @@ namespace Moralis.Web3Api.CloudApi
 
 			string bodyData = postBody.Count > 0 ? JsonConvert.SerializeObject(postBody) : null;
 
-			IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.POST, queryParams, bodyData, headerParams, formParams, fileParams, authSettings));
+			//IRestResponse response = (IRestResponse)(await ApiClient.CallApi(path, Method.POST, queryParams, bodyData, headerParams, formParams, fileParams, authSettings));
+			HttpResponseMessage response = await ApiClient.CallApi(path, HttpMethod.Post, bodyData, headerParams, queryParams, authSettings);
 
 			if (((int)response.StatusCode) >= 400)
 				throw new ApiException((int)response.StatusCode, "Error calling ResolveAddress: " + response.Content, response.Content);
 			else if (((int)response.StatusCode) == 0)
-				throw new ApiException((int)response.StatusCode, "Error calling ResolveAddress: " + response.ErrorMessage, response.ErrorMessage);
+				throw new ApiException((int)response.StatusCode, "Error calling ResolveAddress: " + response.ReasonPhrase, response.ReasonPhrase);
 
-			return ((CloudFunctionResult<Ens>)ApiClient.Deserialize(response.Content, typeof(CloudFunctionResult<Ens>), response.Headers)).Result;
+			return ((CloudFunctionResult<Ens>)(await ApiClient.Deserialize(response.Content, typeof(CloudFunctionResult<Ens>), response.Headers))).Result;
 		}
 	}
 }

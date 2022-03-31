@@ -1,7 +1,6 @@
 ﻿using Morlais;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using WalletConnectSharp.Unity;
 using WalletConnectSharp.Unity.Models;
 
 namespace Assets.Scripts.WalletConnectSharp.Unity.UI

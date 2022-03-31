@@ -22,5 +22,10 @@ namespace Moralis.WebGL.Platform.Abstractions
         /// </summary>
         /// <returns>Task</returns>
         void UnsubscribeAll();
+
+        /// <summary>
+        /// For WebGL Only should be called on Unity Update.
+        /// </summary>
+        void HandleUpdateEvent();
     }
 }

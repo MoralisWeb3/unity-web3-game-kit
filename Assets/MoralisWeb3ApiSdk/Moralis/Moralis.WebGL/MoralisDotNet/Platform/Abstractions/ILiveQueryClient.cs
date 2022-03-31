@@ -55,5 +55,10 @@ namespace Moralis.WebGL.Platform.Abstractions
         ///  Create a query subscription to the Live Query server.
         /// </summary>
         void Subscribe();
+
+        /// <summary>
+        /// For WebGL Only should be called on Unity Update.
+        /// </summary>
+        void HandleUpdateEvent();
     }
 }

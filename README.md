@@ -33,7 +33,16 @@ If you need help with setting up the boilerplate or have other questions - don't
 - When the project opens, open Edit->Preferences->External Tools (on MAC this is Unity->Preferences->External Tools) and make sure "Script Editor" is set to your installed Visual Studio instance. IMPORTANT: This step must be done before importing the package.
 - Navigate to the folder you downloaded the package to. Drag and drop the package into the Unity project.
 ![Demo](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/add.gif)
-
+- If you receive an error regarding **Newtonsoft**, follow these steps:
+	- In Right click on Packages and select _"Show In Explorer"_.
+	![Fix Newtonsoft 1](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/add_ns_a.gif)
+	- Open the _Packages_ folder
+	![Fix Newtonsoft 2](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/add_ns_b.gif)
+	- Edit the _manifest.json_ file
+	![Fix Newtonsoft 3](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/add_ns_b1.gif)
+	- Add an entry for ```"com.unity.nuget.newtonsoft.json": "2.0.0",```
+	![Fix Newtonsoft 4](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/add_ns_c.gif)
+	- Save the file and return to Unity, it should auto-load the Newtonsoft package.
 - Open MoralisWeb3ApiSdk->Example and double-click on the DemoScene object.
 - In the "Hierachy" panel under DemoScene select "MoralisSetup".
 - In the "Inspector" section find the sub-section titled "MoralisController".
@@ -63,7 +72,7 @@ If you need help with setting up the boilerplate or have other questions - don't
 
 This boilerplate project has been tested with the following Unity3D Releases:
 1. 2020.2
-2. 2020.3.26 (latest)
+2. 2020.3.31 (latest)
 3. 2021.2.5
 
 # 🧭 Table of contents

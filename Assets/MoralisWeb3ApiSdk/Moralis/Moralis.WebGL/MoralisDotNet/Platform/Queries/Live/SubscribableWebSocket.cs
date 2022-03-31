@@ -7,18 +7,20 @@ using Moralis.WebGL.Platform.Exceptions;
 using static Moralis.WebGL.Platform.Exceptions.MoralisFailureException;
 using System.Collections.Generic;
 using Moralis.WebGL.Platform.Abstractions;
-using Moralis.Network.Client;
 using Cysharp.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Moralis.WebGL.Platform.Queries.Live
 {
-    public class SubscribableWebSocket : MonoBehaviour
+    public class SubscribableWebSocket 
     {
-        private byte[] subscriptionRequest = null;
+        private static string emptyArray = "[]";
+        private string subscriptionRequest = String.Empty;
         private bool connectionSent = false;
         private bool subscriptionSent = false;
         private bool unsubscribeSent = false;
-        private MoralisClientWebSocket liveWebSocket = null;
+        private bool connected = false;
+
         private bool receiving = false;
 
         /// <summary>
@@ -55,11 +57,9 @@ namespace Moralis.WebGL.Platform.Queries.Live
         /// </summary>
         public string SessionToken { get; set; }
 
-        private IClientWebSocket webSocket;
-
         public SubscribableWebSocket(byte[] subRequest, IServerConnectionData connectionData, int requestId, string installationId, string sessionToken, IJsonSerializer jsonSerializer )
         {
-            subscriptionRequest = subRequest;
+            subscriptionRequest = Encoding.UTF8.GetString(subRequest);
             ConncetionData = connectionData;
             InstallationId = installationId;
             RequestId = requestId;
@@ -71,34 +71,43 @@ namespace Moralis.WebGL.Platform.Queries.Live
         /// Creates a live query subscription. If established, listens until either 
         /// the app or the server closes the connection.
         /// </summary>
-        public async UniTask Subscribe()
+        public async void Subscribe()
         {
             if (String.IsNullOrWhiteSpace(ConncetionData.LiveQueryServerURI))
             {
                 throw new MoralisFailureException(ErrorCode.ServerUrlNullOrEmtpy, "");
             }
+            else
+            {
+                Debug.Log($"Using websocket url: {ConncetionData.LiveQueryServerURI}");
+            }
 
             ClientStatus = LiveQueryClientStatusTypes.New;
-            List<byte> messageBytes = new List<byte>();
 
-            if (liveWebSocket == null)
+            bool resp = await MoralisLiveQueriesGL.CreateSubscription(RequestId.ToString(), ConncetionData.LiveQueryServerURI);
+
+            if (resp)
             {
-                new MoralisClientWebSocket(ConncetionData.LiveQueryServerURI);
+                Console.WriteLine("Live Query WebSocket connected.");
+                connected = true;
+                string json = MoralisLiveQueriesGL.GetResponseQueue(RequestId.ToString());
             }
-            
-            await liveWebSocket.ConnectAsync();
-                
-            Console.WriteLine("Live Query WebSocket connected.");
+            else
+            {
+                Console.WriteLine("Live Query WebSocket connection attempt failed.");
+            }
         }
 
-        private async void Update()
+        bool msgSent = false;
+
+        public void PingWebsocket ()
         {
-            byte[] buffer = new byte[256];
-            bool msgSent = false;
+            if (!connected) return;
+
+            WebSocketStateType status = GetWebSocketStatus();
 
             // Establish a connection and listen and process messages until closed.
-            if (liveWebSocket != null &&
-                WebSocketState.Open.Equals(liveWebSocket.State) && 
+            if (WebSocketStateType.Open.Equals(status) &&
                 !LiveQueryClientStatusTypes.Closed.Equals(ClientStatus))
             {
                 if (!msgSent && !LiveQueryClientStatusTypes.Open.Equals(ClientStatus))
@@ -107,49 +116,47 @@ namespace Moralis.WebGL.Platform.Queries.Live
                     if (!connectionSent && LiveQueryClientStatusTypes.New.Equals(ClientStatus))
                     {
                         SendGeneralMessage("Sending connection request.");
-                        byte[] bytes = CreateConnectRequest();
-                        await liveWebSocket.SendAsync(bytes);
+                        string msg = CreateConnectRequest();
+                        MoralisLiveQueriesGL.SendMessage(RequestId.ToString(), msg);
                         connectionSent = true;
-                        msgSent = true;
+                        return;
                     }
                     // If in openning status, create and send a subscription request.
                     else if (!subscriptionSent && LiveQueryClientStatusTypes.Opening.Equals(ClientStatus))
                     {
                         SendGeneralMessage("Sending subscription request.");
-                        await liveWebSocket.SendAsync(subscriptionRequest);
+                        MoralisLiveQueriesGL.SendMessage(RequestId.ToString(), subscriptionRequest);
                         subscriptionSent = true;
-                        msgSent = true;
+                        return;
                     }
-                    // If in closing status, create and send an unsubscribe request.
                     else if (!unsubscribeSent && LiveQueryClientStatusTypes.Closing.Equals(ClientStatus))
                     {
                         SendGeneralMessage("Sending unsubscribe request.");
-                        byte[] bytes = CreateUnsubscribeRequest();
-                        await liveWebSocket.SendAsync(bytes); 
+                        string msg = CreateUnsubscribeRequest();
+                        MoralisLiveQueriesGL.SendMessage(RequestId.ToString(), msg);
                         unsubscribeSent = true;
-                        msgSent = true;
+                        return;
                     }
                 }
 
-                // Only listen if the client is not processing the response for 
-                // a request (such as connect, subscribe, unsubscribe).
-                if (liveWebSocket.MessageQueue.Count > 0 && 
-                    (msgSent || LiveQueryClientStatusTypes.Open.Equals(ClientStatus)))
-                {
-                    lock (liveWebSocket.Mutex)
-                    {
-                        while (liveWebSocket.MessageQueue.Count > 0)
-                        {
-                            byte[] rawMessage = liveWebSocket.MessageQueue.Dequeue();
-                            OnEventMessage(rawMessage, rawMessage.Length);
-                        }
+                string json = MoralisLiveQueriesGL.GetResponseQueue(RequestId.ToString());
 
-                        receiving = false;
-                        msgSent = false;
+                if (!String.IsNullOrEmpty(json) && !json.Equals(emptyArray))
+                {
+                    string[] msgs = JsonConvert.DeserializeObject<string[]>(json);
+
+                    foreach (string m in msgs)
+                    {
+                        byte[] rawMessage = Encoding.UTF8.GetBytes(m);
+                        OnEventMessage(rawMessage, rawMessage.Length);
                     }
+
+                    receiving = false;
+                    msgSent = false;
                 }
             }
         }
+        
 
         internal void SetState(LiveQueryClientStatusTypes newState) => ClientStatus = newState;
 
@@ -157,9 +164,9 @@ namespace Moralis.WebGL.Platform.Queries.Live
         /// Should only be set for testing scenarios.
         /// </summary>
         /// <param name="ws"></param>
-        public void SetWebsocket(IClientWebSocket ws) => webSocket = ws;
+        public void SetWebsocket(IClientWebSocket ws) => throw new NotImplementedException(); //webSocket = ws;
         
-        private byte[] CreateConnectRequest()
+        private string CreateConnectRequest()
         {
             ConnectRequest msg = new ConnectRequest()
             {
@@ -168,20 +175,16 @@ namespace Moralis.WebGL.Platform.Queries.Live
 
             string json = JsonSerializer.Serialize(msg, JsonSerializer.DefaultOptions);
 
-            byte[] bytes = Encoding.UTF8.GetBytes(json);
-
-            return bytes;
+            return json;
         }
 
-        private byte[] CreateUnsubscribeRequest()
+        private string CreateUnsubscribeRequest()
         {
             UnscubscribeRequest msg = new UnscubscribeRequest(RequestId);
 
             string json = JsonSerializer.Serialize(msg, JsonSerializer.DefaultOptions);
 
-            byte[] bytes = Encoding.UTF8.GetBytes(json);
-
-            return bytes;
+            return json;
         }
 
         private byte[] PackBuffer(byte[] buffer, int size)
@@ -210,6 +213,12 @@ namespace Moralis.WebGL.Platform.Queries.Live
             {
                 OnGeneralMessage(msg);
             }
+        }
+
+        public WebSocketStateType GetWebSocketStatus()
+        {
+            int resp = MoralisLiveQueriesGL.GetSocketState(RequestId.ToString());
+            return (WebSocketStateType)resp;
         }
     }
 }

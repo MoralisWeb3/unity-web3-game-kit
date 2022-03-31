@@ -43,6 +43,7 @@ using Cysharp.Threading.Tasks;
 using Moralis.WebGL;
 using Moralis.WebGL.Platform;
 using Moralis.WebGL.Platform.Objects;
+using Moralis.WebGL.Platform.Services.ClientServices;
 using Moralis.WebGL.Web3Api.Models;
 #else
 using System.Threading.Tasks;
@@ -106,6 +107,12 @@ public class MainMenuScript : MonoBehaviour
         }
     }
 
+#if UNITY_WEBGL
+    private void FixedUpdate()
+    {
+        MoralisLiveQueryManager.UpdateWebSockets();
+    }
+#endif
     /// <summary>
     /// Used to start the authentication process and then run the game. If the 
     /// user has a valid Moralis session thes user is redirected to the next 
@@ -273,12 +280,12 @@ public class MainMenuScript : MonoBehaviour
     {
         Debug.Log("QUIT");
         
+        // Logout the Moralis User.
+        await MoralisInterface.LogOutAsync();
         // Disconnect wallet subscription.
         await walletConnect.Session.Disconnect();
         // CLear out the session so it is re-establish on sign-in.
         walletConnect.CLearSession();
-        // Logout the Moralis User.
-        await MoralisInterface.LogOutAsync();
         // Close out the application.
         Application.Quit();
     }

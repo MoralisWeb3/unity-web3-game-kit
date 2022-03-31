@@ -70,6 +70,22 @@ namespace Moralis.WebGL.Platform.Services.ClientServices
         }
 
         /// <summary>
+        /// For WebGL Only should be called on Unity Update.
+        /// </summary>
+        public void HandleUpdateEvent()
+        {
+            if (liveQueryServerClient != null)
+            {
+                LiveQueryClientStatusTypes state = liveQueryServerClient.ClientStatus; //  .GetWebSocketStatus();
+
+                if (!WebSocketStateType.Closed.Equals(state))
+                {
+                    liveQueryServerClient.PingWebsocket();
+                }
+            }
+        }
+
+        /// <summary>
         /// Called when a connected event is returned from the server.
         /// </summary>
         public event LiveQueryConnectedHandler OnConnected;
