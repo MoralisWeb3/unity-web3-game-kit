@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbf97db7a39f7034cb1921274cbfaaaa, type: 3}
+  m_Name: ReadMe
+  m_EditorClassIdentifier: 
+  icon: {fileID: 2800000, guid: 3f2157c8e2f264c4c8eeba93b9b7bfd2, type: 3}
+  title: Moralis Web3 Unity SDK
+  sections:
+  - heading: What is Moralis?
+    subheading: Moralis
+    text: Moralis provides a single workflow for building high performance dapps.
+      Fully compatible with your favorite web3 tools and services.
+    linkText: moralis.io
+    url: https://moralis.io
+  - heading: 
+    subheading: Web3 Unity SDK
+    text: This SDK brings the power of Moralis to your Unity projects.
+    linkText: docs.moralis.io/unity
+    url: https://docs.moralis.io/unity
+  - heading: Getting Started
+    subheading: 1. Get the Configuration
+    text: Setup the server and copy the config
+    linkText: admin.moralis.io/servers
+    url: https://admin.moralis.io/servers
+  - heading: 
+    subheading: 2. Set the Configuration
+    text: Paste the config into Unity
+    linkText: 
+    url: 
+    pingObjectName: 
+    pingObjectPath: 
+    openMenuName: Web3 Setup Window
+    openMenuNameId: Window/Moralis/Web3 Unity SDK/Open Web3 Setup
+  - heading: 
+    subheading: 3. Open Any New or Existing Scene
+    text: Learn how to add Moralis
+    linkText: docs.moralis.io/unity
+    url: https://docs.moralis.io/unity
+    pingObjectName: 
+    pingObjectPath: 
+  - heading: Need Help?
+    subheading: 
+    text: Contact us in the Moralis Forum.
+    linkText: forum.moralis.io/unity
+    url: https://forum.moralis.io/t/ethereum-unity3d-boilerplate-questions/4553
+  loadedLayout: 1

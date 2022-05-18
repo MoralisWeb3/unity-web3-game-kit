@@ -16,7 +16,7 @@ MonoBehaviour:
   m_EnablePackageDependencies: 1
   m_AdvancedSettingsExpanded: 1
   m_ScopedRegistriesSettingsExpanded: 1
-  oneTimeWarningShown: 0
+  oneTimeWarningShown: 1
   m_Registries:
   - m_Id: main
     m_Name: 
@@ -24,20 +24,35 @@ MonoBehaviour:
     m_Scopes: []
     m_IsDefault: 1
     m_Capabilities: 7
-  m_UserSelectedRegistryName: 
+  - m_Id: scoped:NPMJS
+    m_Name: NPMJS
+    m_Url: https://registry.npmjs.org
+    m_Scopes:
+    - io.moralis
+    m_IsDefault: 0
+    m_Capabilities: 0
+  - m_Id: scoped:OpenUPM
+    m_Name: OpenUPM
+    m_Url: https://package.openupm.com
+    m_Scopes:
+    - com.needle
+    m_IsDefault: 0
+    m_Capabilities: 0
+  m_UserSelectedRegistryName: NPMJS
   m_UserAddingNewScopedRegistry: 0
   m_RegistryInfoDraft:
     m_ErrorMessage: 
     m_Original:
-      m_Id: 
-      m_Name: 
-      m_Url: 
-      m_Scopes: []
+      m_Id: scoped:NPMJS
+      m_Name: NPMJS
+      m_Url: https://registry.npmjs.org
+      m_Scopes:
+      - io.moralis
       m_IsDefault: 0
       m_Capabilities: 0
     m_Modified: 0
-    m_Name: 
-    m_Url: 
+    m_Name: NPMJS
+    m_Url: https://registry.npmjs.org
     m_Scopes:
-    - 
+    - io.moralis
     m_SelectedScopeIndex: 0
