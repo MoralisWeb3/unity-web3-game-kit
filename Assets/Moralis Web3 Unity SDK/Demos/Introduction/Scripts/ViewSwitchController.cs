@@ -4,38 +4,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ViewSwitchController : MonoBehaviour
+namespace MoralisUnity.Demos.Introduction
 {
-
-    [SerializeField]
-    private GameObject authenticationKitObject = null;
-
-    [SerializeField]
-    private GameObject congratulationUiObject = null;
-
-    [SerializeField]
-    private GameObject fireworksObject = null;
-
-    private AuthenticationKit authKit = null;
-
-    private void Start()
+    public class ViewSwitchController : MonoBehaviour
     {
-        authKit = authenticationKitObject.GetComponent<AuthenticationKit>();
-    }
-    public void Authentication_OnConnect()
-    {
-        authenticationKitObject.SetActive(false);
-        congratulationUiObject.SetActive(true);
-        fireworksObject.SetActive(true);
-    }
 
-    public void LogoutButton_OnClicked()
-    {
-        // Logout the Moralis User.
-        authKit.Disconnect();
+        [SerializeField]
+        private GameObject authenticationKitObject = null;
 
-        authenticationKitObject.SetActive(true);
-        congratulationUiObject.SetActive(false);
-        fireworksObject.SetActive(false);
+        [SerializeField]
+        private GameObject congratulationUiObject = null;
+
+        [SerializeField]
+        private GameObject fireworksObject = null;
+
+        private AuthenticationKit authKit = null;
+
+        private void Start()
+        {
+            authKit = authenticationKitObject.GetComponent<AuthenticationKit>();
+        }
+        public void Authentication_OnConnect()
+        {
+            authenticationKitObject.SetActive(false);
+            congratulationUiObject.SetActive(true);
+            fireworksObject.SetActive(true);
+        }
+
+        public void LogoutButton_OnClicked()
+        {
+            // Logout the Moralis User.
+            authKit.Disconnect();
+
+            authenticationKitObject.SetActive(true);
+            congratulationUiObject.SetActive(false);
+            fireworksObject.SetActive(false);
+        }
     }
 }
