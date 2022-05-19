@@ -1,13 +1,14 @@
 # `ethereum-unity-boilerplate`
 
-*IMPORTANT, USE OF SPEEDY NODE IS NO LONGER REQUIRED*
-
 > Unity components and hooks for fast building of web3 games. With this SDK you can build web3 games for mobile, desktop, Xbox, Playstation and other platforms.
 This boilerplate allows you to authenticate users using crypto wallets on any platform.
 
-This boilerplate is built on moralis-dotnet-sdk and [Moralis](https://moralis.io?utm_source=github&utm_medium=readme&utm_campaign=ethereum-boilerplate). Also has its own context provider for quick access to `chainId` or `ethAddress`
+This boilerplate is built on [Moralis Web3 Unity SDK](https://github.com/MoralisWeb3/web3-unity-sdk) and [Moralis](https://moralis.io?utm_source=github&utm_medium=readme&utm_campaign=ethereum-boilerplate). 
 
-There are many components in this boilerplate that do not require an active web3 provider, they use Moralis Web3 API. Moralis supports the most popular blockchains and their test networks. You can find a list of all available networks in [Moralis Supported Chains](https://docs.moralis.io/moralis-server/web3-sdk/intro#supported-chains)
+While this boilerplate demo project is a good place to start, if you want to use the Unity Web3 SDK but do not want to use the demo, checkout the Moralis Unity Web3 SDK:
+1. [repository](https://github.com/MoralisWeb3/web3-unity-sdk).
+2. [UPM]()
+3. [Unity Asset Store] **coming soon**
 
 Please check the [official documentation of Moralis](https://docs.moralis.io/#user) for all the functionalities of Moralis.
 
@@ -22,58 +23,45 @@ If you need help with setting up the boilerplate or have other questions - don't
 # 🚀 Quick Start
 💿 Install all dependencies:
 - [Unity Hub](https://unity3d.com/get-unity/download)
-- [Visual Studio](https://visualstudio.microsoft.com/)
-
-📄 Download the latest package:
-![Demo](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/download.gif)
+- [Visual Studio](https://visualstudio.microsoft.com/) or other Unity supported development platforms.
 
 💿 Create a New Unity Project and Import the Package
 - Open Unity Hub
 - Click on the 'NEW' button and create a new project
 - When the project opens, open Edit->Preferences->External Tools (on MAC this is Unity->Preferences->External Tools) and make sure "Script Editor" is set to your installed Visual Studio instance. IMPORTANT: This step must be done before importing the package.
-- Navigate to the folder you downloaded the package to. Drag and drop the package into the Unity project.
-![Demo](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/add.gif)
-- If you receive an error regarding **Newtonsoft**, follow these steps:
-	- In Right click on Packages and select _"Show In Explorer"_.
-	![Fix Newtonsoft 1](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/add_ns_a.gif)
-	- Open the _Packages_ folder
-	![Fix Newtonsoft 2](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/add_ns_b.gif)
-	- Edit the _manifest.json_ file
-	![Fix Newtonsoft 3](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/add_ns_b1.gif)
-	- Add an entry for ```"com.unity.nuget.newtonsoft-json": "2.0.0",```
-	![Fix Newtonsoft 4](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/add_ns_c.gif)
-	- Save the file and return to Unity, it should auto-load the Newtonsoft package.
-- Open MoralisWeb3ApiSdk->Example and double-click on the DemoScene object.
-- In the "Hierachy" panel under DemoScene select "MoralisSetup".
-- In the "Inspector" section find the sub-section titled "MoralisController".
-- If the "MoralisController" sub-section is not expanded, expand it.
-- Using the information from your Moralis Server, fill in Application Id, and Server URL.
-![insertvalues](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/insertvalues.gif)
+
+**There are two ways to add the Web3 Unity SDK to your project:**
+
+📄 Setup via UPM Package
+![Package Download](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/moralis_upm_import.gif)
+1. Select menu _Window -> Package Manager_
+2. Open Settings and select _Advnaced Project Settings_
+3. In the _Package Manager_ section add a scoped registry entry for moralis on npm
+NAME: `npmjs`
+URL: `https://registry.npmjs/org`
+SCOPE(s): `io.moralis`
+4. Click on the _Save_ button and close the _Project Settings_ window.
+5. In _Package Manager_ select _My Registries_ from the location dropdown.
+6. Select the Moralis Web3 Unity SDK and click on the _Install_ button.
+7. OPTIONAL - install the demo.
+
+*** **OR** ***
+
+📄 Download the latest package:
+![Package Download](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/download.gif)
+1. Navigate to the folder you downloaded the package to. Drag and drop the package into the Unity project.
+![Add Package](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/moralis_package_setup.gif)
+
+Regardless of which option you choose, once the package is installed enter the Dapp URL and Dapp ID.
+![insertvalues](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/moralis_server_setup.gif)
+
 - **FOR WEBGL** In Player Settings change the WebGL template to the Moralis WebGL Template
-![webgltemplate](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/webgltemplate.gif)
-- **NOTE** If, after importing but before running the package, you see an error that describes something as "unsafe", it is probably due to a block of code in Nethereum SCrypt.cs. Open Build Settings then Player Settings
-![unsafe](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/unsafe.gif)
-    - Scroll down. Check the box titled "Allow 'unsafe' code". Rebuild your game.
 
-
-- Run the application by clicking the Play icon located at the top, center of the Unity3D IDE.
-- Click on the "Authenticate" button to authenticate to Moralis using your Wallet.
-- To walk around use the mouse for direction, the 'W' key to move forward and the 'S' key to move backwards. 
-    - In desktop and WebGL builds use the 'SHIFT' key with the 'W' and 'S' keys to run.
-    - Use the space bar to jump
-    - Use the Left mouse button to swing your sword.
-- Open the chest by bashing it with your sword. Inside is a game object that is also an NFT, you can claim this by clicking on it. **Watch your wallet for the transaction request!**
-- **NOTE** Your wallet must be connected to the Polygon Mumbai test network and your account will need some funds. Use the Polygon [Faucet](https://faucet.polygon.technology/) to send yourself test funds.
-- **NOTE** You can claim the NFT only once per address. If you re-run the demo after claiming the NFT, it will not be in the chest. Examine the _AwardableController.cs_ file to see how this is done. You can change the code so that the mug still shows but trying to claim it will only waste gas as the one award per address is also re-enforced at the contract level. 
-    - Yes, you can view your claimed NFT in Opensea.io and other NFT viewers if connected to the Polygon Mumbai network.
-    - If you examine the Metadata for the NFT you will see that in addition to the noraml PNG there is a URL for an Unity3D Prefab that can be programmatically loaded in Untiy 3D games and a link for a _.fbx_ file that can be loaded in most 3D modeling applications and game engines including Blender.
-- Note the purpose of the demo is to show how to authenticate with and interact with Moralis and Web3 in a Unity3D game. Other than looking around, slaying the orcs, openning the chest and claiming the NFT, there is not a lot to do. 
 - **IMPORTANT** If you want to create WebGL builds or want to run the Demo in WebGL, please read the [Web3GL](#web3gl) section prior to running the demo in WebGL.
 
 This boilerplate project has been tested with the following Unity3D Releases:
-1. 2020.2
-2. 2020.3.31 (latest)
-3. 2021.2.5
+1. 2020.3.34f1
+2. 2021.2.5
 
 # 🧭 Table of contents
 
@@ -177,82 +165,102 @@ _note: See [`User Object`](#userobject) for information about initializing the M
 Authentication is handled in a similar manner in both the SDK and the Unity3d. There is no direct manner to interact securely with a wallet in a .NET application so the Moralis SDK interacts with wallets in a loosely coupled manner. For the Unity3D boilerplate application, and the other examples we provide, we use Wallet Connect to facilitate interaction with wallets. 
 
 ### Basic Moralis Authentication
-Here are the statements used to authenticate with Moralis:
-#### SDK
 ```
-MoralisUser user = await moralis.LogInAsync(authenticationData, CancellationToken.None);
-```
-#### Unity3D
-```
-MoralisUser user = await MoralisInterface.LogInAsync(authentication-Data);
+MoralisUser user = await Moralis.LogInAsync(authentication-Data);
 ```
 _note: See [`Authentication Data`](#authentication-data) for information about the authenticationData parameter._
 
-The Unity3D Boilerplate application provides a detailed example of how to integrate with Wallet Connect and is worth examining in detail.
-Here are the relevant sections from the Boiler Plate Application:
-1. **Wallet Selecttion** This is initiated when the _MainMenuScript.Play_ method is called. This method redirects to either a view with a QR Code or, if built for iOS or Android, a Wallet Select list (generated by Wallet Connect)
-2. **Signature** When the connect response from the wallet is received, Wallet Connect fires a WalletConnectEvent. This is handled by the _MainMenuScript.WalletConnectHandler_ method. 
-#### _MainMenuScript.WalletConnectHandler_ Signature Example
+#### Wallet Connect Authentication Example
 ```
-// Extract wallet address from the Wallet Connect Session data object.
-string address = data.accounts[0].ToLower();
+public async void WalletConnect_OnConnectedEventSession(WCSessionData wcSessionData)
+{
+     // Extract wallet address from the Wallet Connect Session data object.
+    string address = wcSessionData.accounts[0].ToLower();
+    string appId = Moralis.DappId;
+    long serverTime = 0;
 
-string response = await walletConnect.Session.EthPersonalSign(address, "Moralis Authentication");
+    // Retrieve server time from Moralis Server for message signature
+    Dictionary<string, object> serverTimeResponse = await Moralis.Cloud
+        .RunAsync<Dictionary<string, object>>("getServerTime", new Dictionary<string, object>());
+
+    if (serverTimeResponse == null || !serverTimeResponse.ContainsKey("dateTime") ||
+        !long.TryParse(serverTimeResponse["dateTime"].ToString(), out serverTime))
+    {
+        Debug.LogError("Failed to retrieve server time from Moralis Server!");
+    }
+
+    string signMessage = $"Moralis Authentication\n\nId: {appId}:{serverTime}";
+
+    string signature = null;
+
+    signature = await _walletConnect.Session.EthPersonalSign(address, signMessage);
+
+    // Create Moralis auth data from message signing response.
+    Dictionary<string, object> authData = new Dictionary<string, object>
+    {
+        { "id", address }, { "signature", signature }, { "data", signMessage }
+    };
+
+    // Attempt to login user.
+    MoralisUser user = await Moralis.LogInAsync(authData, wcSessionData.chainId.Value);
+}
 ```
-#### _MainMenuScript.WalletConnectHandler_ Authentication Example
+
+#### WebGL Authentication Example
 ```
-// Create moralis auth data from message signing response.
-Dictionary<string, object> authData = new Dictionary<string, object> { { "id", address }, { "signature", response }, { "data", "Moralis Authentication" } };
+string address = Web3GL.Account().ToLower();
+string appId = Moralis.DappId;
+long serverTime = 0;
+
+// Retrieve server time from Moralis Server for message signature
+Dictionary<string, object> serverTimeResponse =
+    await Moralis.Cloud.RunAsync<Dictionary<string, object>>("getServerTime", new Dictionary<string, object>());
+
+if (serverTimeResponse == null || !serverTimeResponse.ContainsKey("dateTime") ||
+    !long.TryParse(serverTimeResponse["dateTime"].ToString(), out serverTime))
+{
+    Debug.LogError("Failed to retrieve server time from Moralis Server!");
+}
+
+string signMessage = $"Moralis Authentication\n\nId: {appId}:{serverTime}";
+                
+string signature = null;
+                
+signature = await Web3GL.Sign(signMessage);
+                
+// Create Moralis auth data from message signing response.
+Dictionary<string, object> authData = new Dictionary<string, object>
+{
+    { "id", address }, { "signature", signature }, { "data", signMessage }
+};
+
+// Get chain Id
+int chainId = Web3GL.ChainId();
 
 // Attempt to login user.
-MoralisUser user = await MoralisInterface.LogInAsync(authData);
+MoralisUser user = await Moralis.LogInAsync(authData, chainId);
 ```
 
 ## `Queries`
 Queries provide a way to retrieve information from your Moralis database.
-#### Required Using Statement(s) Non-WebGL
-```
-using Moralis;
-using Moralis.Platform.Objects;
-```
 
-#### Required Using Statement(s) WebGL
-```
-using Moralis.WebGl;
-using Moralis.WebGl.Platform.Objects;
-```
 The following example will return all Hero records where 'Level' is equal to 3.
-#### (Non-WebGL) Example Query
+### Query Example
 ```
-MoralisQuery<Hero> q = MoralisInterface.GetClient().Query<Hero>().WhereEqualTo("Level", 3);
-IEnumerable<Hero> result = await q.FindAsync();
-```
-#### (WebGL) Example
-```
-MoralisQuery<Hero> q = await MoralisInterface.GetClient().Query<Hero>();
+MoralisQuery<Hero> q = await Moralis.Query<Hero>();
 q = q.WhereEqualTo("Level", 3);
 IEnumerable<Hero> result = await q.FindAsync();
 ```
 
-The Moralis Dot Net SDK supports the same query methods as the JS SDK. For example creating 'OR', 'AND', and 'NOR' queries.
+The Moralis Web3 for Unity SDK supports the same query methods as the JS SDK. For example creating 'OR', 'AND', and 'NOR' queries.
 For this example we will take a base query and construct an 'OR' query that returns records where Level is greater or equal to '3' OR the hero's name is 'Zuko'.
 Furthermore we will sort (order) the result set by the hero's strength, descending.
-#### (Non-WebGL) Example OR query
+### Compound Query Example
 ```
-MoralisQuery<Hero> q = MoralisInterface.GetClient().Query<Hero>().WhereEqualTo("Level", 3);
-MoralisQuery<PlayerData> q1 = MoralisInterface.GetClient()
-    .BuildOrQuery<PlayerData>(new MoralisQuery<PlayerData>[] { 
-        q, MoralisInterface.GetClient().Query<PlayerData>().WhereEqualTo("Name", "Zuko") 
-    })
-    .OrderByDescending("Strength");
-IEnumerable<PlayerData> resp = await q1.FindAsync();
-```
-#### (WebGL) Example OR query
-```
-MoralisQuery<PlayerData> q = await MoralisInterface.GetClient().Query<PlayerData>();
+MoralisQuery<PlayerData> q = await Moralis.Query<PlayerData>();
 MoralisQuery<PlayerData> q1 = q.WhereGreaterThanOrEqualTo("Level", 2);
 MoralisQuery<PlayerData> q2 = q.WhereEqualTo("Name", "Zuko");
-MoralisQuery<PlayerData> q3 = MoralisInterface.GetClient().BuildOrQuery<PlayerData>(new MoralisQuery<PlayerData>[] { q1, q2 }).OrderByDescending("Strength");
+MoralisQuery<PlayerData> q3 = Moralis.BuildOrQuery<PlayerData>(new MoralisQuery<PlayerData>[] { q1, q2 }).OrderByDescending("Strength");
 IEnumerable<PlayerData> result = await q3.FindAsync();
 ```
 
@@ -262,17 +270,12 @@ A Live Query subscription emits events that indicate the state of the client and
 the [docs](https://docs.moralis.io/moralis-server/database/live-queries).
 
 The foloowing examples use the [query example from above](#queries)
-### Live Query Example (SDK)
-```
-MoralisLiveQueryClient<Hero> heroSubscription = moralis.Query<Hero>().Subscribe(callbacks);
-```
-_note: the **callbacks** parameter is optional. Please see [Callbacks Explained](#live-query-callbacks-explained) below.
-### Live Query Example (Unity3D)
+### Live Query Example
 Since Unity3d is mainly used to create games, Unity3D apps generaly have life cycle events you do not usually need to worray about in a normal program.
 We have created a special Live Query wrapper object that automatically handles your subscriptions for pause, unpause, close, etc.
 This example shows how to create your subscription using this wrapper class.
 ```
-MoralisQuery<Hero> q = MoralisInterface.GetClient().Query<Hero>();
+MoralisQuery<Hero> q = Moralis.Query<Hero>();
 MoralisLiveQueryController.AddSubscription<Hero>("Hero", q, callbacks);
 ```
 _note: the **callbacks** parameter is optional. Please see [Callbacks Explained](#live-query-callbacks-explained) bellow.
@@ -315,11 +318,7 @@ callbacks.OnGeneralMessageEvent += ((text) =>
 
 ## `Custom Object`
 Creating your own objects to support NPCs, characters, and game objects is as simple as creating a Plain Old C# Object (POCO). The only stipulation is that your custom object must be a child of Moralis Object and when you create an instance of the object it should be made via _**moralis.Create**_ method. This associates some extensions to your object that enable you to perform Moralis functions such as _Save_ directly on the object.
-#### Required Using Statement(s)
-```
-using Moralis;
-using Moralis.Platform.Objects;
-```
+**Note:** Inclusion of _base([OBJECT NAME]) is important for proper database handling.
 #### Sample Object
 ``` 
 public class Hero : MoralisObject
@@ -336,21 +335,9 @@ public class Hero : MoralisObject
     }
 }
 ```
-#### Create and Save Instance of Object (SDK)
+#### Create and Save Instance of Object
 ```
-Hero h = moralis.Create<Hero>();
-h.Name = "Zuko";
-h.Strength = 50;
-h.Level = 15;
-h.Warcry = "Honor!!!";
-h.Bag.Add("Leather Armor");
-h.Bag.Add("Crown Prince Hair clip.");
-
-await h.SaveAsync();
-```
-#### Create and Save Instance of Object (Unity3D)
-```
-Hero h = MoralisInterface.GetClient().Create<Hero>();
+Hero h = Moralis.Create<Hero>();
 h.Name = "Zuko";
 h.Strength = 50;
 h.Level = 15;
@@ -372,7 +359,7 @@ Since C# is a typed language the compiler must know what types are used at compi
 ```
 MoralisClient<YourUserObject> moralis = new MoralisClient<YourUserObject>(new ServerConnectionData() { ApplicationID = "YOUR_APPLICATION_ID_HERE", ServerURI = "YOUR_SERER_URL_HERE"}, new Web3ApiClient());
 ```
-_note: for Unity3D you will need to make the above change in the **MoralisInterface.Initialize** object. You will also need to replace the MoralisUser object elsewhere in the Boilerplate code._
+_note: for Unity3D you will need to make the above change in the **Moralis.Initialize** object. You will also need to replace the MoralisUser object elsewhere in the Boilerplate code._
 _**WARNING** do not make any replacements to any files under the MoralisDtoNet folder_
 
 ## `Authentication Data`
@@ -395,16 +382,13 @@ Description here
 # Web3
 The Web3 object is used for executing Evm RPC calls, meaning transactions directly against the chain. While the [Web3Api](#-ethereum-web3api-methods) is more efficient for most Web3 calls, the Web3Api does not support state changes or transactions. The Web3 object does allow state change and transactions against the change.
 
-For Web3 support, an [Nethereum](https://nethereum.com/) Web3 object is exposed in the **MoralisInterface**. Developers can use the Web3 object directly.
+For Web3 support, an [Nethereum](https://nethereum.com/) Web3 object is exposed in the **Moralis**. Developers can use the Web3 object directly.
 
-**IMPORTANT** Before it can be used, the Web3 object must be initialized, unfortunetly this cannot be done until a connection to the wallet is established. For this demo we added the following methods to the _MainMenuScript.cs_ file:
+**IMPORTANT** Before it can be used, the Web3 object must be initialized, unfortunetly this cannot be done until a connection to the wallet is established.
 ```
     private void InitializeWeb3()
     {
-        MoralisInterface.SetupWeb3();
-
-        // Create an entry for the Game Rewards Contract.
-        MoralisInterface.InsertContractInstance("Rewards", GameAwardContractAbi(), "mumbai", "0x05af21b57d2E378F90106B229E717DC96c7Bb5e2");
+        Moralis.SetupWeb3();
     } 
 
     /// <summary>
@@ -416,32 +400,27 @@ For Web3 support, an [Nethereum](https://nethereum.com/) Web3 object is exposed 
         InitializeWeb3();
     }
 ```
-In the Unity3D IDE under Heirarchy find and select the WalletConnect object
-![WalletConect](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/walletconnect_obj.gif)
-Under the Inspector find the events associated with New Session Connected and Resumed Session Connected
-![WalletConectEvents](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/wc_session_connected_events.gif)
-The method above should be referenced by both of these events.
 
 To make Web3 calls easier we have included a few tools.
 
-First, a EvmContractManager object provides an easy way to set up contracts that are reflected across several chains. The Contract andits functions can be easily retrieved from any where in you code via MoralisInterface.
+First, a EvmContractManager object (currently not available for WebGL) provides an easy way to set up contracts that are reflected across several chains. The Contract andits functions can be easily retrieved from any where in you code via MoralisInterface.
 
 To setup a contract instance use InsertContractInstance:
 ```
-MoralisInterface.InsertContractInstance("Rewards", GameAwardContractAbi(), "mumbai", "0x05af21b57d2E378F90106B229E717DC96c7Bb5e2");
+Moralis.InsertContractInstance("Rewards", GameAwardContractAbi(), "mumbai", "0x05af21b57d2E378F90106B229E717DC96c7Bb5e2");
 ```
 In this example a contract with key "Rewards" is created using the contract ABI (as json), the main chain the contract is on, and the address of the contract on that chain. For a live example please see the _MainMenuScript.cs_ file.
 
-By calling _MoralisInterface.AddContractChainAddress([CONTRACT KEY], [CHAIN ID], [CONTRACT ADDRESS])_ you can create multiple chain specific instances of the same contract using the ABI originally added with [CONTRACT KEY].
+By calling _Moralis.AddContractChainAddress([CONTRACT KEY], [CHAIN ID], [CONTRACT ADDRESS])_ you can create multiple chain specific instances of the same contract using the ABI originally added with [CONTRACT KEY].
 
 To retrieve an Nethereum contract instance call:
 ```
-Contract c = MoralisInterface.EvmContractInstance([CONTRACT KEY], [CHAIN ID]);
+Contract c = Moralis.EvmContractInstance([CONTRACT KEY], [CHAIN ID]);
 ```
 
 Retrieve an Nethereum contract function instance:
 ```
-Function f = MoralisInterface.EvmContractFunctionInstance([CONTRACT KEY], [CHAIN ID], [FUNCTION NAME]);
+Function f = Moralis.EvmContractFunctionInstance([CONTRACT KEY], [CHAIN ID], [FUNCTION NAME]);
 ```
 
 Call function with no parameters
@@ -469,41 +448,20 @@ string jsonResult = await func.CallAsync(playerAddress, new Nethereum.Hex.HexTyp
 
 For other call function varients see the Nethereum [documentation](https://nethereum.com/).
 
-To execute a transaction you can also call _MoralisInstance.SendEvmTransactionAsync_ or _MoralisInterface.SendTransactionAndWaitForReceiptAsync_. These functions represent only a couple of the variants available from the _Nethereum.Contracts.Function_ object.
+To execute a transaction you can also call _Moralis.SendEvmTransactionAsync_ or _Moralis.SendTransactionAndWaitForReceiptAsync_. These functions represent only a couple of the variants available from the _Nethereum.Contracts.Function_ object.
 
 
 # WebGL 
-Due to the way WebGL works, for security reasons it does not support outbound calls or multi-threading. The Moralis SDK depends heavily on both. As a solution we created a duplicate of the SDK that specifically geared to be compatible with WebGL.
-
-For most functionality the switch between other build types and WebGL should be seemless, with two exceptions.
-
-### `Moralis objects and Models`
-Anytime you directly access moralis interfaces, objects, models, etc., use the __Moralis.WebGL__ instead of the __Moralis__ namespace.
-For example:
-```
-using Moralis.Platform.Objects;
-using Moralis.Web3Api.Models;
-```
-becomes
-```
-using Moralis.WebGL.Platform.Objects;
-using Moralis.WebGL.Web3Api.Models;
-```
+Due to the way WebGL works, for security reasons, it does not support outbound calls or multi-threading. The Moralis SDK depends heavily on both. For most functionality the switch between other build types and WebGL should be seemless.
 
 When you have a file that is used for both WebGL and non-WebGL builds use the __UNITY_WEBGL__ pre-processor statement to seperate the code that will be used for each type of build. As example here is part of the using statement from the *TokenListController.cs* file from the Boilerplate Example:
 ```
 #if UNITY_WEBGL
-using Moralis.WebGL.Platform.Objects;
-using Moralis.WebGL.Web3Api.Models;
-using Cysharp.Threading.Tasks;
-using Newtonsoft.Json;
-using Assets.MoralisWeb3ApiSdk.Example.Scripts;
+// WebGL specific code here
 #else
-using Moralis.Platform.Objects;
-using Moralis.Web3Api.Models;
+// Non WebGL code here
 #endif
 ```
-Additionally you can define blocks of code to be included or ignored depending on whether the code is build for WebGL or not. For a good example of this please examine the code in the *TokenListController.cs* file in the Boilerplate Example.
 
 ### `Loading External Resources`
 Under the hood, WebGL loads external resources similar to javascript using AJAX. This means that you can run into CORs issues in the client browser when loading external resources. The prescribed method to solve this issue (as settings for CORS are on the server side) is to create a proxy service. 
@@ -538,16 +496,12 @@ Moralis.Cloud.define("loadResource", async (request) => {
 The complete Moralis Web3API schema including endpoints, operations and models, can be found by logging in to your Moralis Server and selecting **Web3 API***
 
 For use with either Moralis SDK or in Unity3d, the following using statements are required:
-```
-using System.Collections.Generic;
-using Moralis.Web3Api.Models;
-```
 
 ## `Chains`
 Use the code snippet below to retrieve a list of EVM chains supported in the Moralis Web3API. This list can be used for populating dropdown lists etc.
 #### Example
 ```
-List<ChainEntry> chains = MoralisInterface.SupportedChains;
+List<ChainEntry> chains = Moralis.SupportedChains;
 ```
 
 ## `Account`
@@ -561,7 +515,7 @@ Gets native balance for a specific address
 - **toBlock** _string_ OPTIONAL The maximum block number from where to get the logs.
 #### Example
 ```
-NativeBalance balance = await MoralisInterface.GetClient().Web3Api.Account.GetNativeBalance(address.ToLower(), ChainList.eth);
+NativeBalance balance = await Moralis.Web3Api.Account.GetNativeBalance(address.ToLower(), ChainList.eth);
 Debug.Log($"GetNativeBalance Balance: {balance.Balance}");
 ```
 
@@ -575,7 +529,7 @@ Gets NFTs owned by the given address
 - **order** _string_ OPTIONAL The field(s) to order on and if it should be ordered in ascending or descending order. Specified by: fieldName1.order,fieldName2.order. Example 1: "name", "name.ASC", "name.DESC", Example 2: "Name and Symbol", "name.ASC,symbol.DESC"
 #### Example
 ```
-NftOwnerCollection nftCollection = await MoralisInterface.GetClient().Web3Api.Account.GetNFTs(userAddress, chainId);
+NftOwnerCollection nftCollection = await Moralis.Web3Api.Account.GetNFTs(userAddress, chainId);
 
 if (nftCollection.Total < 1)
 {
@@ -603,7 +557,7 @@ Gets NFTs owned by the given address
 - **order** _string_ OPTIONAL The field(s) to order on and if it should be ordered in ascending or descending order. Specified by: fieldName1.order,fieldName2.order. Example 1: "name", "name.ASC", "name.DESC", Example 2: "Name and Symbol", "name.ASC,symbol.DESC"
 #### Example
 ```
-NftOwnerCollection resp = await MoralisInterface.GetClient().Web3Api.Account.GetNFTsForContract(address.ToLower(), "0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", ChainList.eth);
+NftOwnerCollection resp = await Moralis.Web3Api.Account.GetNFTsForContract(address.ToLower(), "0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", ChainList.eth);
 Debug.Log($"GetNFTsForContract Count: {resp.Total}");
 ```
 
@@ -618,7 +572,7 @@ Gets the transfers of the tokens matching the given parameters
 - **order** _string_ OPTIONAL The field(s) to order on and if it should be ordered in ascending or descending order. Specified by: fieldName1.order,fieldName2.order. Example 1: "name", "name.ASC", "name.DESC", Example 2: "Name and Symbol", "name.ASC,symbol.DESC"
 #### Example
 ```
-NftTransferCollection balance = await MoralisInterface.GetClient().Web3Api.Account.GetNFTTransfers(address.ToLower(), ChainList.eth);
+NftTransferCollection balance = await Moralis.Web3Api.Account.GetNFTTransfers(address.ToLower(), ChainList.eth);
 Debug.Log($"GetNFTTransfers Matches: {balance.Total}");
 ```
 
@@ -630,7 +584,7 @@ Gets token balances for a specific address
 - **toBlock** _string_ OPTIONAL The maximum block number from where to get the logs.
 #### Example
 ```
-List<Erc20TokenBalance> balance = await MoralisInterface.GetClient().Web3Api.Account.GetTokenBalances(address.ToLower(), ChainList.eth);
+List<Erc20TokenBalance> balance = await Moralis.Web3Api.Account.GetTokenBalances(address.ToLower(), ChainList.eth);
 Debug.Log($"GetTokenBalances Count: {balance.Count}");
 ```
 
@@ -647,7 +601,7 @@ Gets ERC20 token transactions in descending order based on block number
 - **limit** _integer_ OPTIONAL Limit
 #### Example
 ```
-Erc20TransactionCollection balance = await MoralisInterface.GetClient().Web3Api.Account.GetTokenTransfers(address.ToLower(), ChainList.eth);
+Erc20TransactionCollection balance = await Moralis.Web3Api.Account.GetTokenTransfers(address.ToLower(), ChainList.eth);
 Debug.Log($"GetTokenTransfers Count: {balance.Total}");
 ```
 
@@ -664,7 +618,7 @@ Gets native transactions in descending order based on block number
 - **limit** _integer_ OPTIONAL Limit
 #### Example
 ```
-TransactionCollection balance = await MoralisInterface.GetClient().Web3Api.Account.GetTransactions(address.ToLower(), ChainList.eth);
+TransactionCollection balance = await Moralis.Web3Api.Account.GetTransactions(address.ToLower(), ChainList.eth);
 Debug.Log($"GetTransactions Count: {balance.Total}");
 ```
 
@@ -681,7 +635,7 @@ Fetches and returns pair data of the provided token0+token1 combination. The tok
 - **toDate** _string_ OPTIONAL Get the logs to this date (any format that is accepted by momentjs)
 #### Example
 ```
-ReservesCollection nftTransers = MoralisInterface.GetClient().Web3Api.Defi.GetPairAddress(exchange, token0Address, token1Address, ChainList.eth);
+ReservesCollection nftTransers = Moralis.Web3Api.Defi.GetPairAddress(exchange, token0Address, token1Address, ChainList.eth);
 ```
 
 ### `GetPairReserves`
@@ -693,7 +647,7 @@ Get the liquidity reserves for a given pair address
 - **providerUrl** _string_ OPTIONAL web3 provider url to user when using local dev chain
 #### Example
 ```
-ReservesCollection nftTransers = MoralisInterface.GetClient().Web3Api.Defi.GetPairReserves(pairAddress, ChainList.eth);
+ReservesCollection nftTransers = Moralis.Web3Api.Defi.GetPairReserves(pairAddress, ChainList.eth);
 ```
 
 ## `Native`
@@ -706,7 +660,7 @@ Gets the contents of a block by block hash
 - **subdomain** _string_ OPTIONAL The subdomain of the moralis server to use (Only use when selecting local devchain as chain)
 #### Example
 ```
-Block block = MoralisInterface.GetClient().Web3Api.Native.GetBlock(blockNumberOrHash, ChainList.eth);
+Block block = Moralis.Web3Api.Native.GetBlock(blockNumberOrHash, ChainList.eth);
 ```
 
 ### `GetContractEvents`
@@ -733,7 +687,7 @@ Gets events in descending order based on block number
     // Event ABI
     object abi = new { anonymous = false, inputs = inputParams, name = "RoleGranted", type = "event" };
 
-    List<LogEvent> logEvents = await MoralisInterface.GetClient().Web3Api.Native.GetContractEvents("0x698d7D745B7F5d8EF4fdB59CeB660050b3599AC3", "0x2f8788117e7eff1d82e926ec794901d17c78024a50270940304540a733656f0d", abi, ChainList.mumbai);
+    List<LogEvent> logEvents = await Moralis.Web3Api.Native.GetContractEvents("0x698d7D745B7F5d8EF4fdB59CeB660050b3599AC3", "0x2f8788117e7eff1d82e926ec794901d17c78024a50270940304540a733656f0d", abi, ChainList.mumbai);
 
     Debug.Log($"Contract Function returned {logEvents.Count} events");
 ```
@@ -746,7 +700,7 @@ Gets the closest block of the provided date
 #### Example
 ```
 string blockNumberOrHash = "25509457";
-Block block = await MoralisInterface.GetClient().Web3Api.Native.GetBlock(blockNumberOrHash, chainId);
+Block block = await Moralis.Web3Api.Native.GetBlock(blockNumberOrHash, chainId);
 Debug.Log($"GetBlock BlockNumber: {block.Number}, Transaction Count: {block.TransactionCount}");
 ```
 
@@ -766,7 +720,7 @@ Gets the logs from an address
 - **topic3** _string_ OPTIONAL 
 #### Example
 ```
-LogEventByAddress logEvents = await MoralisInterface.GetClient().Web3Api.Native.GetLogsByAddress(userAddress, chainId);
+LogEventByAddress logEvents = await Moralis.Web3Api.Native.GetLogsByAddress(userAddress, chainId);
 Debug.Log($"GetLogsByAddress BlockNumber: {logEvents.BlockNumber}, Transaction Count: {logEvents.Data}");
 ```
 
@@ -777,7 +731,7 @@ Gets NFT transfers by block number or block hash
 - **subdomain** _string_ OPTIONAL The subdomain of the moralis server to use (Only use when selecting local devchain as chain)
 #### Example
 ```
-NftTransferCollection nftTransfers = await MoralisInterface.GetClient().Web3Api.Native.GetNFTTransfersByBlock("500000", chainId);
+NftTransferCollection nftTransfers = await Moralis.Web3Api.Native.GetNFTTransfersByBlock("500000", chainId);
 Debug.Log($"GetNFTTransfersByBlock Nfts returned: {nftTransfers.Result.Count}");
 ```
 
@@ -789,7 +743,7 @@ Gets the contents of a block transaction by hash
 #### Example
 ```
 string transactionHash = "0xe1ec2dd9964f4dc59b53dce083917abfb5ab5191a37cb1e21566969caa614fcd";
-BlockTransaction blockTransaction = await MoralisInterface.GetClient().Web3Api.Native.GetTransaction(transactionHash, ChainList.mumbai);
+BlockTransaction blockTransaction = await Moralis.Web3Api.Native.GetTransaction(transactionHash, ChainList.mumbai);
 Debug.Log($"Block transaction BlackNumber: {blockTransaction.BlockNumber}, from Address: {blockTransaction.FromAddress}");
 ```
 
@@ -820,7 +774,7 @@ RunContractDto rcd = new RunContractDto()
     Params = new { id = "15310200874782" }
 };
 
-string resp = await MoralisInterface.GetClient().Web3Api.Native.RunContractFunction("0x698d7D745B7F5d8EF4fdB59CeB660050b3599AC3", "uri", rcd, ChainList.mumbai);
+string resp = await Moralis.Web3Api.Native.RunContractFunction("0x698d7D745B7F5d8EF4fdB59CeB660050b3599AC3", "uri", rcd, ChainList.mumbai);
 
 Debug.Log($"Contract Function returned: {resp}");
 ```
@@ -834,7 +788,7 @@ Resolves an Unstoppable domain and returns the address
 - **currency** _string_ OPTIONAL The currency to query.
 #### Example
 ```
-Resolve resp = await MoralisInterface.GetClient().Web3Api.Resolve.ResolveDomain("brad.crypto");
+Resolve resp = await Moralis.Web3Api.Resolve.ResolveDomain("brad.crypto");
 Debug.Log($"ResolveDomain Address: {resp.Address}");
 ```
 
@@ -843,7 +797,7 @@ Resolves an ETH address and find the ENS name
 - **address** _string_ REQUIRED The wallet address to perform reverse lookup on.
 #### Example
 ```
-Ens resp = await MoralisInterface.GetClient().Web3Api.Resolve.ResolveAddress("0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045");
+Ens resp = await Moralis.Web3Api.Resolve.ResolveAddress("0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045");
 Debug.Log($"ResolveAddress Name: {resp.Name}");
 ```
 
@@ -884,7 +838,7 @@ Gets data, including metadata (where available), for all token ids for the given
 - **order** _string_ OPTIONAL If the order should be Ascending or Descending based on the blocknumber on which the NFT was minted. Allowed values: "ASC", "DESC"
 #### Example
 ```
-NftCollection resp = await MoralisInterface.GetClient().Web3Api.Token.GetAllTokenIds("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", ChainList.eth, null, 0, 10);
+NftCollection resp = await Moralis.Web3Api.Token.GetAllTokenIds("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", ChainList.eth, null, 0, 10);
 Debug.Log($"GetAllTokenIds returned {resp.Total} Nfts");
 ```
 
@@ -898,7 +852,7 @@ Gets the transfers of the tokens matching the given parameters
 - **order** _string_ OPTIONAL If the order should be Ascending or Descending based on the blocknumber on which the NFT was minted. Allowed values: "ASC", "DESC"
 #### Example
 ```
-NftTransferCollection resp = await MoralisInterface.GetClient().Web3Api.Token.GetContractNFTTransfers("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", ChainList.eth, null, 0, 10);
+NftTransferCollection resp = await Moralis.Web3Api.Token.GetContractNFTTransfers("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", ChainList.eth, null, 0, 10);
 Debug.Log($"GetContractNFTTransfers returned {resp.Total} Nft transfer entries");
 ```
 
@@ -911,7 +865,7 @@ Get the lowest price found for a nft token contract for the last x days (only tr
 - **marketplace** _string_ OPTIONAL web3 marketplace from where to get the trades (only opensea is supported at the moment)
 #### Example
 ```
-Trade resp = await MoralisInterface.GetClient().Web3Api.Token.GetNFTLowestPrice("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", ChainList.eth, 2000);
+Trade resp = await Moralis.Web3Api.Token.GetNFTLowestPrice("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", ChainList.eth, 2000);
 Debug.Log($"GetNFTLowestPrice Price: {resp.Price}");
 ```
 
@@ -921,7 +875,7 @@ Gets the contract level metadata (name, symbol, base token uri) for the given co
 - **chain** _ChainList_ REQUIRED The chain to query
 #### Example
 ```
-NftContractMetadata resp = await MoralisInterface.GetClient().Web3Api.Token.GetNFTMetadata("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", ChainList.eth);
+NftContractMetadata resp = await Moralis.Web3Api.Token.GetNFTMetadata("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", ChainList.eth);
 Debug.Log($"GetNFTMetadata Name: {resp.Name}, TokenAddress: {resp.TokenAddress}");
 ```
 
@@ -935,7 +889,7 @@ Gets all owners of NFT items within a given contract collection
 - **order** _string_ OPTIONAL If the order should be Ascending or Descending based on the blocknumber on which the NFT was minted. Allowed values: "ASC", "DESC"
 #### Example
 ```
-NftOwnerCollection resp = await MoralisInterface.GetClient().Web3Api.Token.GetNFTOwners("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", ChainList.eth, null, 0, 10);
+NftOwnerCollection resp = await Moralis.Web3Api.Token.GetNFTOwners("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", ChainList.eth, null, 0, 10);
 Debug.Log($"GetNFTOwners returned {resp.Total} Nft Owner records");
 ```
 
@@ -953,7 +907,7 @@ Get the nft trades for a given contracts and marketplace
 - **limit** _integer_ OPTIONAL Limit
 #### Example
 ```
-TradeCollection resp = await MoralisInterface.GetClient().Web3Api.Token.GetNFTTrades("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", ChainList.eth, null, null, null, null, null, null, 0, 10);
+TradeCollection resp = await Moralis.Web3Api.Token.GetNFTTrades("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", ChainList.eth, null, null, null, null, null, null, 0, 10);
 Debug.Log($"GetNFTTrades returned {resp.Total} Nft trades");
 ```
 
@@ -970,7 +924,7 @@ Gets the transfers of the tokens from a block number to a block number
 - **order** _string_ OPTIONAL If the order should be Ascending or Descending based on the blocknumber on which the NFT was minted. Allowed values: "ASC", "DESC"
 #### Example
 ```
-NftTransferCollection resp = await MoralisInterface.GetClient().Web3Api.Token.GetNftTransfersFromToBlock(ChainList.eth, 99999, 25999999, null, null, null, 0, 10);
+NftTransferCollection resp = await Moralis.Web3Api.Token.GetNftTransfersFromToBlock(ChainList.eth, 99999, 25999999, null, null, null, 0, 10);
 Debug.Log($"GetNftTransfersFromToBlock returned {resp.Total} Nft Transfers");
 ```
 
@@ -987,7 +941,7 @@ Gets ERC20 token contract transactions in descending order based on block number
 - **limit** _integer_ OPTIONAL Limit
 #### Example
 ```
-Erc20TransactionCollection resp = await MoralisInterface.GetClient().Web3Api.Token.GetTokenAddressTransfers("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", ChainList.eth, null, null, null, null, null, 0, 10);
+Erc20TransactionCollection resp = await Moralis.Web3Api.Token.GetTokenAddressTransfers("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", ChainList.eth, null, null, null, null, null, 0, 10);
 Debug.Log($"GetTokenAddressTransfers returned {resp.Total} transfer entries");
 ```
 
@@ -1000,7 +954,7 @@ Gets the amount which the spender is allowed to withdraw from the spender
 - **providerUrl** _string_ OPTIONAL web3 provider url to user when using local dev chain
 #### Example
 ```
-Erc20Allowance allowance = MoralisInterface.GetClient().Web3Api.Token.GetTokenAllowance(address, ownerAddress, spenderAddress, ChainList.eth);
+Erc20Allowance allowance = Moralis.Web3Api.Token.GetTokenAllowance(address, ownerAddress, spenderAddress, ChainList.eth);
 ```
 
 ### `GetTokenIdMetadata`
@@ -1011,7 +965,7 @@ Gets data, including metadata (where available), for the given token id of the g
 - **foramt** _string_ OPTIONAL The format of the token id
 #### Example
 ```
-Nft resp = await MoralisInterface.GetClient().Web3Api.Token.GetTokenIdMetadata("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", "10", ChainList.eth);
+Nft resp = await Moralis.Web3Api.Token.GetTokenIdMetadata("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", "10", ChainList.eth);
 Debug.Log($"GetTokenIdMetadata Name: {resp.Name}, Amount: {resp.Amount}");
 ```
 
@@ -1026,7 +980,7 @@ Gets all owners of NFT items within a given contract collection
 - **order** _string_ OPTIONAL If the order should be Ascending or Descending based on the blocknumber on which the NFT was minted. Allowed values: "ASC", "DESC"
 #### Example
 ```
-NftOwnerCollection resp = await MoralisInterface.GetClient().Web3Api.Token.GetTokenIdOwners("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", "10", ChainList.eth, null, 0, 10);
+NftOwnerCollection resp = await Moralis.Web3Api.Token.GetTokenIdOwners("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", "10", ChainList.eth, null, 0, 10);
 Debug.Log($"GetTokenIdOwners returned {resp.Total} Nfts");
 ```
 
@@ -1040,7 +994,7 @@ Returns metadata (name, symbol, decimals, logo) for a given token contract addre
 ```
 List<string> addresses = new List<string>();
 addresses.Add("0x6b175474e89094c44da98b954eedeac495271d0f");
-List<Erc20Metadata> resp = await MoralisInterface.GetClient().Web3Api.Token.GetTokenMetadata(addresses, ChainList.eth);
+List<Erc20Metadata> resp = await Moralis.Web3Api.Token.GetTokenMetadata(addresses, ChainList.eth);
 Debug.Log($"GetTokenMetadata returned {resp.Count} entries.");
 ```
 
@@ -1053,7 +1007,7 @@ Returns metadata (name, symbol, decimals, logo) for a given token contract addre
 ```
 List<string> symbols = new List<string>();
 symbols.Add("DAI");
-List<Erc20Metadata> resp = await MoralisInterface.GetClient().Web3Api.Token.GetTokenMetadataBySymbol(symbols, ChainList.eth);
+List<Erc20Metadata> resp = await Moralis.Web3Api.Token.GetTokenMetadataBySymbol(symbols, ChainList.eth);
 Debug.Log($"GetTokenMetadataBySymbol returned {resp.Count} entries.");
 ```
 
@@ -1066,7 +1020,7 @@ Returns the price nominated in the native token and usd for a given token contra
 - **toBlock** _string_ OPTIONAL The maximum block number from where to get the logs.
 #### Example
 ```
-Erc20Price resp = await MoralisInterface.GetClient().Web3Api.Token.GetTokenPrice("0x6b175474e89094c44da98b954eedeac495271d0f", ChainList.eth);
+Erc20Price resp = await Moralis.Web3Api.Token.GetTokenPrice("0x6b175474e89094c44da98b954eedeac495271d0f", ChainList.eth);
 Debug.Log($"GetTokenPrice Price: {resp.UsdPrice} USD");
 ```
 
@@ -1081,7 +1035,7 @@ Gets the transfers of the tokens matching the given parameters
 - **order** _string_ OPTIONAL If the order should be Ascending or Descending based on the blocknumber on which the NFT was minted. Allowed values: "ASC", "DESC"
 #### Example
 ```
-NftTransferCollection resp = await MoralisInterface.GetClient().Web3Api.Token.GetWalletTokenIdTransfers("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", "10", ChainList.eth, null, 0, 10);
+NftTransferCollection resp = await Moralis.Web3Api.Token.GetWalletTokenIdTransfers("0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", "10", ChainList.eth, null, 0, 10);
 Debug.Log($"GetWalletTokenIdTransfers returned {resp.Total} Nfts");
 ```
 
@@ -1099,7 +1053,7 @@ Gets NFTs that match a given metadata search.
 - **limit** _integer_ OPTIONAL Limit
 #### Example
 ```
-NftMetadataCollection resp = await MoralisInterface.GetClient().Web3Api.Token.SearchNFTs("Apes", ChainList.eth, null, null, null, null, null, null, 0, 10);
+NftMetadataCollection resp = await Moralis.Web3Api.Token.SearchNFTs("Apes", ChainList.eth, null, null, null, null, null, null, 0, 10);
 Debug.Log($"SearchNFTs returned {resp.Total} Nfts");
 ```
 
@@ -1109,29 +1063,29 @@ Debug.Log($"SearchNFTs returned {resp.Total} Nfts");
 
 ### `Solana Balance`
 ```
-NativeBalance bal = await MoralisSolanaClient.SolanaApi.Account.Balance(NetworkTypes.mainnet, "6XU36wCxWobLx5Rtsb58kmgAJKVYmMVqy4SHXxENAyAe");
+NativeBalance bal = await Moralis.SolanaApi.Account.Balance(NetworkTypes.mainnet, "6XU36wCxWobLx5Rtsb58kmgAJKVYmMVqy4SHXxENAyAe");
 ```
 
 ### `Solana GetNFTs`
 ```
-List<SplNft> bal = await MoralisSolanaClient.SolanaApi.Account.GetNFTs(NetworkTypes.mainnet, "6XU36wCxWobLx5Rtsb58kmgAJKVYmMVqy4SHXxENAyAe");
+List<SplNft> bal = await Moralis.SolanaApi.Account.GetNFTs(NetworkTypes.mainnet, "6XU36wCxWobLx5Rtsb58kmgAJKVYmMVqy4SHXxENAyAe");
 ```
 
 ### `Solana GetPortfolio`
 ```
-Portfolio bal = await MoralisSolanaClient.SolanaApi.Account.GetPortfolio(NetworkTypes.mainnet, "6XU36wCxWobLx5Rtsb58kmgAJKVYmMVqy4SHXxENAyAe");
+Portfolio bal = await Moralis.SolanaApi.Account.GetPortfolio(NetworkTypes.mainnet, "6XU36wCxWobLx5Rtsb58kmgAJKVYmMVqy4SHXxENAyAe");
 ```
 
 ### `Solana GetSplTokens`
 ```
-List<SplTokenBalanace> bal = await MoralisSolanaClient.SolanaApi.Account.GetSplTokens(NetworkTypes.mainnet, "6XU36wCxWobLx5Rtsb58kmgAJKVYmMVqy4SHXxENAyAe");
+List<SplTokenBalanace> bal = await Moralis.SolanaApi.Account.GetSplTokens(NetworkTypes.mainnet, "6XU36wCxWobLx5Rtsb58kmgAJKVYmMVqy4SHXxENAyAe");
 ```
 
 ## Solana NFT
 
 ### `Solana GetNFTMetadata`
 ```
-NftMetadata bal = await MoralisSolanaClient.SolanaApi.Nft.GetNFTMetadata(NetworkTypes.mainnet, "6XU36wCxWobLx5Rtsb58kmgAJKVYmMVqy4SHXxENAyAe");
+NftMetadata bal = await Moralis.SolanaApi.Nft.GetNFTMetadata(NetworkTypes.mainnet, "6XU36wCxWobLx5Rtsb58kmgAJKVYmMVqy4SHXxENAyAe");
 ```
 
 # Helpful Tools
