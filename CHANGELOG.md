@@ -1,5 +1,5 @@
 # Change Log
-# 1.2.0 (2022-05-19)
+# 1.2.0 (2022-05-20)
 - Changed namespace from MoralisWeb3ApiSdk to MoralisUnity
 - Changed MoralisInterface to Moralis
 - Changed Moralis.Initialize to Moralis.Start
