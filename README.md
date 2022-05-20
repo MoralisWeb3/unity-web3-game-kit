@@ -1,14 +1,8 @@
-# `ethereum-unity-boilerplate`
+# `Moralis Web3 for Unity Boilerplate`
 
-> Unity components and hooks for fast building of web3 games. With this SDK you can build web3 games for mobile, desktop, Xbox, Playstation and other platforms.
-This boilerplate allows you to authenticate users using crypto wallets on any platform.
+> The Moralis Web3 Unity SDK provides components and hooks for fast building of web3 games targeted for mobile, desktop, Xbox, Playstation and other platforms.
 
 This boilerplate is built on [Moralis Web3 Unity SDK](https://github.com/MoralisWeb3/web3-unity-sdk) and [Moralis](https://moralis.io?utm_source=github&utm_medium=readme&utm_campaign=ethereum-boilerplate). 
-
-While this boilerplate demo project is a good place to start, if you want to use the Unity Web3 SDK but do not want to use the demo, checkout the Moralis Unity Web3 SDK:
-1. [repository](https://github.com/MoralisWeb3/web3-unity-sdk).
-2. [UPM](#-setup-via-upm-package)
-3. [Unity Asset Store] **coming soon**
 
 Please check the [official documentation of Moralis](https://docs.moralis.io/#user) for all the functionalities of Moralis.
 
@@ -17,47 +11,28 @@ Please check the [official documentation of Moralis](https://docs.moralis.io/#us
 # ⭐️ `Star us`
 If this boilerplate helps you build Ethereum dapps faster - please star this project, every star makes us very happy!
 
-# 🤝 `Need help?`
-If you need help with setting up the boilerplate or have other questions - don't hesitate to write in our community forum and we will check asap. [Forum link](https://forum.moralis.io/t/ethereum-unity3d-boilerplate-questions/4553). The best thing about this boilerplate is the super active community ready to help at any time! We help each other.
+# :city_sunrise: `Community`
+The best thing about Moralis is the super active community ready to help at any time! We help each other.
+## 🤝 `Need help?`
+If you need help with setting up the boilerplate or have other questions - don't hesitate to write in our community forum and we will check asap. [Forum link](https://forum.moralis.io/t/ethereum-unity3d-boilerplate-questions/4553). 
+## Discord
+Become a Moralis Mage - join the [Moralis DAO Discord](https://moralis.io/mage)
+## Feedback
+To give feedback, ask a question or make a feature request, you can either use the [Fourm](https://forum.moralis.io/) or the [game-dev](https://discordapp.com/channels/819584798443569182/918645175562145822) Discord thread.
+
+Bugs are logged using the github issue system. To report a bug, simply open a new issue.
 
 # 🚀 Quick Start
 💿 Install all dependencies:
 - [Unity Hub](https://unity3d.com/get-unity/download)
 - [Visual Studio](https://visualstudio.microsoft.com/) or other Unity supported development platforms.
 
-💿 Create a New Unity Project and Import the Package
-- Open Unity Hub
-- Click on the 'NEW' button and create a new project
-- When the project opens, open Edit->Preferences->External Tools (on MAC this is Unity->Preferences->External Tools) and make sure "Script Editor" is set to your installed Visual Studio instance. IMPORTANT: This step must be done before importing the package.
-
-**There are two ways to add the Web3 Unity SDK to your project:**
-
-# 📄 Setup via UPM Package
-![Package Download](gifs/moralis_upm_import.gif)
-1. Select menu _Window -> Package Manager_
-2. Open Settings and select _Advnaced Project Settings_
-3. In the _Package Manager_ section add a scoped registry entry for moralis on npm
-NAME: `npmjs`
-URL: `https://registry.npmjs/org`
-SCOPE(s): `io.moralis`
-4. Click on the _Save_ button and close the _Project Settings_ window.
-5. In _Package Manager_ select _My Registries_ from the location dropdown.
-6. Select the Moralis Web3 Unity SDK and click on the _Install_ button.
-7. OPTIONAL - install the demo.
-
-*** **OR** ***
-
-# 📄 Download the latest package:
-![Package Download](gifs/download.gif)
-1. Navigate to the folder you downloaded the package to. Drag and drop the package into the Unity project.
+1. Using Unity 2020.3 or higher, create a new game project.
+2. Download and install the latest package.
 ![Add Package](gifs/moralis_package_setup.gif)
-
-Regardless of which option you choose, once the package is installed enter the Dapp URL and Dapp ID.
+3. Enter your Moralis Server information in the Setup Wizard.
 ![insertvalues](gifs/moralis_server_setup.gif)
-
-- **FOR WEBGL** In Player Settings change the WebGL template to the Moralis WebGL Template
-
-- **IMPORTANT** If you want to create WebGL builds or want to run the Demo in WebGL, please read the [Web3GL](#web3gl) section prior to running the demo in WebGL.
+4. Open and run the demo scene.
 
 This boilerplate project has been tested with the following Unity3D Releases:
 1. 2020.3.34f1
@@ -65,7 +40,7 @@ This boilerplate project has been tested with the following Unity3D Releases:
 
 # 🧭 Table of contents
 
-- [`ethereum-unity-boilerplate`](#ethereum-unity-boilerplate)
+- [`Moralis Web3 for Unity Boilerplate`](#moralis-web3-for-unity-boilerplate)
 - [🚀 Quick Start](#-quick-start)
 - [🧭 Table of contents](#-table-of-contents)
 - [🧰 Moralis Web3 Unity SDK](#-moralis-web3-unity-sdk)
@@ -454,9 +429,10 @@ For other call function varients see the Nethereum [documentation](https://nethe
 
 To execute a transaction you can also call _Moralis.SendEvmTransactionAsync_ or _Moralis.SendTransactionAndWaitForReceiptAsync_. These functions represent only a couple of the variants available from the _Nethereum.Contracts.Function_ object.
 
-
 # WebGL 
 Due to the way WebGL works, for security reasons, it does not support outbound calls or multi-threading. The Moralis Web3 Unity SDK depends heavily on both. For most functionality the switch between other build types and WebGL should be seemless.
+
+- **IMPORTANT** In Player Settings change the WebGL template to the Moralis WebGL Template
 
 When you have a file that is used for both WebGL and non-WebGL builds use the __UNITY_WEBGL__ pre-processor statement to seperate the code that will be used for each type of build. As example here is part of the using statement from the *TokenListController.cs* file from the Boilerplate Example:
 ```
