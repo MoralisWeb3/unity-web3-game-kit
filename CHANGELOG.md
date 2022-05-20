@@ -10,6 +10,7 @@
 - Updated Newtonsoft dependency to 3.0.2
 - Updated WalletConnect
 - Fixed warnings / removed debugs
+- Issue #26 - Updating Version Control in Package Manager causes errors
 - Issue #42 - Please release this as a UPM-compatible package
 - Issue #56 - WebGL Error with Unity 2021.2.11f1
 - Issue #71 - With Unity 2020.3.30 Newtonsoft Missing
