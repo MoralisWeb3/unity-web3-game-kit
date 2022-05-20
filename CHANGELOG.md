@@ -14,7 +14,6 @@
 - Issue #42 - Please release this as a UPM-compatible package
 - Issue #56 - WebGL Error with Unity 2021.2.11f1
 - Issue #71 - With Unity 2020.3.30 Newtonsoft Missing
-- Issue #74 - AddSubscription is broken by WhereEqualTo
 - Issue #76 - Compile error after adding Unity Collections package
 - Issue #92 - WalletConnect Session Fails to Reconnect
 - Issue #93 - [WebSocket] Exception Unexpected character encountered while parsing value: M. Path '', line 0, position 0.
