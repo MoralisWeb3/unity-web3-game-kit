@@ -1,3 +1,6 @@
+# `UPDATE: Please read this before updating your project`
+The 1.2.0 release represents a major reworking of the project and includes namespace and structural changes in addition to functionality changes. Please be cautious when migrating from previous versions to 1.2.0. See the [CHANGELOG](CHANGELOG.md) for more information.
+
 # `Moralis Web3 for Unity Boilerplate`
 
 > Moralis is the fastest way to connect and build games for Web3.
