@@ -7,12 +7,12 @@ This boilerplate is built on [Moralis Web3 Unity SDK](https://github.com/Moralis
 
 While this boilerplate demo project is a good place to start, if you want to use the Unity Web3 SDK but do not want to use the demo, checkout the Moralis Unity Web3 SDK:
 1. [repository](https://github.com/MoralisWeb3/web3-unity-sdk).
-2. [UPM]()
+2. [UPM](#-setup-via-upm-package)
 3. [Unity Asset Store] **coming soon**
 
 Please check the [official documentation of Moralis](https://docs.moralis.io/#user) for all the functionalities of Moralis.
 
-![Demo](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/moralis-unity-boilerplate.gif)
+![Demo](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/moralis-unity-boilerplate_2.gif)
 
 # ⭐️ `Star us`
 If this boilerplate helps you build Ethereum dapps faster - please star this project, every star makes us very happy!
@@ -32,7 +32,7 @@ If you need help with setting up the boilerplate or have other questions - don't
 
 **There are two ways to add the Web3 Unity SDK to your project:**
 
-📄 Setup via UPM Package
+# 📄 Setup via UPM Package
 ![Package Download](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/moralis_upm_import.gif)
 1. Select menu _Window -> Package Manager_
 2. Open Settings and select _Advnaced Project Settings_
@@ -47,7 +47,7 @@ SCOPE(s): `io.moralis`
 
 *** **OR** ***
 
-📄 Download the latest package:
+# 📄 Download the latest package:
 ![Package Download](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/download.gif)
 1. Navigate to the folder you downloaded the package to. Drag and drop the package into the Unity project.
 ![Add Package](https://github.com/ethereum-boilerplate/ethereum-unity-boilerplate/blob/main/gifs/moralis_package_setup.gif)
