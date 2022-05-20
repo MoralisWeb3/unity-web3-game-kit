@@ -1,5 +1,3 @@
-# `UPDATE: Please read this before updating your project`
-The 1.2.0 release represents a major reworking of the project and includes namespace and structural changes in addition to functionality changes. Please be cautious when migrating from previous versions to 1.2.0. See the [CHANGELOG](CHANGELOG.md) for more information.
 
 # `Moralis Web3 for Unity Boilerplate`
 
@@ -27,6 +25,10 @@ To give feedback, ask a question or make a feature request, you can either use t
 Bugs are logged using the github issue system. To report a bug, simply open a new issue.
 
 # 🚀 Quick Start
+
+## :warning: Please read this before updating your project
+The 1.2.0 release represents a major reworking of the project and includes namespace and structural changes in addition to functionality changes. Please be cautious when migrating from previous versions to 1.2.0. See the [CHANGELOG](CHANGELOG.md) for more information.
+
 💿 Install all dependencies:
 - [Unity Hub](https://unity3d.com/get-unity/download)
 - [Visual Studio](https://visualstudio.microsoft.com/) or other Unity supported development platforms.
