@@ -68,7 +68,7 @@ This boilerplate project has been tested with the following Unity3D Releases:
 - [`ethereum-unity-boilerplate`](#ethereum-unity-boilerplate)
 - [🚀 Quick Start](#-quick-start)
 - [🧭 Table of contents](#-table-of-contents)
-- [🧰 Moralis SDK](#-moralis-sdk)
+- [🧰 Moralis Web3 Unity SDK](#-moralis-web3-unity-sdk)
     - [`Client`](#client)
     - [`Authentication`](#authentication)  
     - [`Queries`](#queries)  
@@ -132,22 +132,20 @@ This boilerplate project has been tested with the following Unity3D Releases:
         - [`Solana GetNFTMetadata`](#solana-getnftmetadata)
 - [Helpful Tools](#helpful-tools)
   
-# 🏗 Moralis SDK
-  The.NET Moralis SDK provides easy to use methods that make integrating your application with Moralis a snap. You will find that the.NET SDK works much the same as in JavaScript. For use in Unity3D, we have added additional quick start objects for integrating the Moralis SDK in a Unity3D application. 
-  For the examples that follow we provide examples of how to use the Moralis.NET SDK directly and perform the same functionality using the provided Moralis Unity3D quick start tools.
+# 🏗 Moralis Web3 Unity SDK
+  The Moralis Web3 Unity SDK provides easy to use methods that make integrating your application with Moralis a snap. You will find that the.NET SDK works much the same as in JavaScript. For use in Unity3D, we have added additional quick start objects for integrating the Moralis Web3 Unity SDK in a Unity3D application. 
+  For the examples that follow we provide examples of how to use the Moralis Web3 Unity SDK using the provided Moralis Unity3D quick start tools.
   
 ## `Client`
-  The Moralis SDK Client provides a way to easily interact with Moralis database and the Web3API. In .NET we use the *MoralisClient*
-  to interact with Moralis. For Unity3D we have provided a singleton wrapper named *MoralisInterface* that makes it easy to initialize the MoralisClient and then access it from anywhere in your Unity3D application. With either option you can initialize the Moralis Client with a single line of code
+  The Moralis Web3 Unity SDK Client provides a way to easily interact with Moralis database and the Web3API. For Unity3D we have provided a singleton wrapper named *Moralis* that makes it easy to initialize the MoralisClient and then access it from anywhere in your Unity3D application. 
   
 ### SDK Client Initialization
-**Required Using Statements**
-```
-using Moralis;
-using Moralis.Platform; 
-using Moralis.Web3Api.Client;
-```
+We have provided the AuthenticationKit prefab to make authenticating to Moralis with your crypto wallet a snap. 
+
+Just drag the prefab from _Packages\io.moralis.web3-unity-sdk\Runtime\Kits\AuthenticationKit\Prefabs_ into your authentication screen. That is all you need to do to get started. The AuthenticationKit.prefab is not needed anywhere else in your game.
+
 **Initialize Client**
+You do not have to use the AuthenticationKit. You can create a completely custom authentication process if you wish and initialize Moralis at the place and time of your choosing.
 ```
 MoralisClient moralis = new MoralisClient(new ServerConnectionData() { ApplicationID = "YOUR_APPLICATION_ID_HERE", ServerURI = "YOUR_SERER_URL_HERE"}, new Web3ApiClient());
 ```
@@ -156,13 +154,13 @@ _note: The **new Web3ApiClient()** parameter is optional and should be included 
 ### Unity3D Client Initialization
 **Initialize Client**
 ```
-MoralisInterface.Initialize(MoralisApplicationId, MoralisServerURI, hostManifestData);
+Moralis.Initialize(MoralisApplicationId, MoralisServerURI, hostManifestData);
 ```
 _note: For the **hostManifestData** parameter see [`HostManifestData`](#hostmanifestdata). This is required for Unity3D applications._
 _note: See [`User Object`](#userobject) for information about initializing the Moralis Client for a custom User Object._
 
 ## `Authentication`
-Authentication is handled in a similar manner in both the SDK and the Unity3d. There is no direct manner to interact securely with a wallet in a .NET application so the Moralis SDK interacts with wallets in a loosely coupled manner. For the Unity3D boilerplate application, and the other examples we provide, we use Wallet Connect to facilitate interaction with wallets. 
+Authentication is handled in a similar manner in both the SDK and the Unity3d. There is no direct manner to interact securely with a wallet in a .NET application so the Moralis Web3 Unity SDK interacts with wallets in a loosely coupled manner. For the Unity3D boilerplate application, and the other examples we provide, we use Wallet Connect to facilitate interaction with wallets. 
 
 ### Basic Moralis Authentication
 ```
@@ -351,9 +349,15 @@ await h.SaveAsync();
 ## `User Object`
 The user object contains information about the currently logged in user. Upon successful login, the user is stored in local storage until logout. This allows a user to log in once and not login again until their session expires or they logout.
 
+If you need to create an instance of MoralisUser for any reason (**example**: to SignUp with _username_ and _password_) you should do so in this manner:
+```
+MoralisUser user = Moralis.Create<MoralisUser>();
+```
+Using this method instead of the default constructor of MoralisUser ensures that the MoralisUser object created is associated with the Moralis instance. This means that several methods of the object will not work problerly (such as _SaveAsync_, _SignUpAsync_, etc.).
+
 If you create a custom user object it must inherit from MoralisUser.
 
-Since C# is a typed language the compiler must know what types are used at compile time. Due to this, since the MoralisUser is integral to internal functions in the Moralis SDK, when you create a custom User Object you must initialize the Moralis client using your custom User Object. After this step you can use the Moralis Client as usual.
+Since C# is a typed language the compiler must know what types are used at compile time. Due to this, since the MoralisUser is integral to internal functions in the Moralis Web3 Unity SDK, when you create a custom User Object you must initialize the Moralis client using your custom User Object. After this step you can use the Moralis Client as usual.
 
 #### Initialize Moralis Client with Custom User Object
 ```
@@ -403,7 +407,7 @@ For Web3 support, an [Nethereum](https://nethereum.com/) Web3 object is exposed 
 
 To make Web3 calls easier we have included a few tools.
 
-First, a EvmContractManager object (currently not available for WebGL) provides an easy way to set up contracts that are reflected across several chains. The Contract andits functions can be easily retrieved from any where in you code via MoralisInterface.
+First, a EvmContractManager object (currently not available for WebGL) provides an easy way to set up contracts that are reflected across several chains. The Contract andits functions can be easily retrieved from any where in you code via Moralis.
 
 To setup a contract instance use InsertContractInstance:
 ```
@@ -452,7 +456,7 @@ To execute a transaction you can also call _Moralis.SendEvmTransactionAsync_ or 
 
 
 # WebGL 
-Due to the way WebGL works, for security reasons, it does not support outbound calls or multi-threading. The Moralis SDK depends heavily on both. For most functionality the switch between other build types and WebGL should be seemless.
+Due to the way WebGL works, for security reasons, it does not support outbound calls or multi-threading. The Moralis Web3 Unity SDK depends heavily on both. For most functionality the switch between other build types and WebGL should be seemless.
 
 When you have a file that is used for both WebGL and non-WebGL builds use the __UNITY_WEBGL__ pre-processor statement to seperate the code that will be used for each type of build. As example here is part of the using statement from the *TokenListController.cs* file from the Boilerplate Example:
 ```
@@ -495,7 +499,7 @@ Moralis.Cloud.define("loadResource", async (request) => {
 ## `Web3Api Notes`
 The complete Moralis Web3API schema including endpoints, operations and models, can be found by logging in to your Moralis Server and selecting **Web3 API***
 
-For use with either Moralis SDK or in Unity3d, the following using statements are required:
+For use with either Moralis Web3 Unity SDK or in Unity3d, the following using statements are required:
 
 ## `Chains`
 Use the code snippet below to retrieve a list of EVM chains supported in the Moralis Web3API. This list can be used for populating dropdown lists etc.
