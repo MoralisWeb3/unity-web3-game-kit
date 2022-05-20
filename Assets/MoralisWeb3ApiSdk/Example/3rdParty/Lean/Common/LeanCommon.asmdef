@@ -1,8 +1,0 @@
-﻿{
-	"name": "LeanCommon",
-    "references": [
-        "Unity.InputSystem"
-    ],
-    "includePlatforms": [],
-    "excludePlatforms": []
-}

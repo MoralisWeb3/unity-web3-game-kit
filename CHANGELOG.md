@@ -1,4 +1,23 @@
 # Change Log
+# 1.2.0 (2022-05-20)
+- Changed namespace from MoralisWeb3ApiSdk to MoralisUnity
+- Changed MoralisInterface to Moralis
+- Changed Moralis.Initialize to Moralis.Start
+- Added new Setup Wizard (Settings are stored in a ScriptableObject)
+- Removed knight demo and added new Introduction demo
+- Seperated core functionality into web3-unity-sdk package (UPM): https://github.com/MoralisWeb3/web3-unity-sdk
+- Added new web3-unity-sdk package as dependency with NPMJS: https://www.npmjs.com/package/io.moralis.web3-unity-sdk
+- Updated Newtonsoft dependency to 3.0.2
+- Updated WalletConnect
+- Fixed warnings / removed debugs
+- Issue #42 - Please release this as a UPM-compatible package
+- Issue #56 - WebGL Error with Unity 2021.2.11f1
+- Issue #71 - With Unity 2020.3.30 Newtonsoft Missing
+- Issue #74 - AddSubscription is broken by WhereEqualTo
+- Issue #76 - Compile error after adding Unity Collections package
+- Issue #92 - WalletConnect Session Fails to Reconnect
+- Issue #95 - [WebSocket] Exception Unexpected character encountered while parsing value: M. Path '', line 0, position 0.
+
 # 1.1.0 (2022-03-30)
 - Issue #90 - iOS Wallet Images not loaded and displayed
 - Issue #81 - WebGL LiveQuery Callbacks are not fired.
