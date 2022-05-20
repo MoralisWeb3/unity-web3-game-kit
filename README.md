@@ -61,7 +61,7 @@ Regardless of which option you choose, once the package is installed enter the D
 
 This boilerplate project has been tested with the following Unity3D Releases:
 1. 2020.3.34f1
-2. 2021.2.5
+2. 2021.3.3f1
 
 # 🧭 Table of contents
 
