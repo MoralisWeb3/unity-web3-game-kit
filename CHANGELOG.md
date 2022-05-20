@@ -16,7 +16,8 @@
 - Issue #74 - AddSubscription is broken by WhereEqualTo
 - Issue #76 - Compile error after adding Unity Collections package
 - Issue #92 - WalletConnect Session Fails to Reconnect
-- Issue #95 - [WebSocket] Exception Unexpected character encountered while parsing value: M. Path '', line 0, position 0.
+- Issue #93 - [WebSocket] Exception Unexpected character encountered while parsing value: M. Path '', line 0, position 0.
+- Issue #95 - MoralisInterface.LogInAsync(user, pass) Does Not Set Current User
 
 # 1.1.0 (2022-03-30)
 - Issue #90 - iOS Wallet Images not loaded and displayed
