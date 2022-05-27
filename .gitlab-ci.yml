@@ -1,4 +1,4 @@
-﻿stages:
+stages:
   - prepare
   - build_and_test
   - deploy
