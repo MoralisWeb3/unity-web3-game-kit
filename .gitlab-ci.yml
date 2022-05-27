@@ -1,0 +1,254 @@
+﻿stages:
+  - prepare
+  - build_and_test
+  - deploy
+
+# If you are looking for a place where to add 'UNITY_LICENSE_FILE' and other secrets, please visit your project's gitlab page:
+# settings > CI/CD > Variables instead
+variables:
+  BUILD_NAME: web3-game-kit
+  UNITY_ACTIVATION_FILE: ./unity3d.alf
+  IMAGE: unityci/editor # https://hub.docker.com/r/unityci/editor
+  IMAGE_VERSION: 1 # This will automatically use latest v1.x.x, see https://github.com/game-ci/docker/releases
+  UNITY_DIR: $CI_PROJECT_DIR # this needs to be an absolute path. Defaults to the root of your tree.
+  # You can expose this in Unity via Application.version
+  VERSION_NUMBER_VAR: $CI_COMMIT_REF_SLUG-$CI_PIPELINE_ID-$CI_JOB_ID
+  VERSION_BUILD_VAR: $CI_PIPELINE_IID
+
+image: $IMAGE:$UNITY_VERSION-base-$IMAGE_VERSION
+
+get-unity-version:
+  image: alpine
+  stage: prepare
+  variables:
+    GIT_DEPTH: 1
+  script:
+    - echo UNITY_VERSION=$(cat $UNITY_DIR/ProjectSettings/ProjectVersion.txt | grep "m_EditorVersion:.*" | awk '{ print $2}') | tee prepare.env
+  artifacts:
+    reports:
+      dotenv: prepare.env
+
+.unity_before_script: &unity_before_script
+  before_script:
+    - chmod +x ./ci/before_script.sh && ./ci/before_script.sh
+  needs:
+    - job: get-unity-version
+      artifacts: true
+
+.cache: &cache
+  cache:
+    key: "$CI_PROJECT_NAMESPACE-$CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG-$TEST_PLATFORM"
+    paths:
+      - $UNITY_DIR/Library/
+
+.license: &license
+  rules:
+    - if: '$UNITY_LICENSE != null'
+      when: always
+
+.unity_defaults: &unity_defaults
+  <<:
+    - *unity_before_script
+    - *cache
+    - *license
+
+# run this job when you need to request a license
+# you may need to follow activation steps from documentation
+get-activation-file:
+  <<: *unity_before_script
+  rules:
+    - if: '$UNITY_LICENSE == null'
+      when: manual
+  stage: prepare
+  script:
+    - chmod +x ./ci/get_activation_file.sh && ./ci/get_activation_file.sh
+  artifacts:
+    paths:
+      - $UNITY_ACTIVATION_FILE
+    expire_in: 10 min # Expiring this as artifacts may contain sensitive data and should not be kept public
+
+.test: &test
+  stage: build_and_test
+  <<: *unity_defaults
+  script:
+    - chmod +x ./ci/test.sh && ./ci/test.sh
+  artifacts:
+    when: always
+    expire_in: 2 weeks
+  # https://gitlab.com/gableroux/unity3d-gitlab-ci-example/-/issues/83
+  # you may need to remove or replace these to fit your need if you are using your own runners
+  tags:
+    - gitlab-org
+  coverage: /<Linecoverage>(.*?)</Linecoverage>/
+
+# Tests without junit reporting results in GitLab
+# test-playmode:
+#   <<: *test
+#   variables:
+#     TEST_PLATFORM: playmode
+#     TESTING_TYPE: NUNIT
+
+# test-editmode:
+#   <<: *test
+#   variables:
+#     TEST_PLATFORM: editmode
+#     TESTING_TYPE: NUNIT
+
+# uncomment the following blocks if you'd like to have junit reporting unity test results in gitlab
+# We currently have the following issue which prevents it from working right now, but you can give
+# a hand if you're interested in this feature:
+# https://gitlab.com/gableroux/unity3d-gitlab-ci-example/-/issues/151
+
+.test-with-junit-reports: &test-with-junit-reports
+  stage: build_and_test
+  <<: *unity_defaults
+  script:
+    # This could be made faster by adding these packages to base image or running in a separate job (and step)
+    # We could use an image with these two depencencies only and only do the saxonb-xslt command on
+    # previous job's artifacts
+    - apt-get update && apt-get install -y default-jre libsaxonb-java
+    - chmod +x ./ci/test.sh && ./ci/test.sh
+    - saxonb-xslt -s $UNITY_DIR/$TEST_PLATFORM-results.xml -xsl $CI_PROJECT_DIR/ci/nunit-transforms/nunit3-junit.xslt >$UNITY_DIR/$TEST_PLATFORM-junit-results.xml
+  artifacts:
+    when: always
+    paths:
+      # This is exported to allow viewing the Coverage Report in detail if needed
+      - $UNITY_DIR/$TEST_PLATFORM-coverage/
+    reports:
+      junit:
+        - $UNITY_DIR/$TEST_PLATFORM-junit-results.xml
+        - "$UNITY_DIR/$TEST_PLATFORM-coverage/coverage.xml"
+    expire_in: 2 weeks
+  # https://gitlab.com/gableroux/unity3d-gitlab-ci-example/-/issues/83
+  # you may need to remove or replace these to fit your need if you are using your own runners
+  tags:
+    - gitlab-org
+  coverage: /<Linecoverage>(.*?)</Linecoverage>/
+
+test-playmode-with-junit-reports:
+  <<: *test-with-junit-reports
+  variables:
+    TEST_PLATFORM: playmode
+    TESTING_TYPE: JUNIT
+
+test-editmode-with-junit-reports:
+  <<: *test-with-junit-reports
+  variables:
+    TEST_PLATFORM: editmode
+    TESTING_TYPE: JUNIT
+
+.build: &build
+  stage: build_and_test
+  <<: *unity_defaults
+  script:
+    - chmod +x ./ci/build.sh && ./ci/build.sh
+  artifacts:
+    paths:
+      - $UNITY_DIR/Builds/
+  # https://gitlab.com/gableroux/unity3d-gitlab-ci-example/-/issues/83
+  # you may need to remove or replace these to fit your need if you are using your own runners
+  tags:
+    - gitlab-org
+
+build-StandaloneLinux64:
+  <<: *build
+  variables:
+    BUILD_TARGET: StandaloneLinux64
+
+build-StandaloneLinux64-il2cpp:
+  <<: *build
+  image: $IMAGE:$UNITY_VERSION-linux-il2cpp-$IMAGE_VERSION
+  variables:
+    BUILD_TARGET: StandaloneLinux64
+    SCRIPTING_BACKEND: IL2CPP
+
+build-StandaloneOSX:
+  <<: *build
+  image: $IMAGE:$UNITY_VERSION-mac-mono-$IMAGE_VERSION
+  variables:
+    BUILD_TARGET: StandaloneOSX
+
+#Note: build target names changed in recent versions, use this for versions < 2017.2:
+# build-StandaloneOSXUniversal:
+#   <<: *build
+#   variables:
+#     BUILD_TARGET: StandaloneOSXUniversal
+
+build-StandaloneWindows64:
+  <<: *build
+  image: $IMAGE:$UNITY_VERSION-windows-mono-$IMAGE_VERSION
+  variables:
+    BUILD_TARGET: StandaloneWindows64
+
+# For webgl support, you need to set Compression Format to Disabled for v0.9. See https://github.com/game-ci/docker/issues/75
+build-WebGL:
+  <<: *build
+  image: $IMAGE:$UNITY_VERSION-webgl-$IMAGE_VERSION
+  # Temporary workaround for https://github.com/game-ci/docker/releases/tag/v0.9 and webgl support in current project to prevent errors with missing ffmpeg
+  before_script:
+    - chmod +x ./ci/before_script.sh && ./ci/before_script.sh
+    - apt-get update && apt-get install ffmpeg -y
+  variables:
+    BUILD_TARGET: WebGL
+
+build-android:
+  <<: *build
+  image: $IMAGE:$UNITY_VERSION-android-$IMAGE_VERSION
+  variables:
+    BUILD_TARGET: Android
+    BUILD_APP_BUNDLE: "false"
+
+build-android-il2cpp:
+  <<: *build
+  image: $IMAGE:$UNITY_VERSION-android-$IMAGE_VERSION
+  variables:
+    BUILD_TARGET: Android
+    BUILD_APP_BUNDLE: "false"
+    SCRIPTING_BACKEND: IL2CPP
+
+#deploy-android:
+#  stage: deploy
+#  image: ruby
+#  script:
+#    - cd $UNITY_DIR/Builds/Android
+#    - echo $GPC_TOKEN > gpc_token.json
+#    - gem install bundler
+#    - bundle install
+#    - fastlane supply --aab "${BUILD_NAME}.aab" --track internal --package_name com.youcompany.yourgame --json_key ./gpc_token.json
+#  needs: ["build-android"]
+
+build-ios-xcode:
+  <<: *build
+  image: $IMAGE:$UNITY_VERSION-ios-$IMAGE_VERSION
+  variables:
+    BUILD_TARGET: iOS
+
+#build-and-deploy-ios:
+#  stage: deploy
+#  script:
+#    - cd $UNITY_DIR/Builds/iOS/$BUILD_NAME
+#    - pod install
+#    - fastlane ios beta
+#  tags:
+#    - ios
+#    - mac
+#  needs: ["build-ios-xcode"]
+
+pages:
+  image: alpine:latest
+  stage: deploy
+  script:
+    - mv "$UNITY_DIR/Builds/WebGL/${BUILD_NAME}" public
+  artifacts:
+    paths:
+      - public
+  only:
+    - $CI_DEFAULT_BRANCH
+
+workflow:
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
+    - if: $CI_COMMIT_TAG
+      when: never
+    - when: always
