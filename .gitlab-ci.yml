@@ -75,10 +75,6 @@ get-activation-file:
   artifacts:
     when: always
     expire_in: 2 weeks
-  # https://gitlab.com/gableroux/unity3d-gitlab-ci-example/-/issues/83
-  # you may need to remove or replace these to fit your need if you are using your own runners
-  tags:
-    - gitlab-org
   coverage: /<Linecoverage>(.*?)</Linecoverage>/
 
 # Tests without junit reporting results in GitLab
