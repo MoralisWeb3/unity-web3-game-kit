@@ -31,8 +31,8 @@ get-unity-version:
 .unity_before_script: &unity_before_script
   before_script:
     - chmod +x ./ci/before_script.sh && ./ci/before_script.sh
-    - sed -i 's/DappUrl:\ /DappUrl:\ '"${DAPP_URL}"'/g' ./Assets/Moralis\ Web3\ Unity\ SDK/Resources/MoralisServerSettings.asset
-    - sed -i 's/DappId:\ /DappId:\ '"${DAPP_ID}"'/g' ./Assets/Moralis\ Web3\ Unity\ SDK/Resources/MoralisServerSettings.asset
+    - sed -i 's,DappUrl: ,DappUrl: '"${DAPP_URL}"',' ./Assets/Moralis\ Web3\ Unity\ SDK/Resources/MoralisServerSettings.asset
+    - sed -i 's,DappId: ,DappId: '"${DAPP_ID}"',' ./Assets/Moralis\ Web3\ Unity\ SDK/Resources/MoralisServerSettings.asset
   needs:
     - job: get-unity-version
       artifacts: true
