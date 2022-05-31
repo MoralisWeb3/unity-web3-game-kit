@@ -2,19 +2,19 @@
 
 > Web3 Game Kit is the fastest way to connect and build games for Web3. It provides a single workflow for building high performance dapps. Fully compatible with your favourite platform.
 
-This boilerplate is built on [Moralis Web3 Unity SDK](https://github.com/MoralisWeb3/web3-unity-sdk) and [Moralis](https://moralis.io?utm_source=github&utm_medium=readme&utm_campaign=ethereum-boilerplate). 
+This kit is built on [Moralis Web3 Unity SDK](https://github.com/MoralisWeb3/web3-unity-sdk) and [Moralis](https://moralis.io?utm_source=github&utm_medium=readme&utm_campaign=ethereum-boilerplate). 
 
 Please check the [official documentation of Moralis](https://docs.moralis.io/#user) for all the functionalities of Moralis.
 
 ![Demo](gifs/moralis-unity-boilerplate_2.gif)
 
 # ⭐️ `Star us`
-If this boilerplate helps you build Ethereum dapps faster - please star this project, every star makes us very happy!
+If this kit helps you build dapps faster - please star this project, every star makes us very happy!
 
 # :city_sunrise: `Community`
 The best thing about Moralis is the super active community ready to help at any time! We help each other.
 ## 🤝 `Need help?`
-If you need help with setting up the boilerplate or have other questions - don't hesitate to write in our community forum and we will check asap. [Forum link](https://forum.moralis.io/t/ethereum-unity3d-boilerplate-questions/4553). 
+If you need help with setting up the kit or have other questions - don't hesitate to write in our community forum and we will check asap. [Forum link](https://forum.moralis.io/t/ethereum-unity3d-boilerplate-questions/4553). 
 ## Discord
 Become a Moralis Mage - join the [Moralis DAO Discord](https://moralis.io/mage)
 ## Feedback
@@ -38,7 +38,7 @@ The 1.2.0 release represents a major reworking of the project and includes names
 ![insertvalues](gifs/moralis_server_setup.gif)
 4. Open and run the demo scene.
 
-This boilerplate project has been tested with the following Unity3D Releases:
+This kit has been tested with the following Unity3D Releases:
 1. 2020.3.34f1
 2. 2021.3.3f1
 
