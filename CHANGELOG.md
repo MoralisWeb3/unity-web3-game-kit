@@ -1,4 +1,22 @@
 # Change Log
+## 1.2.1 (2022-05-30)
+- Issue #84 Web3Api Token Endpoint Missing Operations
+```
+The Web3Api Token Endpoint is missing the SyncNftContract and ResyncMetadata oppperations
+```
+- Issue #87 MoralisUser Should be Fully Functional Using Default Constructor
+```
+Update MoralisObject so that MoralisUser and other objects derived from MoralisObject are
+fully function when an instance is created from the default constructor when in a Unity context
+
+_MoralisUser user = new MoralisUser();_ now is the same as _MoralisUser user = Moralis.Create<MoralisUser>();_
+```
+- Issue #88 TaskQueue Causes Unexpected Behavior but is No Longer Needed
+```
+When _user.SignUpAsync()_ is called, if _user.LogInAsync()_ is called immediately, the login was being called before the SignUpAsync was complete.
+```
+
+- Issue #89 Cronos Integration - Added support for Cronos chain.
 # 1.2.0 (2022-05-20)
 - Changed namespace from MoralisWeb3ApiSdk to MoralisUnity
 - Changed MoralisInterface to Moralis
