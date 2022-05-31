@@ -1,8 +1,6 @@
+# Unity Web3 Game Kit
 
-# `Moralis Web3 for Unity Boilerplate`
-
-> Moralis is the fastest way to connect and build games for Web3.
-> The Moralis Web3 Unity SDK provides components and hooks for fast building of web3 games targeted for mobile, desktop, Xbox, Playstation and other platforms.
+> Web3 Game Kit is the fastest way to connect and build games for Web3. It provides a single workflow for building high performance dapps. Fully compatible with your favourite platform.
 
 This boilerplate is built on [Moralis Web3 Unity SDK](https://github.com/MoralisWeb3/web3-unity-sdk) and [Moralis](https://moralis.io?utm_source=github&utm_medium=readme&utm_campaign=ethereum-boilerplate). 
 
