@@ -386,7 +386,7 @@ For Web3 support, an [Nethereum](https://nethereum.com/) Web3 object is exposed 
 
 To make Web3 calls easier we have included a few tools.
 
-First, a EvmContractManager object (currently not available for WebGL) provides an easy way to set up contracts that are reflected across several chains. The Contract andits functions can be easily retrieved from any where in you code via Moralis.
+First, a EvmContractManager object (currently not available for WebGL) provides an easy way to set up contracts that are reflected across several chains. The Contract andits functions can be easily retrieved from any where in your code via Moralis.
 
 To setup a contract instance use InsertContractInstance:
 ```
