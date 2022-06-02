@@ -246,7 +246,7 @@ Live Queries are queries that include a subscription that provide updates whenev
 A Live Query subscription emits events that indicate the state of the client and changes to the data. For more information please see
 the [docs](https://docs.moralis.io/moralis-server/database/live-queries).
 
-The foloowing examples use the [query example from above](#queries)
+The following examples use the [query example from above](#queries)
 ### Live Query Example
 Since Unity3d is mainly used to create games, Unity3D apps generaly have life cycle events you do not usually need to worray about in a normal program.
 We have created a special Live Query wrapper object that automatically handles your subscriptions for pause, unpause, close, etc.
