@@ -18,7 +18,7 @@ If you need help with setting up the kit or have other questions - don't hesitat
 ## Discord
 Become a Moralis Mage - join the [Moralis DAO Discord](https://moralis.io/mage)
 ## Feedback
-To give feedback, ask a question or make a feature request, you can either use the [Fourm](https://forum.moralis.io/) or the [game-dev](https://discordapp.com/channels/819584798443569182/918645175562145822) Discord thread.
+To give feedback, ask a question or make a feature request, you can either use the [Forum](https://forum.moralis.io/) or the [game-dev](https://discordapp.com/channels/819584798443569182/918645175562145822) Discord thread.
 
 Bugs are logged using the github issue system. To report a bug, simply open a new issue.
 
