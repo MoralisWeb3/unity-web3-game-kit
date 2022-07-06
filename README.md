@@ -18,7 +18,7 @@ If you need help with setting up the kit or have other questions - don't hesitat
 ## Discord
 Become a Moralis Mage - join the [Moralis DAO Discord](https://moralis.io/mage)
 ## Feedback
-To give feedback, ask a question or make a feature request, you can either use the [Fourm](https://forum.moralis.io/) or the [game-dev](https://discordapp.com/channels/819584798443569182/918645175562145822) Discord thread.
+To give feedback, ask a question or make a feature request, you can either use the [Forum](https://forum.moralis.io/) or the [game-dev](https://discordapp.com/channels/819584798443569182/918645175562145822) Discord thread.
 
 Bugs are logged using the github issue system. To report a bug, simply open a new issue.
 
@@ -111,12 +111,12 @@ This kit has been tested with the following Unity3D Releases:
         - [`Solana GetNFTMetadata`](#solana-getnftmetadata)
 - [Helpful Tools](#helpful-tools)
   
-# 🏗 Web3 Game Kit
-  The Web3 Game Kit provides easy to use methods that make integrating your application with Moralis a snap. You will find that the.NET SDK works much the same as in JavaScript. For use in Unity3D, we have added additional quick start objects for integrating the Web3 Game Kit in a Unity3D application. 
-  For the examples that follow we provide examples of how to use the Web3 Game Kit using the provided Moralis Unity3D quick start tools.
+# 🏗 Moralis Web3 Unity SDK
+  The Moralis Web3 Unity SDK provides easy to use methods that make integrating your application with Moralis a snap. You will find that the.NET SDK works much the same as in JavaScript. For use in Unity3D, we have added additional quick start objects for integrating the Moralis Web3 Unity SDK in a Unity3D application. 
+  For the examples that follow we provide examples of how to use the Moralis Web3 Unity SDK using the provided Moralis Unity3D quick start tools.
   
 ## `Client`
-  The Web3 Game Kit Client provides a way to easily interact with Moralis database and the Web3API. For Unity3D we have provided a singleton wrapper named *Moralis* that makes it easy to initialize the MoralisClient and then access it from anywhere in your Unity3D application. 
+  The Moralis Web3 Unity SDK Client provides a way to easily interact with Moralis database and the Web3API. For Unity3D we have provided a singleton wrapper named *Moralis* that makes it easy to initialize the MoralisClient and then access it from anywhere in your Unity3D application. 
   
 ### SDK Client Initialization
 We have provided the AuthenticationKit prefab to make authenticating to Moralis with your crypto wallet a snap. 
@@ -139,7 +139,7 @@ _note: For the **hostManifestData** parameter see [`HostManifestData`](#hostmani
 _note: See [`User Object`](#userobject) for information about initializing the Moralis Client for a custom User Object._
 
 ## `Authentication`
-Authentication is handled in a similar manner in both the SDK and the Unity3d. There is no direct manner to interact securely with a wallet in a .NET application so the Web3 Game Kit interacts with wallets in a loosely coupled manner. For the Unity3D boilerplate application, and the other examples we provide, we use Wallet Connect to facilitate interaction with wallets. 
+Authentication is handled in a similar manner in both the SDK and the Unity3d. There is no direct manner to interact securely with a wallet in a .NET application so the Moralis Web3 Unity SDK interacts with wallets in a loosely coupled manner. For the Unity3D boilerplate application, and the other examples we provide, we use Wallet Connect to facilitate interaction with wallets. 
 
 ### Basic Moralis Authentication
 ```
@@ -336,7 +336,7 @@ Using this method instead of the default constructor of MoralisUser ensures that
 
 If you create a custom user object it must inherit from MoralisUser.
 
-Since C# is a typed language the compiler must know what types are used at compile time. Due to this, since the MoralisUser is integral to internal functions in the Web3 Game Kit, when you create a custom User Object you must initialize the Moralis client using your custom User Object. After this step you can use the Moralis Client as usual.
+Since C# is a typed language the compiler must know what types are used at compile time. Due to this, since the MoralisUser is integral to internal functions in the Moralis Web3 Unity SDK, when you create a custom User Object you must initialize the Moralis client using your custom User Object. After this step you can use the Moralis Client as usual.
 
 #### Initialize Moralis Client with Custom User Object
 ```
@@ -434,7 +434,7 @@ For other call function varients see the Nethereum [documentation](https://nethe
 To execute a transaction you can also call _Moralis.SendEvmTransactionAsync_ or _Moralis.SendTransactionAndWaitForReceiptAsync_. These functions represent only a couple of the variants available from the _Nethereum.Contracts.Function_ object.
 
 # WebGL 
-Due to the way WebGL works, for security reasons, it does not support outbound calls or multi-threading. The Web3 Game Kit depends heavily on both. For most functionality the switch between other build types and WebGL should be seemless.
+Due to the way WebGL works, for security reasons, it does not support outbound calls or multi-threading. The Moralis Web3 Unity SDK depends heavily on both. For most functionality the switch between other build types and WebGL should be seemless.
 
 - **IMPORTANT** In Player Settings change the WebGL template to the Moralis WebGL Template
 
@@ -479,7 +479,7 @@ Moralis.Cloud.define("loadResource", async (request) => {
 ## `Web3Api Notes`
 The complete Moralis Web3API schema including endpoints, operations and models, can be found by logging in to your Moralis Server and selecting **Web3 API***
 
-For use with either Web3 Game Kit or in Unity3d, the following using statements are required:
+For use with either Moralis Web3 Unity SDK or in Unity3d, the following using statements are required:
 
 ## `Chains`
 Use the code snippet below to retrieve a list of EVM chains supported in the Moralis Web3API. This list can be used for populating dropdown lists etc.

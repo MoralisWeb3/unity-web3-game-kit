@@ -1,4 +1,33 @@
-# Change Log
+# Changelog
+## 1.2.3 (2022-07-06)
+- Fixed WalletConnect instabilities
+```
+Always do a full authentication cycle (Connecting,Signing,GetUser) There currently is no way to check if a WalletConnect session is still valid and not broken so we always need to do a full authentication cycle to be sure.
+```
+- Fixed UnityWebRequest memory leaks
+- Fixed WebSocket.jslib naming conflict with Photon
+- Improved menu items for better exposure of the AuthenticationKit
+- Issue #125 Update MoralisUserService to send signin with username/password from GET to POST
+
+## 1.2.2 (2022-06-20)
+⚠️Release skipped due to WalletConnect instabilities ⚠️
+- Issue #64 BUG: MoralisLiveQueryController logs runtime warning
+- Issue #104 No Response When obj.SaveAsync() Fails
+- Issue #105 MoralisWeb3SdkEditor Spelling error in Warning Message
+- Issue #107 WebGL - Multiple Livequeries Does not connect
+```
+The requestId was not being updated properly for WebGL so connections created close together had the same requestId in WebGL.
+```
+- Issue #112 SignUpAsync always throws an exception
+- Improved WalletConnect process in the Authentication Kit to make it more reliable
+- Added retry button for connecting and signing on Android and iOS
+- Updated WalletConnect to latest version and enable timeout refresh and QR loading animation
+- Change State names to better reflect the state
+- Fixed Web3 not getting set up on stored session
+- Added extra ReadyForUserPrompt check on Android and iOS with 15 seconds timeout to help with unresponsive WalletConnect bridges
+- Only download medium wallet images to speed up iOS wallet list
+- Updated default server settings
+ 
 ## 1.2.1 (2022-05-30)
 - Issue #84 Web3Api Token Endpoint Missing Operations
 ```
