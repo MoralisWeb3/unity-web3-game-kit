@@ -1,4 +1,8 @@
 # Changelog
+## 1.2.4 (2022-07-11)
+- Fixed WalletConnect not persisting on a scene change
+- Fixed HexBigInteger not return the right value in Unity 2021.3.34f
+
 ## 1.2.3 (2022-07-06)
 - Fixed WalletConnect instabilities
 ```
