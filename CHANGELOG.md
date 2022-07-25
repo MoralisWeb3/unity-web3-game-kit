@@ -1,4 +1,7 @@
 # Changelog
+## 1.2.5 (2022-07-25)
+- Add Cronos Testnet support to Web3Api
+
 ## 1.2.4 (2022-07-11)
 - Fixed WalletConnect not persisting on a scene change
 - Fixed HexBigInteger not return the right value in Unity 2021.3.34f
