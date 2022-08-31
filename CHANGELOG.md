@@ -1,4 +1,10 @@
 # Changelog
+## 1.2.8 (2022-08-31)
+- Add x-moralis-platform and x-moralis-platform-version analytical headers
+
+## 1.2.6 (2022-08-01)
+- Added sign and login to Moralis option. This option is enabled by default but can be disabled to allow for custom sign and authentication solutions.
+
 ## 1.2.5 (2022-07-25)
 - Add Cronos Testnet support to Web3Api
 
