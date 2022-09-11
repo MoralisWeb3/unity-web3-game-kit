@@ -1,4 +1,8 @@
 # Changelog
+## 1.2.9 (2022-09-11)
+- Issue 68 - Solana throws null reference error
+- Issue 96 - SolanaAPI thrown NullReferencec Exception
+
 ## 1.2.8 (2022-08-31)
 - Add x-moralis-platform and x-moralis-platform-version analytical headers
 
