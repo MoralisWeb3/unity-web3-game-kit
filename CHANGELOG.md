@@ -1,4 +1,7 @@
 # Changelog
+## 1.2.10 (2022-09-13)
+- Added x-moralis-platform and x-moralis-platform-version to the allowHeaders
+
 ## 1.2.9 (2022-09-11)
 - Issue 68 - Solana throws null reference error
 - Issue 96 - SolanaAPI thrown NullReferencec Exception
